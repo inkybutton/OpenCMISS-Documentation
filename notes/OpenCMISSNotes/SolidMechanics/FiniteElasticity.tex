@@ -391,11 +391,262 @@ The relationships between the stress tensors are given in \Tabref{tab:Relationsh
     $\inverse{\tensor{F}}\tensor{\tau}\invtranspose{\tensor{F}}$ &
     $\inverse{\tensor{F}}\tensor{P}$ & - \\ \hline
   \end{tabular}
-  \caption{Reltionships between stress tensors.}
+  \caption{Relationships between stress tensors.}
   \label{tab:RelationshipBetweenStressTensors}
 \end{table}
 
 \subsection{Anisotropy}
+\label{subsec:FiniteElasticityAnisotropy}
+
+Most biological materials are, to an extent,
+\emph{anisotropic}\index{anisotopy} \ie their material properties have
+preferred directions. To deal with anisotropy \OpenCMISS defines an
+anisotropic coordinate system which defines the directions of
+anisotropy. From \secref{sec:MaterialCoordinateTransformations} the
+principle axes of anisotopy are that of the fibre, sheet and
+sheet-normal directions.
+
+For solid mechanics problems we most consider whether or not we are
+dealing with material or reference coordinate manifold or the spatial
+or deformed coordinate manifold. The choice of the coordinate manifold
+has important implications for the anisotropic coordinate system. In
+the undeformed material coordinate system it is realitively easy to
+define an orthogonal fibre, sheet, sheet-normal coordinate
+system. However, under deformation, this orthogonal coordinate system
+is distorted in the spatial or deformed coordiantes and is not
+necessarily orthogonal. To deal with tensor properties it is far
+easier to deal with orthogonal coordinates and so an orthogonal
+coordinate system for defining anisotropy needs to be defined in
+spatial or deformed coordinates.
+
+To define an orthogonal deformed anisotropic fibre coordinate system
+consider the deformation of a block of fibrous tissue as shown in
+\figref{fig:FiniteElasticityDeformedFibres}.
+
+\epstexfigure{SolidMechanics/svgs/DeformedFibres.eps_tex}{Defomed
+  fibre coordinate system.}{Deformed fibre coordinate system. A block
+  of fibrous tissue in material, $\materialcoordinatevector$,
+  coordinates undergoes deformation via the deformation gradient
+  tensor, $\deformationgradienttensor$, to a block of fibrous tissue
+  in the spatial coordinate system, $\spatialcoordinatevector$. The
+  undeformed block of tissue is defined by the orthogonal elemental
+  coordinates given by the unit vectors,
+  $\materialxicoordinatevector_{1}$,
+  $\materialxicoordinatevector_{2}$, and
+  $\materialxicoordinatevector_{3}$. From these orthogonal elemental
+  coordinates the undeformed orthogonal fibre coordinate system can be
+  found from the fibre, sheet and sheet-normal angles. The orthogonal
+  undeformed fibre coordinate system is given by the unit vectors,
+  $\materialfibrecoordinatevector_{1}$,
+  $\materialfibrecoordinatevector_{2}$, and
+  $\materialfibrecoordinatevector_{3}$. In the spatial coordinates the
+  block deforms to give the (not necessarily unit or orthogonal)
+  elemental coordinate system given by the vectors,
+  $\spatialxicoordinatevector_{1}$, $\spatialxicoordinatevector_{2}$,
+  and $\spatialxicoordinatevector_{3}$. The undeformed fibre
+  coordinate system also deforms to give the (not necessarily unit or
+  orthogonal) deformed fibre coordinate system given by the vectors,
+  $\spatialfibrecoordinatevector^{'}_{1}$,
+  $\spatialfibrecoordinatevector^{'}_{2}$, and
+  $\spatialfibrecoordinatevector^{'}_{3}$. An unit orthogonal deformed
+  fibre coordinate system can be constructed in spatial coordinates
+  from the deformed fibre coordinates. Firstly, the unit orthogonal
+  sheet-normal vector, $\spatialfibrecoordinatevector_{3}$, is
+  constructed as unit and orthogonal to
+  $\spatialfibrecoordinatevector^{'}_{1}$ and
+  $\spatialfibrecoordinatevector^{'}_{2}$. Secondly, an unit
+  orthogonal sheet vector, $\spatialfibrecoordinatevector_{2}$, is
+  constructed as unit and orthogonal to
+  $\spatialfibrecoordinatevector^{'}_{1}$ and
+  $\spatialfibrecoordinatevector_{3}$. Finally, a unit vector,
+  $\spatialfibrecoordinatevector_{1}$ can be found from normalising
+  the vector $\spatialfibrecoordinatevector^{'}_{1}$. The unit
+  orthogonal deformed fibre coordinates are then given by the vectors,
+  $\spatialfibrecoordinatevector_{1}$,
+  $\spatialfibrecoordinatevector_{2}$, and
+  $\spatialfibrecoordinatevector_{3}$.}{fig:FiniteElasticityDeformedFibres}{0.66}
+
+In \figref{fig:FiniteElasticityDeformedFibres} the material or reference geometric coordinate vector is given by
+\begin{equation}
+  \materialcoordinatevector=\materialcoordinatesymbol^{I}\materialbasevector_{I}
+\end{equation}
+
+From \secref{sec:MaterialCoordinateTransformations} we can define a
+unit orthogonal elemental coordinate system
+$\fnof{\materialxicoordinatevector_{R}}{\materialcoordinatevector}$
+defined with respect to the material or undeformed coordinate system
+\ie
+\begin{equation}
+  \fnof{\materialxicoordinatevector_{R}}{\materialcoordinatevector}=
+  \fnof{\materialxicoordinatesymbol^{I}_{R}}{\materialcoordinatevector}\materialbasevector_{I}
+\end{equation}
+and then a unit orthogonal fibre coordinate system defined by the unit
+vectors $\fnof{\materialfibrecoordinatevector_{A}}{\materialcoordinatevector}$ which are defined with
+respect to the material or undeformed coordinate system \ie
+\begin{equation}
+  \fnof{\materialfibrecoordinatevector_{A}}{\materialcoordinatevector}=
+  \fnof{\materialfibrecoordinatesymbol^{I}_{A}}{\materialcoordinatevector}\materialbasevector_{I}
+\end{equation}
+
+It is often useful to deal with physical material properties with
+regard to the fibre coordinate system rather than the material or
+undeformed coordinate system \eg material property tensors are often
+diagonal in the fibre coordinate system. The material coordinate
+vector in material or reference fibre coordinates,
+$\tilde{\materialfibrecoordinatevector}$, is given by
+\begin{equation}
+  \tilde{\materialfibrecoordinatevector}=
+  \tilde{\materialfibrecoordinatesymbol}^{A}\tilde{\materialfibrecoordinatevector}_{A}
+\end{equation}
+where the $\tilde{.}$ indicates that the quantity is with respect to fibre coordinates.
+
+The transformation between material or reference coordinates and material fibre coordinates is given by
+\begin{equation}
+  \tilde{\materialfibrecoordinatevector}=\tilde{\materialfibrecoordinatesymbol}^{A}\tilde{\materialfibrecoordinatevector}_{A}=
+  \tensortwo{Q}\materialcoordinatevector=Q^{A}_{I}\materialcoordinatesymbol^{I}
+  \dotprod{\tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}}{\materialbasevector_{I}}
+\end{equation}
+where $\tilde{\materialfibrecoordinatevector}_{A}$ are the material
+fibre coordinate base vectors (with respect to the material fibre
+coordinate system) and $\tensortwo{Q}$ is the tensor tranformation
+between the material or reference coordinate system and the material
+fibre coordinate system \ie
+\begin{equation}
+  \tensortwo{Q}=Q^{A}_{I}\tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}=
+  \delby{\tilde{\materialfibrecoordinatesymbol}^{A}}{\materialxicoordinatesymbol^{R}}
+  \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{I}}
+  \tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}
+\end{equation}
+
+Now, the material or undeformed block of fibrous tissue in
+\figref{fig:FiniteElasticityDeformedFibres} undergoes deformation as
+defined by the deformation gradient tensor,
+$\fnof{\deformationgradienttensor}{\materialcoordinatevector}$, such
+that a point in the material or reference manifold,
+$\materialcoordinatevector$, is mapped to a point in the spatial or
+deformed manifold, $\spatialcoordinatevector$, where
+\begin{equation}
+  \spatialcoordinatevector=\spatialcoordinatesymbol^{i}\spatialbasevector_{i}
+\end{equation}
+and the mapping is given by
+\begin{equation}
+  \spatialcoordinatevector=\spatialcoordinatesymbol^{i}\spatialbasevector_{i}=
+  \fnof{\deformationgradienttensor}{\materialcoordinatevector}\materialcoordinatevector
+  =\fnof{\deformationgradienttensorsymbol^{i}_{I}}{\materialcoordinatevector}\materialcoordinatesymbol^{I}
+  \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}}{\materialbasevector_{I}}
+\end{equation}
+
+We can also define the deformation gradient tensor as a map from the
+material fibre coordinates to the spatial deformed coordinates \ie
+\begin{equation}
+  \fnof{\tilde{\deformationgradienttensor}}{\tilde{\materialfibrecoordinatevector}}=
+  \fnof{\tilde{\deformationgradienttensorsymbol}^{i}_{A}}{\tilde{\materialfibrecoordinatevector}}
+  \tensorprod{\spatialbasevector_{i}}{\tilde{\materialfibrecoordinatevector}^{A}}=
+  \fnof{\deformationgradienttensor}{\materialcoordinatevector}\transpose{\tensortwo{Q}}=
+  \fnof{\deformationgradienttensorsymbol^{i}_{I}}{\materialcoordinatevector}\pbrac{\transpose{Q}}^{I}_{A}
+  \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}}{\tensorprod{\materialbasevector_{I}}{\tilde{\materialfibrecoordinatevector}^{A}}}
+\end{equation}
+
+Note that
+$\fnof{\deformationgradienttensor}{\materialcoordinatevector}$ is a
+two-point tensor and so transforms as
+$\fnof{\deformationgradienttensor}{\materialcoordinatevector}\transpose{\tensortwo{Q}}$.
+
+Now, the material fibre coordinate system also undergoes deformation
+along with the block of material. The material fibre coordinate system
+is mapped under the deformation gradient tensor to the spatial or
+deformed fibre coordinate system with respect to spatial or deformed
+coordinates \ie
+\begin{equation}
+  \fnof{\spatialfibrecoordinatevector^{'}_{a}}{\spatialcoordinatevector}=
+  \fnof{\spatialfibrecoordinatesymbol^{i'}_{a}}{\spatialcoordinatevector}\spatialbasevector_{i}=
+  \fnof{\deformationgradienttensor}{\materialcoordinatevector}\materialfibrecoordinatevector_{a}=
+  \fnof{\deformationgradienttensorsymbol^{i}_{I}}{\materialcoordinatevector}\materialfibrecoordinatesymbol^{I}_{a}
+  \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialfibrecoordinatevector^{I}}}{\materialfibrecoordinatevector_{I}}
+\end{equation}
+
+We can also compute the spatial fibre coordinate system using tensors with respect to the material fibre coordinate system \ie
+\begin{equation}
+  \fnof{\spatialfibrecoordinatevector^{'}_{a}}{\spatialcoordinatevector}=
+  \fnof{\spatialfibrecoordinatesymbol^{i'}_{a}}{\spatialcoordinatevector}\spatialbasevector_{i}=\fnof{\tilde{\deformationgradienttensor}}{\tilde{\materialfibrecoordinatevector}}\tilde{\materialfibrecoordinatevector}_{a}=\fnof{\tilde{\deformationgradienttensorsymbol}^{i}_{A}}{\tilde{\materialfibrecoordinatevector}}\tilde{\materialfibrecoordinatesymbol}^{A}_{a}\dotprod{\tensorprod{\spatialbasevector_{i}}{\tilde{\materialfibrecoordinatevector}^{A}}}{\tilde{\materialfibrecoordinatevector}_{A}}
+\end{equation}
+
+Now, the spatial or deformed fibre coordinate system,
+$\fnof{\spatialfibrecoordinatevector^{'}_{a}}{\spatialcoordinatevector}$, are not necessarily of unit
+length or are orthogonal to each other. Dealing with tensor properties
+with respect to a non-orthogonal coordinate system can be problematic
+and so it will be useful to construct an orthogonal spatial fibre
+coordinate system. The first step to construct
+$\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}$, a unit vector orthogonal to
+$\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ and
+$\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}$ \ie
+\begin{equation}
+  \fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}=\dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}
+                               {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}}
+\end{equation}
+
+Next, we construct $\fnof{\spatialfibrecoordinatevector_{2}}{\spatialcoordinatevector}$, a unit vector orthogonal to
+$\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}$ and
+$\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ \ie
+\begin{equation}
+  \fnof{\spatialfibrecoordinatevector_{2}}{\spatialcoordinatevector}=\dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}
+                               {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}}
+\end{equation}
+
+And finally, we can complete the unit orthogonal spatial fibre
+coordinate system by normalising
+$\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ \ie
+\begin{equation}
+  \fnof{\spatialfibrecoordinatevector_{1}}{\spatialcoordinatevector}=\norm{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}
+\end{equation}
+
+Now, as with the material coordinate case, it is useful to define
+tensors with respect to the spatial fibre coordinate system as they
+may have useful properties with respect this coordinate system \eg a
+diagonal tensor. We can define the spatial fibre coordinate vector as
+\begin{equation}
+  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\tilde{\spatialfibrecoordinatevector}_{a}
+\end{equation}
+
+The transformation between the spatial or deformed coordinates and the spatial fibre coordinates is given by
+\begin{equation}
+  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\tilde{\spatialfibrecoordinatevector}_{a}=
+  \tensortwo{q}\spatialcoordinatevector=q^{a}_{i}\spatialcoordinatesymbol^{i}
+  \dotprod{\tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}}{\spatialbasevector_{i}}
+\end{equation}
+where $\tilde{\spatialfibrecoordinatevector}_{a}$ are the spatial
+fibre coordinate base vectors (with respect to the spatial fibre
+coordinate system) and $\tensortwo{q}$ is the tensor tranformation
+between the spatial or deformed coordinate system and the spatial
+fibre coordinate system \ie
+\begin{equation}
+  \tensortwo{q}=q^{a}_{i}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}=
+  \delby{\tilde{\spatialfibrecoordinatesymbol}^{a}}{\spatialcoordinatesymbol^{i}}
+  \tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}
+\end{equation}
+
+Now, to compute the transformation tensor, $\tensortwo{q}$ we need to
+find the relationship between
+$\tilde{\spatialfibrecoordinatesymbol}^{a}$ and
+$\spatialcoordinatesymbol^{i}$. We can do this by utilising a
+relationship between unit orthogonal spatial fibre coordinate system
+with respect to the spatial coordinates,
+$\fnof{\spatialfibrecoordinatevector}{\spatialcoordinatevector}$, and
+with respect to spatial fibre coordinates,
+$\fnof{\tilde{\spatialfibrecoordinatevector}}{\tilde{\spatialfibrecoordinatevector}}$, \ie
+\begin{equation}
+  \fnof{\tilde{\spatialfibrecoordinatevector}_{a}}{\tilde{\spatialfibrecoordinatevector}}=
+  \fnof{\tilde{\spatialfibrecoordinatesymbol}^{b}_{a}}{\tilde{\spatialfibrecoordinatevector}}
+  \tilde{\spatialfibrecoordinatevector}_{b}=
+  \fnof{\spatialfibrestructuretensor}{\spatialcoordinatevector}\fnof{\spatialfibrecoordinatevector_{a}}{\spatialcoordinatevector}=
+  \fnof{\spatialfibrestructuretensorsymbol^{b}_{i}}{\spatialcoordinatevector}\spatialfibrecoordinatesymbol^{i}_{a}
+  \dotprod{\tensorprod{\spatialfibrecoordinatevector_{b}}{\spatialbasevector^{i}}}{\spatialbasevector_{i}}
+\end{equation}
+where
+\begin{equation}
+  \fnof{\spatialfibrestructuretensor}{\spatialcoordinatevector}=\fnof{\spatialfibrestructuretensorsymbol^{b}_{i}}{\spatialcoordinatevector}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{b}}{\spatialbasevector^{i}}=\delby{\tilde{\spatialfibrecoordinatesymbol}^{b}}{\spatialfibrecoordinatesymbol^{i}}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{b}}{\spatialbasevector^{i}}
+\end{equation}
+is the structure tensor. 
 
 In order to deal with anisotropy we wish to base our stress and strain
 calculation on fibre coordinates in the reference configuration where they are
@@ -439,8 +690,7 @@ We have
 \begin{align}
   \vectr{x}=x^{i}\vectr{g}_{i}&=F^{i}_{I}X^{I}\dotprod{\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}}{\vectr{G}_{I}}=\tensor{F}\vectr{X}\\
   \tensor{Q}=Q^{A}_{I}\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}&=\delby{\tilde{N}^{A}}{X^{I}}\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}\\
-  \tilde{\tensor{F}}=\tilde{F}^{i}_{A}\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{N}}^{A}}&=F^{i}_{I}\pbrac{\transpose{Q}}^{I}_{A}\dotprod{\tensorprod{\vectr{g_{i}}}{\vectr{G}^{I}}}{\tensorprod{\vectr{G}_{I}}{\tilde{\vectr{N}}^{A}}}=\tensor{F}\transpose{\tensor{Q}}\\
-  \tilde{\vectr{N}}=\tilde{N}^{A}\tilde{\vectr{N}}_{A}&=Q^{A}_{I}X^{I}\dotprod{\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}}{\vectr{G}_{I}}=\tensor{Q}\vectr{X} \\
+ \tilde{\vectr{N}}=\tilde{N}^{A}\tilde{\vectr{N}}_{A}&=Q^{A}_{I}X^{I}\dotprod{\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}}{\vectr{G}_{I}}=\tensor{Q}\vectr{X} \\
   \vectr{\nu}=\nu^{i}\vectr{g}_{i}&=\tilde{F}^{i}_{A}\tilde{N}^{A}\dotprod{\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{N}}^{A}}}{\tilde{\vectr{N}}_{A}}=\tilde{\tensor{F}}\tilde{\vectr{N}}
 \end{align}
 
@@ -472,7 +722,11 @@ $\tilde{\vectr{\nu}}$ from the skewed $\vectr{\nu}$.
 
 Note that in \OpenCMISS we have
 \begin{equation}
-  F^{i}_{A}=\delby{X^{M}}{\nu^{A}}F^{i}_{M}=\delby{X^{M}}{\nu^{A}}\delby{z^{i}}{\xi^{k}}\delby{\xi^{k}}{X^{M}}
+  F^{i}_{A}=\delby{z^{i}}{\xi^{k}}\delby{\xi^{k}}{\nu^{A}}
+\end{equation}
+and
+\begin{equation}
+  F^{i}_{J}=\delby{\nu^{A}}{X^{J}}F^{i}_{A}=\delby{\nu^{A}}{X^{J}}\delby{z^{i}}{\xi^{k}}\delby{\xi^{k}}{\nu^{A}}
 \end{equation}
 
 \subsection{Growth}
@@ -545,6 +799,8 @@ and
   \sigma^{ij}=\inverse{J_{e}}\pbrac{F_{e}}^{i}_{B}S^{BC}\pbrac{\transpose{F_{e}}}^{j}_{C}
 \end{equation}
 
+\subsection{Active Contraction}
+\label{subsec:FiniteElasticityActiveContraction}
 \subsection{Elasticity Tensors}
 
 If $\fnof{\tensor{P}}{\vectr{X},\tensor{F}}$ is the first Piola-Kirchoff

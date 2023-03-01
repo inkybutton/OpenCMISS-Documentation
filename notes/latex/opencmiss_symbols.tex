@@ -51,6 +51,81 @@
 \newcommand{\xithreesq}{\ensuremath{{\xi^{3}}^{2}}\xspace} % (xi 3)^2
 \newcommand{\xithreecube}{\ensuremath{{\xi^{3}}^{3}}\xspace} % (xi 3)^3
 
+\newcommand{\Xione}{\ensuremath{\Xi^{1}}\xspace} % Xi 1
+\newcommand{\Xionesq}{\ensuremath{{\Xi^{1}}^{2}}\xspace} % (Xi 1)^2
+\newcommand{\Xionecube}{\ensuremath{{\Xi^{1}}^{3}}\xspace} % (Xi 1)^3
+\newcommand{\Xitwo}{\ensuremath{\Xi^{2}}\xspace} % Xi 2
+\newcommand{\Xitwosq}{\ensuremath{{\Xi^{2}}^{2}}\xspace} % (Xi 2)^2
+\newcommand{\Xitwocube}{\ensuremath{{\Xi^{2}}^{3}}\xspace} % (Xi 2)^3
+\newcommand{\Xithree}{\ensuremath{\Xi^{3}}\xspace} % xi 3
+\newcommand{\Xithreesq}{\ensuremath{{\Xi^{3}}^{2}}\xspace} % (Xi 3)^2
+\newcommand{\Xithreecube}{\ensuremath{{\Xi^{3}}^{3}}\xspace} % (Xi 3)^3
+
+%
+% Coordinate systems etc. (fibre, elemental, world etc.)
+%
+\newcommand{\coordinatesymbol}{\ensuremath{ %
+    x %
+}} % coordinate symbol e.g., \coordinatesymbol => x
+\newcommand{\coordinatevector}{\ensuremath{ %
+    \vectr{\coordinatesymbol} %
+}} % coordinate vectr e.g., \coordinatevector => x
+\newcommand{\xicoordinatesymbol}{\ensuremath{ %
+    \xi %
+}} % xi coordinate symbol e.g., \xicoordinatesymbol => \xi
+\newcommand{\xicoordinatevector}{\ensuremath{ %
+    \vectr{\xicoordinatesymbol} %
+}} % xi coordinate vector e.g., \xicoordinatevector => \xi
+\newcommand{\fibrecoordinatesymbol}{\ensuremath{ %
+    \nu %
+}} % Fibre coordinate symbol e.g., \fibrecoordinatesymbol => \nu
+\newcommand{\fibrecoordinatevector}{\ensuremath{ %
+    \vectr{\fibrecoordinatesymbol} %
+}} % Fibre coordinate vector e.g., \fibrecoordinatevector => \nu
+
+\newcommand{\spatialcoordinatesymbol}{\ensuremath{ %
+    \coordinatesymbol %
+}} % spatial coordinate symbol e.g., \spatialcoordinatesymbol => x
+\newcommand{\spatialcoordinatevector}{\ensuremath{ %
+    \vectr{\spatialcoordinatesymbol} %
+}} % spatial coordinate vector e.g., \spatialcoordinatevector => x
+\newcommand{\materialcoordinatesymbol}{\ensuremath{ %
+    X %
+}} % material coordinate symbol e.g., \materialcoordinatesymbol => X
+\newcommand{\materialcoordinatevector}{\ensuremath{ %
+    \vectr{\materialcoordinatesymbol} %
+}} % material coordinate vector e.g., \materialcoordinatevector => X
+\newcommand{\spatialxicoordinatesymbol}{\ensuremath{ %
+    \xicoordinatesymbol %
+}} % Spatial xi coordinate symbol e.g., \spatialxicoordinatesymbol => \xi
+\newcommand{\spatialxicoordinatevector}{\ensuremath{ %
+    \vectr{\spatialxicoordinatesymbol} %
+}} % Spatial xi coordinate vector e.g., \spatialxicoordinatevector => \xi
+\newcommand{\materialxicoordinatesymbol}{\ensuremath{ %
+    \Xi %
+}} % Material xi coordinate symbol e.g., \materialxicoordinatesymbol => \Xi
+\newcommand{\materialxicoordinatevector}{\ensuremath{ %
+    \vectr{\materialxicoordinatesymbol} %
+}} % Material xi coordinate vector e.g., \materialxicoordinatevector => \Xi
+\newcommand{\spatialfibrecoordinatesymbol}{\ensuremath{ %
+    \fibrecoordinatesymbol %
+}} % Spatial fibre coordinate symbol e.g., \spatialfibrecoordinatesymbol => \nu
+\newcommand{\spatialfibrecoordinatevector}{\ensuremath{ %
+    \vectr{\spatialfibrecoordinatesymbol} %
+}} % Spatial fibre coordinate vector e.g., \spatialfibrecoordinatevector => \nu
+\newcommand{\materialfibrecoordinatesymbol}{\ensuremath{ %
+    N %
+}} % Material fibre coordinate symbol e.g., \materialfibrecoordinatesymbol => N
+\newcommand{\materialfibrecoordinatevector}{\ensuremath{ %
+    \vectr{\materialfibrecoordinatesymbol} %
+}} % Material fibre coordinate vector e.g., \materialfibrecoordinatevector => N
+\newcommand{\spatialfibrestructuretensorsymbol}{\ensuremath{ %
+    s %
+}} % Spatial fibre structure tensor symbol e.g., \spatialfibrestructuretensorsymbol => s
+\newcommand{\spatialfibrestructuretensor}{\ensuremath{ %
+    \tensortwo{\spatialfibrestructuretensorsymbol} %
+}} % Spatial fibre structure tensor e.g., \spatialfibrestructuretensor => s
+
 %
 % Solid Mechanics
 %
@@ -74,7 +149,7 @@
     F %
 }} % Deformation gradient tensor symbol e.g., \deformationgradienttensorsymbol => F
 \newcommand{\deformationgradienttensor}{\ensuremath{ %
-    \tensortwo{\deformationgradienttensor} %
+    \tensortwo{\deformationgradienttensorsymbol} %
 }} % Deformation gradient tensor e.g., \deformationgradienttensor => F
 \newcommand{\rightstretchtensorsymbol}{\ensuremath{ %
     U %
