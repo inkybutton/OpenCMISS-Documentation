@@ -1,128 +1,165 @@
 \section{Monodomain Equation}
- 
+\label{sec:MonodomainEquation}
 
-\renewcommand{\vec}[1]{\boldsymbol{#1}}
-\newcommand{\Iion}{I_{\text{ion}}}
-\newcommand{\Iext}{I_{\text{ext}}}
-\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\lrbr}[1]{\left(#1\right)}
-\newcommand{\dt}{\Delta t}
+\subsection{Governing Equations}
+\label{subsec:MonodomainGoverningEquations}
 
-
-
-This section describes the implementation of the monodomain equations and hardcoded cell models in OpenCMISS.
-
-\section{Equations}
-The monodomain equations are:
-\begin{eqnarray}
- \pd{V_m}{t}  &=&  \nabla \cdot \lrbr{\vec{D} \nabla V_m}  -  \frac{1}{C_m}\lrbr{\Iion + \Iext}
-\end{eqnarray}
-
-where $V_m$ is the membrane potential, $\vec{D}=\frac{\vec{\sigma}}{\chi C_m}$ is the diffusion coefficient, $\vec{\sigma}$ is the conductivity, $C_m$ the membrane capacitance, $\chi$ the cell's surface area to volume ratio, $\Iion$ the currents across the membrane, and $\Iext$ the external stimulus current.
-
-The numerical method developed to solve the monodomain model uses the idea of operator splitting based on Strang splitting outlined in (Qu \& Garfinkel 1999). The splitting algorithm is used to decouple the cell model from the diffusion part of the monodomain equation. 
- 
-The splitting method enables us to solve:
+Under certain conditions the bidomain equations given in
+\eqnref{eqn:BidomainEquation1} and \eqnref{eqn:BidomainEquation2} can
+be simplified. If we assume that the intra- and extra-cellular
+conductivity tensors have equal anisotropy ratios \ie
 \begin{equation}
-\frac{d V_m}{d t} = \nabla \cdot (\mathbf{D}\nabla V)
-\label{diff}
+  \extracellularconductivitytensor=\lambda\intracellularconductivitytensor
+  \label{eqn:MonodomainConductivityAssumption}
+\end{equation}
+where $\lambda$ is the conductivity scaling, we can substitute
+\eqnref{eqn:MonodomainConductivityAssumption} into
+\eqnref{eqn:FirstBidomainEquation} to obtain
+\begin{equation}
+  \begin{aligned}
+    \divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}&=
+    -\divergence{}{\pbrac{\pbrac{\intracellularconductivitytensor+\extracellularconductivitytensor}
+      \gradient{}{\extracellularpotential}}}\\&=
+    -\divergence{}{\pbrac{\pbrac{\intracellularconductivitytensor+\lambda\intracellularconductivitytensor}
+      \gradient{}{\extracellularpotential}}}\\
+    &=-\divergence{}{\pbrac{\pbrac{1+\lambda}\intracellularconductivitytensor\gradient{}{\extracellularpotential}}}
+  \end{aligned}
+\end{equation}
+or
+\begin{equation}
+  \divergence{}{\pbrac{\intracellularconductivitytensor\gradient{}{\extracellularpotential}}}=
+  \dfrac{-1}{1+\lambda}\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}
+  \label{eqn:MonodomainFirstBidomainEquation}
 \end{equation}
 
-and use the solution of this step in the set of ODEs describing the ion concentrations,
-\begin{eqnarray}
-\frac{d V_m}{d t} &=& f(t,V_m,\vec{v})\\
-\frac{d V_m}{d t} &=&  - \frac{1}{C_m}(I_{ion} + I_{ext}) 
-\end{eqnarray}
-where $\vec{v}$ is the vector of other variables defining the cell model.
-The solution obtained this way is not second-order accurate as normal Strang splitting uses half steps, but the error does not accumulate as
-fast since
-
-\subsection{Finite element discretization}
-Equation \ref{diff} is discretized using a finite element approach, with a Crank-Nicholson discretization in time:\\
+If we now substitute \eqnref{eqn:MonodomainFirstBidomainEquation} into \eqnref{eqn:SecondBidomainEquation} we obtain
 \begin{equation}
- (\vec{M}/\dt+\vec{A}/2) \vec{V_m}(t+\dt) = (\vec{M}/\dt-\vec{A}/2) \vec{V_m}(t)
+  \begin{aligned}
+    \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent}&=
+    \divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}} +
+    \dfrac{-1}{1+\lambda}\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}} \\
+    &=\dfrac{\pbrac{1+\lambda}\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}} -
+      \divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}{1+\lambda} \\
+    &=\dfrac{\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}+
+      \lambda\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}} -
+      \divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}{1+\lambda} \\
+    &=\dfrac{\lambda}{1+\lambda}\divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}\\
+    &=\divergence{}{\pbrac{\dfrac{\lambda}{1+\lambda}\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}
+  \end{aligned}
+\end{equation}
+We can now define a \emph{monodomain conductivity tensor}\index{Monodomain conductivity tensor}, $\monodomainconductivitytensor$, as
+\begin{equation}
+  \monodomainconductivitytensor=\dfrac{\lambda\intracellularconductivitytensor}{1+\lambda}=
+  \dfrac{\intracellularconductivitytensor\extracellularconductivitytensor}{\intracellularconductivitytensor+
+    \extracellularconductivitytensor}
+  \label{eqn:MonodomainConductivityTensor}  
 \end{equation}
 
-With the stiffness matrix:
-\begin{eqnarray}
-A_{kl} &=& \int_v \sum_{ij} D_{ij} \pd{\phi^{(l)}}{x_j} \pd{\phi^{(k)}}{x_i} ~dv
-\end{eqnarray}
+\Eqnref{eqn:MonodomainConductivityTensor} defines the monodomain
+conductivity tensor as the arithmetic mean of the intra- and
+extra-cellular conductivity tensors.
 
-And the damping matrix (lumped, shown to give better convergence):
-\begin{eqnarray}
-M_{kl} &=& \delta_{kl}  \int_v \phi^{(k)} ~ dv \\
-\end{eqnarray}
-Where $\phi^{(k)}$ is the basis function such that $\phi^{(k)}(x_j)=\delta_{kj}$.
+Subsituting \eqnref{eqn:MonodomainConductivityTensor} into
+\eqnref{eqn:SecondBidomainEquation} and adding a stimulus current
+gives us
+\begin{equation}
+  \addtolength{\fboxsep}{5pt}
+  \boxed{
+    \membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}-
+    \divergence{}{\pbrac{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}=
+    -\membraneareavolumeratio\ioniccurrent+\stimuluscurrent
+  }
+  \label{eqn:MonodomainEquation}
+\end{equation}
+where $\stimuluscurrent$ is the monodomain stimulus current.
 
-\section{Example usage}
+\Eqnref{eqn:MonodomainEquation} is known as the \emph{monodomain equation}\index{Monodomain equation}.
 
-\subsection{Types}
-The problem class and type are always \verb!CMISSProblemBioelectricsClass! and \verb!CMISSProblemMonodomainStrangSplittingEquationType! respectively.
-The problem subtype defines the cell model, currently either
-\verb!CMISSProblemMonodomainBuenoOrovioSubtype! or \verb!CMISSProblemMonodomainTenTusscher06Subtype!.
+The boundary condition for the monodomain equation is that there is no current flow out of the domain \ie
+\begin{equation}
+  \dotprod{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}{\normal}=0
+  \label{eqn:MonodomainBC}
+\end{equation}
 
-The equations set class and type are always \verb!CMISSEquationsSetBioelectricsClass! and \verb!CMISSEquationsSetMonodomainSSEquationType! respectively.
-The problem subtype defines the cell model, currently either
-\verb!CMISSEquationsSetMonodomainBuenoOrovioSubtype! or \verb!CMISSEquationsSetMonodomainTenTusscher06Subtype!.
+\subsection{Weak formulation}
+\label{subsec:MonodomainWeakForm}
 
-\subsection{Cell models}
-There are currently two options for the cell model:
-\begin{itemize}
- \item   Bueno-Orovio minimal cell model  with 1 Hz paced initial condition, 4 variables. 
- Integration scheme is forward Euler with an adaptive time step 
-Functions \verb!bueno_orovio_initialize!, \verb!bueno_orovio_integrate! are called from \verb!monodomain_equations_routines.f90! in respectively the fields setup and post solve stages. 
- \item   Ten Tusscher and Panfilov (2006) cell model, 19 variables and initial condition as in the euHeart benchmark. Integration scheme is forward Euler with an adaptive time step and a specialized scheme for the $m,d$ gates to prevent them from crossing the steady state solution.
-Functions \verb!tentusscher06_initialize!, \verb!tentusscher06_integrate! are used from \verb!monodomain_equations_routines.f90!.
-\end{itemize}
+The corresponding weak form of \eqnref{eqn:MonodomainEquation} is
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}-
+      \divergence{}{\pbrac{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}
+      +\membraneareavolumeratio\ioniccurrent-\stimuluscurrent}w}{\Omega}=0
+  \label{eqn:MonodomainWeakForm1}
+\end{equation}
 
+Applying the divergence thereom to \eqnref{eqn:MonodomainWeakForm1} gives
+\begin{equation}
+  \gint{\Omega}{}{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}w}{\Omega}
+  +\gint{\Omega}{}{\dotprod{\pbrac{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}{\gradient{}{w}}}{\Omega}
+  -\gint{\Gamma}{}{\dotprod{\pbrac{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}}}{\normal}}{\Gamma}
+  +\gint{\Omega}{}{\membraneareavolumeratio\ioniccurrent w}{\Omega}
+  -\gint{\Omega}{}{\stimuluscurrent w}{\Omega}=0
+  \label{eqn:MonodomainWeakForm2}
+\end{equation}
 
+\subsection{Tensor notation}
+\label{subsec:MonodomainTensorNotation}
 
-\subsection{Fields}
-The main fields relevant for the example is the material field, which has the following components:
-\begin{enumerate}
- \item Activation flag. Set to $1.0$ to have a cell be stimulated (standard $\Iext$) and to $0.0$ for no stimulation. Any other value $c$ will apply $c \Iext$ as stimulus current to that cell, allowing the strength to be tuned manually from the example file.
- \item Fiber ``diffusivity'', i.e. $D_f=\frac{\sigma_f}{\chi C_m}$ where $\sigma_f$ is the conductivity along the fiber direction.
- \item Transverse ``diffusivity'', i.e. $D_t=\frac{\sigma_t}{\chi C_m}$ where $\sigma_t$ is the conductivity orthogonal to the fiber direction.
- \item Fiber direction unit vector $x$.
- \item Fiber direction unit vector $y$.
- \item Fiber direction unit vector $z$ (3D only).
-\end{enumerate}
-The activation flag and fiber direction are nodal by default, the others have constant interpolation but this can be changed.
-Fiber direction is normalized to lenght $1$ in the code, so input does not need to be.
+\Eqnref{eqn:MonodomainWeakForm2} in tensor notation is given by
+\begin{equation}
+  \gint{\Omega}{}{\membraneareavolumeratio\membranecapacitance\dot{\transmembranevoltage}w}{\Omega}
+  +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+  -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{k}\normalsymbol_{l}w}{\Gamma}
+  +\gint{\Omega}{}{\membraneareavolumeratio\ioniccurrent w}{\Omega}
+  -\gint{\Omega}{}{\stimuluscurrent w}{\Omega}=0
+  \label{eqn:MonodomainTensorNotation1}
+\end{equation}
 
-Internally, the dependent field contains a single variable $V_m$ (and its normal which is required by OpenCMISS but not used). The independent
-field contains the cell model, with the first component always being the copy of $V_m$ used in the cell model.
+Rearranging \eqnref{eqn:MonodomainTensorNotation1} and dividing by $\membraneareavolumeratio\membranecapacitance$ gives
+\begin{equation}
+  \gint{\Omega}{}{\dot{\transmembranevoltage}w}{\Omega}=
+  \dfrac{-1}{\membraneareavolumeratio\membranecapacitance}\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}
+    \conductivitytensorsymbol^{j}_{.ki}\covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+  +\dfrac{1}{\membranecapacitance}\gint{\Omega}{}{\pbrac{\ioniccurrent-
+      \dfrac{\stimuluscurrent}{\membraneareavolumeratio}}w}{\Omega}
+  +\dfrac{1}{\membraneareavolumeratio\membranecapacitance}\gint{\Gamma}{}{qw}{\Gamma}
+  \label{eqn:MonodomainTensorNotation2}
+\end{equation}
+where $q$ is the surface current flux. In the standard monodomain
+formulation the surface current flux is zero by virtue of the boundary
+condition (\eqnref{eqn:MonodomainBC}). Although it is possible to
+extend the monodomain formulation to allow for a non-zero surface
+current flux we will assume that it is zero from now on.
 
-\section{Internal implementation details}
-The diffusion equation is solved using OpenCMISS standard setup for a linear dynamic equation solved using a finite element approach.
-\subsection{Finite element calculation}
-The stiffness and damping matrices are calculated only once, and the update flags are set to false afterwards.
-Still, the basis function derivatives are tabulated instead of recalculated in the inner loop, and code for this table this could be used to speed up other equation types.
+\subsection{Finite element formulation}
+\label{subsec:MonodomainFEMFormulation}
 
+We can now discretise the spatial domain into finite elements \ie
+$\Omega= \displaystyle{\bigcup_{e=1}^{E}}\Omega_{e}$ with
+$\Gamma=\displaystyle{\bigcup_{f=1}^{F}}\Gamma_{f}$.
+\Eqnref{eqn:MonodomainTensorNotation2} now becomes
+\begin{equation}
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{\dot{\transmembranevoltage}w}{\Omega}=
+  \dsum_{e=1}^{E}\dfrac{-1}{\membraneareavolumeratio\membranecapacitance}\gint{\Omega_{e}}{}{\generalmetrictensorsymbol^{lk}
+    \conductivitytensorsymbol^{j}_{.ki}\covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+  +\dsum_{e=1}^{E}\dfrac{1}{\membranecapacitance}\gint{\Omega_{e}}{}{\pbrac{\ioniccurrent-
+      \dfrac{\stimuluscurrent}{\membraneareavolumeratio}}w}{\Omega}
+  \label{eqn:MonodomainFEM1}
+\end{equation}
 
-\subsection{Examples}
-Current examples using this code are:
-\begin{itemize}
- \item \verb!examples/Bioelectrics/MonodomainTP06!
- \item \verb!examples/Bioelectrics/MonodomainBuenoOrovio!
-\end{itemize}
-The first of these is set up to match the euHeart benchmark problem.
-
-\section{Known issues and TODO}
-\begin{itemize}
- \item We are planning to implement an adaptive time step.
- \item Lookup tables would speed up the code as well, but there is currently no support for them.
-\end{itemize}
-
-\section{Testing}
-Solutions for spacing $0.5, 0.2, 0.1$mm match a reference implementation, and further tests
-with non-axis aligned fibers also match.
-
-
-%\begin{thebibliography}{}
-%\bibitem{cp} Clayton R. H. and Panfilov A.V., Prog. Bio-phys. Mol. Biol. 96(1-3):19-43, 2008
-%\bibitem{qg} Qu Z. and Garfinkel A. IEEE Trans Biomed. Eng. 25(4):389-392, 1998
-%\bibitem{bo} Bueno-Orovio A., Cherry E.M. and Fenton F. H., J. Theo. Bio. 253(3): 405-628 2008
-%\bibitem{tp} ten Tusscher, K. H. W. J and Panfilov A. V., Am. J. Physiol. Heart Circ. Physiol. 291(3):H1088--H1100, 2006
-%\end{thebibliography}
-
+If we now assume that the dependent variable $\transmembranevoltage$ can be interpolated
+separately in space and in time we can write
+\begin{equation}
+  \fnof{\transmembranevoltage}{\vectr{x},t}=\gbfn{n}{}{\vectr{x}}\fnof{\nodept{\transmembranevoltage}{n}}{t}
+\end{equation}
+or, in standard interpolation notation within an element,
+\begin{equation}
+  \fnof{\transmembranevoltage}{\vectr{\xi},t}=\gbfn{n}{\beta}{\vectr{\xi}}
+  \fnof{\nodedof{\transmembranevoltage}{n}{\beta}}{t}\gsf{n}{\beta}
+\end{equation}
+where $\fnof{\nodedof{\transmembranevoltage}{n}{\beta}}{t}$ are the
+time varying nodal degrees-of-freedom for node $n$, global derivative
+$\beta$, $\gbfn{n}{\beta}{\vectr{\xi}}$ are the corresponding basis
+functions and $\gsf{n}{\beta}$ are the scale factors.

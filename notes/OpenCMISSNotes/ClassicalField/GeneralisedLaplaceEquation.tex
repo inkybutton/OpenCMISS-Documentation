@@ -90,7 +90,7 @@ hand integral is
 and thus \eqnref{eqn:LaplaceWeightedResidualForm} becomes
 \begin{equation}
   \gint{\Omega}{}{\generalmetrictensorsymbol^{kj}\conductivitytensorsymbol^{i}_{.j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}
-  = \gint{\Gamma}{}{\generalmetrictensorsymbol^{kj}\conductivitytensorsymbol^{i}_{.j}\covarderiv{u}{i}n_{k}w}{\Gamma}
+  = \gint{\Gamma}{}{\generalmetrictensorsymbol^{kj}\conductivitytensorsymbol^{i}_{.j}\covarderiv{u}{i}\normalsymbol_{k}w}{\Gamma}
   \label{eqn:LaplaceWeightedResidualTensorForm1}
 \end{equation}
 or
@@ -272,7 +272,7 @@ where
   \delby{\xi^{d}}{x^{j}}\delby{\xi^{c}}{\nu^{a}}\delby{\nu^{b}}{\xi^{d}}
   \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
   \delby{\xi^{r}}{x^{i}}\delby{\xi^{s}}{x^{k}}
-  \label{eqn:diffusiongammadefinition1}
+  \label{eqn:DiffusionOperatorGammaDefinition1}
 \end{equation}
 or
 \begin{equation}
@@ -284,13 +284,13 @@ Note that for Laplace's equation with no conductivity or fibre fields
   have
 \begin{equation}
   \fnof{\gamma^{rs}}{\vectr{\xi}}=\generalmetrictensorsymbol^{kj}\delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{k}}
-  \label{eqn:diffusiongammadefinition2}
+  \label{eqn:DiffusionOperatorGammaDefinition2}
 \end{equation}
 and that for rectangular-Cartesian coordinates systems
 $\generalmetrictensorsymbol^{kj}=\sharpkronecker{k}{j}$ and thus $k=j$. This now gives
 \begin{equation}
   \fnof{\gamma^{rs}}{\vectr{\xi}}=\delby{\xi^{r}}{x^{k}}\delby{\xi^{s}}{x^{k}}=\fnof{g^{rs}}{\vectr{x}}
-  \label{eqn:diffusiongammadefinition3}
+  \label{eqn:DiffusionOperatorGammaDefinition3}
 \end{equation}
 where $g^{rs}$ is the \emph{contravariant metric tensor} from $\vectr{x}$ to
 $\vectr{\xi}$ coordinates.

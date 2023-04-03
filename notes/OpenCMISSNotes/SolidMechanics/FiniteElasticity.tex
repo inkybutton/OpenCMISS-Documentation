@@ -248,13 +248,13 @@ where $\tensor{c}=\inverse{\tensor{b}}$. In component form we have
 Note that we have the following relationships between the deformation tensors
 and metric tensors
 \begin{alignat}{7}
-  \flattensor{\tensor{C}}&=&\pullback{\chi}{\flattensor{\tensor{g}}} &\quad&
+  \flattensor{\tensor{C}}&=&\pullback{\chi}{\flattensor{\tensor{g}}} &&\quad&
   \flattensor{\tensor{c}}&=&\pushforward{\chi}{\flattensor{\tensor{G}}} \\
-  \sharptensor{\tensor{B}}&=&\pullback{\chi}{\sharptensor{\tensor{g}}} &\quad&
+  \sharptensor{\tensor{B}}&=&\pullback{\chi}{\sharptensor{\tensor{g}}} &&\quad&
   \sharptensor{\tensor{b}}&=&\pushforward{\chi}{\sharptensor{\tensor{G}}} \\
-  \flattensor{\tensor{E}}&=&\pullback{\chi}{\flattensor{\tensor{e}}} &\quad&
+  \flattensor{\tensor{E}}&=&\pullback{\chi}{\flattensor{\tensor{e}}} &&\quad&
   \flattensor{\tensor{e}}&=&\pushforward{\chi}{\flattensor{\tensor{E}}} \\ 
-  &=&\frac{1}{2}\pbrac{\pullback{\chi}{\flattensor{\tensor{g}}}-\flattensor{\tensor{G}}}&\quad&
+  &=&\frac{1}{2}\pbrac{\pullback{\chi}{\flattensor{\tensor{g}}}-\flattensor{\tensor{G}}}&&\quad&
   &=&\frac{1}{2}\pbrac{\flattensor{\tensor{g}}-\pushforward{\chi}{\flattensor{\tensor{G}}}}
 \end{alignat}
 \ie
@@ -496,26 +496,25 @@ vector in material or reference fibre coordinates,
 $\tilde{\materialfibrecoordinatevector}$, is given by
 \begin{equation}
   \tilde{\materialfibrecoordinatevector}=
-  \tilde{\materialfibrecoordinatesymbol}^{A}\tilde{\materialfibrecoordinatevector}_{A}
+  \tilde{\materialfibrecoordinatesymbol}^{A}\materialfibrecoordinatevector_{A}
 \end{equation}
 where the $\tilde{.}$ indicates that the quantity is with respect to fibre coordinates.
 
 The transformation between material or reference coordinates and material fibre coordinates is given by
 \begin{equation}
-  \tilde{\materialfibrecoordinatevector}=\tilde{\materialfibrecoordinatesymbol}^{A}\tilde{\materialfibrecoordinatevector}_{A}=
+  \tilde{\materialfibrecoordinatevector}=\tilde{\materialfibrecoordinatesymbol}^{A}\materialfibrecoordinatevector_{A}=
   \tensortwo{Q}\materialcoordinatevector=Q^{A}_{I}\materialcoordinatesymbol^{I}
-  \dotprod{\tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}}{\materialbasevector_{I}}
+  \dotprod{\tensorprod{\materialfibrecoordinatevector_{A}}{\materialbasevector^{I}}}{\materialbasevector_{I}}
 \end{equation}
-where $\tilde{\materialfibrecoordinatevector}_{A}$ are the material
-fibre coordinate base vectors (with respect to the material fibre
-coordinate system) and $\tensortwo{Q}$ is the tensor tranformation
-between the material or reference coordinate system and the material
-fibre coordinate system \ie
+where $\materialfibrecoordinatevector_{A}$ are the material fibre
+coordinate base vectors and $\tensortwo{Q}$ is the tensor
+tranformation between the material or reference coordinate system and
+the material fibre coordinate system \ie
 \begin{equation}
-  \tensortwo{Q}=Q^{A}_{I}\tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}=
+  \tensortwo{Q}=Q^{A}_{I}\tensorprod{\materialfibrecoordinatevector_{A}}{\materialbasevector^{I}}=
   \delby{\tilde{\materialfibrecoordinatesymbol}^{A}}{\materialxicoordinatesymbol^{R}}
   \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{I}}
-  \tensorprod{\tilde{\materialfibrecoordinatevector}_{A}}{\materialbasevector^{I}}
+  \tensorprod{\materialfibrecoordinatevector_{A}}{\materialbasevector^{I}}
 \end{equation}
 
 Now, the material or undeformed block of fibrous tissue in
@@ -541,16 +540,39 @@ material fibre coordinates to the spatial deformed coordinates \ie
 \begin{equation}
   \fnof{\tilde{\deformationgradienttensor}}{\tilde{\materialfibrecoordinatevector}}=
   \fnof{\tilde{\deformationgradienttensorsymbol}^{i}_{A}}{\tilde{\materialfibrecoordinatevector}}
-  \tensorprod{\spatialbasevector_{i}}{\tilde{\materialfibrecoordinatevector}^{A}}=
+  \tensorprod{\spatialbasevector_{i}}{\materialfibrecoordinatevector^{A}}=
   \fnof{\deformationgradienttensor}{\materialcoordinatevector}\transpose{\tensortwo{Q}}=
   \fnof{\deformationgradienttensorsymbol^{i}_{I}}{\materialcoordinatevector}\pbrac{\transpose{Q}}^{I}_{A}
-  \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}}{\tensorprod{\materialbasevector_{I}}{\tilde{\materialfibrecoordinatevector}^{A}}}
+  \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}}{\tensorprod{\materialbasevector_{I}}{\materialfibrecoordinatevector^{A}}}
 \end{equation}
 
 Note that
 $\fnof{\deformationgradienttensor}{\materialcoordinatevector}$ is a
 two-point tensor and so transforms as
-$\fnof{\deformationgradienttensor}{\materialcoordinatevector}\transpose{\tensortwo{Q}}$.
+$\tensortwo{Q}\fnof{\deformationgradienttensor}{\materialcoordinatevector}$.
+
+Also note that in \OpenCMISS we have
+\begin{equation}
+  \begin{aligned}
+    \tilde{\deformationgradienttensorsymbol}^{i}_{A}&=\delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
+    \delby{\materialxicoordinatesymbol^{R}}{\materialfibrecoordinatesymbol^{A}}\\
+    &=\delby{\materialcoordinatesymbol^{J}}{\materialfibrecoordinatesymbol^{A}}\deformationgradienttensorsymbol^{i}_{J}=
+    \delby{\materialcoordinatesymbol^{J}}{\materialfibrecoordinatesymbol^{A}}
+    \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{J}}
+    \delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
+  \end{aligned}
+\end{equation}
+and
+\begin{equation}
+  \begin{aligned}
+    \deformationgradienttensorsymbol^{i}_{J}&=\delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
+    \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{J}}\\
+    &=\delby{\materialfibrecoordinatesymbol^{A}}{\materialcoordinatesymbol^{J}}
+    \tilde{\deformationgradienttensorsymbol}^{i}_{A}=\delby{\materialfibrecoordinatesymbol^{A}}{\materialcoordinatesymbol^{J}}    
+    \delby{\materialxicoordinatesymbol^{R}}{\materialfibrecoordinatesymbol^{A}}
+    \delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
+  \end{aligned}
+\end{equation}
 
 Now, the material fibre coordinate system also undergoes deformation
 along with the block of material. The material fibre coordinate system
@@ -565,12 +587,6 @@ coordinates \ie
   \dotprod{\tensorprod{\spatialbasevector_{i}}{\materialfibrecoordinatevector^{I}}}{\materialfibrecoordinatevector_{I}}
 \end{equation}
 
-We can also compute the spatial fibre coordinate system using tensors with respect to the material fibre coordinate system \ie
-\begin{equation}
-  \fnof{\spatialfibrecoordinatevector^{'}_{a}}{\spatialcoordinatevector}=
-  \fnof{\spatialfibrecoordinatesymbol^{i'}_{a}}{\spatialcoordinatevector}\spatialbasevector_{i}=\fnof{\tilde{\deformationgradienttensor}}{\tilde{\materialfibrecoordinatevector}}\tilde{\materialfibrecoordinatevector}_{a}=\fnof{\tilde{\deformationgradienttensorsymbol}^{i}_{A}}{\tilde{\materialfibrecoordinatevector}}\tilde{\materialfibrecoordinatesymbol}^{A}_{a}\dotprod{\tensorprod{\spatialbasevector_{i}}{\tilde{\materialfibrecoordinatevector}^{A}}}{\tilde{\materialfibrecoordinatevector}_{A}}
-\end{equation}
-
 Now, the spatial or deformed fibre coordinate system,
 $\fnof{\spatialfibrecoordinatevector^{'}_{a}}{\spatialcoordinatevector}$, are not necessarily of unit
 length or are orthogonal to each other. Dealing with tensor properties
@@ -581,23 +597,26 @@ $\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}$, a unit vec
 $\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ and
 $\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}$ \ie
 \begin{equation}
-  \fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}=\dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}
-                               {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}}
+  \fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}=
+  \dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}
+        {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{2}}{\spatialcoordinatevector}}}}
 \end{equation}
 
 Next, we construct $\fnof{\spatialfibrecoordinatevector_{2}}{\spatialcoordinatevector}$, a unit vector orthogonal to
 $\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}$ and
 $\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ \ie
 \begin{equation}
-  \fnof{\spatialfibrecoordinatevector_{2}}{\spatialcoordinatevector}=\dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}
-                               {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}}
+  \fnof{\spatialfibrecoordinatevector_{2}}{\spatialcoordinatevector}=
+  \dfrac{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}
+        {\norm{\crossprod{\fnof{\spatialfibrecoordinatevector_{3}}{\spatialcoordinatevector}}{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}}}
 \end{equation}
 
 And finally, we can complete the unit orthogonal spatial fibre
 coordinate system by normalising
 $\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}$ \ie
 \begin{equation}
-  \fnof{\spatialfibrecoordinatevector_{1}}{\spatialcoordinatevector}=\norm{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}
+  \fnof{\spatialfibrecoordinatevector_{1}}{\spatialcoordinatevector}=
+  \norm{\fnof{\spatialfibrecoordinatevector^{'}_{1}}{\spatialcoordinatevector}}
 \end{equation}
 
 Now, as with the material coordinate case, it is useful to define
@@ -605,203 +624,246 @@ tensors with respect to the spatial fibre coordinate system as they
 may have useful properties with respect this coordinate system \eg a
 diagonal tensor. We can define the spatial fibre coordinate vector as
 \begin{equation}
-  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\tilde{\spatialfibrecoordinatevector}_{a}
+  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\spatialfibrecoordinatevector_{a}
 \end{equation}
 
 The transformation between the spatial or deformed coordinates and the spatial fibre coordinates is given by
 \begin{equation}
-  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\tilde{\spatialfibrecoordinatevector}_{a}=
+  \tilde{\spatialfibrecoordinatevector}=\tilde{\spatialfibrecoordinatesymbol}^{a}\spatialfibrecoordinatevector_{a}=
   \tensortwo{q}\spatialcoordinatevector=q^{a}_{i}\spatialcoordinatesymbol^{i}
-  \dotprod{\tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}}{\spatialbasevector_{i}}
+  \dotprod{\tilde{\spatialfibrecoordinatevector_{a}}{\spatialbasevector^{i}}}{\spatialbasevector_{i}}
 \end{equation}
-where $\tilde{\spatialfibrecoordinatevector}_{a}$ are the spatial
+where $\spatialfibrecoordinatevector_{a}$ are the spatial
 fibre coordinate base vectors (with respect to the spatial fibre
 coordinate system) and $\tensortwo{q}$ is the tensor tranformation
 between the spatial or deformed coordinate system and the spatial
 fibre coordinate system \ie
 \begin{equation}
-  \tensortwo{q}=q^{a}_{i}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}=
+  \tensortwo{q}=q^{a}_{i}\tensorprod{\spatialfibrecoordinatevector_{a}}{\spatialbasevector^{i}}=
   \delby{\tilde{\spatialfibrecoordinatesymbol}^{a}}{\spatialcoordinatesymbol^{i}}
-  \tensorprod{\tilde{\spatialfibrecoordinatevector}_{a}}{\spatialbasevector^{i}}
+  \tensorprod{\spatialfibrecoordinatevector_{a}}{\spatialbasevector^{i}}
 \end{equation}
 
-Now, to compute the transformation tensor, $\tensortwo{q}$ we need to
-find the relationship between
-$\tilde{\spatialfibrecoordinatesymbol}^{a}$ and
-$\spatialcoordinatesymbol^{i}$. We can do this by utilising a
-relationship between unit orthogonal spatial fibre coordinate system
-with respect to the spatial coordinates,
-$\fnof{\spatialfibrecoordinatevector}{\spatialcoordinatevector}$, and
-with respect to spatial fibre coordinates,
-$\fnof{\tilde{\spatialfibrecoordinatevector}}{\tilde{\spatialfibrecoordinatevector}}$, \ie
+By assuming that the magnitude of the spatial coordinate base vectors,
+$\spatialbasevector_{i}$, and the spatial fibre coordinate base
+vectors, $\spatialfibrecoordinatevector_{a}$, are equal then the
+transformation tensor, $\tensortwo{q}$, can be found from the
+components of the spatial fibre coordinate base vectors \ie
 \begin{equation}
-  \fnof{\tilde{\spatialfibrecoordinatevector}_{a}}{\tilde{\spatialfibrecoordinatevector}}=
-  \fnof{\tilde{\spatialfibrecoordinatesymbol}^{b}_{a}}{\tilde{\spatialfibrecoordinatevector}}
-  \tilde{\spatialfibrecoordinatevector}_{b}=
-  \fnof{\spatialfibrestructuretensor}{\spatialcoordinatevector}\fnof{\spatialfibrecoordinatevector_{a}}{\spatialcoordinatevector}=
-  \fnof{\spatialfibrestructuretensorsymbol^{b}_{i}}{\spatialcoordinatevector}\spatialfibrecoordinatesymbol^{i}_{a}
-  \dotprod{\tensorprod{\spatialfibrecoordinatevector_{b}}{\spatialbasevector^{i}}}{\spatialbasevector_{i}}
-\end{equation}
-where
-\begin{equation}
-  \fnof{\spatialfibrestructuretensor}{\spatialcoordinatevector}=\fnof{\spatialfibrestructuretensorsymbol^{b}_{i}}{\spatialcoordinatevector}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{b}}{\spatialbasevector^{i}}=\delby{\tilde{\spatialfibrecoordinatesymbol}^{b}}{\spatialfibrecoordinatesymbol^{i}}\tensorprod{\tilde{\spatialfibrecoordinatevector}_{b}}{\spatialbasevector^{i}}
-\end{equation}
-is the structure tensor. 
-
-In order to deal with anisotropy we wish to base our stress and strain
-calculation on fibre coordinates in the reference configuration where they are
-orthogonal \ie $\vectr{N}$ coordinates. To change our reference coordinate
-system from $\vectr{X}$ to $\vectr{N}$ we need to transform
-$\fnof{\tensor{F}}{\vectr{X}}$. As $\fnof{\tensor{F}}{\vectr{X}}$ is a two
-point tensor the transformation rule for transforming just the reference
-coordinates is given by
-\begin{equation}
-  \fnof{\tensor{F}}{\vectr{N}}=\fnof{\tensor{F}}{\vectr{X}}\transpose{\tensor{Q}}
-\end{equation}
-where $\tensor{Q}$ is the rotation matrix from $\vectr{X}$ to $\vectr{N}$ in
-the reference configuration.
-
-Consider $\vectr{X}=X^{I}\vectr{G}_{I}$ being the underformed geometric
-coordinate vector, $\vectr{N}=N^{I}\vectr{G}_{I}$ the undeformed fibre
-coordinate vector with respect to underformed geometric coordinates,
-$\tilde{\vectr{N}}=\tilde{N}^{A}\tilde{\vectr{N}}_{A}$ the undeformed fibre
-coordinate vector with respect to undeformed fibre coordinates,
-$\vectr{x}=x^{i}\vectr{g}_{i}$ the deformed geometric coordinate vector,
-$\vectr{\nu}=\nu^{i}\vectr{g}_{i}$ the deformed fibres with respect to the
-deformed geometric coordinates,
-$\tilde{\vectr{\nu}}=\tilde{\nu}^{a}\tilde{\vectr{\nu}}_{a}$ the deformed
-fibre coordinate vector with respect to deformed fibre coordinates,
-$\tensor{F}=F^{i}_{I}\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}$ the
-deformation gradient tensor with respect to the undeformed and deformed
-geometric coordinates, and
-$\tilde{\tensor{F}}=\tilde{F}^{i}_{A}\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{N}}^{A}}$
-the deformation gradient tensor with respect to the undeformed fibre
-coordinates and the deformed geometric coordinates,
-$\tensor{Q}=Q^{A}_{I}\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}_{I}}$ the
-orthogonal rotation matrix from undeformed geometric coordinates to undeformed
-fibre coordinates,
-$\tensor{\sigma}=\sigma^{ij}\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}$ the
-Cauchy stress tensor with respect to deformed geometric coordinates, and
-$\tilde{\tensor{\sigma}}=\sigma^{ab}\tensorprod{\tilde{\vectr{\nu}}_{a}}{\tilde{\vectr{\nu}}_{b}}$
-the Cauchy stress tensor with respect to the deformed fibre coordinates. Note
-that $\tilde{\cdot}$ indicates a quantity with respect to fibre coordinates.
-
-We have
-\begin{align}
-  \vectr{x}=x^{i}\vectr{g}_{i}&=F^{i}_{I}X^{I}\dotprod{\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}}{\vectr{G}_{I}}=\tensor{F}\vectr{X}\\
-  \tensor{Q}=Q^{A}_{I}\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}&=\delby{\tilde{N}^{A}}{X^{I}}\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}\\
- \tilde{\vectr{N}}=\tilde{N}^{A}\tilde{\vectr{N}}_{A}&=Q^{A}_{I}X^{I}\dotprod{\tensorprod{\tilde{\vectr{N}}_{A}}{\vectr{G}^{I}}}{\vectr{G}_{I}}=\tensor{Q}\vectr{X} \\
-  \vectr{\nu}=\nu^{i}\vectr{g}_{i}&=\tilde{F}^{i}_{A}\tilde{N}^{A}\dotprod{\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{N}}^{A}}}{\tilde{\vectr{N}}_{A}}=\tilde{\tensor{F}}\tilde{\vectr{N}}
-\end{align}
-
-Now we have $\tilde{\tensor{\sigma}}$ from the active model and we need
-$\tensor{\sigma}$ for the integration. We can thus use
-\begin{equation}
-  \tensor{q}=q^{i}_{a}\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{\nu}}^{a}}=\delby{x^{i}}{\tilde{\nu}^{a}}\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{\nu}}^{a}}
-\end{equation}
-where $\tensor{q}$ is the rotation matrix from $\tilde{\vectr{\nu}}$ to
-$\vectr{x}$ to give
-\begin{equation}
-  \tensor{\sigma}=\sigma^{ij}\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}=q^{i}_{a}q^{j}_{b}\tilde{\sigma}^{ab}\dotprod{\dotprod{\tensorprod{\vectr{g}_{i}}{\tilde{\vectr{\nu}}^{a}}}{\tensorprod{\tilde{\vectr{\nu}}_{a}}{\tilde{\vectr{\nu}}_{b}}}}{\tensorprod{\tilde{\vectr{\nu}}^{b}}{\vectr{g}_{j}}}=\tensor{q}\tilde{\tensor{\sigma}}\transpose{\tensor{q}}
-\end{equation}
-NOTE: this might not be strictly correct??? The above assumes that
-$\tensor{q}=\transpose{\tensor{q}}$??? $\vectr{x}$ is skew but
-$\tilde{\vectr{\nu}}$ is not???
-
-However, what is $\tilde{\vectr{\nu}}$? We have $\vectr{\nu}$ and so we can
-find $\tilde{\vectr{\nu}}$ from
-\begin{equation}
-  \tilde{\vectr{\nu}}=\tilde{\nu}^{a}\tilde{\vectr{\nu}}_{a}=s^{a}_{i}\nu^{i}\dotprod{\tensorprod{\tilde{\vectr{\nu}}_{a}}{\vectr{g}^{i}}}{\vectr{g}_{i}}=\tensor{s}\vectr{\nu}
-\end{equation}
-where
-\begin{equation}
-  \tensor{s}=s^{a}_{i}\tensorprod{\tilde{\vectr{\nu}}_{a}}{\vectr{g}^{i}}=\delby{\tilde{\nu}^{a}}{\nu^{i}}\tensorprod{\tilde{\vectr{\nu}}_{a}}{\vectr{g}^{i}}
-\end{equation}
-which is the structure tensor which constructs the orthogonal
-$\tilde{\vectr{\nu}}$ from the skewed $\vectr{\nu}$.
-
-Note that in \OpenCMISS we have
-\begin{equation}
-  F^{i}_{A}=\delby{z^{i}}{\xi^{k}}\delby{\xi^{k}}{\nu^{A}}
-\end{equation}
-and
-\begin{equation}
-  F^{i}_{J}=\delby{\nu^{A}}{X^{J}}F^{i}_{A}=\delby{\nu^{A}}{X^{J}}\delby{z^{i}}{\xi^{k}}\delby{\xi^{k}}{\nu^{A}}
+  \begin{bmatrix}
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{1}}{\spatialcoordinatesymbol^{1}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{1}}{\spatialcoordinatesymbol^{2}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{1}}{\spatialcoordinatesymbol^{3}} \\
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{2}}{\spatialcoordinatesymbol^{1}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{2}}{\spatialcoordinatesymbol^{2}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{2}}{\spatialcoordinatesymbol^{3}} \\
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{3}}{\spatialcoordinatesymbol^{1}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{3}}{\spatialcoordinatesymbol^{2}} &
+    \delby{\tilde{\spatialfibrecoordinatesymbol}^{3}}{\spatialcoordinatesymbol^{3}}
+  \end{bmatrix} = \begin{bmatrix}
+    \spatialfibrecoordinatesymbol^{1}_{1} & \spatialfibrecoordinatesymbol^{2}_{1} & \spatialfibrecoordinatesymbol^{3}_{1} \\
+    \spatialfibrecoordinatesymbol^{1}_{2} & \spatialfibrecoordinatesymbol^{2}_{2} & \spatialfibrecoordinatesymbol^{3}_{2} \\
+    \spatialfibrecoordinatesymbol^{1}_{3} & \spatialfibrecoordinatesymbol^{2}_{3} & \spatialfibrecoordinatesymbol^{3}_{3} \\
+  \end{bmatrix}
 \end{equation}
 
 \subsection{Growth}
+\label{subsec:FiniteElasticityGrowth}
 
 To allow for growth we use a multiplicative decomposition approach \ie
 \begin{equation}
-  \fnof{\tensor{F}}{\vectr{N}}=\fnof{\tensor{F}_{e}}{\vectr{N}}\fnof{\tensor{F}_{g}}{\vectr{N}}
+  \tilde{\deformationgradienttensor}=\tilde{\deformationgradienttensor}_{e}\tilde{\deformationgradienttensor}_{g}
 \end{equation}
-where $\fnof{\tensor{F}_{g}}{\vectr{N}}$ is the growth tensor with
-respect to undeformed fibre coordinates and $\fnof{\tensor{F}_{e}}{\vectr{N}}$ is the
-elastic component of the deformation gradient tensor in undeformed fibre coordinates.
+where $\tilde{\deformationgradienttensor}_{g}$ is the growth tensor
+with respect to material fibre coordinates and
+$\tilde{\deformationgradienttensor}_{e}$ is the elastic component of
+the deformation gradient tensor in material fibre coordinates.
 
 The elastic component of the deformation gradient tensor can be calculated
 from
 \begin{equation}
-  \fnof{\tensor{F}_{e}}{\vectr{N}}=\fnof{\tensor{F}}{\vectr{N}}\fnof{\inverse{\tensor{F}_{g}}}{\vectr{N}}
+  \tilde{\deformationgradienttensor}_{e}=\tilde{\deformationgradienttensor}\inverse{\tilde{\deformationgradienttensor}_{g}}
 \end{equation}
 
 In component form we have
 \begin{equation}
-  F^{i}_{A}=\pbrac{F_{e}}^{i}_{B}\pbrac{F_{g}}^{B}_{A}
+  \tilde{\deformationgradienttensorsymbol}^{i}_{A}=\pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{i}_{B}
+  \pbrac{\tilde{\deformationgradienttensorsymbol}_{g}}^{B}_{A}
 \end{equation}
 and
 \begin{equation}
-  \pbrac{F_{e}}^{i}_{B}=F^{i}_{A}\pbrac{\inverse{F_{g}}}^{A}_{B}
+  \pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{i}_{B}=\tilde{\deformationgradienttensor}^{i}_{A}
+  \pbrac{\inverse{\tilde{\deformationgradienttensor}_{g}}}^{A}_{B}
 \end{equation}
 
 The Jacobian of the growth component of the deformation is given by
-$J_{g}=\determinant{\fnof{\tensor{F}_{g}}{\vectr{N}}}$ and the Jacobian of the
-elastic component of the deformation is given by
-$J_{e}=\determinant{\fnof{\tensor{F}_{e}}{\vectr{N}}}$.
+$J_{g}=\determinant{\tilde{\deformationgradienttensor}_{g}}$ and the
+Jacobian of the elastic component of the deformation is given by
+$J_{e}=\determinant{\\tilde{\deformationgradienttensor}_{e}}$.
 
 The right Cauchy Green deformation tensor in fibre coordinates is now given by
-the pullback of the current configuration metric tensor, $\tensor{g}$,
+the pullback of the spatial metric tensor, $\spatialmetrictensor$,
 \begin{equation}
-  \fnof{\tensor{C}}{\vectr{N}}=\fnof{\transpose{\tensor{F}_{e}}}{\vectr{N}}\tensor{g}\fnof{\tensor{F}_{e}}{\vectr{N}}
+  \tilde{\rightcauchygreentensor}=
+  \transpose{\tilde{\deformationgradienttensor}_{e}}\spatialmetrictensor\tilde{\deformationgradienttensor}_{e}
 \end{equation}
 
 In component form we have
 \begin{equation}
-  C_{AB}=g_{ij}\pbrac{F_{e}}^{i}_{A}\pbrac{F_{e}}^{j}_{B}
-\end{equation}
-and
-\begin{equation}
-  E_{AB}=\frac{1}{2}\pbrac{C_{AB}-G_{AB}}
+  \tilde{\rightcauchygreentensorsymbol}_{AB}=\spatialmetrictensorsymbol_{ij}\pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{i}_{A}
+  \pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{j}_{B}
 \end{equation}
 
-To find the stress tensors in deformed coordinates we need to push the second
-Piola Kirchhoff tensor in the reference coordinates forward to the deformed
-coordinates, $\vectr{x}$, to give the Kirchhoff stress tensor,
-$\fnof{\tensor{\tau}}{\vectr{x}}$. The push foward is given by
+To find the stress tensors in spatial or deformed coordinates we need to push the second
+Piola Kirchhoff tensor in the material or reference coordinates forward to the spatial
+coordinates, $\spatialcoordinatevector$, to give the Kirchhoff stress tensor,
+$\fnof{\kirchoffstresstensor}{\spatialcoordinatevector}$. The push foward is given by
 \begin{equation}
-  \fnof{\tensor{\tau}}{\vectr{x}}=\fnof{\tensor{F}_{e}}{\vectr{N}}\fnof{\tensor{S}}{\vectr{N}}
-  \fnof{\transpose{\tensor{F}_{e}}}{\vectr{N}}
+  \fnof{\kirchoffstresstensor}{\spatialcoordinatevector}=
+  \fnof{\tilde{\deformationgradienttensor}_{e}}{\tilde{\materialfibrecoordinatevector}}
+  \fnof{\tilde{\secondpiolakirchoffstresstensor}}{\tilde{\materialfibrecoordinatevector}}
+  \fnof{\transpose{\tilde{\deformationgradienttensor}_{e}}}{\tilde{\materialfibrecoordinatevector}}
 \end{equation}
 
-The Cauchy stress tensor, $\fnof{\tensor{\sigma}}{\vectr{x}}$, can then be calculated from the Kirchhoff stress
-tensor using the Jacobian of the deformation \ie
+The Cauchy stress tensor,
+$\fnof{\cauchystresstensor}{\spatialcoordinatevector}$, can then be
+calculated from the Kirchhoff stress tensor using the Jacobian of the
+deformation \ie
 \begin{equation}
-  \fnof{\tensor{\sigma}}{\vectr{x}}=\inverse{J_{e}}\fnof{\tensor{\tau}}{\vectr{x}}=\inverse{J_{e}}
-  \fnof{\tensor{F}_{e}}{\vectr{N}}\fnof{\tensor{S}}{\vectr{N}}\fnof{\transpose{\tensor{F}_{e}}}{\vectr{N}}
+  \fnof{\cauchystresstensor}{\spatialcoordinatevector}=\inverse{J_{e}}\fnof{\kirchoffstresstensor}{\spatialcoordinatevector}=
+  \inverse{J_{e}}\fnof{\tilde{\deformationgradienttensor}_{e}}{\tilde{\materialfibrecoordinatevector}}
+  \fnof{\tilde{\secondpiolakirchoffstresstensor}}{\tilde{\materialfibrecoordinatevector}}
+  \fnof{\transpose{\tilde{\deformationgradienttensor}_{e}}}{\tilde{\materialfibrecoordinatevector}}
 \end{equation}
 
 In component form we have
 \begin{equation}
-  \tau^{ij}=\pbrac{F_{e}}^{i}_{B}S^{BC}\pbrac{\transpose{F_{e}}}^{j}_{C}
+  \kirchoffstresstensorsymbol^{ij}=\pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{i}_{B}
+  \tilde{\secondpiolakirchofftensorsymbol}^{BC}\pbrac{\transpose{\tilde{\deformationgradienttensorsymbol}_{e}}}^{j}_{C}
 \end{equation}
 and
 \begin{equation}
-  \sigma^{ij}=\inverse{J_{e}}\pbrac{F_{e}}^{i}_{B}S^{BC}\pbrac{\transpose{F_{e}}}^{j}_{C}
+  \cauchystresstensorsymbol^{ij}=\inverse{J_{e}}\pbrac{\tilde{\deformationgradienttensorsymbol}_{e}}^{i}_{B}
+  \tilde{\secondpiolakirchofftensorsymbol}^{BC}\pbrac{\transpose{\tilde{\deformationgradienttensorsymbol}_{e}}}^{j}_{C}
 \end{equation}
 
 \subsection{Active Contraction}
 \label{subsec:FiniteElasticityActiveContraction}
+
+When dealing with biological materials like muscle we must deal with
+not only passive elastic stresses but also stresses actively generated
+by the muscle fibres, themselves, contracting. That is, the total
+Cauchy stress that the material experiences is made up of the sum of
+an elastic stress and an active stress \ie
+\begin{equation}
+  \fnof{\cauchystresstensor}{\spatialcoordinatevector}=\fnof{\cauchystresstensor_{e}}{\spatialcoordinatevector}+
+  \fnof{\cauchystresstensor_{a}}{\spatialcoordinatevector}
+\end{equation}
+where $\fnof{\cauchystresstensor_{e}}{\spatialcoordinatevector}$ is
+the \emph{elastic Cauchy stress tensor}\footnote{also known as the
+passive Cauchy stress tensor} and
+$\fnof{\cauchystresstensor_{a}}{\spatialcoordinatevector}$ is the
+\emph{active Cauchy stress tensor}.
+
+There are two main methods for calculating the active stress,
+depending on whether material or spatial coordiantes are used. The
+first, and simplest, method is to calculate the active stress in the
+material or undeformed coordinate system. The advantages of using this
+coordinate system are that the material fibre coordinate system is
+orthogonal and fixed throughout deformation. Thus, the active stress
+tensor is often diagonal in the material fibre coordinate system.
+
+With active stress in material coordinates we have
+\begin{equation}
+  \fnof{\secondpiolakirchoffstresstensor}{\materialcoordinatevector}=
+  \fnof{\secondpiolakirchoffstresstensor_{e}}{\materialcoordinatevector}+
+  \fnof{\secondpiolakirchoffstresstensor_{a}}{\materialcoordinatevector}
+\end{equation}
+where
+$\fnof{\secondpiolakirchoffstresstensor_{e}}{\materialcoordinatevector}$
+is the \emph{elastic second Piola-Kirchoff stress tensor} and
+$\fnof{\secondpiolakirchoffstresstensor_{a}}{\materialcoordinatevector}$
+is the \emph{active second Piola-Kirchoff stress tensor} which has
+been calculated using some model of active contraction.
+
+Once the second Piola-Kirchoff stress tensor is calculated in can be
+pushed forward to the spatial or deformed coordinate system as a
+Cauchy stress. As mentioned above, the second Piola-Kirchoff stress
+tensors are often calculated in the material or reference fibre
+coordinate system. The push forward transformation is thus given using
+the deformation gradient tensor in material fibre coordinates
+\begin{equation}
+  \begin{aligned}
+    \cauchystresstensor&=\cauchystresstensorsymbol^{ij}\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}=
+    \inverse{J}\tilde{\deformationgradienttensor}\tilde{\secondpiolakirchoffstresstensor}
+    \transpose{\tilde{\deformationgradienttensor}}=
+    \tilde{\deformationgradienttensor}\pbrac{\tilde{\secondpiolakirchoffstresstensor}_{e}+
+      \tilde{\secondpiolakirchoffstresstensor}_{a}}\transpose{\tilde{\deformationgradienttensor}}\\
+    &=\inverse{J}\pbrac{\tilde{\deformationgradienttensorsymbol}}^{i}_{B}
+    \pbrac{\tilde{\secondpiolakirchofftensorsymbol}^{BC}_{e}+\tilde{\secondpiolakirchofftensorsymbol}^{BC}_{a}}
+    \pbrac{\transpose{\tilde{\deformationgradienttensorsymbol}}}^{j}_{C}\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}
+  \end{aligned}
+\end{equation}
+
+Whilst the first method for active contraction is relatively
+straightforward to compute it does have the major drawback that,
+because the active stress is calculated in the material domain, the
+immediate physical environment an active cell might encounter is not
+part of the calculation. For example an active muscle cell might sense
+the amount of stretch the cell experiences and use that in the active
+model via stretch receptors or myofillament overlap.
+
+To overcome some of the limitations of the first method, the second
+method for active contraction computes the active stress with respect
+to the spatial fibre coordinate system \ie
+\begin{equation}
+  \tilde{\cauchystresstensor}_{a}=\tilde{\cauchystresstensorsymbol}^{bc}_{a}
+  \tensorprod{\spatialfibrecoordinatevector_{b}}{\spatialfibrecoordinatevector_{b}}
+\end{equation}
+
+In order to add the active Cauchy stress to the elastic Cauchy stress
+we must transform the active stress tensor from spatial fibre
+coordinates to spatial coordinates. This can be achieved by using the
+inverse transformation tensor from spatial to fibre coordinates
+defined in \subsecref{subsec:FiniteElasticityAnisotropy} \ie
+\begin{equation}
+  \begin{aligned}
+    \cauchystresstensor_{a}&=\transpose{\tensortwo{q}}\tilde{\cauchystresstensor}_{a}\tensortwo{q}\\
+    &=\pbrac{q}^{i}_{b}\tilde{\cauchystresstensorsymbol}^{bc}\pbrac{\transpose{\tilde{q}}}^{j}_{c}
+  \end{aligned}
+\end{equation}
+
+To calculate the stretch an active cell experiences in each direction
+it is useful to compute the stretches relative to the spatial fibre
+coordinate system. To do this we must first transform the
+Euler-Almansi strain tensor from spatial to spatial fibre coordinates \ie
+\begin{equation}
+  \begin{aligned}
+    \tilde{\euleralmansistraintensor}&=\tilde{\euleralmansistraintensorsymbol}_{bc}
+    \tensorprod{\spatialfibrecoordinatevector^{b}}{\spatialfibrecoordinatevector^{c}}=
+    \inverse{\tensortwo{q}}\euleralmansistraintensor\invtranspose{\tensortwo{q}}\\
+    &=\dfrac{1}{2}\inverse{\tensortwo{q}}\pbrac{\flattensor{\spatialmetrictensor}-\flattensor{\cauchydeformationtensor}}
+    \invtranspose{\tensortwo{q}}\\
+    &=\dfrac{1}{2}\pbrac{\inverse{q}}^{i}_{b}\pbrac{\spatialmetrictensorsymbol_{ij}-\cauchydeformationtensorsymbol_{ij}}
+    \pbrac{\invtranspose{q}}^{j}_{c}\tensorprod{\spatialfibrecoordinatevector^{b}}{\spatialfibrecoordinatevector^{c}}
+  \end{aligned}
+\end{equation}
+where
+\begin{equation}
+  \flattensor{\cauchydeformationtensor}=\cauchydeformationtensorsymbol_{ij}
+  \tensorprod{\spatialbasevector^{i}}{\spatialbasevector^{j}}=
+  \invtranspose{\deformationgradienttensor}\flattensor{\materialmetrictensor}\inverse{\deformationgradienttensor}
+\end{equation}
+
+The principal stretches in spatial fibre coordinates are then given by
+\begin{align}
+  \tilde{\lambda}_{1}&=\dfrac{1}{\sqrt{1-2\tilde{\euleralmansistraintensorsymbol}_{11}}} \\
+  \tilde{\lambda}_{2}&=\dfrac{1}{\sqrt{1-2\tilde{\euleralmansistraintensorsymbol}_{22}}} \\
+  \tilde{\lambda}_{3}&=\dfrac{1}{\sqrt{1-2\tilde{\euleralmansistraintensorsymbol}_{33}}} 
+\end{align}
+
 \subsection{Elasticity Tensors}
+\label{subsec:FiniteElasticityElasticityTensors}
 
 If $\fnof{\tensor{P}}{\vectr{X},\tensor{F}}$ is the first Piola-Kirchoff
 constitutive function that depends on $\vectr{X}$ and the deformation

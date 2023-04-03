@@ -36,6 +36,13 @@
 \newcommand{\conductivitytensor}{\ensuremath{ %
     \tensortwo{\conductivitytensorsymbol} %
 }} % conductivity tensor e.g., \conductivitytensor => \sigma
+\newcommand{\diffusivitytensorsymbol}{\ensuremath{ %
+    \sigma %
+}} % diffusivity tensor symbol e.g., \diffusivitytensorsymbol => \sigma
+\newcommand{\diffusivitytensor}{\ensuremath{ %
+    \tensortwo{\diffusivitytensorsymbol} %
+}} % diffusivity tensor e.g., \diffusivitytensor => \sigma
+
 
 %
 % Interpolation
@@ -206,13 +213,13 @@
     P %
 }} % First Piola-Kirchoff stress tensor symbol e.g., \firstpiolakirchoffstresstensorsymbol => P
 \newcommand{\firstpiolakirchoffstresstensor}{\ensuremath{ %
-    \tensortwo{\firstpiolakirchoffstresstensorsymbol} %
+    \tensortwo{\firstpiolakirchofftensorsymbol} %
 }} % First Piola-Kirchoss stress tensor e.g., \firstpiolakirchoffstresstensor => P
 \newcommand{\secondpiolakirchofftensorsymbol}{\ensuremath{ %
     S %
 }} % Second Piola-Kirchoff stress tensor symbol e.g., \secondpiolakirchoffstresstensorsymbol => S
 \newcommand{\secondpiolakirchoffstresstensor}{\ensuremath{ %
-    \tensortwo{\secondpiolakirchoffstresstensorsymbol} %
+    \tensortwo{\secondpiolakirchofftensorsymbol} %
 }} % Second Piola-Kirchoss stress tensor e.g., \secondpiolakirchoffstresstensor => S
 \newcommand{\cauchystresstensorsymbol}{\ensuremath{ %
     \sigma %
@@ -267,6 +274,12 @@
 \newcommand{\transmembranevoltage}{\ensuremath{ %
     {\voltagesymbol}_{m} %
 }} % transmembrane voltage e.g., \transmembranevoltage => V_m
+\newcommand{\cellstatevariablesymbol}{\ensuremath{ %
+    u %
+}} % cell state variable symbol  e.g., \cellstatevariablesymbol => u
+\newcommand{\cellstatevariablevector}{\ensuremath{ %
+    \vectr{u} %
+}} % cell state variable vector  e.g., \cellstatevariablevector => u
 \newcommand{\transmembranecurrent}{\ensuremath{ %
     {\currentsymbol}_{m} %
 }} % transmembrane current e.g., \transmembranecurrent => I_m

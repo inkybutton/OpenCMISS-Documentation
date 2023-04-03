@@ -189,7 +189,8 @@ $(MAINFILE)/index.html :	$(MAINFILE).tex
 quick	:	
 	$(LATEX_DVI) $(MAINFILE)
 
-pics :	$(FIG_SRC) $(SVG_SRC) $(PLOT_SRC)
+pics :	$(FIG_SRC) $(SVG_SRC) $(PLOT_SRC) \
+	$(OPENCMISS_MACROS) $(OPENCMISS_ABBREV) $(OPENCMISS_ACRONY) $(OPENCMISS_SYMBOLS)
 	@if test -z $(IS_FIGS) ; \
 		then : ; \
 		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsmake ; \

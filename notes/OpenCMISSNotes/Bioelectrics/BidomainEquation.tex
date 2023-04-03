@@ -1,6 +1,9 @@
 \section{Bidomain Equation}
 \label{sec:Bidomain}
 
+\subsection{Governing Equations}
+\label{subsec:BidomainGoverningEquations}
+
 The bidomain model \citep{henriquez:1993} can be thought of as two
 co-existant intra and extracelluar spaces. The potential in the
 intracellular space is denoted as $\intracellularpotential$ and the
@@ -83,18 +86,20 @@ Now, the current flow across the membrane, $\transmembranecurrent$,
 can be described by a time dependent capacitive current and an ionic
 current \ie
 \begin{equation}
-  \transmembranecurrent=\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent
+  \transmembranecurrent=\membranecapacitance\delby{\transmembranevoltage}{t}+
+  \fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}
   \label{eqn:TransMembraneCurrentDefinition}
 \end{equation}
 where $\membranecapacitance$ is the membrane capacitance per unit
-area and $\ioniccurrent$ is the sum of all ionic currents across the
-cell membrane.
+area,  $\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}$ is the sum of all ionic currents across the
+cell membrane, and $\cellstatevariablevector$ is the vector of cell state variables for a particular cell model.
 
 If we now substitute \eqnref{eqn:TransMembraneCurrentDefinition} into
 \eqnref{eqn:IntraCellularCurrentDensityConservation} we obtain
 \begin{equation}
   \divergence{}{\intracellularconductivitytensor\gradient{}{\intracellularpotential}}=
-  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent}
+  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+
+    \fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}}
   \label{eqn:IntraCellularCurrentDensityConservationTransmembraneVoltage}
 \end{equation}
 
@@ -106,7 +111,8 @@ we obtain
 \begin{equation}
   \divergence{}{\intracellularconductivitytensor\gradient{}{\intracellularpotential}} +
   \divergence{}{\intracellularconductivitytensor\gradient{}{\extracellularpotential}} =
-  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent} +
+  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+
+    \fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}} +
   \divergence{}{\intracellularconductivitytensor\gradient{}{\extracellularpotential}}  
 \end{equation}
 or, rearranging, we obtain
@@ -114,13 +120,15 @@ or, rearranging, we obtain
   \divergence{}{\intracellularconductivitytensor\gradient{}{\intracellularpotential}} +
   \divergence{}{\intracellularconductivitytensor\gradient{}{\extracellularpotential}} -
   \divergence{}{\intracellularconductivitytensor\gradient{}{\extracellularpotential}} =
-  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent} 
+  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+
+    \fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}} 
 \end{equation}
 which, using \eqnref{eqn:TransMembraneVoltageDefinition}, we can rewrite as
 \begin{equation}
   \divergence{}{\intracellularconductivitytensor\gradient{}{\transmembranevoltage}} +
   \divergence{}{\intracellularconductivitytensor\gradient{}{\extracellularpotential}} =
-  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+\ioniccurrent} 
+  \membraneareavolumeratio\pbrac{\membranecapacitance\delby{\transmembranevoltage}{t}+
+    \fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}} 
   \label{eqn:SecondBidomainEquation}
 \end{equation}
 
@@ -135,19 +143,119 @@ allow for stimulus currents in each domain, and rearrange to obtain the
   \addtolength{\fboxsep}{5pt}
   \boxed{
     \membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}-
-    \divergence{}{\pbrac{\tensor{\sigma}_{i}\grad{\transmembranevoltage}}}=
-    \divergence{}{\pbrac{\tensor{\sigma}_{i}\grad{\extracellularpotential}}}-
-    \membraneareavolumeratio\ioniccurrent+\intracellularstimuluscurrent
+    \divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}=
+    \divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\extracellularpotential}}}-
+    \membraneareavolumeratio\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}+
+    \intracellularstimuluscurrent
   } \label{eqn:BidomainEquation1}
 \end{equation}
 and
 \begin{equation}
   \addtolength{\fboxsep}{5pt}
   \boxed{
-    \divergence{}{\pbrac{\pbrac{\tensor{\sigma}_{e}+\tensor{\sigma}_{i}}\grad{\extracellularpotential}}}=
-    -\divergence{}{\pbrac{\tensor{\sigma}_{i}\grad{\transmembranevoltage}}}+\extracellularstimuluscurrent
+    \divergence{}{\pbrac{\pbrac{\tensor{\sigma}_{e}+\tensor{\sigma}_{i}}\gradient{}{\extracellularpotential}}}=
+    -\divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}+\extracellularstimuluscurrent
   } \label{eqn:BidomainEquation2}
 \end{equation}
 where $\intracellularstimuluscurrent$ is the intracellular stimulus
 current and $\extracellularstimuluscurrent$ is the extracellular
 stimulus current.
+
+\subsection{Weak formulation}
+\label{subsec:BidomainWeakForm}
+
+The corresponding weak form of \eqnref{eqn:BidomainEquation1} is
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}-
+      \divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}-
+      \divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\extracellularpotential}}}+
+      \membraneareavolumeratio\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}-
+      \intracellularstimuluscurrent}w}{\Omega}=0
+  \label{eqn:Bidomain1WeakForm1}
+\end{equation}
+and the weak form of \eqnref{eqn:BidomainEquation2} is
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{\divergence{}{\pbrac{\pbrac{\tensor{\sigma}_{e}+\tensor{\sigma}_{i}}\gradient{}{\extracellularpotential}}}-
+      \divergence{}{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}-\extracellularstimuluscurrent}w}{\Omega}=0
+  \label{eqn:Bidomain2WeakForm1}
+\end{equation}
+
+Applying the divergence thereom to \eqnref{eqn:Bidomain1WeakForm1} gives
+\begin{equation}
+  \begin{split}
+    \gint{\Omega}{}{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}}{\Omega}
+    +\gint{\Omega}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}{\gradient{}{w}}}{\Omega}
+    -\gint{\Gamma}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}{\normal}}{\Gamma} \\
+    +\gint{\Omega}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\extracellularpotential}}}{\gradient{}{w}}}{\Omega}
+    -\gint{\Gamma}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\extracellularpotential}}}{\normal}}{\Gamma} \\
+    +\gint{\Omega}{}{\pbrac{\membraneareavolumeratio\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}}w}{\Omega}
+    -\gint{\Omega}{}{\intracellularstimuluscurrent w}{\Omega}=0
+  \end{split}
+  \label{eqn:Bidomain1WeakForm2}
+\end{equation}
+and to \eqnref{eqn:Bidomain2WeakForm1} gives
+\begin{equation}
+  \begin{split}
+    -\gint{\Omega}{}{\dotprod{\pbrac{\pbrac{\tensor{\sigma}_{e}+
+            \tensor{\sigma}_{i}}\gradient{}{\extracellularpotential}}}{\gradient{}{w}}}{\Omega}
+    +\gint{\Gamma}{}{\dotprod{\pbrac{\pbrac{\tensor{\sigma}_{e}+
+            \tensor{\sigma}_{i}}\gradient{}{\extracellularpotential}}}{\normal}}{\Gamma} \\
+    +\gint{\Omega}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}{\gradient{}{w}}}{\Omega}
+    -\gint{\Gamma}{}{\dotprod{\pbrac{\tensor{\sigma}_{i}\gradient{}{\transmembranevoltage}}}{\normal}}{\Gamma}
+    -\gint{\Omega}{}{\extracellularstimuluscurrent w}{\Omega}=0
+  \end{split}
+\end{equation}
+
+\subsection{Tensor notation}
+\label{subsec:BidomainTensorNotation}
+
+\Eqnref{eqn:Bidomain1WeakForm2} in tensor notation is given by
+\begin{equation}
+  \begin{split}
+    \gint{\Omega}{}{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}}{\Omega}
+    +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+    -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{k}\normalsymbol_{l}w}{\Gamma} \\
+    +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\extracellularpotential}{j}\covarderiv{w}{l}}{\Omega}
+    -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\extracellularpotential}{k}\normalsymbol_{l}w}{\Gamma} \\
+    +\gint{\Omega}{}{\pbrac{\membraneareavolumeratio\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}}w}{\Omega}
+    -\gint{\Omega}{}{\intracellularstimuluscurrent w}{\Omega}=0    
+  \end{split}
+  \label{eqn:Bidomain1TensorNotation1}
+\end{equation}
+and \eqnref{eqn:Bidomain2WeakForm2} in tensor notation is given by
+\begin{equation}
+  \begin{split}
+    -\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\pbrac{\conductivitytensorsymbol^{j}_{.ke}+\conductivitytensorsymbol^{j}_{.ki}}
+      \covarderiv{\extracellularpotential}{j}\covarderiv{w}{l}}{\Omega}
+    +\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\pbrac{\conductivitytensorsymbol^{j}_{.ke}+\conductivitytensorsymbol^{j}_{.ki}}
+      \covarderiv{\extracellularpotential}{k}\normalsymbol_{l}w}{\Gamma} \\
+    +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+    -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\extracellularpotential}{k}\normalsymbol_{l}w}{\Gamma}
+    -\gint{\Omega}{}{\extracellularstimuluscurrent w}{\Omega}=0    
+  \end{split}
+  \label{eqn:Bidomain2TensorNotation1}
+\end{equation}
+
+Rearranging terms gives
+\begin{equation}
+  \begin{split}
+    \gint{\Omega}{}{\membraneareavolumeratio\membranecapacitance\delby{\transmembranevoltage}{t}}{\Omega}
+    +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{j}\covarderiv{w}{l}}{\Omega}
+    -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\transmembranevoltage}{k}\normalsymbol_{l}w}{\Gamma} \\
+    +\gint{\Omega}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\extracellularpotential}{j}\covarderiv{w}{l}}{\Omega}
+    -\gint{\Gamma}{}{\generalmetrictensorsymbol^{lk}\conductivitytensorsymbol^{j}_{.ki}
+      \covarderiv{\extracellularpotential}{k}\normalsymbol_{l}w}{\Gamma} \\
+    +\gint{\Omega}{}{\pbrac{\membraneareavolumeratio\fnof{\ioniccurrent}{\cellstatevariablevector,\transmembranevoltage}}w}{\Omega}
+    -\gint{\Omega}{}{\intracellularstimuluscurrent w}{\Omega}=0    
+  \end{split}
+  \label{eqn:Bidomain1TensorNotation2}
+\end{equation}

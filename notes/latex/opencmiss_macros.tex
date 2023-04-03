@@ -2366,7 +2366,8 @@
 \newcommand{\matr}[1]{\ensuremath{\uppercase{\boldsymbol{#1}}}} % matrix
 % cpb 19/9/96 Changing from \mathbf to \boldsymbol to allow bold greek vectors
 \newcommand{\vect}[1]{\ensuremath{\lowercase{\boldsymbol{#1}}}} % vector
-\newcommand{\normal}{\vectr{n}} % normal
+\newcommand{\normalsymbol}{n} % normal symbol
+\newcommand{\normal}{\vectr{\normalsymbol}} % normal
 
 % Matrix and vector operators
 \newcommand{\determinant}[1]{\det #1} % determinant e.g., \determinant{A} =
@@ -2596,6 +2597,12 @@
 \newcommand{\nodept}[2]{\ensuremath{ %
     {#1}^{#2} %
   }} % Nodal point (without derivative) e.g., \nodept{\psi}{n}=> nodal dof of \psi at node n.
+\newcommand{\idxnodept}[3]{\ensuremath{ %
+    {#1}^{#2#3} %
+  }} % Indexed nodal point (without derivative) e.g., \idxnodept{\psi}{i}{n}=> i'th nodal dof of \psi at node n.
+\newcommand{\coidxnodept}[3]{\ensuremath{ %
+    {#1}^{#3}_{#2} %
+  }} % "Covector" Indexed nodal point (without derivative) e.g., \coidxnodept{\psi}{i}{n}=> i'th nodal dof of \psi at node n.
 \newcommand{\nodedof}[3]{\ensuremath{ %
   \nodept{#1}{#2}_{,#3} %
 }} % Nodal DOF e.g., \nodedof{\psi}{n}{u} => nodal dof of \psi at node n

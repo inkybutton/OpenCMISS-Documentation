@@ -2,21 +2,726 @@
 \label{sec:ReactionDiffusionEquations}
 
 \subsection{Governing equations}
-The \emph{generalised reaction-diffusion equation} on a domain $\Omega$ with boundary
-$\Gamma$ in \OpenCMISS can be stated as
+\label{subsec:ReactionDiffusionGoverningEquations}
+
+The \emph{generalised reaction-diffusion
+equation}\index{reaction-diffusion equation!generalised} on a domain
+$\Omega\in\rntopology{n}$ with boundary
+$\Gamma=\boundary{\Omega}\in\rntopology{n-1}$ in \OpenCMISS can be
+stated as
 \begin{equation}
   \addtolength{\fboxsep}{5pt}
   \boxed{
-    \fnof{a}{\vectr{x}}\delby{\fnof{\vectr{u}}{\vectr{x},t}}{t}+
-    \divergence{}{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}\gradient{}{\fnof{\vectr{u}}{\vectr{x},t}}}}+
-    \fnof{b}{\vectr{x}}\fnof{\vectr{r}}{\fnof{\vectr{u}}{\vectr{x},t}}+\fnof{\vectr{s}}{\vectr{x},t}=\vectr{0}  
+    \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+
+    \divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}\gradient{}{\fnof{u}{\vectr{x},t}}}}+
+    \fnof{b}{\vectr{x}}\fnof{r}{\fnof{u}{\vectr{x},t}}+\fnof{s}{\vectr{x},t}=0
   }
   \label{eqn:GeneralisedReactionDiffusionEquation}
 \end{equation}
-where $\vectr{x}\in\Omega$, $t\in[0,\infty)$, $\fnof{\vectr{u}}{\vectr{x},t}$
+where $\vectr{x}\in\Omega$, $t\in[0,\infty)$, $\fnof{u}{\vectr{x},t}$
   is the vector quatity that diffuses and reacts,
-  $\fnof{\vectr{r}}{\fnof{\vectr{u}}{\vectr{x},t}}$ is the reaction vector,
-  $\fnof{a}{\vectr{x}}$ and $\fnof{b}{\vectr{x}}$ are material coefficients,
-  $\fnof{\tensor{\sigma}}{\vectr{x}}$ is the conductivity/diffusivity tensor
-  throughout the domain and $\fnof{s}{\vectr{x},t}$ is a source term in the
-  domain.
+  $\fnof{r}{\fnof{u}{\vectr{x},t}}$ is the reaction vector,
+  $\fnof{a}{\vectr{x}}$ and $\fnof{b}{\vectr{x}}$ are material
+  coefficients, $\fnof{\diffusivitytensor}{\vectr{x}}$ is the
+  conductivity/diffusivity tensor throughout the domain and
+  $\fnof{s}{\vectr{x},t}$ is a source term in the domain.
+  
+A specialisation of the reaction-diffusion equation is \emph{Fisher's
+equation}\footnote{named after
+\link{https://en.wikipedia.org/wiki/Ronald_Fisher}{Sir Ronald Aylmer
+  Fisher} (1890-1962), a British polymath.}\index{Fisher's equation}, which can be used to
+model population growth. Fisher's equation is
+\begin{equation}
+  \addtolength{\fboxsep}{5pt}
+  \boxed{
+    \delby{\fnof{u}{x,t}}{t}-D\deltwosqby{\fnof{u}{x,t}}{x}=c.\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}
+  }
+  \label{eqn:FishersEquation}
+\end{equation}
+where $c\geq 2$.
+
+Fisher's equation is a special case of the generalised
+reaction-diffusion equation with $a=1$, $\diffusivitytensorsymbol=-D$,
+$b=-c$, and $\fnof{r}{u}=u\pbrac{1-u}$ and $s\equiv 0$. Fisher's
+equation is also known as the Kolmogorov\footnote{named after
+\link{https://en.wikipedia.org/wiki/Andrey_Kolmogorov}{Andrey
+  Kolmogorov} (1903-1987), a Russian
+mathematician.}–Petrovsky\footnote{named after
+\link{https://en.wikipedia.org/wiki/Ivan_Petrovsky}{Ivan G. Petrovsky} (1901-1973), a Russian
+mathematician.}–Piskunov\footnote{named after
+\link{https://en.wikipedia.org/wiki/Nikolai_Piskunov}{Nikolai Piskunov} (1908-1977), a Russian
+mathematician.} (KPP) equation or the Fisher-KPP
+equation.
+
+The \emph{generalised Fisher's equation}\index{Fisher's
+  equation!generalised} can be found by extending
+\eqnref{eqn:FishersEquation} to multiple dimensions \ie
+\begin{equation}
+  \addtolength{\fboxsep}{5pt}
+  \boxed{
+    \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+
+    \divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}\gradient{}{\fnof{u}{\vectr{x},t}}}}
+    +\fnof{b}{\vectr{x}}\fnof{u}{\vectr{x},t}+\fnof{c}{\vectr{x}}\sqbrac{\fnof{u}{\vectr{x},t}}^{2}
+    +\fnof{s}{\vectr{x},t}=0
+  }
+  \label{eqn:GeneralisedFishersEquation}
+\end{equation}
+
+Appropriate boundary conditions conditions for the reaction-diffusion equation
+are specification of Dirichlet boundary conditions on the solution,
+$\fnof{g}{\vectr{x},t}$, \ie
+\begin{equation}
+  \fnof{u}{\vectr{x},t} = \fnof{g}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{D},t\in[0,\infty)
+  \label{eqn:ReactionDiffusionDirichletBC} 
+\end{equation}
+and/or Neumann conditions in terms of the solution flux in the normal
+direction, $\fnof{h}{\vectr{x},t}$ \ie
+\begin{equation}
+  \fnof{q}{\vectr{x},t} = \dotprod{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
+      \gradient{}{\fnof{u}{\vectr{x},t}}}}{\fnof{\normal}{\vectr{x}}} =
+  \fnof{h}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{N},t\in[0,\infty)
+  \label{eqn:ReactionDiffusionNeumannBC} 
+\end{equation}
+where $\fnof{q}{\vectr{x},t}$, is the flux in the normal direction, $\fnof{\normal}{\vectr{x}}$ is the normal
+vector to the boudary and $\Gamma=\union{\Gamma_{D}}{\Gamma_{N}}$.
+
+Appropriate initial conditions for the diffusion equation are the
+specification of an initial value of the solution, $\fnof{i}{\vectr{x}}$, \ie
+\begin{equation}
+  \fnof{u}{\vectr{x},0} = \fnof{i}{\vectr{x}} \quad \vectr{x}\in\Omega.
+  \label{eqn:ReactionDiffusionInitialC} 
+\end{equation}
+
+\subsection{Weak formulation}
+\label{subsec:ReactionDiffusionWeakForm}
+
+The corresponding weak form of \eqnref{eqn:GeneralisedReactionDiffusionEquation} can be found by
+integrating over the spatial domain with a test function \ie
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{a\delby{u}{t}+\divergence{}{\pbrac{\diffusivitytensor\gradient{}{u}}}+b\fnof{r}{u}+s}w}{\Omega}=0
+  \label{eqn:ReactionDiffusionWeakForm1}
+\end{equation}
+where $w$ is a suitable spatial test function.
+
+Applying the divergence theorem to \eqnref{eqn:ReactionDiffusionWeakForm1} gives
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{a\delby{u}{t}}w}{\Omega}-
+      \gint{\Omega}{}{\dotprod{\diffusivitytensor\gradient{}{u}}{\gradient{}{w}}}{\Omega}
+      +\gint{\Gamma}{}{\pbrac{\dotprod{\diffusivitytensor\gradient{}{u}}{\normal}}w}{\Gamma}
+      +\gint{\Omega}{}{b\fnof{r}{u}w}{\Omega}
+      +\gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:ReactionDiffusionWeakForm2}
+\end{equation}
+
+\subsection{Tensor notation}
+\label{subsec:ReactionDiffusionTensorNotation}
+
+\Eqnref{eqn:ReactionDiffusionWeakForm2} can be written in tensor notation as
+\begin{equation}
+  \gint{\Omega}{}{a\dot{u}w}{\Omega}
+  -\gint{\Omega}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}
+  +\gint{\Gamma}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}n_{k}w}{\Gamma}
+  +\gint{\Omega}{}{b\fnof{r}{u}w}{\Omega}
+  +\gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:ReactionDiffusionTensorForm1}
+\end{equation}
+or
+\begin{equation}
+  \gint{\Omega}{}{a\dot{u}w}{\Omega}
+  -\gint{\Omega}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}
+  +\gint{\Gamma}{}{qw}{\Gamma}
+  +\gint{\Omega}{}{b\fnof{r}{u}w}{\Omega}
+  +\gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:ReactionDiffusionTensorForm1}
+\end{equation}
+
+\subsection{Finite element formulation}
+\label{subsec:ReactionDiffusionFEMFormulation}
+
+We can now discretise the spatial domain into finite elements \ie $\Omega=
+\displaystyle{\bigcup_{e=1}^{E}}\Omega_{e}$ with
+$\Gamma=\displaystyle{\bigcup_{f=1}^{F}}\Gamma_{f}$. 
+\Eqnref{eqn:ReactionDiffusionTensorForm2} becomes
+\begin{equation}
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{a\dot{u}w}{\Omega}-
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}
+    \covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
+  \dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{qw}{\Gamma} +
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{b\fnof{r}{u}w}{\Omega}=0
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{sw}{\Omega}=0
+  \label{eqn:ReactionDiffusionFEMForm}
+\end{equation}
+
+If we now assume that the dependent variable $u$ can be interpolated
+separately in space and in time we can write
+\begin{equation}
+  \fnof{u}{\vectr{x},t}=\gbfn{n}{}{\vectr{x}}\fnof{\nodept{u}{n}}{t}
+\end{equation}
+or, in standard interpolation notation within an element,
+\begin{equation}
+  \fnof{u}{\vectr{\xi},t}=\gbfn{n}{\beta}{\vectr{\xi}}
+  \fnof{\nodedof{u}{n}{\beta}}{t}\gsf{n}{\beta}
+\end{equation}
+where $\fnof{\nodedof{u}{n}{\beta}}{t}$ are the time varying nodal
+degrees-of-freedom for node $n$, global derivative $\beta$,
+$\gbfn{n}{\beta}{\vectr{\xi}}$ are the corresponding basis functions 
+and $\gsf{n}{\beta}$ are the scale factors. 
+
+We can also interpolate the other variables in a similar manner \ie
+\begin{equation}
+  \begin{split}
+    \fnof{q}{\vectr{\xi},t} &= \gbfn{o}{\gamma}{\vectr{\xi}}\fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{o}{\gamma} \\
+    \fnof{s}{\vectr{\xi},t} &= \gbfn{p}{\delta}{\vectr{\xi}}\fnof{\nodedof{s}{p}{\delta}}{t}\gsf{p}{\delta} \\
+    \fnof{\tilde{\diffusivitytensor}}{\vectr{\xi}} &=\gbfn{l}{\epsilon}{\vectr{\xi}}
+    \nodedof{\tilde{\diffusivitytensor}}{l}{\epsilon}\gsf{l}{\epsilon} \\
+    \fnof{a}{\vectr{\xi}} &=\gbfn{v}{\zeta}{\vectr{\xi}}\nodedof{a}{v}{\zeta}\gsf{v}{\zeta} \\
+    \fnof{b}{\vectr{\xi}} &=\gbfn{w}{\eta}{\vectr{\xi}}\nodedof{b}{w}{\eta}\gsf{w}{\eta} 
+  \end{split}
+\end{equation}
+where $\fnof{\nodedof{q}{o}{\gamma}}{t}$,
+$\fnof{\nodedof{s}{p}{\delta}}{t}$,
+$\nodedof{\tilde{\diffusivitytensor}}{l}{\epsilon}$,
+$\nodedof{a}{v}{\zeta}$, and $\nodedof{b}{w}{\eta}$ are the nodal
+degrees-of-freedom for the flux, source, diffusivity, and material
+variables.
+
+For a Galerkin finite element formulation we also choose the spatial weighting
+function $w$ to be equal to the basis fucntions \ie
+\begin{equation}
+  \fnof{w}{\vectr{\xi}}=\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}
+\end{equation}
+
+\subsection{Spatial integration}
+\label{subsec:ReactionDiffusionSpatialIntegration}
+
+Adopting the standard integration notation we can write the spatial
+integration term in \eqnref{eqn:ReactionDiffusionFEMForm} as
+\begin{multline}
+  \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{a}{\vectr{\xi}}
+    \delby{\pbrac{\gbfn{n}{\beta}{\vectr{\xi}}\fnof{\nodedof{u}{\beta}{n}}{t}
+        \gsf{n}{\beta}}}{t}\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  -\dsum_{e=1}^{E}\dintl{\vectr{0}}{\vectr{1}}G^{jk}\delby{x^{i}}{\xi^{d}}\delby{\xi^{e}}{x^{j}}
+  \delby{\xi^{d}}{\nu^{a}}\delby{\nu^{b}}{\xi^{e}}\fnof{{\tilde{\diffusivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
+  \delby{\xi^{s}}{x^{i}}
+  \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad \\ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
+  \delby{\pbrac{\gbfn{\beta}{n}{\vectr{\xi}}\fnof{\nodedof{u}{\beta}{n}}{t}
+      \gsf{\beta}{n}}}{\xi^{s}}\delby{\xi^{r}}{x^{k}}\delby{
+    \pbrac{\gbfn{\alpha}{m}{\vectr{\xi}}\gsf{\alpha}{m}}}{\xi^{r}}
+  \abs{\fnof{\matr{J}}{\vectr{\xi}}}d\vectr{\xi} \\
+  +\dsum_{f=1}^{F}\gint{\vectr{0}}{\vectr{1}}{\gbfn{o}{\gamma}{\vectr{\xi}}
+    \fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{o}{\gamma}\gbfn{m}{\alpha}{\vectr{\xi}}
+    \gsf{m}{\alpha}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  +\dsum_{e=1}^{E}\gint{\Omega_{e}}{}{\fnof{b}{\vectr{\xi}}\fnof{r}{\fnof{u}{\vectr{\xi},t}}\gbfn{m}{\alpha}{\vectr{\xi}}
+    \gsf{m}{\alpha}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  +\dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\gbfn{p}{\delta}{\vectr{\xi}}\fnof{\nodedof{s}{p}{\delta}}{t}\gsf{p}{\delta}\gbfn{m}{\alpha}{\vectr{\xi}}
+    \gsf{m}{\alpha}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} = 0
+  \label{eqn:ReactionDiffusionSpatialIntegration1}
+\end{multline}
+where $\fnof{\matr{J}}{\vectr{\xi}}$ is the \emph{Jacobian} of the
+transformation from the integration $\vectr{x}$ to $\vectr{\xi}$ coordinates.
+
+Taking values that are constant over the integration interval outside the
+integration gives
+\begin{multline}
+  \dsum_{e=1}^{E}\fnof{\nodedof{\dot{u}}{\beta}{n}}{t}\gsf{m}{\alpha}\gsf{n}{\beta}
+  \gint{\vectr{0}}{\vectr{1}}{\fnof{a}{\vectr{\xi}}
+    \gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{n}{\beta}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  -\dsum_{e=1}^{E}\fnof{\nodedof{u}{\beta}{n}}{t}\gsf{\alpha}{m}\gsf{\beta}{n}
+  \gint{\vectr{0}}{\vectr{1}}{\delby{\gbfn{\alpha}{m}{\vectr{\xi}}}{\xi^{r}}
+  \delby{\gbfn{\beta}{n}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}
+  \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  +\dsum_{f=1}^{F}\fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{m}{\alpha}\gsf{o}{\gamma}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  +\dsum_{e=1}^{E}\gbfn{m}{\alpha}{\vectr{\xi}}
+  \gsf{m}{\alpha}\gint{\Omega_{e}}{}{\fnof{b}{\vectr{\xi}}\fnof{r}{\fnof{u}{\vectr{\xi},t}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} \\
+  +\dsum_{e=1}^{E}\fnof{\nodedof{s}{p}{\delta}}{t}\gsf{m}{\alpha}\gsf{p}{\delta}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{p}{\delta}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} = 0
+  \label{eqn:ReactionDiffusionSpatialIntegration2}
+\end{multline}
+where $\fnof{\gamma^{rs}}{\vectr{\xi}}$ is defined in 
+\eqnthrurefs{eqn:DiffusionOperatorGammaDefinition1}{eqn:DiffusionOperatorGammaDefinition3}.
+
+This is an equation of the form
+\begin{equation}
+  \matr{C}\fnof{\dot{\vect{u}}}{t}+\matr{K}\fnof{\vect{u}}{t}+\fnof{\vectr{g}}{\fnof{\vect{u}}{t}}+\fnof{\vect{f}}{t}=\vect{0}
+  \label{eqn:ReactionDiffusionVectorEquations}
+\end{equation}
+where
+\begin{equation}
+  \fnof{\vect{f}}{t}=\matr{N}\fnof{\vect{q}}{t}+\matr{R}\fnof{\vect{s}}{t}
+\end{equation}
+
+The elemental damping matrix, $C^{\alpha\beta}_{mn}$, is given by
+\begin{equation}
+  C^{\alpha\beta}_{mn} =
+  \gsf{m}{\alpha}\gsf{n}{\beta}\gint{\vectr{0}}{\vectr{1}}{\fnof{a}{\vectr{\xi}}
+    \gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{n}{\beta}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+\end{equation}
+
+The elemental stiffness matrix, $K^{\alpha\beta}_{mn}$, is given by
+\begin{equation}
+  K^{\alpha\beta}_{mn} = -\gsf{m}{\alpha}\gsf{n}{\beta}\gint{\vectr{0}}{\vectr{1}}{
+    \delby{\gbfn{\alpha}{m}{\vectr{\xi}}}{\xi^{r}}\delby{\gbfn{\beta}{m}{\vectr{\xi}}}{\xi^{s}}
+    \fnof{\gamma^{rs}}{\vectr{\xi}}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+\end{equation}
+
+The elemental residual vector, $g^{\alpha}_{m}$, is given by
+\begin{equation}
+  g^{\alpha}_{m} =
+  \gsf{m}{\alpha}\gint{\vectr{0}}{\vectr{1}}{\fnof{b}{\vectr{\xi}}
+    \fnof{r}{\fnof{u}{\vectr{\xi},t}}
+    \gbfn{m}{\alpha}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+\end{equation}
+
+The elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
+\begin{equation}
+  N^{\alpha\gamma}_{mo} =\gsf{m}{\alpha}\gsf{o}{\gamma}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+\end{equation}
+and the elemental source matrix, $R^{\alpha\delta}_{mp}$, 
+\begin{equation}
+  R^{\alpha\delta}_{mp}=\gsf{m}{\alpha}\gsf{p}{\delta}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{p}{\delta}{\vectr{\xi}}
+    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+\end{equation}
+
+\subsection{Operator splitting}
+\label{subsec:ReactionDiffusionOperatorSplitting}
+
+\Eqnref{eqn:ReactionDiffusionVectorEquations} can be solved
+using standard (nonlinear) time integration solvers. An alternative
+solution method for solving the reaction-diffusion problems is to use
+operator splitting (see
+\subsubsecref{subsubsec:DynamicOperatorSplitting}). Operator splitting
+is particularily useful if the reaction term involves dynamics at a
+different time-scale to that of the diffusion dynamics. Operator
+splitting allows for the decoupling of the reaction dynamics for the
+diffusion dynamics.
+
+The generalised reaction-diffusion equation in
+\eqnref{eqn:GeneralisedReactionDiffusionEquation} can be written as
+the sum of two operators \ie
+\begin{equation}
+  \delby{\fnof{u}{\vectr{x},t}}{t}=\fnof{A}{\fnof{u}{\vectr{x},t}}+\fnof{B}{\fnof{u}{\vectr{x},t}}
+  \label{eqn:ReactionDiffusionOperatorForm}
+\end{equation}
+where $\fnof{A}{\cdot}$ and $\fnof{B}{\cdot}$ are two operators given by
+\begin{align}
+  \fnof{A}{\fnof{u}{\vectr{x},t}}&=\dfrac{\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
+        \gradient{}{\fnof{u}{\vectr{x},t}}}}+\fnof{s}{\vectr{x},t}}{\fnof{a}{\vectr{x}}} \\
+  \fnof{B}{\fnof{u}{\vectr{x},t}}&=\dfrac{\fnof{b}{\vectr{x}}\fnof{r}{\fnof{u}{\vectr{x},t}}}{\fnof{a}{\vectr{x}}}
+\end{align}
+
+To solve the initial value problem in
+\eqnref{eqn:ReactionDiffusionOperatorForm} with the initial condition
+$\fnof{u}{\vectr{x},0}=\fnof{u_{0}}{\vectr{x}}$ we need to
+integrate. Condsider a single integration time step \ie from $t=0$ to
+$t=\Delta t$. Operator splitting breaks this integration step into a
+sequence of integration steps involving each operator.
+
+For \emph{Gudunov splitting} 
+
+\subsection{Analytic solutions}
+\label{subsec:ReactionDiffusionAnalyticSolutions}
+
+\subsubsection{One Dimensional Analytic Function 1}
+
+This analytic solution is a solution to Fisher's equation as given in
+\eqnref{eqn:FishersEquation} with $D=1$. From
+\urllink{https://eqworld.ipmnet.ru/en/solutions/npde/npde1101.pdf} a
+solution to
+\begin{equation}
+  \delby{u}{t}-\deltwosqby{u}{x}=c.u\pbrac{1-u}
+  \label{eqn:AnalyticReactionDiffusionFishersEquation}
+\end{equation}
+is
+\begin{equation}
+  \fnof{u}{x,t}=\dfrac{1}{\sqbrac{1+Ae^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{2}}
+  \label{eqn:AnalyticReactionDiffusionEquationOneDim1}
+\end{equation}
+where $A$ is an arbitrary constant.
+
+To prove the analytic solution we differentiate
+\eqnref{eqn:AnalyticReactionDiffusionEquationOneDim1}. Consider
+defining $\fnof{v}{w}=1+Ae^{\fnof{w}{x,t}}$, $\fnof{w}{x,t}=\alpha t +
+\beta x$, $\alpha=\dfrac{-5c}{6}$, and
+$\beta=\pm\dfrac{1}{6}\sqrt{6c}$. \Eqnref{eqn:AnalyticReactionDiffusionEquationOneDim1}
+is thus $\fnof{u}{v}=\fnof{v}{w}^{-2}$ and so we have for the temporal derivative
+\begin{align}
+  \delby{\fnof{u}{x,t}}{t}&=\delby{\fnof{u}{v}}{v}\delby{\fnof{v}{w}}{w}\delby{\fnof{w}{x,t}}{t} \\
+  &=\dfrac{-2}{\fnof{v}{w}^{3}}.Ae^{\fnof{w}{x,t}}.\alpha \\
+  &=\dfrac{-2\alpha A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}}
+\end{align}
+
+If we now consider
+$\delby{\fnof{u}{w}}{t}=\dfrac{\fnof{y}{w}}{\fnof{z}{w}}$ where
+$\fnof{y}{w}=-2\beta A e^{\fnof{w}{x,t}}$ and
+$\fnof{z}{w}=\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}$ we thus have
+\begin{align}
+  \deltwosqby{\fnof{u}{x,t}}{t}&=\delby{}{t}\pbrac{\delby{\fnof{u}{x,t}}{x}}=\delby{}{t}\pbrac{\dfrac{\fnof{y}{w}}{\fnof{z}{w}}}\\
+  &=\dfrac{\fnof{z}{w}\delby{\fnof{y}{w}}{w}\delby{\fnof{w}{x,t}}{t}-
+    \fnof{y}{w}\delby{\fnof{z}{w}}{w}\delby{\fnof{w}{x,t}}{t}}{\fnof{z}{w}^{2}} \\
+  &=\dfrac{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}.-2\alpha A e^{\fnof{w}{x,t}}.\alpha-
+    \pbrac{-2\alpha A e^{\fnof{w}{x,t}}}.3\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}.A e^{\fnof{w}{x,t}}.\alpha}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}} \\
+  &=\dfrac{-2\alpha^{2}A e^{\fnof{w}{x,t}}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}+
+    6\alpha^{2}\pbrac{A e^{\fnof{w}{x,t}}}^{2}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}}\\
+  &=\dfrac{2\alpha^{2}A e^{\fnof{w}{x,t}}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}\pbrac{3A e^{\fnof{w}{x,t}}-
+      \sqbrac{1+A e^{\fnof{w}{x,t}}}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}} \\
+  &=\dfrac{2\alpha^{2}A e^{\fnof{w}{x,t}}\pbrac{2A e^{\fnof{w}{x,t}}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}
+\end{align}
+
+For the spatial derivative we have
+\begin{align}
+  \delby{\fnof{u}{x,t}}{x}&=\delby{\fnof{u}{v}}{v}\delby{\fnof{v}{w}}{w}\delby{\fnof{w}{x,t}}{x} \\
+  &=\dfrac{-2}{\fnof{v}{w}^{3}}.Ae^{\fnof{w}{x,t}}.\beta \\
+  &=\dfrac{-2\beta A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}}
+\end{align}
+
+If we now consider
+$\delby{\fnof{u}{w}}{x}=\dfrac{\fnof{y}{w}}{\fnof{z}{w}}$ where
+$\fnof{y}{w}=-2\beta A e^{\fnof{w}{x,t}}$ and
+$\fnof{z}{w}=\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}$ we thus have
+\begin{align}
+  \deltwosqby{\fnof{u}{x,t}}{x}&=\delby{}{x}\pbrac{\delby{\fnof{u}{x,t}}{x}}=\delby{}{x}\pbrac{\dfrac{\fnof{y}{w}}{\fnof{z}{w}}}\\
+  &=\dfrac{\fnof{z}{w}\delby{\fnof{y}{w}}{w}\delby{\fnof{w}{x,t}}{x}-
+    \fnof{y}{w}\delby{\fnof{z}{w}}{w}\delby{\fnof{w}{x,t}}{x}}{\fnof{z}{w}^{2}} \\
+  &=\dfrac{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}.-2\beta A e^{\fnof{w}{x,t}}.\beta-
+    \pbrac{-2\beta A e^{\fnof{w}{x,t}}}.3\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}.A e^{\fnof{w}{x,t}}.\beta}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}} \\
+  &=\dfrac{-2\beta^{2}A e^{\fnof{w}{x,t}}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}+
+    6\beta^{2}\pbrac{A e^{\fnof{w}{x,t}}}^{2}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}}\\
+  &=\dfrac{2\beta^{2}A e^{\fnof{w}{x,t}}\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}\pbrac{3A e^{\fnof{w}{x,t}}-
+      \sqbrac{1+A e^{\fnof{w}{x,t}}}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{6}} \\
+  &=\dfrac{2\beta^{2}A e^{\fnof{w}{x,t}}\pbrac{2A e^{\fnof{w}{x,t}}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}
+\end{align}
+
+The reaction term is given by
+\begin{align}
+  c\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}&=c\fnof{u}{v}\pbrac{1-\fnof{u}{v}}=
+  \dfrac{c}{\fnof{v}{w}^{2}}\pbrac{1-\dfrac{1}{\fnof{v}{w}^{2}}}=\dfrac{c\pbrac{\fnof{v}{w}^{2}-1}}{\fnof{v}{w}^{4}}\\
+  &=\dfrac{c\pbrac{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{2}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\\
+  &=\dfrac{c\pbrac{1+2A e^{\fnof{w}{x,t}}+\pbrac{A e^{\fnof{w}{x,t}}}^{2}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\\
+  &=\dfrac{cA e^{\fnof{w}{x,t}}\pbrac{2+A e^{\fnof{w}{x,t}}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}
+\end{align}
+
+In summary, the derivatives of
+\eqnref{eqn:AnalyticReactionDiffusionEquationOneDim1} are thus given
+by
+\begin{equation}
+  \begin{aligned}
+    \delby{u}{t}&=\dfrac{-2\alpha A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}}\\
+    &=\dfrac{5 c A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}{3\sqbrac{1+A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{3}}\\
+    \deltwosqby{u}{t}&=\dfrac{2\alpha^{2}A e^{\fnof{w}{x,t}}\pbrac{2A e^{\fnof{w}{x,t}}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\\
+    &=\dfrac{25 c^{2} A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}\pbrac{2A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}-1}}{18\sqbrac{1+
+        A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{3}}\\
+    \delby{u}{x}&=\dfrac{-2\beta A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}}\\
+    &=\dfrac{\mp\sqrt{6c} A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}{3\sqbrac{1+A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{3}}\\
+    \deltwosqby{u}{x}&=\dfrac{2\beta^{2}A e^{\fnof{w}{x,t}}\pbrac{2A e^{\fnof{w}{x,t}}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\\
+    &=\dfrac{c A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}\pbrac{2A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}-1}}{3\sqbrac{1+
+        A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{3}}
+  \end{aligned}
+  \label{eqn:AnalyticReactionDiffusionOneDim1Derivatives}
+\end{equation}
+and the reaction term in \eqnref{eqn:AnalyticReactionDiffusionFishersEquation} is thus
+given by
+\begin{equation}
+  \begin{aligned}
+    c\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}&=\dfrac{cA e^{\fnof{w}{x,t}}\pbrac{2+A e^{\fnof{w}{x,t}}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\\
+    &=\dfrac{cA e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}\pbrac{2+A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}}{\sqbrac{1+
+        A e^{\frac{-5}{6}ct\pm\frac{1}{6}\sqrt{6c}x}}^{4}}
+  \end{aligned}
+  \label{eqn:AnalyticReactionDiffusionOneDim1Reaction}
+\end{equation}
+
+Substiting
+\eqnrefs{eqn:AnalyticReactionDiffusionOneDim1Derivatives}{eqn:AnalyticReactionDiffusionOneDim1Reaction}
+into \eqnref{eqn:AnalyticReactionDiffusionFishersEquation} gives
+\begin{align}
+  \delby{u}{t}-\deltwosqby{u}{x}-c.u\pbrac{1-u}&= \\
+  \dfrac{-2\alpha A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{3}}-
+  \dfrac{2\beta^{2}A e^{\fnof{w}{x,t}}\pbrac{2A e^{\fnof{w}{x,t}}-1}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}
+  -\dfrac{cA e^{\fnof{w}{x,t}}\pbrac{2+A e^{\fnof{w}{x,t}}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}&=0\\
+  \dfrac{A e^{\fnof{w}{x,t}}}{\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\pbrac{-2\alpha\pbrac{1+A e^{\fnof{w}{x,t}}}-
+    2\beta^{2}\pbrac{2A e^{\fnof{w}{x,t}}-1}-c\pbrac{2+A e^{\fnof{w}{x,t}}}}&=0\\
+  \dfrac{A e^{\fnof{w}{x,t}}}{6\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\pbrac{10 c\pbrac{1+A e^{\fnof{w}{x,t}}}-
+    2c\pbrac{2A e^{\fnof{w}{x,t}}-1}-6c\pbrac{2+A e^{\fnof{w}{x,t}}}}&=0\\
+  \dfrac{A e^{\fnof{w}{x,t}}}{6\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\pbrac{10 c+10 cA e^{\fnof{w}{x,t}}-
+    4cA e^{\fnof{w}{x,t}}+2c-12c-6cA e^{\fnof{w}{x,t}}}&=0\\
+  \dfrac{A e^{\fnof{w}{x,t}}}{6\sqbrac{1+A e^{\fnof{w}{x,t}}}^{4}}\pbrac{0}&=0
+\end{align}
+which thus proves that \eqnref{eqn:AnalyticReactionDiffusionEquationOneDim1} is an analytic solution to \eqnref{eqn:AnalyticReactionDiffusionFishersEquation}.
+
+The analytic field component definitions in \OpenCMISS are shown in \tabref{tab:OpenCMISSAnalyticFieldReactionDiffusionOneDim1}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|} \hline
+    \emph{Analytic constant} & \emph{Analytic field component} \\ \hline \hline
+    $A$ & $1$ \\ 
+    $c$ & $2$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS analytic field components for the \oned reaction-diffusion equation
+    analytic function 1.}
+  \label{tab:OpenCMISSAnalyticFieldReactionDiffusionOneDim1}
+\end{table}
+
+
+\subsection{Worked example}
+\label{subsec:ReactionDiffusionWorkedExample}
+
+Consider Fisher's equation
+\begin{equation}
+  \delby{\fnof{u}{x,t}}{t}-D\deltwosqby{\fnof{u}{x,t}}{x}=c.\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}
+  \label{eqn:FishersExampleEquation}
+\end{equation}
+on the \onedal domain of length $L$ and with $E$ elements and $N=E+1$ nodes as shown in \figref{fig:Fishers1DDomain}.
+
+\epstexfigure{ClassicalField/svgs/FishersOneDDomain.eps_tex}{One
+  dimensional domain for Fisher's equation.}{One
+  dimensional domain for Fisher's equation. The domain
+  of length $L$ has $E$ elements and $N=E+1$ nodes. The length of each
+  element is $L/E$.}{fig:Fishers1DDomain}{1.0}
+
+The weighted residual form of \eqnref{eqn:FishersExampleEquation} is given by
+\begin{equation}
+  \gint{\Omega}{}{\pbrac{\delby{\fnof{u}{x,t}}{t}-D\deltwosqby{\fnof{u}{x,t}}{x}-
+      c.\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}}\fnof{w}{x}}{\Omega}=0
+  \label{eqn:FishersExampleWeightedResidual}
+\end{equation}
+
+Applying the divergence theorem to \eqnref{eqn:FishersExampleWeightedResidual} gives
+\begin{equation}
+  \begin{split}
+    \gint{\Omega}{}{\pbrac{\delby{\fnof{u}{x,t}}{t}+D\delby{\fnof{u}{x,t}}{x}\delby{\fnof{w}{x}}{x}-
+        c.\fnof{u}{x,t}\pbrac{1-\fnof{u}{x,t}}}\fnof{w}{x}}{\Omega}\\
+    -\gint{\Gamma}{}{\pbrac{\dotprod{D\delby{\fnof{u}{x,t}}{x}}{n}}\fnof{w}{x}}{\Gamma}=0
+  \end{split}
+  \label{eqn:FishersExampleDivergence}
+\end{equation}
+or
+\begin{equation}
+  \begin{split}
+    \gsum{e=1}{E}{\gint{0}{1}{\pbrac{\delby{\fnof{u}{\xi,t}}{t}\fnof{w}{\xi}
+          +D\delby{\fnof{u}{\xi,t}}{\xi}\delby{\xi}{x}\delby{\fnof{w}{\xi}}{\xi}\delby{\xi}{x}
+          +c\fnof{u}{\xi,t}\pbrac{1-\fnof{u}{\xi,t}}\fnof{w}{\xi}}\abs{\fnof{J}{\xi}}}{\xi}} \\
+    -\gsum{f=1}{F}{\gint{0}{1}{\pbrac{\dotprod{D\delby{\fnof{u}{\xi,t}}{\xi}\delby{\xi}{x}}{n}}\fnof{w}{\xi}
+        \abs{\fnof{J}{\xi}}}{\xi}}=0
+  \end{split}
+  \label{eqn:FishersExampleFEMForm}
+\end{equation}
+
+Upon integration the resultant system of equations can be written as
+\begin{equation}
+  \matr{C}\dotover{\vectr{u}}+\matr{K}\vectr{u}+\fnof{\vectr{g}}{\vectr{u}}=\vectr{f}
+\end{equation}
+
+Considering element $i$ we can derive expressions for the elemental
+stiffness matrices. Assuming linear basis functions the interpolation
+expression for $\fnof{u}{\xi}$ can be written as
+\begin{equation}
+  \fnof{u}{\xi}=\xi u_{i}+\pbrac{1-\xi}u_{i+1}
+\end{equation}
+also we have
+\begin{align}
+  \delby{x}{\xi}&=\dfrac{L}{E} \\
+  \delby{\xi}{x}&=\dfrac{E}{L} \\
+  \abs{\fnof{J}{\xi}}&=\dfrac{L}{E}
+\end{align}
+
+The element damping matrix can be written as
+\begin{align}
+  C_{i,i}&=\gint{0}{1}{\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{t}\xi\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{L}{E}\gint{0}{1}{\pbrac{\xi\dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}\xi}{\xi} \\
+  &=\dfrac{L}{E}\gint{0}{1}{\pbrac{\xi^{2}\dotover{u}_{i}+\pbrac{\xi-\xi^{2}}\dotover{u}_{i+1}}}{\xi} \\
+  &=\dfrac{L}{E}\sqbrac{\dfrac{\xi^{3}}{3}\dotover{u}_{i}+\pbrac{\dfrac{\xi^{2}}{2}-\dfrac{\xi^{3}}{3}}\dotover{u}_{i+1}}_{0}^{1}\\
+  &=\dfrac{L}{E}\pbrac{\dfrac{\dotover{u}_{i}}{3}+\dfrac{\dotover{u}_{i+1}}{2}-\dfrac{\dotover{u}_{i+1}}{3}}\\
+  &=\dfrac{L\pbrac{2\dotover{u}_{i}+\dotover{u}_{i+1}}}{6E}  
+\end{align}
+
+Similarily
+\begin{align}
+  C_{i+1,i}&=\gint{0}{1}{\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{t}\pbrac{1-\xi}\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{L}{E}\gint{0}{1}{\pbrac{\xi\dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}\pbrac{1-\xi}}{\xi} \\
+  &=\dfrac{L}{E}\gint{0}{1}{\pbrac{\pbrac{\xi-\xi^{2}}\dotover{u}_{i}+\pbrac{1-2\xi+\xi^{2}}\dotover{u}_{i+1}}}{\xi} \\
+  &=\dfrac{L}{E}\sqbrac{\pbrac{\dfrac{\xi^{2}}{2}-\dfrac{\xi^{3}}{3}}\dotover{u}_{i}+\pbrac{\xi-\xi^{2}+
+      \dfrac{\xi^{3}}{3}}\dotover{u}_{i+1}}_{0}^{1}\\
+  &=\dfrac{L}{E}\pbrac{\dfrac{\dotover{u}_{i}}{2}-\dfrac{\dotover{u}_{i}}{3}+\dotover{u}_{i+1}-\dotover{u}_{i+1}+
+    \dfrac{\dotover{u}_{i+1}}{3}}\\
+  &=\dfrac{L\pbrac{\dotover{u}_{i}+2\dotover{u}_{i+1}}}{6E}  
+\end{align}
+
+The element damping matrix for element $i$ is thus
+\begin{equation}
+  \begin{bmatrix}
+    C_{i,i} & C_{i,i+1} \\
+    C_{i+1,i} & C_{i+1,i+1}
+  \end{bmatrix}\begin{bmatrix}
+    \dotover{u}_{i} \\
+    \dotover{u}_{i+1}
+  \end{bmatrix} = \begin{bmatrix}
+    \frac{L}{3E} & \frac{L}{6E} \\
+    \frac{L}{6E} & \frac{L}{3E}
+   \end{bmatrix}\begin{bmatrix}
+    \dotover{u}_{i} \\
+    \dotover{u}_{i+1}
+  \end{bmatrix}
+\end{equation}
+
+
+The element stiffness matrix can be written as
+\begin{align}
+  K_{i,i}&=\gint{0}{1}{D\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{\xi}\dfrac{E}{L}\delby{\xi}{\xi}\dfrac{E}{L}\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{DE\pbrac{u_{i}-u_{i+1}}}{L}\gint{0}{1}{}{\xi}\\
+  &=\dfrac{DE\pbrac{u_{i}-u_{i+1}}}{L}\sqbrac{\xi}_{0}^{1}\\
+  &=\dfrac{DE\pbrac{u_{i}-u_{i+1}}}{L}
+\end{align}
+
+Similarily
+\begin{align}
+  K_{i+1,i}&=\gint{0}{1}{D\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{\xi}\dfrac{E}{L}\delby{\pbrac{1-\xi}}{\xi}\dfrac{E}{L}\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{-DE\pbrac{u_{i}-u_{i+1}}}{L}\gint{0}{1}{}{\xi}\\
+  &=\dfrac{-DE\pbrac{u_{i}-u_{i+1}}}{L}\sqbrac{\xi}_{0}^{1}\\
+  &=\dfrac{-DE\pbrac{u_{i}-u_{i+1}}}{L}
+\end{align}
+
+The element stiffness matrix for element $i$ is thus
+\begin{equation}
+  \begin{bmatrix}
+    K_{i,i} & K_{i,i+1} \\
+    K_{i+1,i} & K_{i+1,i+1}
+  \end{bmatrix}\begin{bmatrix}
+    u_{i} \\
+    u_{i+1}
+  \end{bmatrix} = \begin{bmatrix}
+    \frac{DE}{L} & \frac{-DE}{L} \\
+    \frac{-DE}{L} & \frac{DE}{L}
+   \end{bmatrix}\begin{bmatrix}
+    u_{i} \\
+    u_{i+1}
+  \end{bmatrix}
+\end{equation}
+
+The nonlinear vector can be written as
+\begin{align}
+  g_{i}&=\gint{0}{1}{c.\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}\pbrac{1-\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}\xi\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{cL}{E}\gint{0}{1}{\pbrac{\pbrac{\xi-\xi^{2}}u^{2}_{i}-2\pbrac{\xi-\xi^{2}}u_{i}u_{i+1}+\pbrac{\xi-\xi^{2}}u^{2}_{i+1}}\xi}{\xi} \\
+  &=\dfrac{cL}{E}\gint{0}{1}{\pbrac{\pbrac{\xi^{2}-\xi^{3}}u^{2}_{i}-2\pbrac{\xi^{2}-\xi^{3}}u_{i}u_{i+1}+\pbrac{\xi^{2}-\xi^{3}}u^{2}_{i+1}}}{\xi} \\
+  &=\dfrac{cL}{E}\pbrac{\sqbrac{\dfrac{\xi^{3}}{3}-\dfrac{\xi^{4}}{4}}^{1}_{0}u^{2}_{i}-2\sqbrac{\dfrac{\xi^{3}}{3}-\dfrac{\xi^{4}}{4}}^{1}_{0}u_{i}u_{i+1}+\sqbrac{\dfrac{\xi^{3}}{3}-\dfrac{\xi^{4}}{4}}^{1}_{0}u^{2}_{i+1}}\\
+  &=\dfrac{cL\pbrac{u_{i}^{2}-2u_{i}u_{i+1}+u_{i+1}^{2}}}{12E}
+\end{align}
+
+Similarily
+\begin{align}
+  g_{i+1}&=\gint{0}{1}{c.\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}\pbrac{1-\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}\pbrac{1-\xi}\dfrac{L}{E}}{\xi} \\
+  &=\dfrac{cL}{E}\gint{0}{1}{\pbrac{\pbrac{\xi-\xi^{2}}u^{2}_{i}-2\pbrac{\xi-\xi^{2}}u_{i}u_{i+1}+\pbrac{\xi-\xi^{2}}u^{2}_{i+1}}\pbrac{1-\xi}}{\xi} \\
+  &=\dfrac{cL}{E}\gint{0}{1}{\pbrac{\pbrac{\xi-2\xi^{2}+\xi^{3}}u^{2}_{i}-2\pbrac{\xi-2\xi^{2}+\xi^{3}}u_{i}u_{i+1}+\pbrac{\xi-2\xi^{2}+\xi^{3}}u^{2}_{i+1}}}{\xi} \\
+  &=\dfrac{cL}{E}\pbrac{\sqbrac{\dfrac{\xi^{2}}{2}-2\dfrac{\xi^{3}}{3}+\dfrac{\xi^{4}}{4}}^{1}_{0}u^{2}_{i}-2\sqbrac{\dfrac{\xi^{2}}{2}-2\dfrac{\xi^{3}}{3}+\dfrac{\xi^{4}}{4}}^{1}_{0}u_{i}u_{i+1}+\sqbrac{\dfrac{\xi^{2}}{2}-2\dfrac{\xi^{3}}{3}+\dfrac{\xi^{4}}{4}}^{1}_{0}u^{2}_{i+1}}\\
+  &=\dfrac{-cL\pbrac{u_{i}^{2}-2u_{i}u_{i+1}+u_{i+1}^{2}}}{12E}
+\end{align}
+
+
+The element residual vector for element $i$ is thus
+\begin{equation}
+  \begin{bmatrix}
+    g_{i}  \\
+    g_{i+1} 
+  \end{bmatrix} = \begin{bmatrix}
+    \frac{cL\pbrac{u_{i}^{2}-2u_{i}u_{i+1}+u_{i+1}^{2}}}{12E} \\
+    \frac{-cL\pbrac{u_{i}^{2}-2u_{i}u_{i+1}+u_{i+1}^{2}}}{12E}
+   \end{bmatrix}
+\end{equation}
+
+The element Jacobian matrix for element $i$ is thus
+\begin{equation}
+  \begin{bmatrix}
+    J_{i,i} & J_{i,i+1} \\
+    J_{i+1,i} & J_{i+1,i+1} 
+  \end{bmatrix} = \begin{bmatrix}
+    \delby{g_{i}}{u_{i}} & \delby{g_{i}}{u_{i+1}} \\
+    \delby{g_{i+1}}{u_{i}} & \delby{g_{i+1}}{u_{i+1}}
+   \end{bmatrix} = \begin{bmatrix}
+    \frac{cL\pbrac{u_{i}-u_{i+1}}}{6E} & \frac{-cL\pbrac{u_{i}-u_{i+1}}}{6E} \\
+    \frac{-cL\pbrac{u_{i}-u_{i+1}}}{6E} & \frac{cL\pbrac{u_{i}-u_{i+1}}}{6E}
+   \end{bmatrix}
+\end{equation}
+
+The matrix system for the domain shown in \figref{fig:Fishers1DDomain} with no flux conditions is thus
+\begin{multline}
+  \begin{bmatrix}
+    \frac{L}{3E} & \frac{L}{6E} & 0 & 0 & 0 & \cdots & 0 & 0 \\
+    \frac{L}{6E} & \frac{2L}{3E} &  \frac{L}{6E} & 0 & 0 & \cdots & 0 & 0 \\
+    0 & \frac{L}{6E} & \frac{2L}{3E} &  \frac{L}{6E} & 0 & \cdots & 0 & 0 \\
+    0 & 0 & \frac{L}{6E} & \frac{2L}{3E} &  \frac{L}{6E} & \cdots & 0 & 0 \\
+    0 & 0 & 0 & \frac{L}{6E} & \frac{2L}{3E} & \cdots & 0 & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{2L}{3E} & \frac{L}{6E} \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{L}{6E} & \frac{L}{3E} \\
+  \end{bmatrix} \begin{bmatrix}
+    \dotover{u}_{1} \\
+    \dotover{u}_{2} \\
+    \dotover{u}_{3} \\
+    \dotover{u}_{4} \\
+    \dotover{u}_{5} \\
+    \vdots \\
+    \dotover{u}_{N-1} \\
+    \dotover{u}_{N} \\
+  \end{bmatrix} \\
+  + \begin{bmatrix}
+    \frac{DE}{L} & \frac{-DE}{L} & 0 & 0 & 0 & \cdots & 0 & 0 \\
+    \frac{-DE}{L} & \frac{2DE}{L} &  \frac{-DE}{L} & 0 & 0 & \cdots & 0 & 0 \\
+    0 & \frac{-DE}{L} & \frac{2DE}{L} &  \frac{-DE}{L} & 0 & \cdots & 0 & 0 \\
+    0 & 0 & \frac{-DE}{L} & \frac{2DE}{L} &  \frac{-DE}{L} & \cdots & 0 & 0 \\
+    0 & 0 & 0 & \frac{-DE}{L} & \frac{2DE}{L} & \cdots & 0 & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{2DE}{L} & \frac{-DE}{L} \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{-DE}{L} & \frac{DE}{L} \\
+  \end{bmatrix} \begin{bmatrix}
+    u_{1} \\
+    u_{2} \\
+    u_{3} \\
+    u_{4} \\
+    u_{5} \\
+    \vdots \\
+    u_{N-1} \\
+    u_{N}
+  \end{bmatrix} \\
+  + \begin{bmatrix}
+    \frac{cL\pbrac{u_{1}^{2}-2u_{1}u_{2}+u_{2}^{2}}}{12E} \\
+    \frac{cL\pbrac{-u_{1}^{2}+2u_{1}u_{2}-2u_{2}u_{3}+u_{3}^{2}}}{12E} \\
+    \frac{cL\pbrac{-u_{2}^{2}+2u_{2}u_{3}-2u_{3}u_{4}+u_{4}^{2}}}{12E} \\
+    \frac{cL\pbrac{-u_{3}^{2}+2u_{3}u_{4}-2u_{4}u_{5}+u_{5}^{2}}}{12E} \\
+    \frac{cL\pbrac{-u_{4}^{2}+2u_{4}u_{5}-2u_{5}u_{6}+u_{6}^{2}}}{12E} \\
+    \vdots \\
+    \frac{cL\pbrac{-u_{N-2}^{2}+2u_{N-2}u_{N-1}-2u_{N-1}u_{N}+u_{N}^{2}}}{12E} \\
+    \frac{cL\pbrac{-u_{N-1}^{2}+2u_{N-1}u_{N}-u_{N}^{2}}}{12E}    
+  \end{bmatrix} = \begin{bmatrix}
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    0 \\
+    \vdots \\
+    0 \\
+    0 \\
+  \end{bmatrix}
+\end{multline}
+
+And the Jacobian matrix is
+\begin{equation}
+  \begin{bmatrix}
+    \frac{cL\pbrac{u_{1}-u_{2}}}{6E} & \frac{-cL\pbrac{u_{1}-u_{2}}}{6E} & 0 & 0 & 0 & \cdots & 0 & 0 \\
+    \frac{-cL\pbrac{u_{1}-u_{2}}}{6E} & \frac{cL\pbrac{u_{1}-u_{3}}}{6E} &  \frac{-cL\pbrac{u_{2}-u_{3}}}{6E} & 0 & 0 & \cdots & 0 & 0 \\
+    0 & \frac{-cL\pbrac{u_{2}-u_{3}}}{6E} & \frac{cL\pbrac{u_{2}-u_{4}}}{6E} &  \frac{-cL\pbrac{u_{3}-u_{4}}}{6E} & 0 & \cdots & 0 & 0 \\
+    0 & 0 & \frac{-cL\pbrac{u_{3}-u_{4}}}{6E} & \frac{cL\pbrac{u_{3}-u_{5}}}{6E} &  \frac{-cL\pbrac{u_{4}-u_{5}}}{6E} & \cdots & 0 & 0 \\
+    0 & 0 & 0 & \frac{-cL\pbrac{u_{4}-u_{5}}}{6E} & \frac{cL\pbrac{u_{4}-u_{6E}}}{6E} & \cdots & 0 & 0 \\
+    \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{cL\pbrac{u_{N-2}-u_{N}}}{6E} & \frac{-cL\pbrac{u_{N-1}-u_{N}}}{6E} \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{-cL\pbrac{u_{N-1}-u_{N}}}{6E} & \frac{cL\pbrac{u_{N-1}-u_{N}}}{6E}
+  \end{bmatrix}
+\end{equation}
