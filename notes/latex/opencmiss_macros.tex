@@ -120,6 +120,9 @@
 \newcommand{\oscommand}[1]{ %
   \texttt{#1} %
 } %
+\newcommand{\compconst}[1]{ %
+  \texttt{#1} %
+} %
   
 %
 % Software and systmes
@@ -834,15 +837,18 @@
 \newcommand{\complex}[1]{\ensuremath{ %
   \boldsymbol{\textrm{#1}} %
 }} %% complex number format e.g. \complex{i} => i
+\newcommand{\commutation}[2]{\ensuremath{ %
+ \sqbrac{#1,#2} %
+}} %% commutation e.g. \commutation{A,B} => [A,B]
 \newcommand{\conjugate}[1]{\ensuremath{ %
     \overline{#1} %                                _
 }} %% complex conjugate e.g. \conjugate{Z} => Z
 \newcommand{\const}[1]{\ensuremath{\mathrm{#1}}} % constant
-\newcommand{\cont}[1]{\ensuremath{C^{#1}}} % continuity e.g. \cont{1} => C1
-\newcommand{\gcont}[1]{\ensuremath{G^{#1}}} % geometric continuity e.g. \gcont{1} => G1
+\newcommand{\cont}[1]{\ensuremath{C^{#1}}} % continuity e.g. \cont{1} => C^1
+\newcommand{\gcont}[1]{\ensuremath{G^{#1}}} % geometric continuity e.g. \gcont{1} => G^1
 \newcommand{\convolution}[2]{\ensuremath{#1*#2}} % convolution
 % e.g. \convolution{a}{b} => a*b
-\newcommand{\cuberoot}[1]{\ensuremath{ %7
+\newcommand{\cuberoot}[1]{\ensuremath{ %
     \sqrt[3]{#1} %
   }} % cube root e.g. \cuberoot{a} = 3\sqrt{a}
 \newcommand{\degree}{\ensuremath{^{\circ}}\xspace} % degree sign
@@ -1369,51 +1375,54 @@
 \newcommand{\dothamiltonian}[1]{\ensuremath{ %
     \fnof{\dotover{\hamiltoniansym}}{#1} %
 }} % dot Hamiltonian e.g., time derivative of the Hamiltonian
-\newcommand{\lagrangiansym}{\ensuremath{ %
+\newcommand{\lagrangiansymbol}{\ensuremath{ %
     L %
 }} % Lagrangian symbol
 \newcommand{\lagrangian}[1]{\ensuremath{ %
-    \fnof{\lagrangiansym}{#1} %
+    \fnof{\lagrangiansymbol}{#1} %
 }} % Lagrangian e.g., \lagrangian{u,v} => L(u,v)
 
 %
 % Spaces
 %
-\newcommand{\vectorspace}[1]{\ensuremath{ %
+\newcommand{\mathspace}[1]{\ensuremath{ %
     \mathcal{#1} %
-}} % vetor space e.g., \vectirspace{V} => V
+}} % mathmatical space e.g., \mathspace{M} => M
+\newcommand{\vectorspace}[1]{\ensuremath{ %
+    \mathspace{#1} %
+}} % vetor space e.g., \vectorspace{V} => V
 \newcommand{\dualspace}[1]{\ensuremath{ %
     \vectorspace{#1}^{*} %
 }} % dual space e.g., \dualspace{V} => V^*
-\newcommand{\lebesguespacesym}{\ensuremath{ %
+\newcommand{\lebesguespacesymbol}{\ensuremath{ %
     L %
 }} % Lebesque space symbol
 \newcommand{\lebesguepspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\lebesguespacesym^{#1}}
+    \ensuremath{\lebesguespacesymbol^{#1}}
   }{
-    \ensuremath{\lebesguespacesym^{#1}\pbrac{#2}} %  
+    \ensuremath{\lebesguespacesymbol^{#1}\pbrac{#2}} %  
 }} % Lebesgue p space e.g., \lebesguepspace{2}{M} =>L^2(M)
 \newcommand{\lebesguetwospace}[1]{\ensuremath{ %
     \lebesquepspace{2}{#1} %  
 }} % Lebesgue 2 space e.g., \lebesgue2space{M} =>L^2(M)
-\newcommand{\sobolevspacesym}{\ensuremath{ %
+\newcommand{\sobolevspacesymbol}{\ensuremath{ %
     W
 }} % Sobolev space symbol
 \newcommand{\sobolevkpspace}[3]{%
   \ifthenelse{\equal{#3}{}}{ %
-    \ensuremath{\sobolevspacesym^{#1,#2}}
+    \ensuremath{\sobolevspacesymbol^{#1,#2}}
   }{
-    \ensuremath{\sobolevspacesym^{#1,#2}\pbrac{#3}} %  
+    \ensuremath{\sobolevspacesymbol^{#1,#2}\pbrac{#3}} %  
 }} % Sobolev k,p space e.g., \sobolevkpspace{k,p}{M} =>W^k,p(M)
-\newcommand{\hilbertspacesym}{\ensuremath{ %
+\newcommand{\hilbertspacesymbol}{\ensuremath{ %
     H
 }} % Hilbert space symbol
 \newcommand{\hilbertpspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\hilbertspacesym^{#1}}
+    \ensuremath{\hilbertspacesymbol^{#1}}
   }{
-    \ensuremath{\hilbertspacesym^{#1}\pbrac{#2}} %  
+    \ensuremath{\hilbertspacesymbol^{#1}\pbrac{#2}} %  
 }} % Hilbert p space e.g., \hilbertpspace{1}{M} =>H^1(M)
 \newcommand{\hilbertonespace}[1]{\ensuremath{ %
     \hilbertpspace{1}{#1} %  
@@ -1424,26 +1433,32 @@
 \newcommand{\hilbertthreespace}[1]{\ensuremath{ %
     \hilbertpspace{3}{#1} %  
 }} % Hilbert 3 space e.g., \hilbert3space{M} =>H^3(M)
-\newcommand{\diffformspacesym}{\ensuremath{ %
+\newcommand{\vectorfieldspacesymbol}{\ensuremath{ %
+    \mathfrak{X} %
+}} % space of vector fields symbol
+\newcommand{\vectorfieldspace}[1]{\ensuremath{ %
+    \fnof{\vectorfieldspacesymbol}{#1} %  
+}} % vector field space e.g., \vectorfieldspace{M} => X(M)
+\newcommand{\diffformspacesymbol}{\ensuremath{ %
     \bigwedge
 }} % space of differential forms symbol
 \newcommand{\diffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{{\diffformspacesym}^{#1}}
+    \ensuremath{{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % differential form space e.g., \diffformspace{2}{M} =>^2(M)
 \newcommand{\ltwodiffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\lebesguespacesym^{2}{\diffformspacesym}^{#1}}
+    \ensuremath{\lebesguespacesymbol^{2}{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{\lebesguespacesym^{2}{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{\lebesguespacesymbol^{2}{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % L^2 differential form space e.g., \ltwodiffformspace{2}{M} =>L^2 ^2(M)
 \newcommand{\honediffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\hilbertspacesym^{1}{\diffformspacesym}^{#1}}
+    \ensuremath{\hilbertspacesymbol^{1}{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{\hilbertspacesym^{1}{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{\hilbertspacesymbol^{1}{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % H^1 differential form space e.g., \honediffformspace{2}{M} =>H^1 ^2(M)
 \newcommand{\innerform}[3]{ %
   \ifthenelse{\equal{#3}{}}{ %
@@ -1490,21 +1505,24 @@
 %
 \newcommand{\manifold}[1]{\ensuremath{ %
     \mathfrak{#1} %
-}} % manifold symbol
+}} % manifold e.g., \manifold{M} => M
 \newcommand{\boundary}[1]{\ensuremath{ %
     \del{#1} %
-}} % boundary symbol
+}} % boundary symbol e.g., \boundary{\Omega} => \del\Omega
+\newcommand{\configspace}[1]{\ensuremath{ %
+    \mathspace{#1} %
+}} % 
 \newcommand{\embedmanifold}[1]{\ensuremath{ %
-  \mathcal{#1} %
-}} % embedded manifold symbol
+  \configspace{#1} %
+}} % embedded manifold e.g., \embedmanifold{N} => N
 \newcommand{\connection}[2]{\ensuremath{ %
     \grad_{#1}{#2} %
 }} % connection e.g., \connection{X}{Y} => \grad_{X} Y
 \newcommand{\coordspacesymbol}{\ensuremath{ %
-    \mathcal{C} %
+    \configspace{C} %
 }} % Coordinate space symbol => C
 \newcommand{\tangentspacesymbol}{\ensuremath{ %
-    \mathcal{T} %
+    \configspace{T} %
 }} % Tangent space symbol => T
 \newcommand{\cotangentspacesymbol}{\ensuremath{ %
     \tangentspacesymbol^{*} %

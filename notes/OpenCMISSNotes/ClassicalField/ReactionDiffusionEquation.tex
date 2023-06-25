@@ -24,7 +24,15 @@ where $\vectr{x}\in\Omega$, $t\in[0,\infty)$, $\fnof{u}{\vectr{x},t}$
   $\fnof{a}{\vectr{x}}$ and $\fnof{b}{\vectr{x}}$ are material
   coefficients, $\fnof{\diffusivitytensor}{\vectr{x}}$ is the
   conductivity/diffusivity tensor throughout the domain and
-  $\fnof{s}{\vectr{x},t}$ is a source term in the domain.
+  $\fnof{s}{\vectr{x},t}$ is a source term in the domain. In
+  \OpenCMISS \eqnref{eqn:GeneralisedReactionDiffusionEquation} is the
+  form of the
+  \compconst{EQUATIONS\_SET\_CELLML\_NOSPLIT\_LINEAR\_GEN\_REACT\_DIFF\_SUBTYPE}
+  and
+  \compconst{EQUATIONS\_SET\_CELLML\_NOSPLIT\_NONLINEAR\_GEN\_REACT\_DIFF\_SUBTYPE}
+  equations set dependending on whether or not
+  $\fnof{r}{\fnof{u}{\vectr{x},t}}$ is linear or nonlinear in terms of
+  $\fnof{u}{\vectr{x},t}$.
   
 A specialisation of the reaction-diffusion equation is \emph{Fisher's
 equation}\footnote{named after
@@ -66,6 +74,10 @@ The \emph{generalised Fisher's equation}\index{Fisher's
   }
   \label{eqn:GeneralisedFishersEquation}
 \end{equation}
+
+In \OpenCMISS \Eqnref{eqn:GeneralisedFishersEquation} is the form of
+the \compconst{EQUATIONS\_SET\_GEN\_FISHERS\_NOSPLIT\_REACT\_DIFF\_SUBTYPE}
+equations set type.
 
 Appropriate boundary conditions conditions for the reaction-diffusion equation
 are specification of Dirichlet boundary conditions on the solution,
@@ -310,14 +322,34 @@ The generalised reaction-diffusion equation in
 \eqnref{eqn:GeneralisedReactionDiffusionEquation} can be written as
 the sum of two operators \ie
 \begin{equation}
-  \delby{\fnof{u}{\vectr{x},t}}{t}=\fnof{A}{\fnof{u}{\vectr{x},t}}+\fnof{B}{\fnof{u}{\vectr{x},t}}
+  \delby{\fnof{u}{\vectr{x},t}}{t}=\sqbrac{\fnof{A}{\cdot}+\fnof{B}{\cdot}}\fnof{u}{\vectr{x},t}
   \label{eqn:ReactionDiffusionOperatorForm}
 \end{equation}
-where $\fnof{A}{\cdot}$ and $\fnof{B}{\cdot}$ are two operators given by
+where $\fnof{A}{\cdot}$ and $\fnof{B}{\cdot}$ are two operators.
+
+For \eqnref{eqn:ReactionDiffusionVectorEquations} the operators for the split form of the equations are given by
 \begin{align}
-  \fnof{A}{\fnof{u}{\vectr{x},t}}&=\dfrac{\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
-        \gradient{}{\fnof{u}{\vectr{x},t}}}}+\fnof{s}{\vectr{x},t}}{\fnof{a}{\vectr{x}}} \\
-  \fnof{B}{\fnof{u}{\vectr{x},t}}&=\dfrac{\fnof{b}{\vectr{x}}\fnof{r}{\fnof{u}{\vectr{x},t}}}{\fnof{a}{\vectr{x}}}
+  \fnof{A}{\fnof{u}{\vectr{x},t}}&=-\divergence{}{\pbrac{\fnof{\bar{\diffusivitytensor}}{\vectr{x}}
+      \gradient{}{\fnof{u}{\vectr{x},t}}}}-\fnof{\bar{s}}{\vectr{x},t}
+  \label{eqn:GeneralisedReactionDiffusionSplitEquationA} \\
+  \fnof{B}{\fnof{u}{\vectr{x},t}}&=-\fnof{\bar{r}}{\fnof{u}{\vectr{x},t}}
+  \label{eqn:GeneralisedReactionDiffusionSplitEquationB}
+\end{align}
+where
+\begin{align}
+  \fnof{\bar{\diffusivitytensor}}{\vectr{x}}&=\dfrac{\fnof{\diffusivitytensor}{\vectr{x}}}{\fnof{a}{\vectr{x}}} \\
+  \fnof{\bar{r}}{\fnof{u}{\vectr{x},t}}&=\dfrac{\fnof{b}{\vectr{x}}\fnof{r}{\fnof{u}{\vectr{x},t}}}{\fnof{a}{\vectr{x}}} \\
+  \fnof{\bar{s}}{\vectr{x},t}&=\dfrac{\fnof{s}{\vectr{x},t}}{\fnof{a}{\vectr{x}}}
+\end{align}
+
+For \eqnref{eqn:GeneralisedFishersEquation} the operators for the split form of the equations are given by
+\begin{align}
+  \fnof{A}{\fnof{u}{\vectr{x},t}}&=\dfrac{-\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
+        \gradient{}{\fnof{u}{\vectr{x},t}}}}-\fnof{s}{\vectr{x},t}}{\fnof{a}{\vectr{x}}}
+  \label{eqn:GeneralisedFishersSplitEquationA} \\
+  \fnof{B}{\fnof{u}{\vectr{x},t}}&=\dfrac{-\fnof{b}{\vectr{x}}\fnof{u}{\vectr{x},t}-
+    \fnof{c}{\vectr{x}}\fnof{u^{2}}{\vectr{x},t}}{\fnof{a}{\vectr{x}}}
+  \label{eqn:GeneralisedFishersSplitEquationB}
 \end{align}
 
 To solve the initial value problem in
@@ -329,6 +361,132 @@ sequence of integration steps involving each operator.
 
 For \emph{Gudunov splitting} 
 
+\subsection{\OpenCMISS fields}
+\label{subsec:ReactionDiffusionOpenCMISSFields}
+
+The following fields are used in the \OpenCMISS implementation of reaction-diffusion equations.
+
+\subsubsection{Equations set field}
+
+An equations set field is not used for reaction-diffusion equations sets.
+
+\subsubsection{Geometric field}
+
+The geometric field definition for the coordinate vector
+$\vectr{x}\in\rntopology{n}$, where $n$ is the number of dimensions,
+is given in \tabref{tab:OpenCMISSGeometricFieldReactionDiffusionEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Geometric field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $x^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $x^{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS geometric field components for reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSGeometricFieldReactionDiffusionEQS}
+\end{table}
+
+\subsubsection{Fibre field}
+
+A fibre field can be optionally used to define the fibre coordinate
+system rotation angles $\vectr{\alpha}\in\rntopology{n}$, where $n$ is
+the number of dimensions, is given in
+\tabref{tab:OpenCMISSFibreFieldReactionDiffusionEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Fibre field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\alpha^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $\alpha^{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS fibre field components for reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSFibreFieldReactionDiffusionEQS}
+\end{table}
+
+\subsubsection{Dependent field}
+
+The dependent field defintion for $\fnof{u}{\vectr{x},t}$ is given in \tabref{tab:OpenCMISSDependentFieldReactionDiffusionEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Dependent field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $u$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS dependent field components for reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSDependentFieldReactionDiffusionEQS}
+\end{table}
+  
+\subsubsection{Materials field}
+
+For \eqnref{eqn:GeneralisedReactionDiffusionEquation} where the
+reaction term, $\fnof{r}{\fnof{u}{\vectr{x},t}}$, is defined using
+\CellML, the materials field definition for $n$ dimensions is given in
+\tabref{tab:OpenCMISSMaterialsFieldReactionDiffusionCellMLNonSplitEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Material field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $a$ \\
+    & $2$ & $b$ \\
+    & $3$ & $\tilde{\bar{\diffusivitytensorsymbol}}^{1}_{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $2+n$ & $\tilde{\bar{\diffusivitytensorsymbol}}^{n}_{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS materials field components for nonsplit
+    reaction-diffusion equation sets with the reaction term defined by
+    \CellML.}
+  \label{tab:OpenCMISSMaterialsFieldReactionDiffusionCellMLNonSplitEQS}
+\end{table}
+
+For \eqnrefs{eqn:GeneralisedReactionDiffusionSplitEquationA}{eqn:GeneralisedReactionDiffusionSplitEquationB} where the
+reaction term, $\fnof{\bar{r}}{\fnof{u}{\vectr{x},t}}$, is defined using
+\CellML, the materials field definition for $n$ dimensions is given in
+\tabref{tab:OpenCMISSMaterialsFieldReactionDiffusionCellMLSplitEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Material field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\tilde{\bar{\diffusivitytensorsymbol}}^{1}_{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $\tilde{\bar{\diffusivitytensorsymbol}}^{n}_{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS materials field components for \CellML split reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSMaterialsFieldReactionDiffusionCellMLSplitEQS}
+\end{table}
+
+For the generalised Fisher's equation in
+\eqnrefsthree{eqn:GeneralisedFishersEquation}{eqn:GeneralisedFishersSplitEquationA}{eqn:GeneralisedFishersSplitEquationB},
+the materials field defintion for $n$ dimensions is given in
+\tabref{tab:OpenCMISSMaterialsFieldFishersReactionDiffusionEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Material field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $a$ \\
+    & $2$ & $b$ \\
+    & $3$ & $\tilde{\diffusivitytensorsymbol}^{1}_{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $2+n$ & $\tilde{\diffusivitytensorsymbol}^{n}_{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS materials field components for generalised Fisher's equation reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSMaterialsFieldFishersReactionDiffusionEQS}
+\end{table}
+
+\subsubsection{Source field}
+
+An optional source field, $\fnof{s}{\vectr{x},t}$, can defined as given in \tabref{tab:OpenCMISSSourceFieldReactionDiffusionEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Source field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $s^{1}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS source field components for reaction-diffusion equation sets.}
+  \label{tab:OpenCMISSSourceFieldReactionDiffusionEQS}
+\end{table}
+  
 \subsection{Analytic solutions}
 \label{subsec:ReactionDiffusionAnalyticSolutions}
 

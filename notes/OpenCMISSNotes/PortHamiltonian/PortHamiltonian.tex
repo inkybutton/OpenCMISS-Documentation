@@ -1,6 +1,87 @@
 \clearemptydoublepage
-\chapter{Port Hamiltonian}
-\label{cha:PortHamiltonian}
+\chapter{Port Hamiltonians}
+\label{cha:PortHamiltonians}
+
+\section{Lagrangian Mechanics}
+\label{sec:PHLagrangianMechanics}
+
+In 1788 the Italian-French mathematician and astronomer Joseph-Louis Lagrange introduced Lagranian mechanics\footnote{named after
+\link{https://en.wikipedia.org/wiki/Joseph-Louis_Lagrange}{Joseph-Louis Lagrange} (1736-1813), a French-Italian polymath.}\index{Lagrangian mechanics}
+as a reformulation of classical (or Newtonian) mechanics. Lagrangian
+mechanics is based on the stationary-action principle (or principle of
+least action).
+
+Consider a physical system consisting of physical bodies in
+space-time. In a classical (Newtonian) approach to find the time
+evolution, or trajectories, of the physical bodies we associate a
+configuration space, $\configspace{Q}\in\rntopology{n}$, with this
+system so that space-time is replaced by
+$\spaceprod{\configspace{Q}}{\realnums}$. The trajectories of the
+physical bodies can then be found by solving a system of second-order
+differential equations, called Newton's second law, given, in component form, by
+\begin{equation}
+  \dtwosqby{q^{i}}{t}=\fnof{F^{i}}{\vectr{q},\dby{\vectr{q}}{t}}
+  \label{eqn:LagragianNewtonsSecondLaw}
+\end{equation}
+where $\vectr{q}\in\configspace{Q}$ and
+$\fnof{F^{i}}{\vectr{q},\dby{\vectr{q}}{t}}$ are the force
+functions.
+
+The system of $n$ second-order differential equations
+in \eqnref{eqn:LagragianNewtonsSecondLaw} can be rewritten as a
+system of $2n$ first order differential equations given, in component form, by
+\begin{equation}
+  \begin{aligned}
+    \dby{q^{i}}{t}&=v^{i} \\
+    \dby{v^{i}}{t}&=\fnof{F^{i}}{\vectr{q},\vectr{v}}
+  \end{aligned}
+  \label{eqn:LagragianNewtonsSecondLawFirstOrder}
+\end{equation}
+
+For a physical system whose trajectories are governed
+by \eqnref{eqn:LagragianNewtonsSecondLawFirstOrder} we can say that
+the system will admit a \emph{Lagrangian description} if there exists
+a smooth function $\lagrangian{\vectr{q},\vectr{v}}$ such
+that \eqnref{eqn:LagragianNewtonsSecondLawFirstOrder} can be written,
+in component form, as
+\begin{equation}
+  \begin{aligned}
+    \dby{q^{i}}{t}&=v^{i} \\
+    \dby{}{t}\pbrac{\dby{\lagrangiansymbol}{v^{i}}}&=\dby{\lagrangiansymbol}{q^{i}}
+  \end{aligned}
+  \label{eqn:LagragianNewtonsSecondLagrangianForm}
+\end{equation}
+
+If \eqnref{eqn:LagragianNewtonsSecondLagrangianForm} can be found for
+the physical system then $\lagrangian{\vectr{q},\vectr{v}}$ is known
+as the \emph{Lagrangian}\index{Lagrangian} of the system.
+
+In Lagrangian mechanics, a mechanical system
+$\pbrac{\configspace{M},\lagrangiansymbol}$ is defined as the pair of
+the configuration space, $\configspace{M}$, and a smooth function on
+the space called a \emph{Lagrangian}\index{Lagrangian},
+$\lagrangiansymbol$. For a number of mechanical systems the Lagrangian
+can often be expressed as
+\begin{equation}
+  \lagrangian{x,\dot{x}} = \fnof{T}{\dot{x}} - \fnof{V}{x}
+\end{equation}
+where $x$ is position, $\dot{x}$ is velocity, $\fnof{T}{\dot{x}}$ is
+the kinetic energy of the system, and $\fnof{V}{x}$ is the potential
+energy of the system.
+
+\section{Hamiltonian Mechanics}
+\label{sec:PHHamiltonianMechanics}
+
+Introduced by Sir William Hamilton in 1833, Hamiltonian
+mechanics\footnote{named after
+\link{https://en.wikipedia.org/wiki/William_Rowan_Hamilton}{Sir William Rowan Hamilton} (1805-1865), an Irish polymath.}\index{Hamiltonian mechanics} is a reformulation of Lagrangian mechanics in which the generalised
+velocities of Lagrangian mechanics are replaced by generalised
+momenta. Hamiltonian mechanics is a more sophisticated formulation of
+mechanics in that it has strong relationship with the underlying
+geometry and provides a link between classical and quantum mechanics.
+
+\section{Derivation of port Hamiltonians}
+\label{sec:PHDerivation}
 
 In order to extend the \emph{Bond Graph} ideas to multi-dimensional space we
 consider a physical space called the \emph{Bond space}, $\vectorspace{B}$, which
