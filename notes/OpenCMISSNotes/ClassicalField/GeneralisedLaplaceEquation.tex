@@ -8,33 +8,50 @@ in \OpenCMISS can be stated as
 \begin{equation}
   \addtolength{\fboxsep}{5pt}
   \boxed{
-    \divergence{}{\pbrac{\fnof{\conductivitytensor}{\vectr{x}}\gradient{}{\fnof{u}{\vectr{x},t}}}}=0
+    \divergence{}{\pbrac{\fnof{\conductivitytensor}{\coordinatevector}\gradient{}{\fnof{u}{\coordinatevector,t}}}}=0
   }
   \label{eqn:GeneralisedLaplaceEquation}
 \end{equation}
-where $\vectr{x}\in\Omega$, $t\in[0,\infty)$, $\fnof{u}{\vectr{x},t}$ is the potential and 
-$\fnof{\conductivitytensor}{\vectr{x}}$ is the (positive definite) conductivity
+where $\coordinatevector\in\Omega$, $t\in[0,\infty)$, $\fnof{u}{\coordinatevector,t}$ is the potential and 
+$\fnof{\conductivitytensor}{\coordinatevector}$ is the (positive definite) conductivity
 tensor throughout the domain. Note that $\conductivitytensor=\tensor{I}$ gives 
-the \emph{standard form of Laplace's equation} \ie $\laplacian{}{u}=0$.
+the \emph{standard form of Laplace's equation} \ie
+\begin{equation}
+  \addtolength{\fboxsep}{5pt}
+  \boxed{
+    \laplacian{}{\fnof{u}{\coordinatevector,t}}=0
+  }
+  \label{eqn:LaplaceEquation}
+\end{equation}
+
+\OpenCMISS solves one further Laplace type equation, that of a \emph{moving mesh Laplace's equation}, that is used during ALE type mechanics problems. For a mesh displacement field, $\fnof{\vectr{w}}{\coordinatevector,t}$, the moving mesh Laplace's equation is
+\begin{equation}
+  \addtolength{\fboxsep}{5pt}
+  \boxed{
+    \divergence{}{\pbrac{\fnof{k^{i}}{\coordinatevector}\gradient{}{\fnof{w^{i}}{\coordinatevector,t}}}}=0
+  }
+  \label{eqn:MovingMeshLaplaceEquation}
+\end{equation}
+where $i$ ranges from $1$ to the number of dimensions of $n$.
 
 To complete the description of the boundary value problem,
 the governing \eqnref{eqn:GeneralisedLaplaceEquation} is supplemented
 by suitable boundary conditions on the domain boundary~$\Gamma$.
 These boundary conditions can either be of Dirichlet type and specify a
-solution value, $\fnof{D}{\vectr{x},t}$, \ie
+solution value, $\fnof{D}{\coordinatevector,t}$, \ie
 \begin{equation}
-  \fnof{u}{\vectr{x},t} = \fnof{D}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{D},t\in[0,\infty)
+  \fnof{u}{\coordinatevector,t} = \fnof{D}{\coordinatevector,t} \quad \coordinatevector\in\Gamma_{D},t\in[0,\infty)
   \label{eqn:LaplaceDirichletBC} 
 \end{equation}
 and/or of Neumann type and specify the solution gradient in normal direction,
-$\fnof{N}{\vectr{x},t}$, \ie
+$\fnof{N}{\coordinatevector,t}$, \ie
 \begin{equation}
-  \fnof{q}{\vectr{x},t} = \dotprod{\pbrac{\fnof{\sharptensor{\conductivitytensor}}{\vectr{x}}
-      \gradient{}{\fnof{u}{\vectr{x},t}}}}{\fnof{\normal}{\vectr{x}}} =
-  \fnof{N}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{N},t\in[0,\infty)
+  \fnof{q}{\coordinatevector,t} = \dotprod{\pbrac{\fnof{\sharptensor{\conductivitytensor}}{\coordinatevector}
+      \gradient{}{\fnof{u}{\coordinatevector,t}}}}{\fnof{\normal}{\coordinatevector}} =
+  \fnof{N}{\coordinatevector,t} \quad \coordinatevector\in\Gamma_{N},t\in[0,\infty)
   \label{eqn:LaplaceNeumannBC} 
 \end{equation}
-where $\fnof{q}{\vectr{x},t}$ is the flux in the normal direction, $\fnof{\normal}{\vectr{x}}$ is the normal
+where $\fnof{q}{\coordinatevector,t}$ is the flux in the normal direction, $\fnof{\normal}{\coordinatevector}$ is the normal
 vector to the boundary and $\Gamma = \Gamma_D \cup \Gamma_N$.
 
 \subsection{Weak formulation}
@@ -77,12 +94,14 @@ and
   \label{eqn:LaplaceWeakFormFactor2}
 \end{equation}
 
-Now, \eqnref{eqn:LaplaceWeakFormFactor1}) and \eqnref{eqn:LaplaceWeakFormFactor2}
-both represent covariant vectors and therefore we must convert \eqnref{eqn:LaplaceWeakFormFactor2} to a contravariant vector by 
-multiplying by the contravariant metric tensor (from $\vectr{i}$ to $\vectr{x}$ 
-coordinates; see \secrefs{sec:MetricTensors}{sec:CoordinateSystems})
-so that we can take the dot product. The final tensorial form for the left
-hand integral is
+Now, \eqnref{eqn:LaplaceWeakFormFactor1}) and
+\eqnref{eqn:LaplaceWeakFormFactor2} both represent covariant vectors
+and therefore we must convert \eqnref{eqn:LaplaceWeakFormFactor2} to a
+contravariant vector by multiplying by the contravariant metric tensor
+(from $\vectr{i}$ to $\coordinatevector$ coordinates; see
+\secrefs{sec:MetricTensors}{sec:CoordinateSystems}) so that we can
+take the dot product. The final tensorial form for the left hand
+integral is
 \begin{equation}
   \dotprod{\pbrac{\conductivitytensor\gradient{}{u}}}{\gradient{}{w}} = 
   \generalmetrictensorsymbol^{kj}\conductivitytensorsymbol^{i}_{.j}\covarderiv{u}{i}\covarderiv{w}{k}
@@ -109,48 +128,56 @@ $\Gamma=\displaystyle{\bigcup_{f=1}^{F}}\Gamma_{f}$,
 \begin{equation}
   \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{\conductivitytensorsymbol^{i}_{j}\covarderiv{u}{i}\generalmetrictensorsymbol^{kj}
     \covarderiv{w}{k}}{\Omega}
-  =\dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{qw}{\Omega}
+  =\dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{qw}{\Gamma}
 \end{equation}
 
 The next step is to approximate the dependent variable, $u$, using basis
 functions. To simplify this for different types of basis functions an
 \emph{interpolation notation} is adopted. This interpolation is such that
-$\gbfn{n}{\beta}{\vectr{\xi}}$ are the appropriate basis functions for the
+$\gbfn{n}{\beta}{\elementcoordinatevector}$ are the appropriate basis functions for the
 type of element (\eg \bicubicherm, Hermite-sector, \etc) and dimension of 
-the problem (one, two or \threedal). For example if $\vectr{\xi}=\bbrac{\xi}$ 
+the problem (one, two or \threedal). For example if $\elementcoordinatevector=\bbrac{\xi}$ 
 and the element is a cubic Hermite element
-(\secref{sec:Hermitianbasisfunctions}) then $\gbfn{n}{\beta}{\vectr{\xi}}$ 
+(\secref{sec:Hermitianbasisfunctions}) then $\gbfn{n}{\beta}{\elementcoordinatevector}$ 
 are the cubic Hermite basis functions where the local node number $n$ ranges 
 from $1$ to $2$ and the derivative $\beta$ ranges from $0$ to $1$. If,
-however, $\vectr{\xi}=\bbrac{\xione,\xitwo}$ and the element is a \bicubicherm 
+however, $\elementcoordinatevector=\bbrac{\elemcoordone,\elemcoordtwo}$ and the element is a \bicubicherm 
 element then $n$ ranges from $1$ to $4$, $\beta$ ranges from $0$ to $3$ and
-$\gbfn{n}{\beta}{\vectr{\xi}}$ is the appropriate basis function for the nodal
+$\gbfn{n}{\beta}{\elementcoordinatevector}$ is the appropriate basis function for the nodal
 variable $\nodedof{u}{n}{\beta}$. The nodal variables are defined as
 follows: $\nodedof{u}{n}{0}=\nodept{u}{n}$,
 $\nodedof{u}{n}{1}=\delby{\nodept{u}{n}}{s_{1}}$,
 $\nodedof{u}{n}{2}=\delby{\nodept{u}{n}}{s_{2}}$,
 $\nodedof{u}{n}{3}=\deltwoby{\nodept{u}{n}}{s_{1}}{s_{2}}$,
 \etc Hence for the \bicubicherm element the interpolation function
-$\gbfn{2}{3}{\vectr{\xi}}$ multiplies the nodal variable
+$\gbfn{2}{3}{\elementcoordinatevector}$ multiplies the nodal variable
 $\nodedof{u}{2}{3}=\deltwoby{u^{2}}{s_{1}}{s_{2}}$ and thus the
-interpolation function is $\chbfn{2}{1}{\xione}\chbfn{1}{1}{\xitwo}$.  The
+interpolation function is $\chbfn{2}{1}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}$.  The
 scale factors for the Hermite interpolation are handled by the introduction of
 an interpolation scale factor $\gsf{n}{\beta}$ defined as follows:
 $\gsf{n}{0}=1$, $\gsf{n}{1}=\nsftwo{n}{1}$, $\gsf{n}{2}=
 \nsftwo{n}{2}$, $\gsf{n}{3}=\nsftwo{n}{1}\nsftwo{n}{2}$,
 \etc For Lagrangian basis functions the interpolation scale factors are all
-one. The general form of the interpolation notation for $u$ is then
+one.
+
+Note that the elemental coordinates are denoted with
+$\elementcoordinatevector$ whereas the coordinates of the boundary of
+that element are denoted with $\boundarycoordinatevector$. The number
+of components in $\boundarycoordinatevector$ is one less than the
+number of components in $\elementcoordinatevector$.
+
+The general form of the interpolation notation for $u$ is then
 \begin{equation}
-  \fnof{u}{\vectr{\xi}}=\gbfn{n}{\beta}{\vectr{\xi}}\nodedof{u}{n}{\beta}\gsf{n}{\beta}
+  \fnof{u}{\elementcoordinatevector}=\gbfn{n}{\beta}{\elementcoordinatevector}\nodedof{u}{n}{\beta}\gsf{n}{\beta}
   \label{eqn:uInterpolationLaplace}
 \end{equation}
 
 We can also interpolate the other variables in a similar manner \ie
 \begin{equation}
   \begin{split}
-    \fnof{q}{\vectr{\xi}} &= \gbfn{o}{\gamma}{\vectr{\xi}}\nodedof{q}{o}{\gamma}\gsf{o}{\gamma} \\
-    \fnof{\conductivitytensor}{\vectr{\xi}}
-    &=\gbfn{l}{\delta}{\vectr{\xi}}\nodedof{\conductivitytensor}{l}{\delta}\gsf{l}{\delta} \\
+    \fnof{q}{\boundarycoordinatevector} &= \gbfn{o}{\gamma}{\boundarycoordinatevector}\nodedof{q}{o}{\gamma}\gsf{o}{\gamma} \\
+    \fnof{\conductivitytensor}{\elementcoordinatevector}
+    &=\gbfn{l}{\delta}{\elementcoordinatevector}\nodedof{\conductivitytensor}{l}{\delta}\gsf{l}{\delta} \\
   \end{split}
 \end{equation}
 where $\nodedof{q}{o}{\gamma}$ and $\nodedof{\conductivitytensor}{l}{\delta}$ are the
@@ -159,91 +186,108 @@ nodal degrees-of-freedom for the flux variable and conductivity tensor.
 Using a Galerkin finite element approach (where the weighting functions are
 chosento be the interpolating basis functions) we have 
 \begin{equation}
-  \fnof{w}{\vectr{\xi}}=\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}
+  \fnof{w}{\elementcoordinatevector}=\gbfn{m}{\alpha}{\elementcoordinatevector}\gsf{m}{\alpha}
 \end{equation}
 
 \subsection{Spatial integration}
 
-When dealing with integrals a similar interpolation notation is adopted in
-that $\exteriorderiv{\vectr{\xi}}$ is the appropriate infinitesimal for the dimension of the
-problem. The limits of the integral are also written in bold font and indicate
-the appropriate number of integrals for the dimension of the problem.  For
-example if $\vectr{\xi}=\bbrac{\xione,\xitwo}$ then
+When dealing with integrals a similar interpolation notation is
+adopted in that $\exteriorderiv{\elementcoordinatevector}$ is the
+appropriate infinitesimal for the dimension of the problem. The limits
+of the integral are also written in bold font and indicate the
+appropriate number of integrals for the dimension of the problem.  For
+example if
+$\elementcoordinatevector=\bbrac{\elemcoordone,\elemcoordtwo}$ then
 $\gint{\vectr{0}}{\vectr{1}}{x}
-{\vectr{\xi}}=\giint{0}{1}{0}{1}{x}{\xione}{\xitwo}$,
-but if $\vectr{\xi}=\bbrac{\xione,\xitwo,\xithree}$ then 
-$\gint{\vectr{0}}{\vectr{1}}{x}{\vectr{\xi}}=
-\dintl{0}{1}\!\dintl{0}{1}\!\dintl{0}{1}\,\threeform{x}{\xione}{\xitwo}{\xithree}$.
+{\elementcoordinatevector}=\giint{0}{1}{0}{1}{x}{\elemcoordone}{\elemcoordtwo}$,
+but if
+$\elementcoordinatevector=\bbrac{\elemcoordone,\elemcoordtwo,\elemcoordthree}$
+then $\gint{\vectr{0}}{\vectr{1}}{x}{\elementcoordinatevector}=
+\dintl{0}{1}\!\dintl{0}{1}\!\dintl{0}{1}\,\threeform{x}{\elemcoordone}{\elemcoordtwo}{\elemcoordthree}$.
 
-In order to integrate in $\vectr{\xi}$ coordinates we must convert the spatial
-derivatives to derivatives with respect to $\vectr{\xi}$. Using the tensor
+In order to integrate in $\elementcoordinatevector$ coordinates we must convert the spatial
+derivatives to derivatives with respect to $\elementcoordinatevector$. Using the tensor
 transformation equations for a covariant vector we have
 \begin{equation}  
-  \covarderiv{u}{i}=\delby{\xi^{s}}{x^{i}}\covarderiv{u}{s}=
-  \delby{\xi^{s}}{x^{i}}\delby{u}{\xi^{s}}
+  \covarderiv{u}{i}=\delby{\elementcoordinate{s}}{\coordinate{i}}\covarderiv{u}{s}=
+  \delby{\elementcoordinate{s}}{\coordinate{i}}\delby{u}{\elementcoordinate{s}}
 \end{equation}
 and 
 \begin{equation}
-  \covarderiv{w}{k}=\delby{\xi^{r}}{x^{k}}\covarderiv{w}{r}=
-  \delby{\xi^{r}}{x^{k}}\delby{w}{\xi^{r}}
+  \covarderiv{w}{k}=\delby{\elementcoordinate{r}}{\coordinate{k}}\covarderiv{w}{r}=
+  \delby{\elementcoordinate{r}}{\coordinate{k}}\delby{w}{\elementcoordinate{r}}
 \end{equation}
 
-As we only know $\tilde{\conductivitytensor}$, the conductivity in the 
-$\vectr{\nu}$ (fibre) coordinate system rather than $\conductivitytensor$, the
-conductivity in the $\vectr{x}$ (geometric) coordinate system, we must transform the mixed
-tensor ${\tilde{\conductivitytensorsymbol}}^{a}_{.b}$ from $\vectr{\nu}$ to $\vectr{x}$ coordinates. However, as the
-fibre coordinate system is defined in terms of $\vectr{\xi}$ coordinates we
-first transform the conductivity tensor from $\vectr{\nu}$ to $\vectr{\xi}$
-coordinates \ie
+As we only know $\tilde{\conductivitytensor}$, the conductivity in the
+$\fibrecoordinatevector$ (fibre) coordinate system rather than
+$\conductivitytensor$, the conductivity in the $\coordinatevector$
+(geometric) coordinate system, we must transform the mixed tensor
+${\tilde{\conductivitytensorsymbol}}^{a}_{.b}$ from
+$\fibrecoordinatevector$ to $\coordinatevector$ coordinates. However,
+as the fibre coordinate system is defined in terms of
+$\elementcoordinatevector$ coordinates we first transform the
+conductivity tensor from $\fibrecoordinatevector$ to
+$\elementcoordinatevector$ coordinates \ie
 \begin{equation}
-  \fnof{\conductivitytensorsymbol^{c}_{.d}}{\vectr{\xi}}=\delby{\xi^{c}}{\nu^{a}}\delby{\nu^{b}}{\xi^{d}}
-  \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
+  \fnof{\conductivitytensorsymbol^{c}_{.d}}{\elementcoordinatevector}=
+  \delby{\elementcoordinate{c}}{\fibrecoordinate{a}}\delby{\fibrecoordinate{b}}{\elementcoordinate{d}}
+  \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\elementcoordinatevector}
 \end{equation}
 with $.b$ indicating that $b$ is the ``second'' index (\secref{subsec:SummationNotation}),
-and then transform the conductivity from $\vectr{\xi}$ coordinates to
-$\vectr{x}$ coordinates \ie
+and then transform the conductivity from $\elementcoordinatevector$ coordinates to
+$\coordinatevector$ coordinates \ie
 \begin{equation}
   \begin{split}
-    \fnof{\conductivitytensorsymbol^{i}_{.j}}{\vectr{\xi}} &=
-    \delby{x^{i}}{\xi^{c}}\delby{\xi^{d}}{x^{j}}
-    \fnof{{\conductivitytensorsymbol}^{c}_{.d}}{\vectr{\xi}} \\
-    &= \delby{x^{i}}{\xi^{c}}\delby{\xi^{d}}{x^{j}}\delby{\xi^{c}} 
-    {\nu^{a}}\delby{\nu^{b}}{\xi^{d}}\fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
+    \fnof{\conductivitytensorsymbol^{i}_{.j}}{\elementcoordinatevector} &=
+    \delby{\coordinate{i}}{\elementcoordinate{c}}\delby{\elementcoordinate{d}}{\coordinate{j}}
+    \fnof{{\conductivitytensorsymbol}^{c}_{.d}}{\elementcoordinatevector} \\
+    &= \delby{\coordinate{i}}{\elementcoordinate{c}}\delby{\elementcoordinate{d}}{\coordinate{j}}\delby{\elementcoordinate{c}} 
+         {\fibrecoordinate{a}}\delby{\fibrecoordinate{b}}{\elementcoordinate{d}}
+         \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\elementcoordinatevector}
   \end{split}
 \end{equation}
 where $\tilde{\conductivitytensor}$ is interpolated in the normal way \ie
 \begin{equation}
-  \fnof{\tilde{\conductivitytensor}}{\vectr{\xi}}
-  =\gbfn{l}{\delta}{\vectr{\xi}}\nodedof{\tilde{\conductivitytensor}}{l}{\delta}
+  \fnof{\tilde{\conductivitytensor}}{\elementcoordinatevector}
+  =\gbfn{l}{\delta}{\elementcoordinatevector}\nodedof{\tilde{\conductivitytensor}}{l}{\delta}
   \gsf{l}{\delta}
 \end{equation}
 
 Using an interpolated variables yields
 \begin{multline}
-  \dsum_{e=1}^{E}\dintl{\vectr{0}}{\generalmetrictensorsymbol^{kj}\vectr{1}}\delby{x^{i}}{\xi^{c}}
-    \delby{\xi^{d}}{x^{j}}\delby{\xi^{c}}{\nu^{a}}
-    \delby{\nu^{b}}{\xi^{d}}\fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}\delby{\xi^{s}}{x^{i}} \\
-    \delby{\pbrac{\gbfn{n}{\beta}{\vectr{\xi}}\nodedof{u}{n}{\beta}\gsf{n}{\beta}}}{\xi^{s}}
-    \delby{\xi^{r}}{x^{k}}\delby{\pbrac{\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}}}{\xi^{r}}
-    \abs{\fnof{\matr{J}}{\vectr{\xi}}}\exteriorderiv{\vectr{\xi}} \\ 
-  = \dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{\gbfn{o}{\gamma}{\vectr{\xi}}\nodedof{q}{o}{\gamma}
-    \gsf{o}{\gamma}\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}}{\Gamma}
+  \dsum_{e=1}^{E}\dintl{\vectr{0}}{\vectr{1}}\generalmetrictensorsymbol^{kj}\delby{\coordinate{i}}{\elementcoordinate{c}}
+    \delby{\elementcoordinate{d}}{\coordinate{j}}\delby{\elementcoordinate{c}}{\fibrecoordinate{a}}
+    \delby{\fibrecoordinate{b}}{\elementcoordinate{d}}
+    \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\elementcoordinatevector}\delby{\elementcoordinate{s}}{\coordinate{i}} \\
+    \delby{\pbrac{\gbfn{n}{\beta}{\elementcoordinatevector}\nodedof{u}{n}{\beta}\gsf{n}{\beta}}}{\elementcoordinate{s}}
+    \delby{\elementcoordinate{r}}{\coordinate{k}}\delby{\pbrac{\gbfn{m}{\alpha}{\elementcoordinatevector}
+        \gsf{m}{\alpha}}}{\elementcoordinate{r}}
+    \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}\exteriorderiv{\elementcoordinatevector} \\ 
+  = \dsum_{f=1}^{F}\gint{\vectr{0}}{\vectr{1}}{\gbfn{o}{\gamma}{\boundarycoordinatevector}\nodedof{q}{o}{\gamma}
+    \gsf{o}{\gamma}\gbfn{m}{\alpha}{\boundarycoordinatevector}\gsf{m}{\alpha}
+    \abs{\jacobian{\Gamma_{f}}{\boundarycoordinatevector}}}{\boundarycoordinatevector}
 \end{multline}
-where $\fnof{\matr{J}}{\vectr{\xi}}$ is the \emph{Jacobian} of the
-transformation from the integration $\vectr{x}$ to $\vectr{\xi}$ coordinates.
+where $\jacobian{\Omega_{e}}{\elementcoordinatevector}$ is the
+\emph{Jacobian} of the transformation from the integration
+$\fnof{\Omega_{e}}{\coordinatevector}$ to $\elementcoordinatevector$
+coordinates and $\jacobian{\Gamma_{f}}{\boundarycoordinatevector}$ is
+the \emph{Jacobian} of the transformation from the integration
+$\fnof{\Gamma_{f}}{\coordinatevector}$ to $\boundarycoordinatevector$
+coordinates.
 
 Taking the fixed nodal degrees-of-freedom and scale factors outside the integral we have
 \begin{multline}
   \dsum_{e=1}^{E}\nodedof{u}{n}{\beta}\gsf{m}{\alpha}\gsf{n}{\beta}
-  \dintl{\vectr{0}}{\vectr{1}}\generalmetrictensorsymbol^{kj}\delby{x^{i}}{\xi^{c}}
-  \delby{\xi^{d}}{x^{j}}\delby{\xi^{c}}{\nu^{a}}
-  \delby{\nu^{b}}{\xi^{d}}\fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}} \\
-  \delby{\xi^{r}}{x^{i}}\delby{\xi^{s}}{x^{k}}
-  \delby{\gbfn{m}{\alpha}{\vectr{\xi}}}{\xi^{s}}
-  \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{r}}
-  \abs{\fnof{\matr{J}}{\vectr{\xi}}}\exteriorderiv{\vectr{\xi}} \\
+  \dintl{\vectr{0}}{\vectr{1}}\generalmetrictensorsymbol^{kj}\delby{\coordinate{i}}{\elementcoordinate{c}}
+  \delby{\elementcoordinate{d}}{\coordinate{j}}\delby{\elementcoordinate{c}}{\fibrecoordinate{a}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{d}}\fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\elementcoordinatevector} \\
+  \delby{\elementcoordinate{r}}{\coordinate{i}}\delby{\elementcoordinate{s}}{\coordinate{k}}
+  \delby{\gbfn{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{s}}
+  \delby{\gbfn{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{r}}
+  \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}\exteriorderiv{\elementcoordinatevector} \\
   = \dsum_{f=1}^{F}\nodedof{q}{o}{\gamma}\gsf{m}{\alpha}\gsf{o}{\gamma}
-  \gint{\Gamma_{f}}{}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}}{\Gamma}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\boundarycoordinatevector}\gbfn{o}{\gamma}{\boundarycoordinatevector}
+    \abs{\jacobian{\Gamma_{f}}{\boundarycoordinatevector}}}{\boundarycoordinatevector}
   \label{eqn:elementalfem1}
 \end{multline}
 
@@ -251,61 +295,148 @@ Taking the fixed nodal degrees-of-freedom and scale factors outside the integral
 
 \Eqnref{eqn:elementalfem1} is an equation of the form of
 \begin{equation}
-  \matr{K}\vect{u}+\vect{f}=\vect{0}
+  \matr{K}\vect{u}-\vect{f}=\vect{0}
 \end{equation}
 or
 \begin{equation}
-  \matr{K}\vect{u}+\matr{N}\vectr{q}=\vect{0}
+  \matr{K}\vect{u}-\matr{N}\vectr{q}=\vect{0}
 \end{equation}
 
 The elemental stiffness matrix, $K^{\alpha\beta}_{mn}$, is given by
 \begin{equation}
   K^{\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{m}{\beta}
-  \gint{\vectr{0}}{\vectr{1}}{\delby{\gbfn{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
-    \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}
-    \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
+  \gint{\vectr{0}}{\vectr{1}}{\delby{\gbfn{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+    \delby{\gbfn{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}\fnof{\gamma^{rs}}{\elementcoordinatevector}
+    \abs{\jacobian{\Omega}{\elementcoordinatevector}}}{\elementcoordinatevector}
   \label{eqn:elementalfemlhs2}
 \end{equation}
 where
 \begin{equation}
-  \fnof{\gamma^{rs}}{\vectr{\xi}}=\generalmetrictensorsymbol^{kj}\delby{x^{i}}{\xi^{c}}
-  \delby{\xi^{d}}{x^{j}}\delby{\xi^{c}}{\nu^{a}}\delby{\nu^{b}}{\xi^{d}}
-  \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
-  \delby{\xi^{r}}{x^{i}}\delby{\xi^{s}}{x^{k}}
+  \fnof{\gamma^{rs}}{\elementcoordinatevector}=\generalmetrictensorsymbol^{kj}\delby{\coordinate{i}}{\elementcoordinate{c}}
+  \delby{\elementcoordinate{d}}{\coordinate{j}}\delby{\elementcoordinate{c}}{\fibrecoordinate{a}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{d}}
+  \fnof{{\tilde{\conductivitytensorsymbol}}^{a}_{.b}}{\elementcoordinatevector}
+  \delby{\elementcoordinate{r}}{\coordinate{i}}\delby{\elementcoordinate{s}}{\coordinate{k}}
   \label{eqn:DiffusionOperatorGammaDefinition1}
 \end{equation}
 or
 \begin{equation}
-  \fnof{\gamma^{rs}}{\vectr{\xi}}=\generalmetrictensorsymbol^{kj}
-  \fnof{\conductivitytensorsymbol^{i}_{.j}}{\vectr{\xi}}\delby{\xi^{r}}{x^{i}}\delby{\xi^{s}}{x^{k}}
+  \fnof{\gamma^{rs}}{\elementcoordinatevector}=\generalmetrictensorsymbol^{kj}
+  \fnof{\conductivitytensorsymbol^{i}_{.j}}{\elementcoordinatevector}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\elementcoordinate{s}}{\coordinate{k}}
 \end{equation}
 Note that for Laplace's equation with no conductivity or fibre fields
-(\ie $\conductivitytensorsymbol^{i}_{.j}=\mixedkronecker{i}{.j}$ and thus $i=j$) we
-  have
+(\ie $\conductivitytensorsymbol^{i}_{.j}=\mixedkronecker{i}{.j}$ and
+thus $i=j$) we have
 \begin{equation}
-  \fnof{\gamma^{rs}}{\vectr{\xi}}=\generalmetrictensorsymbol^{kj}\delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{k}}
+  \fnof{\gamma^{rs}}{\elementcoordinatevector}=\generalmetrictensorsymbol^{kj}
+  \delby{\elementcoordinate{r}}{\coordinate{j}}\delby{\elementcoordinate{s}}{\coordinate{k}}
   \label{eqn:DiffusionOperatorGammaDefinition2}
 \end{equation}
 and that for rectangular-Cartesian coordinates systems
 $\generalmetrictensorsymbol^{kj}=\sharpkronecker{k}{j}$ and thus $k=j$. This now gives
 \begin{equation}
-  \fnof{\gamma^{rs}}{\vectr{\xi}}=\delby{\xi^{r}}{x^{k}}\delby{\xi^{s}}{x^{k}}=\fnof{g^{rs}}{\vectr{x}}
+  \fnof{\gamma^{rs}}{\elementcoordinatevector}=\delby{\elementcoordinate{r}}{\coordinate{k}}
+  \delby{\elementcoordinate{s}}{\coordinate{k}}=\fnof{\generalmetrictensorsymbol^{rs}}{\coordinatevector}
   \label{eqn:DiffusionOperatorGammaDefinition3}
 \end{equation}
-where $g^{rs}$ is the \emph{contravariant metric tensor} from $\vectr{x}$ to
-$\vectr{\xi}$ coordinates.
+where $\generalmetrictensorsymbol^{rs}$ is the \emph{contravariant metric tensor} from $\coordinatevector$ to
+$\elementcoordinatevector$ coordinates.
 
 The flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 \begin{equation}
-  N^{\alpha\gamma}_{mo} = -\gsf{m}{\alpha}\gsf{o}{\gamma}
-  \gint{\Gamma_{f}}{}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}}{\Gamma}
+  N^{\alpha\gamma}_{mo} = \gsf{m}{\alpha}\gsf{o}{\gamma}
+  \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\boundarycoordinatevector}
+    \gbfn{o}{\gamma}{\boundarycoordinatevector}
+    \abs{\jacobian{\Gamma}{\boundarycoordinatevector}}}{\boundarycoordinatevector}
 \end{equation}
 
-\subsection{\OpenCMISS Implementation}
+\subsection{\OpenCMISS fields}
+\label{subsec:LaplaceOpenCMISSFields}
 
-\OpenCMISS requires a number of field variables for the generalised Laplace equation. 
+The following fields are used in the \OpenCMISS implementation of Laplace's equations.
+
+\subsubsection{Equations set field}
+
+An equations set field is not used for Laplace equations sets.
+
+\subsubsection{Geometric field}
+
+The geometric field definition for the coordinate vector
+$\coordinatevector\in\rntopology{n}$, where $n$ is the number of dimensions,
+is given in \tabref{tab:OpenCMISSGeometricFieldLaplaceEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Geometric field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\coordinate{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $\coordinate{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS geometric field components for Laplace equation sets.}
+  \label{tab:OpenCMISSGeometricFieldLaplaceEQS}
+\end{table}
+
+\subsubsection{Fibre field}
+
+A fibre field can be optionally used to define the fibre coordinate
+system rotation angles $\vectr{\alpha}\in\rntopology{n}$, where $n$ is
+the number of dimensions, is given in
+\tabref{tab:OpenCMISSFibreFieldLaplaceEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Fibre field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\alpha^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $\alpha^{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS fibre field components for Laplace equation sets.}
+  \label{tab:OpenCMISSFibreFieldLaplaceEQS}
+\end{table}
+
+\subsubsection{Dependent field}
+
+The dependent field defintion for $\fnof{u}{\coordinatevector}$ and
+$\delby{\fnof{u}{\coordinatevector}}{\normal}$ are given in
+\tabref{tab:OpenCMISSDependentFieldLaplaceEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Dependent field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $u$ \\ \hline \hline
+    \compcode{FIELD\_DELUDELN\_VARIABLE\_TYPE} & $1$ & $q=\dotprod{\conductivitytensor\gradient{}{u}}{\normal}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS dependent field components for Laplace equation sets.}
+  \label{tab:OpenCMISSDependentFieldLaplaceEQS}
+\end{table}
+   
+\subsubsection{Materials field}
+
+For \eqnref{eqn:GeneralisedLaplaceEquation} the conductivity tensor,
+$\fnof{\conductivitytensor}{\coordinatevector}$, is defined using the
+materials field definition for $n$ dimensions is given in
+\tabref{tab:OpenCMISSMaterialsFieldGenLaplaceEQS}. The conductivity
+tensor is stored in Voigt form and $\numberVoigt{n}$ is the number of
+Voigt terms for $n$ dimensions.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Material field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\tilde{\bar{\conductivitytensorsymbol}}^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $\numberVoigt{n}$ & $\tilde{\bar{\conductivitytensorsymbol}}^{\numberVoigt{n}}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS materials field components for the generalised Laplace equation sets.}
+  \label{tab:OpenCMISSMaterialsFieldGenLaplaceEQS}
+\end{table}
+   
+\subsubsection{Analytic field}
+
+The field definitions for the analytic field are given in \subsecref{subsec:LaplaceAnalytic}.
 
 \subsection{Analytic Solutions}
+\label{subsec:LaplaceAnalytic}
 
 \subsubsection{Standard Laplace Two Dimensional Solution 1}
 
@@ -902,8 +1033,8 @@ This analytic solution does not have an analytic field.
 %   \boxed{
 %   \dsum_{e=1}^{E}\nodedof{\phi}{\alpha}{u}\gsf{(\alpha)}{(u)} \gsf{(\beta)}{(v)}
 %   \dsum_{i=1}^{n}
-%   \left(\delby{\gbfn{\alpha}{u}{\vectr{\xi}}}{\xi^{r}}
-%   \delby{\gbfn{\beta}{v}{\vectr{\xi}}}{\xi^{s}}\gamma^{rs}\abs{\fnof{\matr{J}}{\vectr{\xi}}}
+%   \left(\delby{\gbfn{\alpha}{u}{\elementcoordinatevector}}{\elementcoordinate{r}}
+%   \delby{\gbfn{\beta}{v}{\elementcoordinatevector}}{\elementcoordinate{s}}\gamma^{rs}\abs{\fnof{\matr{J}}{\elementcoordinatevector}}
 %   \right)(x_i)g_i
 %   }
 %   \label{eqn:Laplaceweightedresidualtensorform in OpenCMISS}

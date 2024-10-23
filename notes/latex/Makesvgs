@@ -19,25 +19,25 @@ SHELL=/bin/bash
 all	:	all_eps_tex
 
 .svg.pdf:
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-pdf=${@F} ${*F}.svg )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=pdf --export-filename=${@F} ${*F}.svg )
 
 .svg.ps:
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-ps=${@F} ${*F}.svg )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=ps --export-filename=${@F} ${*F}.svg )
 
 .svg.eps:
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-eps=${@F} ${*F}.svg )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=eps --export-filename=${@F} ${*F}.svg )
 
 .svg.tex:
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-latex ${*F}.svg  )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-latex --export-filename=${@F} ${*F}.svg  )
 
 .svg.pdf_tex:	
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-pdf=${*F}.pdf --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_pdftex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=pdf --export-filename=${*F}.pdf --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_pdftex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
 
 .svg.ps_tex:	
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-ps=${*F}.ps --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_pdftex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=ps --export-filename=${*F}.ps --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_pdftex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
 
 .svg.eps_tex:	
-	( cd ${@D} ; ${INKSCAPE} -D -z --export-eps=${*F}.eps --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_epstex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//#%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
+	( cd ${@D} ; ${INKSCAPE} --export-area-drawing --export-type=eps --export-filename=${*F}.eps --export-latex ${*F}.svg ; sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_epstex_svgs ${@F} | sed s%CUR_DIR%${@D}% | sed s%=svgs/./%=svgs/% | sed s%=svgs//%=svgs/% | sed s%{svgs/./%{svgs/% | sed s%{svgs//#%{svgs/% > ${*F}.tmp ; mv ${*F}.tmp ${@F} )
 
 all_pdf_tex:
 	@${OPENCMISS_ROOT}/documentation/notes/latex/call_makefile.sh ${OPENCMISS_ROOT}/documentation/notes/latex/Makesvgs pdf_tex `find . -name "*.svg" -print`

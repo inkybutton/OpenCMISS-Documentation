@@ -38,7 +38,7 @@ between these points using interpolation. The points at which the solution is
 found are known as \emph{nodes}. \emph{Basis functions} are used to
 interpolate the field between nodes within a subregion of the domain known as
 an \emph{element}. Interpolation is achieved by mapping the field coordinate
-onto a \emph{local parametric}, or $\xi$, coordinate (which varies from $0$ to
+onto a \emph{local parametric}, or $\elementcoordinatesymbol$, coordinate (which varies from $0$ to
 $1$) within each element. The global nodes which make up each element are also
 mapped onto local element nodes and the basis functions are chosen (in terms
 of polynomials of the local parametric coordinate) such that the interpolated
@@ -47,7 +47,7 @@ between elements. A schematic of this
 scheme is shown in \figref{fig:nodesandelements}.
 
 \epstexfigure{BasisFunctions/svgs/nodesandelements.eps_tex}
-{A schematic of the relationship between local and global nodes, elements and the parametric elemental $\xi$
+{A schematic of the relationship between local and global nodes, elements and the parametric elemental $\elementcoordinatesymbol$
   coordinate.}{Relationship between local and global nodes and elements.}{fig:nodesandelements}{0.3}
 
 \subsection{Lagrangian Basis Functions}
@@ -71,8 +71,8 @@ Lagrange basis functions. These basis functions involve two local nodes and
 are defined as
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xi}&=1-\xi \\
-    \lbfn{2}{\xi}&=\xi
+    \lbfn{1}{\elementcoordinatesymbol}&=1-\elementcoordinatesymbol \\
+    \lbfn{2}{\elementcoordinatesymbol}&=\elementcoordinatesymbol
   \end{split}
   \label{eqn:linearlbfuns}
 \end{equation}
@@ -86,26 +86,29 @@ The interpolation of a field variable, $u$, using these basis functions is
 given by
 \begin{equation}
   \begin{split}
-    \fnof{u}{\xi}&=\lbfn{1}{\xi}\nodept{u}{1}+\lbfn{2}{\xi}\nodept{u}{2} \\
-    &=\pbrac{1-\xi}\nodept{u}{1}+\xi\nodept{u}{2}
+    \fnof{u}{\elementcoordinatesymbol}&=\lbfn{1}{\elementcoordinatesymbol}\nodept{u}{1}+\lbfn{2}{\elementcoordinatesymbol}\nodept{u}{2} \\
+    &=\pbrac{1-\elementcoordinatesymbol}\nodept{u}{1}+\elementcoordinatesymbol\nodept{u}{2}
   \end{split}
 \end{equation}
 where $\nodept{u}{1}$ and $\nodept{u}{2}$ are the values of the field variable at
 the first and second local nodes respectively. These basis functions hence
 provide a linear variation between the local nodal values with the local
-element coordinate, $\xi$.
+element coordinate, $\elementcoordinatesymbol$.
 
 \subsubsection{Quadratic Lagrange basis functions}
 
 Lagrange basis functions can also be used to provide higher order variations,
 for example the one-dimensional quadratic Lagrange basis functions involve
 three local nodes and can provide a quadratic variation of field parameter
-with $\xi$. They are defined as
+with $\elementcoordinatesymbol$. They are defined as
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xi}&=2\pbrac{\xi-\frac12}\pbrac{\xi-1} \\
-    \lbfn{2}{\xi}&=4\xi\pbrac{1-\xi} \\
-    \lbfn{3}{\xi}&=2\xi\pbrac{\xi-\frac12}
+    \lbfn{1}{\elementcoordinatesymbol}&=2\pbrac{\elementcoordinatesymbol-\frac12}\pbrac{\elementcoordinatesymbol-1} \\
+    &=2\elementcoordinatesymbol^{2}-3\elementcoordinatesymbol+1\\
+    \lbfn{2}{\elementcoordinatesymbol}&=4\elementcoordinatesymbol\pbrac{1-\elementcoordinatesymbol} \\
+    &=-4\elementcoordinatesymbol^{2}+4\elementcoordinatesymbol\\
+    \lbfn{3}{\elementcoordinatesymbol}&=2\elementcoordinatesymbol\pbrac{\elementcoordinatesymbol-\frac12}\\
+    &=2\elementcoordinatesymbol^{2}-\elementcoordinatesymbol
   \end{split}
   \label{eqn:quadraticlbfuns}
 \end{equation}
@@ -118,10 +121,10 @@ The three \onedal quadratic Lagrange basis functions are shown in \figref{fig:qu
 The interpolation formula is
 \begin{equation}
   \begin{split}
-    \fnof{u}{\xi}&=\lbfn{1}{\xi}\nodept{u}{1}+\lbfn{2}{\xi}\nodept{u}{2}+
-    \lbfn{3}{\xi}\nodept{u}{3}\\
-    &=2\pbrac{\xi-\frac12}\pbrac{\xi-1}\nodept{u}{1}+
-    4\xi\pbrac{1-\xi}\nodept{u}{2}+2\xi\pbrac{\xi-\frac12}\nodept{u}{3}
+    \fnof{u}{\elementcoordinatesymbol}&=\lbfn{1}{\elementcoordinatesymbol}\nodept{u}{1}+\lbfn{2}{\elementcoordinatesymbol}\nodept{u}{2}+
+    \lbfn{3}{\elementcoordinatesymbol}\nodept{u}{3}\\
+    &=2\pbrac{\elementcoordinatesymbol-\frac12}\pbrac{\elementcoordinatesymbol-1}\nodept{u}{1}+
+    4\elementcoordinatesymbol\pbrac{1-\elementcoordinatesymbol}\nodept{u}{2}+2\elementcoordinatesymbol\pbrac{\elementcoordinatesymbol-\frac12}\nodept{u}{3}
   \end{split}
 \end{equation}
 
@@ -129,13 +132,17 @@ The interpolation formula is
 
 One-dimensional cubic Lagrange basis functions involve
 four local nodes and can provide a cubic variation of field parameter
-with $\xi$. They are defined as
+with $\elementcoordinatesymbol$. They are defined as
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xi}&=\frac12\pbrac{3\xi-1}\pbrac{3\xi-2}\pbrac{1-\xi} \\
-    \lbfn{2}{\xi}&=\frac92\xi\pbrac{3\xi-2}\pbrac{\xi-1} \\
-    \lbfn{3}{\xi}&=\frac92\xi\pbrac{3\xi-1}\pbrac{1-\xi} \\
-    \lbfn{4}{\xi}&=\frac12\xi\pbrac{3\xi-1}\pbrac{3\xi-2}
+    \lbfn{1}{\elementcoordinatesymbol}&=\frac12\pbrac{3\elementcoordinatesymbol-1}\pbrac{3\elementcoordinatesymbol-2}\pbrac{1-\elementcoordinatesymbol} \\
+    &=\frac12\pbrac{-9\elementcoordinatesymbol^{3}+18\elementcoordinatesymbol^{2}-11\elementcoordinatesymbol+2}\\
+    \lbfn{2}{\elementcoordinatesymbol}&=\frac92\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-2}\pbrac{\elementcoordinatesymbol-1} \\
+    &=\frac92\pbrac{3\elementcoordinatesymbol^{3}-5\elementcoordinatesymbol^{2}+2\elementcoordinatesymbol}\\
+    \lbfn{3}{\elementcoordinatesymbol}&=\frac92\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-1}\pbrac{1-\elementcoordinatesymbol} \\
+    &=\frac92\pbrac{-3\elementcoordinatesymbol^{3}+4\elementcoordinatesymbol^{2}-\elementcoordinatesymbol}\\
+    \lbfn{4}{\elementcoordinatesymbol}&=\frac12\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-1}\pbrac{3\elementcoordinatesymbol-2} \\
+    &=\frac12\pbrac{9\elementcoordinatesymbol^{3}-9\elementcoordinatesymbol^{2}+2\elementcoordinatesymbol}
   \end{split}
   \label{eqn:cubiclbfuns}
 \end{equation}
@@ -148,12 +155,12 @@ The four \onedal cubic Lagrange basis functions are shown in \figref{fig:cublagr
 The interpolation formula is
 \begin{equation}
   \begin{split}
-    \fnof{u}{\xi}&=\lbfn{1}{\xi}\nodept{u}{1}+\lbfn{2}{\xi}\nodept{u}{2}+
-    \lbfn{3}{\xi}\nodept{u}{3}+\lbfn{4}{\xi}\nodept{u}{4}\\
-    &=\frac12\pbrac{3\xi-1}\pbrac{3\xi-2}\pbrac{1-\xi}\nodept{u}{1}+
-    \frac92\xi\pbrac{3\xi-2}\pbrac{\xi-1}\nodept{u}{2} \\
-    &\quad+\frac92\xi\pbrac{3\xi-1}\pbrac{1-\xi}\nodept{u}{3}+
-    \frac12\xi\pbrac{3\xi-1}\pbrac{3\xi-2}\nodept{u}{4}
+    \fnof{u}{\elementcoordinatesymbol}&=\lbfn{1}{\elementcoordinatesymbol}\nodept{u}{1}+\lbfn{2}{\elementcoordinatesymbol}\nodept{u}{2}+
+    \lbfn{3}{\elementcoordinatesymbol}\nodept{u}{3}+\lbfn{4}{\elementcoordinatesymbol}\nodept{u}{4}\\
+    &=\frac12\pbrac{3\elementcoordinatesymbol-1}\pbrac{3\elementcoordinatesymbol-2}\pbrac{1-\elementcoordinatesymbol}\nodept{u}{1}+
+    \frac92\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-2}\pbrac{\elementcoordinatesymbol-1}\nodept{u}{2} \\
+    &\quad+\frac92\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-1}\pbrac{1-\elementcoordinatesymbol}\nodept{u}{3}+
+    \frac12\elementcoordinatesymbol\pbrac{3\elementcoordinatesymbol-1}\pbrac{3\elementcoordinatesymbol-2}\nodept{u}{4}
   \end{split}
 \end{equation}
 
@@ -163,14 +170,14 @@ In general the interpolation formula for the Lagrange family of basis
 functions is, using \index{Einstein summation notation}\emph{Einstein
   summation notation}, given by
 \begin{equation}
-  \fnof{u}{\xi}=\lbfn{\alpha}{\xi}\nodept{u}{\alpha}\quad \alpha=1,\ldots,n_{e}
+  \fnof{u}{\elementcoordinatesymbol}=\lbfn{\alpha}{\elementcoordinatesymbol}\nodept{u}{\alpha}\quad \alpha=1,\ldots,n_{e}
   \label{eqn:lagrangeinterpolation}
 \end{equation}
 where $n_{e}$ is the number of local nodes in the element. Einstein summation
 notation uses a repeated index in a product expression to imply summation. For
 example \eqnref{eqn:lagrangeinterpolation} is equivalent to
 \begin{equation}
-  \fnof{u}{\xi}=\gsum{\alpha=1}{n_{e}}{\lbfn{\alpha}{\xi}\nodept{u}{\alpha}}
+  \fnof{u}{\elementcoordinatesymbol}=\gsum{\alpha=1}{n_{e}}{\lbfn{\alpha}{\elementcoordinatesymbol}\nodept{u}{\alpha}}
 \end{equation}
 
 \subsubsection{Bilinear Lagrange basis functions}
@@ -181,14 +188,14 @@ example the two-dimensional bilinear Lagrange basis functions have four local
 nodes with the basis functions given by
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{1}{\xitwo}=
-    \pbrac{1-\xione}\pbrac{1-\xitwo}\\
-    \lbfn{2}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{1}{\xitwo}=
-    \xione\pbrac{1-\xitwo}\\
-    \lbfn{3}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{2}{\xitwo}=
-    \pbrac{1-\xione}\xitwo \\
-    \lbfn{4}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{2}{\xitwo}=
-    \xione\xitwo
+    \lbfn{1}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \pbrac{1-\elemcoordone}\pbrac{1-\elemcoordtwo}\\
+    \lbfn{2}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \elemcoordone\pbrac{1-\elemcoordtwo}\\
+    \lbfn{3}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \pbrac{1-\elemcoordone}\elemcoordtwo \\
+    \lbfn{4}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \elemcoordone\elemcoordtwo
   \end{split}
 \end{equation}
 
@@ -200,15 +207,15 @@ The four \twodal bilinear Lagrange basis functions are shown in \figref{fig:bili
 \begin{figure}[hbtp]
    \centering
    \gnuplotsubfigure{BasisFunctions/gnuplots/bilinlagrangebfuns1.gnuplot}{Bilinear Lagrange basis function $1$.}
-     {Bilinear Lagrange basis function $1$, $\lbfn{1}{\xione,\xitwo}$.}{subfig:bilinlagrangebfuns1}{0.45\linewidth}{10}{3}{}
+     {Bilinear Lagrange basis function $1$, $\lbfn{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bilinlagrangebfuns1}{0.45\linewidth}{10}{3}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bilinlagrangebfuns2.gnuplot}{Bilinear Lagrange basis function $2$.}
-     {Bilinear Lagrange basis function $2$, $\lbfn{2}{\xione,\xitwo}$.}{subfig:bilinlagrangebfuns2}{0.45\linewidth}{10}{3}{}
+     {Bilinear Lagrange basis function $2$, $\lbfn{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bilinlagrangebfuns2}{0.45\linewidth}{10}{3}{}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bilinlagrangebfuns3.gnuplot}{Bilinear Lagrange basis function $3$.}
-     {Bilinear Lagrange basis function $3$, $\lbfn{3}{\xione,\xitwo}$.}{subfig:bilinlagrangebfuns3}{0.45\linewidth}{10}{3}{}
+     {Bilinear Lagrange basis function $3$, $\lbfn{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bilinlagrangebfuns3}{0.45\linewidth}{10}{3}{}
    \hfil  
    \gnuplotsubfigure{BasisFunctions/gnuplots/bilinlagrangebfuns4.gnuplot}{Bilinear Lagrange basis function $4$.}
-     {Bilinear Lagrange basis function $4$, $\lbfn{4}{\xione,\xitwo}$.}{subfig:bilinlagrangebfuns4}{0.45\linewidth}{10}{3}{}
+     {Bilinear Lagrange basis function $4$, $\lbfn{4}{\elemcoordone,\elemcoordtwo}$.}{subfig:bilinlagrangebfuns4}{0.45\linewidth}{10}{3}{}
    \caption[Bilinear Lagrange basis functions.]{Bilinear Lagrange basis functions.}
    \label{fig:bilinlagrangebfuns}
 \end{figure}
@@ -218,11 +225,11 @@ the nodal basis function and the field value at the node. For example the
 interpolated geometric position vector within an element is given by
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo}&=\lbfn{\alpha}{\xione,\xitwo}
-    \nodept{\vect{x}}{\alpha}\\
-    &=\lbfn{1}{\xione,\xitwo}\nodept{\vect{x}}{1}+\lbfn{2}{\xione,\xitwo}
-    \nodept{\vect{x}}{2}+\lbfn{3}{\xione,\xitwo}\nodept{\vect{x}}{3}+
-    \lbfn{4}{\xione,\xitwo}\nodept{\vect{x}}{4}
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo}&=\lbfn{\alpha}{\elemcoordone,\elemcoordtwo}
+    \nodept{\coordinatevector}{\alpha}\\
+    &=\lbfn{1}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{1}+\lbfn{2}{\elemcoordone,\elemcoordtwo}
+    \nodept{\coordinatevector}{2}+\lbfn{3}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{3}+
+    \lbfn{4}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{4}
   \end{split}
 \end{equation}
 where, for the vector field, each component is interpolated separately using
@@ -234,24 +241,24 @@ The two-dimensional biquadratic Lagrange basis functions have nine local nodes
 with the basis functions given by
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{1}{\xitwo}=
-    4\pbrac{\xione-\frac12}\pbrac{\xione-1}\pbrac{\xitwo-\frac12}\pbrac{\xitwo-1} \\
-    \lbfn{2}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{1}{\xitwo}=
-    8\xione\pbrac{1-\xione}\pbrac{\xitwo-\frac12}\pbrac{\xitwo-1} \\
-    \lbfn{3}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{1}{\xitwo}=
-    4\xione\pbrac{\xione-\frac12}\pbrac{\xitwo-\frac12}\pbrac{\xitwo-1} \\
-    \lbfn{4}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{2}{\xitwo}=
-    8\pbrac{\xione-\frac12}\pbrac{\xione-1}\xitwo\pbrac{1-\xitwo} \\
-    \lbfn{5}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{2}{\xitwo}=
-    16\xione\pbrac{1-\xione}\xitwo\pbrac{1-\xitwo} \\
-    \lbfn{6}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{2}{\xitwo}=
-    8\xione\pbrac{\xione-\frac12}\xitwo\pbrac{1-\xitwo} \\
-    \lbfn{7}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{3}{\xitwo}=
-    4\pbrac{\xione-\frac12}\pbrac{\xione-1}\xitwo\pbrac{\xitwo-\frac12} \\
-    \lbfn{8}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{3}{\xitwo}=
-    8\xione\pbrac{1-\xione}\xitwo\pbrac{\xitwo-\frac12} \\
-    \lbfn{9}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{3}{\xitwo}=
-    4\xione\pbrac{\xione-\frac12}\xitwo\pbrac{\xitwo-\frac12}
+    \lbfn{1}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    4\pbrac{\elemcoordone-\frac12}\pbrac{\elemcoordone-1}\pbrac{\elemcoordtwo-\frac12}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{2}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    8\elemcoordone\pbrac{1-\elemcoordone}\pbrac{\elemcoordtwo-\frac12}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{3}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    4\elemcoordone\pbrac{\elemcoordone-\frac12}\pbrac{\elemcoordtwo-\frac12}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{4}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    8\pbrac{\elemcoordone-\frac12}\pbrac{\elemcoordone-1}\elemcoordtwo\pbrac{1-\elemcoordtwo} \\
+    \lbfn{5}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    16\elemcoordone\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{1-\elemcoordtwo} \\
+    \lbfn{6}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    8\elemcoordone\pbrac{\elemcoordone-\frac12}\elemcoordtwo\pbrac{1-\elemcoordtwo} \\
+    \lbfn{7}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    4\pbrac{\elemcoordone-\frac12}\pbrac{\elemcoordone-1}\elemcoordtwo\pbrac{\elemcoordtwo-\frac12} \\
+    \lbfn{8}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    8\elemcoordone\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{\elemcoordtwo-\frac12} \\
+    \lbfn{9}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    4\elemcoordone\pbrac{\elemcoordone-\frac12}\elemcoordtwo\pbrac{\elemcoordtwo-\frac12}
   \end{split}
 \end{equation}
 
@@ -263,29 +270,29 @@ The nine \twodal biquadratic Lagrange basis functions are shown in \figref{fig:b
 \begin{figure}[hbtp]
    \centering
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns1.gnuplot}{Biquadratic Lagrange basis function $1$.}
-     {Biquadratic Lagrange basis function $1$, $\lbfn{1}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns1}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $1$, $\lbfn{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns1}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns2.gnuplot}{Biquadratic Lagrange basis function $2$.}
-     {Biquadratic Lagrange basis function $2$, $\lbfn{2}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns2}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $2$, $\lbfn{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns2}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns3.gnuplot}{Biquadratic Lagrange basis function $3$.}
-     {Biquadratic Lagrange basis function $3$, $\lbfn{3}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns3}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $3$, $\lbfn{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns3}{0.30\linewidth}{9}{2.5}{}
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns4.gnuplot}{Biquadratic Lagrange basis function $4$.}
-     {Biquadratic Lagrange basis function $4$, $\lbfn{4}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns4}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $4$, $\lbfn{4}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns4}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns5.gnuplot}{Biquadratic Lagrange basis function $5$.}
-     {Biquadratic Lagrange basis function $5$, $\lbfn{5}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns5}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $5$, $\lbfn{5}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns5}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns6.gnuplot}{Biquadratic Lagrange basis function $6$.}
-     {Biquadratic Lagrange basis function $6$, $\lbfn{6}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns6}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $6$, $\lbfn{6}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns6}{0.30\linewidth}{9}{2.5}{}
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns7.gnuplot}{Biquadratic Lagrange basis function $7$.}
-     {Biquadratic Lagrange basis function $7$, $\lbfn{7}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns7}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $7$, $\lbfn{7}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns7}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns8.gnuplot}{Biquadratic Lagrange basis function $8$.}
-     {Biquadratic Lagrange basis function $8$, $\lbfn{8}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns8}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $8$, $\lbfn{8}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns8}{0.30\linewidth}{9}{2.5}{}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/biquadlagrangebfuns9.gnuplot}{Biquadratic Lagrange basis function $9$.}
-     {Biquadratic Lagrange basis function $9$, $\lbfn{9}{\xione,\xitwo}$.}{subfig:biquadlagrangebfuns9}{0.30\linewidth}{9}{2.5}{}
+     {Biquadratic Lagrange basis function $9$, $\lbfn{9}{\elemcoordone,\elemcoordtwo}$.}{subfig:biquadlagrangebfuns9}{0.30\linewidth}{9}{2.5}{}
    \caption[Biquadratic Lagrange basis functions.]{Biquadratic Lagrange basis functions.}
    \label{fig:biquadlagrangebfuns}
 \end{figure}
@@ -297,38 +304,38 @@ The two-dimensional bicubic Lagrange basis functions have sixteen local nodes
 with the basis functions given by
 \begin{equation}
   \begin{split}
-    \lbfn{1}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{1}{\xitwo}=
-    \frac14\pbrac{3\xione-1}\pbrac{3\xione-2}\pbrac{1-\xione}\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{2}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{1}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-2}\pbrac{\xione-1}\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{3}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{1}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-1}\pbrac{1-\xione}\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{4}{\xione,\xitwo}&=\lbfn{4}{\xione}\lbfn{1}{\xitwo}=
-    \frac14\xione\pbrac{3\xione-1}\pbrac{3\xione-2}\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{5}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{2}{\xitwo}=
-    \frac94\pbrac{3\xione-1}\pbrac{3\xione-2}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-2}\pbrac{\xitwo-1} \\
-    \lbfn{6}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{2}{\xitwo}=
-    \frac{81}{4}\xione\pbrac{3\xione-2}\pbrac{\xione-1}\xitwo\pbrac{3\xitwo-2}\pbrac{\xitwo-1} \\
-    \lbfn{7}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{2}{\xitwo}=
-    \frac{81}{4}\xione\pbrac{3\xione-1}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-2}\pbrac{\xitwo-1} \\
-    \lbfn{8}{\xione,\xitwo}&=\lbfn{4}{\xione}\lbfn{2}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-1}\pbrac{3\xione-2}\xitwo\pbrac{3\xitwo-2}\pbrac{\xitwo-1} \\
-    \lbfn{9}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{3}{\xitwo}=
-    \frac94\pbrac{3\xione-1}\pbrac{3\xione-2}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{10}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{3}{\xitwo}=
-    \frac{81}{4}\xione\pbrac{3\xione-2}\pbrac{\xione-1}\xitwo\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{11}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{3}{\xitwo}=
-    \frac{81}{4}\xione\pbrac{3\xione-1}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{12}{\xione,\xitwo}&=\lbfn{4}{\xione}\lbfn{3}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-1}\pbrac{3\xione-2}\xitwo\pbrac{3\xitwo-2}\pbrac{1-\xitwo} \\
-    \lbfn{13}{\xione,\xitwo}&=\lbfn{1}{\xione}\lbfn{4}{\xitwo}=
-    \frac14\pbrac{3\xione-1}\pbrac{3\xione-2}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}\\
-    \lbfn{14}{\xione,\xitwo}&=\lbfn{2}{\xione}\lbfn{4}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-2}\pbrac{\xione-1}\xitwo\pbrac{3\xitwo-1}\pbrac{3\xitwo-2} \\
-    \lbfn{15}{\xione,\xitwo}&=\lbfn{3}{\xione}\lbfn{4}{\xitwo}=
-    \frac94\xione\pbrac{3\xione-1}\pbrac{1-\xione}\xitwo\pbrac{3\xitwo-1}\pbrac{3\xitwo-2} \\
-    \lbfn{16}{\xione,\xitwo}&=\lbfn{4}{\xione}\lbfn{4}{\xitwo}=
-    \frac14\xione\pbrac{3\xione-1}\pbrac{3\xione-2}\xitwo\pbrac{3\xitwo-1}\pbrac{3\xitwo-2}
+    \lbfn{1}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \frac14\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\pbrac{1-\elemcoordone}\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{2}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-2}\pbrac{\elemcoordone-1}\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{3}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{1-\elemcoordone}\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{4}{\elemcoordone,\elemcoordtwo}&=\lbfn{4}{\elemcoordone}\lbfn{1}{\elemcoordtwo}=
+    \frac14\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{5}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \frac94\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{6}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \frac{81}{4}\elemcoordone\pbrac{3\elemcoordone-2}\pbrac{\elemcoordone-1}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{7}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \frac{81}{4}\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{8}{\elemcoordone,\elemcoordtwo}&=\lbfn{4}{\elemcoordone}\lbfn{2}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{\elemcoordtwo-1} \\
+    \lbfn{9}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    \frac94\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{10}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    \frac{81}{4}\elemcoordone\pbrac{3\elemcoordone-2}\pbrac{\elemcoordone-1}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{11}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    \frac{81}{4}\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{12}{\elemcoordone,\elemcoordtwo}&=\lbfn{4}{\elemcoordone}\lbfn{3}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\elemcoordtwo\pbrac{3\elemcoordtwo-2}\pbrac{1-\elemcoordtwo} \\
+    \lbfn{13}{\elemcoordone,\elemcoordtwo}&=\lbfn{1}{\elemcoordone}\lbfn{4}{\elemcoordtwo}=
+    \frac14\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\\
+    \lbfn{14}{\elemcoordone,\elemcoordtwo}&=\lbfn{2}{\elemcoordone}\lbfn{4}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-2}\pbrac{\elemcoordone-1}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2} \\
+    \lbfn{15}{\elemcoordone,\elemcoordtwo}&=\lbfn{3}{\elemcoordone}\lbfn{4}{\elemcoordtwo}=
+    \frac94\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{1-\elemcoordone}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2} \\
+    \lbfn{16}{\elemcoordone,\elemcoordtwo}&=\lbfn{4}{\elemcoordone}\lbfn{4}{\elemcoordtwo}=
+    \frac14\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}
   \end{split}
 \end{equation}
 
@@ -340,49 +347,49 @@ The sixteen \twodal bicubic Lagrange basis functions are shown in \figref{fig:bi
 \begin{figure}[hbtp]
    \centering
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns1.gnuplot}{Bicubic Lagrange basis function $1$.}
-     {Bicubic Lagrange basis function $1$, $\lbfn{1}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns1}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $1$, $\lbfn{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns1}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns2.gnuplot}{Bicubic Lagrange basis function $2$.}
-     {Bicubic Lagrange basis function $2$, $\lbfn{2}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns2}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $2$, $\lbfn{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns2}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns3.gnuplot}{Bicubic Lagrange basis function $3$.}
-     {Bicubic Lagrange basis function $3$, $\lbfn{3}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns3}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $3$, $\lbfn{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns3}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns4.gnuplot}{Bicubic Lagrange basis function $4$.}
-     {Bicubic Lagrange basis function $4$, $\lbfn{4}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns4}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $4$, $\lbfn{4}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns4}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns5.gnuplot}{Bicubic Lagrange basis function $5$.}
-     {Bicubic Lagrange basis function $5$, $\lbfn{5}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns5}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $5$, $\lbfn{5}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns5}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns6.gnuplot}{Bicubic Lagrange basis function $6$.}
-     {Bicubic Lagrange basis function $6$, $\lbfn{6}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns6}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $6$, $\lbfn{6}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns6}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns7.gnuplot}{Bicubic Lagrange basis function $7$.}
-     {Bicubic Lagrange basis function $7$, $\lbfn{7}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns7}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $7$, $\lbfn{7}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns7}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns8.gnuplot}{Bicubic Lagrange basis function $8$.}
-     {Bicubic Lagrange basis function $8$, $\lbfn{8}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns8}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $8$, $\lbfn{8}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns8}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns9.gnuplot}{Bicubic Lagrange basis function $9$.}
-     {Bicubic Lagrange basis function $9$, $\lbfn{9}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns9}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $9$, $\lbfn{9}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns9}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns10.gnuplot}{Bicubic Lagrange basis function $10$.}
-     {Bicubic Lagrange basis function $10$, $\lbfn{10}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns10}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $10$, $\lbfn{10}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns10}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns11.gnuplot}{Bicubic Lagrange basis function $11$.}
-     {Bicubic Lagrange basis function $11$, $\lbfn{11}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns11}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $11$, $\lbfn{11}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns11}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns12.gnuplot}{Bicubic Lagrange basis function $12$.}
-     {Bicubic Lagrange basis function $12$, $\lbfn{12}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns12}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $12$, $\lbfn{12}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns12}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns13.gnuplot}{Bicubic Lagrange basis function $13$.}
-     {Bicubic Lagrange basis function $13$, $\lbfn{13}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns13}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $13$, $\lbfn{13}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns13}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns14.gnuplot}{Bicubic Lagrange basis function $14$.}
-     {Bicubic Lagrange basis function $14$, $\lbfn{14}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns14}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $14$, $\lbfn{14}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns14}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns15.gnuplot}{Bicubic Lagrange basis function $15$.}
-     {Bicubic Lagrange basis function $15$, $\lbfn{15}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns15}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $15$, $\lbfn{15}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns15}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubiclagrangebfuns16.gnuplot}{Bicubic Lagrange basis function $16$.}
-     {Bicubic Lagrange basis function $16$, $\lbfn{16}{\xione,\xitwo}$.}{subfig:bicubiclagrangebfuns16}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Lagrange basis function $16$, $\lbfn{16}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubiclagrangebfuns16}{0.20\linewidth}{6}{1.75}{1.5}
    \caption[Bicubic Lagrange basis functions.]{Bicubic Lagrange basis functions.}
    \label{fig:bicubiclagrangebfuns}
 \end{figure}
@@ -394,26 +401,26 @@ Hermitian\footnote{named after
 \link{https://en.wikipedia.org/wiki/Charles_Hermite}{Charles Hermite}
 (1822-1901), a French mathematician.} basis functions preserve
 continuity of the derivative of the interpolating variable \ie $C^{1}$
-continuity, with respect to $\xi$ across element boundaries by
-defining additional nodal derivative parameters. Like Lagrange bases,
-Hermitian basis functions are also chosen so that, at a particular
-node, only one basis function is non-zero and equal to one. They also
-are chosen so that, at a particular node, the \emph{derivative} of
-only one of four basis functions is non-zero and is equal to
-one. Hermitian basis functions hence serve to weight the interpolated
-solution in terms of the field value and derivative of the field value
-at nodes.
+continuity, with respect to $\elementcoordinatesymbol$ across element
+boundaries by defining additional nodal derivative parameters. Like
+Lagrange bases, Hermitian basis functions are also chosen so that, at
+a particular node, only one basis function is non-zero and equal to
+one. They also are chosen so that, at a particular node,
+the \emph{derivative} of only one of four basis functions is non-zero
+and is equal to one. Hermitian basis functions hence serve to weight
+the interpolated solution in terms of the field value and derivative
+of the field value at nodes.
 
 \subsubsection{Cubic Hermite basis functions}
 
 \Cubicherm basis functions are the simplest of the Hermitian family and
 involve two local nodes per element. The interpolation within each element is
-in terms of $\nodept{\vect{x}}{\alpha}$ and \evalat{\dby{\vect{x}}{\xi}}{\alpha}
-and is given by \index{cubic Hermite basis!$\xi$ interpolation formula}
+in terms of $\nodept{\coordinatevector}{\alpha}$ and \evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{\alpha}
+and is given by \index{cubic Hermite basis!$\elementcoordinatesymbol$ interpolation formula}
 \begin{equation}
-  \fnof{\vect{x}}{\xi}=\chbfn{1}{0}{\xi}\nodept{\vect{x}}{1}+\chbfn{1}{1}{\xi}
-  \evalat{\dby{\vect{x}}{\xi}}{1}+\chbfn{2}{0}{\xi}\nodept{\vect{x}}{2}+
-  \chbfn{2}{1}{\xi}\evalat{\dby{\vect{x}}{\xi}}{2}
+  \fnof{\coordinatevector}{\elementcoordinatesymbol}=\chbfn{1}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{1}+\chbfn{1}{1}{\elementcoordinatesymbol}
+  \evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{1}+\chbfn{2}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{2}+
+  \chbfn{2}{1}{\elementcoordinatesymbol}\evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{2}
   \label{eqn:chxiinterpolation}
 \end{equation}
 where the four \onedal \cubicherm basis functions are given in 
@@ -421,10 +428,10 @@ where the four \onedal \cubicherm basis functions are given in
 \index{cubic Hermite basis!basis functions formulae}
 \begin{equation}
   \begin{split}
-    \chbfn{1}{0}{\xi} &= 1-3\xi^{2}+2\xi^{3} \\
-    \chbfn{1}{1}{\xi} &= \xi\pbrac{\xi-1}^{2} \\
-    \chbfn{2}{0}{\xi} &= \xi^{2}\pbrac{3-2\xi} \\
-    \chbfn{2}{1}{\xi} &= \xi^{2}\pbrac{\xi-1}
+    \chbfn{1}{0}{\elementcoordinatesymbol} &= 1-3\elementcoordinatesymbol^{2}+2\elementcoordinatesymbol^{3} \\
+    \chbfn{1}{1}{\elementcoordinatesymbol} &= \elementcoordinatesymbol\pbrac{\elementcoordinatesymbol-1}^{2} \\
+    \chbfn{2}{0}{\elementcoordinatesymbol} &= \elementcoordinatesymbol^{2}\pbrac{3-2\elementcoordinatesymbol} \\
+    \chbfn{2}{1}{\elementcoordinatesymbol} &= \elementcoordinatesymbol^{2}\pbrac{\elementcoordinatesymbol-1}
   \end{split}
   \label{eqn:chbfuns}
 \end{equation}
@@ -441,9 +448,9 @@ practice.  Consider the two \cubicherm elements shown in
   cubic Hermite elements formed from three nodes.}{Two cubic Hermite elements
   (denoted by $\mathit{1}$ and $\mathit{2}$) formed from three nodes (shown as
   a $\bullet$ and denoted by $\mathbf{1}, \mathbf{2}$ and $\mathbf{3}$) and
-  having \arclens $s_{1}$ and $s_{2}$ respectively.}{fig:chelements}{0.50}
+  having \arclens $\arclengthcoordinate{1}$ and $\arclengthcoordinate{2}$ respectively.}{fig:chelements}{0.50}
 
-The derivative $\evalat{\dby{\vect{x}}{\xi}}{\alpha}$ defined at local node
+The derivative $\evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{\alpha}$ defined at local node
 $\alpha$ is dependent upon the local element \xicoord and is therefore, in
 general, different in the two adjacent elements. Interpretation of the
 derivative is hence difficult as two derivatives with the same magnitude in
@@ -470,35 +477,35 @@ The solution is to find a parameter that scales
 in the same way as arc-length or as close to it as we can. 
 
 Consider then basing the derivatives on an \arclen coordinate at nodes,
-$\dby{\nodept{\vect{x}}{\alpha}}{s}$, with
+$\dby{\nodept{\coordinatevector}{\alpha}}{s}$, with
 \begin{equation}
   \begin{split}
-    \evalat{\dby{\vect{x}}{\xi}}{\alpha}&=\dby{\nodept{\vect{x}}{
-        \fnof{\Delta}{\alpha,e}}}{s}\pbrac{\dby{s}{\xi}}_{e} \\ &=
-    \dby{\nodept{\vect{x}}{\fnof{\Delta}{\alpha,e}}}{s}\esfone{e}
+    \evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{\alpha}&=\dby{\nodept{\coordinatevector}{
+        \fnof{\Delta}{\alpha,e}}}{s}\pbrac{\dby{s}{\elementcoordinatesymbol}}_{e} \\ &=
+    \dby{\nodept{\coordinatevector}{\fnof{\Delta}{\alpha,e}}}{s}\esfone{e}
   \end{split}
   \label{eqn:xitosch}
 \end{equation}
-used to determine $\evalat{\dby{\vect{x}}{\xi}}{\alpha}$. Here
-$\dby{\vect{x}}{s}$ is a physical \arclen derivative,
+used to determine $\evalat{\dby{\coordinatevector}{\elementcoordinatesymbol}}{\alpha}$. Here
+$\dby{\coordinatevector}{s}$ is a physical \arclen derivative,
 $\fnof{\Delta}{\alpha,e}$ is the global node number of local node $\alpha$ in
-element $e$, $\pbrac{\dby{s}{\xi}}_{e}$ is an \index{element scale
+element $e$, $\pbrac{\dby{s}{\elementcoordinatesymbol}}_{e}$ is an \index{element scale
   factor}element \emph{scale factor}, denoted by $\esfone{e}$, which scales
-the \arclen derivative to the \xicoord derivative.  Thus $\dby{\vect{x}}{s}$
+the \arclen derivative to the \xicoord derivative.  Thus $\dby{\coordinatevector}{s}$
 is constrained to be continuous across element boundaries rather than
-$\dby{\vect{x}}{\xi}$. The \cubicherm interpolation formula now becomes
+$\dby{\coordinatevector}{\elementcoordinatesymbol}$. The \cubicherm interpolation formula now becomes
 \begin{equation}
-  \fnof{\vect{x}}{\xi}=\chbfn{1}{0}{\xi}\nodept{\vect{x}}{1}+\chbfn{1}{1}{\xi}
-  \dby{\nodept{\vect{x}}{1}}{s}\esfone{e}+\chbfn{2}{0}{\xi}\nodept{\vect{x}}{2}+
-  \chbfn{2}{1}{\xi}\dby{\nodept{\vect{x}}{2}}{s}\esfone{e}
+  \fnof{\coordinatevector}{\elementcoordinatesymbol}=\chbfn{1}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{1}+\chbfn{1}{1}{\elementcoordinatesymbol}
+  \dby{\nodept{\coordinatevector}{1}}{s}\esfone{e}+\chbfn{2}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{2}+
+  \chbfn{2}{1}{\elementcoordinatesymbol}\dby{\nodept{\coordinatevector}{2}}{s}\esfone{e}
   \label{eqn:chseinterpolation}
 \end{equation}
 
-By interpolating with respect to $s$ rather than with respect to $\xi$ there is some
+By interpolating with respect to $\arclengthcoordinatesymbol$ rather than with respect to $\elementcoordinatesymbol$ there is some
 liberty as to the choice of the element scale factor, $\esfone{e}$. The choice
-of the scale factor will, however, affect how $\xi$ changes with $s$.  It is
-computationally desirable to have a relatively uniform change of $\xi$ with
-$s$ (for example not biasing the Gaussian quadrature -- see later -- scheme to
+of the scale factor will, however, affect how $\elementcoordinatesymbol$ changes with $\arclengthcoordinatesymbol$.  It is
+computationally desirable to have a relatively uniform change of $\elementcoordinatesymbol$ with
+$\arclengthcoordinatesymbol$ (for example not biasing the Gaussian quadrature -- see later -- scheme to
 one end of the element). For this reason the element scale factor is chosen as
 some function of the \arclen of the element, $s_{e}$. The simplest linear
 function that can be chosen is the \arclen itself. This type of scaling is
@@ -508,13 +515,13 @@ To calculate the \arclen for a particular element an iterative process is
 needed. The \arclen for a \onedal element in \twods is defined as
 \index{arc-length definition}
 \begin{equation}
-  \text{\arclen, }s_{e}=\gint{0}{1}{\norm{\dby{\fnof{\vect{x}}{\xi}}{\xi}}}
-  {\xi}=\gint{0}{1}{\sqrt{\pbrac{\dby{\fnof{x}{\xi}}{\xi}}^{2}+
-      \pbrac{\dby{\fnof{y}{\xi}}{\xi}}^{2}}}{\xi}
+  \text{\arclen, }s_{e}=\gint{0}{1}{\norm{\dby{\fnof{\coordinatevector}{\elementcoordinatesymbol}}{\elementcoordinatesymbol}}}
+  {\elementcoordinatesymbol}=\gint{0}{1}{\sqrt{\pbrac{\dby{\fnof{x}{\elementcoordinatesymbol}}{\elementcoordinatesymbol}}^{2}+
+      \pbrac{\dby{\fnof{y}{\elementcoordinatesymbol}}{\elementcoordinatesymbol}}^{2}}}{\elementcoordinatesymbol}
   \label{eqn:arclendef}
 \end{equation}
 
-However, since the interpolation of $\fnof{\vect{x}}{\xi}$, as defined in
+However, since the interpolation of $\fnof{\coordinatevector}{\elementcoordinatesymbol}$, as defined in
 \eqnref{eqn:chseinterpolation}, uses the \arclen in the calculation of the
 scaling factor, an iterative root finding technique is needed to obtain the
 \arclen.
@@ -522,24 +529,24 @@ scaling factor, an iterative root finding technique is needed to obtain the
 Thus, for an element $e$, the \onedal \cubicherm interpolation
 formula in \eqnref{eqn:chseinterpolation} becomes
 \begin{equation}
-  \fnof{\vect{x}}{\xi}=\chbfn{\alpha}{u}{\xi}\nodept{\vect{x}}{\alpha}_{,u}
+  \fnof{\coordinatevector}{\elementcoordinatesymbol}=\chbfn{\alpha}{u}{\elementcoordinatesymbol}\nodept{\coordinatevector}{\alpha}_{,u}
   \esftwo{e}{u}
   \label{eqn:chsfinterpolation}
 \end{equation}
 where $\alpha$ varies from $1$ to $2$, $u$ varies from $0$ to $1$,
-$\nodept{\vect{x}}{\alpha}_{,0}=\nodept{\vect{x}}{\alpha}$,
-$\nodept{\vect{x}}{\alpha}_{,1}= \dby{\nodept{\vect{x}}{\alpha}}{s}$,
+$\nodept{\coordinatevector}{\alpha}_{,0}=\nodept{\coordinatevector}{\alpha}$,
+$\nodept{\coordinatevector}{\alpha}_{,1}= \dby{\nodept{\coordinatevector}{\alpha}}{s}$,
 $\esftwo{e}{0}=1$ and $\esftwo{e}{1}=\esfone{e}=s_{e}$. \Eqnref{eqn:chsfinterpolation} is equivalent to
 \begin{equation}
-  \fnof{\vect{x}}{\xi}=\chbfn{1}{0}{\xi}\nodept{\vect{x}}{1}_{,0}\esftwo{e}{0}
-  +\chbfn{1}{1}{\xi}\nodept{\vect{x}}{1}_{,1}\esftwo{e}{1}+
-  \chbfn{2}{0}{\xi}\nodept{\vect{x}}{2}_{,0}\esftwo{e}{0}
-  +\chbfn{2}{1}{\xi}\nodept{\vect{x}}{2}_{,1}\esftwo{e}{1}
+  \fnof{\coordinatevector}{\elementcoordinatesymbol}=\chbfn{1}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{1}_{,0}\esftwo{e}{0}
+  +\chbfn{1}{1}{\elementcoordinatesymbol}\nodept{\coordinatevector}{1}_{,1}\esftwo{e}{1}+
+  \chbfn{2}{0}{\elementcoordinatesymbol}\nodept{\coordinatevector}{2}_{,0}\esftwo{e}{0}
+  +\chbfn{2}{1}{\elementcoordinatesymbol}\nodept{\coordinatevector}{2}_{,1}\esftwo{e}{1}
 \end{equation}
-\ie there is an implied sum with $\alpha$ and $u$ for $\chbfn{\alpha}{u}{\xi}$
-and $\nodept{\vect{x}}{\alpha}_{,u}$ but not for $\esftwo{e}{u}$.
+\ie there is an implied sum with $\alpha$ and $u$ for $\chbfn{\alpha}{u}{\elementcoordinatesymbol}$
+and $\nodept{\coordinatevector}{\alpha}_{,u}$ but not for $\esftwo{e}{u}$.
 
-There is one final condition that must be placed on the $\xi$ to \arclen
+There is one final condition that must be placed on the $\elementcoordinatesymbol$ to \arclen
 transformation to ensure \arclen derivatives. This condition is based on the
 geometric defintion of \arclen which is given by Pythagorus \ie for \twods in
 rectangular cartesian coordinate we have
@@ -558,19 +565,19 @@ Rearranging \eqnref{eqn:arclengthpythagorus} we find that the \arclen derivative
 node for geometric like fields, for rectangular cartesian coordinates, must
 have unit magnitude. Thus for global node $A$ we have
 \begin{equation}
-  \norm{\dby{\nodept{\vect{x}}{A}}{s}}=1
+  \norm{\dby{\nodept{\coordinatevector}{A}}{s}}=1
   \label{eqn:chnormconstraint}
 \end{equation}
 
 In general coordinates this condition becomes
 \begin{equation}
-  \norm{\delby{\nodept{\vect{x}}{A}}{s_{k}}}=\sqrt{\det{\tensor{g}}}
+  \norm{\delby{\nodept{\coordinatevector}{A}}{\arclengthcoordinate{k}}}=\sqrt{\det{\generalmetrictensor}}
   \label{eqn:genchnormconstraint}
 \end{equation}
-where $s_{k}$ is the \nth{k} global arc-length direction and $\tensor{g}$ is the metric tensor.
+where $\arclengthcoordinate{k}$ is the \nth{k} global arc-length direction and $\generalmetrictensor$ is the metric tensor.
 
 The use of this constraint on \arclen derivative magnitude ensures that there is continuity with respect to a physical parameter,
-$s$, rather than with respect to a mathematical parameter $\xi$. The set of
+$\arclengthcoordinatesymbol$, rather than with respect to a mathematical parameter $\elementcoordinatesymbol$. The set of
 mesh parameters, $\vect{u}$, for \cubicherm interpolation hence contains the
 set of nodal values (or positions), the set of nodal \arclen derivatives and
 the set of scale factors.
@@ -584,49 +591,49 @@ of two of the \onedal cubic Hermite basis functions defined in
 
 \begin{equation}
   \begin{split}
-    \chbfn{1}{0}{\xione,\xitwo}&=\chbfn{1}{0}{\xione}\chbfn{1}{0}{\xitwo}=\pbrac{1-3\xionesq+2\xionecube}\pbrac{1-3\xitwosq+2\xitwocube}\\
-    \chbfn{2}{0}{\xione,\xitwo}&=\chbfn{2}{0}{\xione}\chbfn{1}{0}{\xitwo}=\pbrac{\xione(\xione-1)^{2}}\pbrac{1-3\xitwosq+2\xitwocube}\\
-    \chbfn{3}{0}{\xione,\xitwo}&=\chbfn{1}{0}{\xione}\chbfn{2}{0}{\xitwo}=\pbrac{1-3\xionesq+2\xionecube}\pbrac{\xitwosq\pbrac{3-2\xitwo}}\\
-    \chbfn{4}{0}{\xione,\xitwo}&=\chbfn{2}{0}{\xione}\chbfn{2}{0}{\xitwo}=\pbrac{\xionesq\pbrac{3-2\xione}}\pbrac{\xitwosq\pbrac{3-2\xitwo}}\\
-    \chbfn{1}{1}{\xione,\xitwo}&=\chbfn{1}{1}{\xione}\chbfn{1}{0}{\xitwo}=\pbrac{\xione\pbrac{\xione-1}^{2}}\pbrac{1-3\xitwosq+2\xitwocube}\\
-    \chbfn{2}{1}{\xione,\xitwo}&=\chbfn{2}{1}{\xione}\chbfn{1}{0}{\xitwo}=\pbrac{\xionesq\pbrac{\xione-1}}\pbrac{1-3\xitwosq+2\xitwocube}\\
-    \chbfn{3}{1}{\xione,\xitwo}&=\chbfn{1}{1}{\xione}\chbfn{2}{0}{\xitwo}=\pbrac{\xione\pbrac{\xione-1}^{2}}\pbrac{\xitwosq\pbrac{3-2\xitwo}}\\
-    \chbfn{4}{1}{\xione,\xitwo}&=\chbfn{2}{1}{\xione}\chbfn{2}{0}{\xitwo}=\pbrac{\xionesq\pbrac{\xione-1}}\pbrac{\xitwosq\pbrac{3-2\xitwo}}\\
-    \chbfn{1}{2}{\xione,\xitwo}&=\chbfn{1}{0}{\xione}\chbfn{1}{1}{\xitwo}=\pbrac{1-3\xionesq+2\xionecube}\pbrac{\xitwo\pbrac{\xitwo-1}^{2}}\\
-    \chbfn{2}{2}{\xione,\xitwo}&=\chbfn{2}{0}{\xione}\chbfn{1}{1}{\xitwo}=\pbrac{\xionesq\pbrac{3-2\xione}}\pbrac{\xitwo\pbrac{\xitwo-1}^{2}}\\
-    \chbfn{3}{2}{\xione,\xitwo}&=\chbfn{1}{0}{\xione}\chbfn{2}{1}{\xitwo}=\pbrac{1-3\xionesq+2\xionecube}\pbrac{\xitwosq\pbrac{\xitwo-1}}\\
-    \chbfn{4}{2}{\xione,\xitwo}&=\chbfn{2}{0}{\xione}\chbfn{2}{1}{\xitwo}=\pbrac{\xionesq\pbrac{3-2\xione}}\pbrac{\xitwosq\pbrac{\xitwo-1}}\\
-    \chbfn{1}{3}{\xione,\xitwo}&=\chbfn{1}{1}{\xione}\chbfn{1}{1}{\xitwo}=\pbrac{\xione\pbrac{\xione-1}^{2}}\pbrac{\xitwo\pbrac{\xitwo-1}^{2}}\\
-    \chbfn{2}{3}{\xione,\xitwo}&=\chbfn{2}{1}{\xione}\chbfn{1}{1}{\xitwo}=\pbrac{\xionesq\pbrac{\xione-1}}\pbrac{\xitwo\pbrac{\xitwo-1}^{2}}\\
-    \chbfn{3}{3}{\xione,\xitwo}&=\chbfn{1}{1}{\xione}\chbfn{2}{1}{\xitwo}=\pbrac{\xione\pbrac{\xione-1}^{2}}\pbrac{\xitwosq\pbrac{\xitwo-1}}\\
-    \chbfn{4}{3}{\xione,\xitwo}&=\chbfn{2}{1}{\xione}\chbfn{2}{1}{\xitwo}=\pbrac{\xionesq\pbrac{\xione-1}}\pbrac{\xitwosq\pbrac{\xitwo-1}}    
+    \chbfn{1}{0}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{0}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}=\pbrac{1-3\elemcoordonesq+2\elemcoordonecube}\pbrac{1-3\elemcoordtwosq+2\elemcoordtwocube}\\
+    \chbfn{2}{0}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{0}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}=\pbrac{\elemcoordone(\elemcoordone-1)^{2}}\pbrac{1-3\elemcoordtwosq+2\elemcoordtwocube}\\
+    \chbfn{3}{0}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}=\pbrac{1-3\elemcoordonesq+2\elemcoordonecube}\pbrac{\elemcoordtwosq\pbrac{3-2\elemcoordtwo}}\\
+    \chbfn{4}{0}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{3-2\elemcoordone}}\pbrac{\elemcoordtwosq\pbrac{3-2\elemcoordtwo}}\\
+    \chbfn{1}{1}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{1}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}=\pbrac{\elemcoordone\pbrac{\elemcoordone-1}^{2}}\pbrac{1-3\elemcoordtwosq+2\elemcoordtwocube}\\
+    \chbfn{2}{1}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{1}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{\elemcoordone-1}}\pbrac{1-3\elemcoordtwosq+2\elemcoordtwocube}\\
+    \chbfn{3}{1}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{1}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}=\pbrac{\elemcoordone\pbrac{\elemcoordone-1}^{2}}\pbrac{\elemcoordtwosq\pbrac{3-2\elemcoordtwo}}\\
+    \chbfn{4}{1}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{1}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{\elemcoordone-1}}\pbrac{\elemcoordtwosq\pbrac{3-2\elemcoordtwo}}\\
+    \chbfn{1}{2}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{0}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}=\pbrac{1-3\elemcoordonesq+2\elemcoordonecube}\pbrac{\elemcoordtwo\pbrac{\elemcoordtwo-1}^{2}}\\
+    \chbfn{2}{2}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{0}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{3-2\elemcoordone}}\pbrac{\elemcoordtwo\pbrac{\elemcoordtwo-1}^{2}}\\
+    \chbfn{3}{2}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{0}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}=\pbrac{1-3\elemcoordonesq+2\elemcoordonecube}\pbrac{\elemcoordtwosq\pbrac{\elemcoordtwo-1}}\\
+    \chbfn{4}{2}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{0}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{3-2\elemcoordone}}\pbrac{\elemcoordtwosq\pbrac{\elemcoordtwo-1}}\\
+    \chbfn{1}{3}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{1}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}=\pbrac{\elemcoordone\pbrac{\elemcoordone-1}^{2}}\pbrac{\elemcoordtwo\pbrac{\elemcoordtwo-1}^{2}}\\
+    \chbfn{2}{3}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{1}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{\elemcoordone-1}}\pbrac{\elemcoordtwo\pbrac{\elemcoordtwo-1}^{2}}\\
+    \chbfn{3}{3}{\elemcoordone,\elemcoordtwo}&=\chbfn{1}{1}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}=\pbrac{\elemcoordone\pbrac{\elemcoordone-1}^{2}}\pbrac{\elemcoordtwosq\pbrac{\elemcoordtwo-1}}\\
+    \chbfn{4}{3}{\elemcoordone,\elemcoordtwo}&=\chbfn{2}{1}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}=\pbrac{\elemcoordonesq\pbrac{\elemcoordone-1}}\pbrac{\elemcoordtwosq\pbrac{\elemcoordtwo-1}}    
   \end{split}
   \label{eqn:BicubicHermBFuns}
 \end{equation}
 
 The interpolation formula for the point
-$\fnof{\vect{x}}{\xione,\xitwo}$ within an element is obtained from the
+$\fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo}$ within an element is obtained from the
 \bicubicherm interpolation formula \citep{nielsen:1991a}, \index{bicubic
-  Hermite basis!$\xi$ interpolation formula}
+  Hermite basis!$\elementcoordinatesymbol$ interpolation formula}
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo} &=
-    \chbfn{1}{0}{\xione,\xitwo}\nodept{\vect{x}}{1} +
-    \chbfn{2}{0}{\xione,\xitwo}\nodept{\vect{x}}{2} +
-    \chbfn{3}{0}{\xione,\xitwo}\nodept{\vect{x}}{3} +
-    \chbfn{4}{0}{\xione,\xitwo}\nodept{\vect{x}}{4} + \\
-    & \chbfn{1}{1}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xione}}{1}+
-    \chbfn{2}{1}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xione}}{2}+ 
-    \chbfn{3}{1}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xione}}{3}+
-    \chbfn{4}{1}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xione}}{4} + \\ 
-    & \chbfn{1}{2}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{1}+
-    \chbfn{2}{2}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{2} + 
-    \chbfn{3}{2}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{3}+
-    \chbfn{4}{2}{\xione,\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{4} + \\ 
-    & \chbfn{1}{3}{\xione,\xitwo}\evalat{\deltwoby{\vect{x}}{\xione}{\xitwo}}{1} +
-    \chbfn{2}{3}{\xione,\xitwo}\evalat{\deltwoby{\vect{x}}{\xione}{\xitwo}}{2} +
-    \chbfn{3}{3}{\xione,\xitwo}\evalat{\deltwoby{\vect{x}}{\xione}{\xitwo}}{3} + 
-    \chbfn{4}{3}{\xione,\xitwo}\evalat{ \deltwoby{\vect{x}}{\xione}{\xitwo}}{4}    
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo} &=
+    \chbfn{1}{0}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{1} +
+    \chbfn{2}{0}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{2} +
+    \chbfn{3}{0}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{3} +
+    \chbfn{4}{0}{\elemcoordone,\elemcoordtwo}\nodept{\coordinatevector}{4} + \\
+    & \chbfn{1}{1}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordone}}{1}+
+    \chbfn{2}{1}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordone}}{2}+ 
+    \chbfn{3}{1}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordone}}{3}+
+    \chbfn{4}{1}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordone}}{4} + \\ 
+    & \chbfn{1}{2}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{1}+
+    \chbfn{2}{2}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{2} + 
+    \chbfn{3}{2}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{3}+
+    \chbfn{4}{2}{\elemcoordone,\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{4} + \\ 
+    & \chbfn{1}{3}{\elemcoordone,\elemcoordtwo}\evalat{\deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{1} +
+    \chbfn{2}{3}{\elemcoordone,\elemcoordtwo}\evalat{\deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{2} +
+    \chbfn{3}{3}{\elemcoordone,\elemcoordtwo}\evalat{\deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{3} + 
+    \chbfn{4}{3}{\elemcoordone,\elemcoordtwo}\evalat{ \deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{4}    
   \end{split}
   \label{eqn:bichxiinterp}
 \end{equation}
@@ -636,76 +643,76 @@ The sixteen \twodal bicubic Hermite basis functions are shown in \figref{fig:Bic
 \begin{figure}[hbtp]
    \centering
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns1.gnuplot}{Bicubic Hermite basis function $1$.}
-     {Bicubic Hermite basis function $1$, $\chbfn{1}{0}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns1}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $1$, $\chbfn{1}{0}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns1}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns2.gnuplot}{Bicubic Hermite basis function $2$.}
-     {Bicubic Hermite basis function $2$, $\chbfn{2}{0}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns2}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $2$, $\chbfn{2}{0}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns2}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns3.gnuplot}{Bicubic Hermite basis function $3$.}
-     {Bicubic Hermite basis function $3$, $\chbfn{3}{0}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns3}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $3$, $\chbfn{3}{0}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns3}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns4.gnuplot}{Bicubic Hermite basis function $4$.}
-     {Bicubic Hermite basis function $4$, $\chbfn{4}{0}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns4}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $4$, $\chbfn{4}{0}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns4}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns5.gnuplot}{Bicubic Hermite basis function $5$.}
-     {Bicubic Hermite basis function $5$, $\chbfn{1}{1}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns5}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $5$, $\chbfn{1}{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns5}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns6.gnuplot}{Bicubic Hermite basis function $6$.}
-     {Bicubic Hermite basis function $6$, $\chbfn{2}{1}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns6}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $6$, $\chbfn{2}{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns6}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns7.gnuplot}{Bicubic Hermite basis function $7$.}
-     {Bicubic Hermite basis function $7$, $\chbfn{3}{1}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns7}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $7$, $\chbfn{3}{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns7}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns8.gnuplot}{Bicubic Hermite basis function $8$.}
-     {Bicubic Hermite basis function $8$, $\chbfn{4}{1}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns8}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $8$, $\chbfn{4}{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns8}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns9.gnuplot}{Bicubic Hermite basis function $9$.}
-     {Bicubic Hermite basis function $9$, $\chbfn{1}{2}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns9}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $9$, $\chbfn{1}{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns9}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns10.gnuplot}{Bicubic Hermite basis function $10$.}
-     {Bicubic Hermite basis function $10$, $\chbfn{2}{2}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns10}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $10$, $\chbfn{2}{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns10}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns11.gnuplot}{Bicubic Hermite basis function $11$.}
-     {Bicubic Hermite basis function $11$, $\chbfn{3}{2}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns11}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $11$, $\chbfn{3}{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns11}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns12.gnuplot}{Bicubic Hermite basis function $12$.}
-     {Bicubic Hermite basis function $12$, $\chbfn{4}{2}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns12}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $12$, $\chbfn{4}{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns12}{0.20\linewidth}{6}{1.75}{1.5}
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns13.gnuplot}{Bicubic Hermite basis function $13$.}
-     {Bicubic Hermite basis function $13$, $\chbfn{1}{3}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns13}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $13$, $\chbfn{1}{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns13}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns14.gnuplot}{Bicubic Hermite basis function $14$.}
-     {Bicubic Hermite basis function $14$, $\chbfn{2}{3}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns14}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $14$, $\chbfn{2}{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns14}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns15.gnuplot}{Bicubic Hermite basis function $15$.}
-     {Bicubic Hermite basis function $15$, $\chbfn{3}{3}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns15}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $15$, $\chbfn{3}{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns15}{0.20\linewidth}{6}{1.75}{1.5}
    \hfil
    \gnuplotsubfigure{BasisFunctions/gnuplots/bicubichermitebfuns16.gnuplot}{Bicubic Hermite basis function $16$.}
-     {Bicubic Hermite basis function $16$, $\chbfn{4}{3}{\xione,\xitwo}$.}{subfig:bicubichermitebfuns16}{0.20\linewidth}{6}{1.75}{1.5}
+     {Bicubic Hermite basis function $16$, $\chbfn{4}{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:bicubichermitebfuns16}{0.20\linewidth}{6}{1.75}{1.5}
    \caption[Bicubic Hermite basis functions.]{Bicubic Hermite basis functions.}
    \label{fig:BicubicHermiteBFuns}
 \end{figure}
 
-As with \onedal \cubicherm elements, the derivatives with respect to $\xi$ in
+As with \onedal \cubicherm elements, the derivatives with respect to $\elementcoordinatesymbol$ in
 the \twodal interpolation formula above are expressed as the product of a
 nodal \arclen derivative and a scale factor. This is, however, complicated by
-the fact that there are now multiple $\xi$ directions at each node. From the
-product rule the transformation from an $\xi$ based derivative to an \arclen
+the fact that there are now multiple $\elementcoordinatesymbol$ directions at each node. From the
+product rule the transformation from an $\elementcoordinatesymbol$ based derivative to an \arclen
 based derivative is given by,
 \begin{equation}
-  \delby{\vect{x}}{\xi_{l}}=\delby{\vect{x}}{s_{1}}\delby{s_{1}}{\xi_{l}}+
-  \delby{\vect{x}}{s_{2}}\delby{s_{2}}{\xi_{l}}
+  \delby{\coordinatevector}{\elementcoordinate{l}}=\delby{\coordinatevector}{\arclengthcoordinate{1}}\delby{\arclengthcoordinate{1}}{\elementcoordinate{l}}+
+  \delby{\coordinatevector}{\arclengthcoordinate{2}}\delby{\arclengthcoordinate{2}}{\elementcoordinate{l}}
   \label{eqn:xitosproductrule}
 \end{equation}
 
 Now, by definition, the $\nth{l}$ \arclen direction is only a function of the
-$\nth{l}$ $\xi$ direction, hence the derivative at local node $\alpha$ is
+$\nth{l}$ $\elementcoordinatesymbol$ direction, hence the derivative at local node $\alpha$ is
 \begin{equation}
-  \evalat{\delby{\vect{x}}{\xi_{l}}}{\alpha}=\delby{\nodept{\vect{x}}{
-      \fnof{\Delta}{\alpha,e}}}{s_{l}}\esftwo{e}{l}
+  \evalat{\delby{\coordinatevector}{\elementcoordinate{l}}}{\alpha}=\delby{\nodept{\coordinatevector}{
+      \fnof{\Delta}{\alpha,e}}}{\arclengthcoordinate{l}}\esftwo{e}{l}
   \label{eqn:xitosbich}
 \end{equation}
 and the cross-derivative is
 \begin{equation}
-  \evalat{\deltwoby{\vect{x}}{\xione}{\xitwo}}{\alpha}=
-  \deltwoby{\nodept{\vect{x}}{\fnof{\Delta}{\alpha,e}}}{s_{1}}{s_{2}}\esftwo{e}{1}
+  \evalat{\deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{\alpha}=
+  \deltwoby{\nodept{\coordinatevector}{\fnof{\Delta}{\alpha,e}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\esftwo{e}{1}
   \esftwo{e}{2}
   \label{eqn:xitosbichcd}
 \end{equation}
@@ -714,153 +721,153 @@ Unlike the \onedal \cubicherm case a condition must be placed on
 this transformation in order to maintain $C^{1}$ continuity across element
 boundaries. 
 
-Consider the line between global nodes $\mathbf{1}$ and $\mathbf{2}$ in the
+Consider the line between global nodes $\nodenumber{1}$ and $\nodenumber{2}$ in the
 two \bicubicherm elements shown in \figref{fig:bichelementcont}.
 \epstexfigure{BasisFunctions/svgs/C1bicubicHermite.eps_tex}{Continuity of two bicubic
-  Hermite elements.}{Two bicubic Hermite elements (denoted by $\mathit{1}$ and
-  $\mathit{2}$). The global node numbers are given in boldface, the local node
+  Hermite elements.}{Two bicubic Hermite elements (denoted by $\elementnumber{1}$ and
+  $\elementnumber{2}$). The global node numbers are given in boldface, the local node
   numbers in normal text and the element scale factors used along each line
   are denoted by $\esfone{l}$.}{fig:bichelementcont}{0.35}
 
 For $C^{1}$ continuity, as opposed to $G^{1}$ continuity, between these
-elements the derivative with respect to $\xione$, that is
-\delby{\fnof{\vect{x}}{\xitwo}}{\xione}, must be continuous\footnote{For
+elements the derivative with respect to $\elemcoordone$, that is
+\delby{\fnof{\coordinatevector}{\elemcoordtwo}}{\elemcoordone}, must be continuous\footnote{For
   $C^{1}$ continuity the normals either side of an element boundary must be in
   the same direction \emph{and} have the same magnitude. For $G^{1}$
   continuity the normals must only have the same direction.}. The formula for
-this derivative in element $\mathit{1}$ along the boundary between elements
-$\mathit{1}$ and $\mathit{2}$ is
+this derivative in element $\elementnumber{1}$ along the boundary between elements
+$\elementnumber{1}$ and $\elementnumber{2}$ is
 \begin{equation}
-  \delby{\fnof{\vect{x}}{1,\xitwo}}{\xione}=\chbfn{0}{1}{\xitwo}\evalat{
-    \delby{\vect{x}}{\xione}}{2}+\chbfn{0}{2}{\xitwo}\evalat{
-    \delby{\vect{x}}{\xione}}{4}+\chbfn{1}{1}{\xitwo}\evalat{
-    \deltwoby{\vect{x}}{\xione}{\xitwo}}{2}+\chbfn{1}{2}{\xitwo}\evalat{
-    \deltwoby{\vect{x}}{\xione}{\xitwo}}{4}
+  \delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone}=\chbfn{0}{1}{\elemcoordtwo}\evalat{
+    \delby{\coordinatevector}{\elemcoordone}}{2}+\chbfn{0}{2}{\elemcoordtwo}\evalat{
+    \delby{\coordinatevector}{\elemcoordone}}{4}+\chbfn{1}{1}{\elemcoordtwo}\evalat{
+    \deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{2}+\chbfn{1}{2}{\elemcoordtwo}\evalat{
+    \deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{4}
   \label{eqn:c1contelem1}
 \end{equation}
 and for element $\mathit{2}$ is
 \begin{equation}
-  \delby{\fnof{\vect{x}}{0,\xitwo}}{\xione}=\chbfn{0}{1}{\xitwo}\evalat{
-    \delby{\vect{x}}{\xione}}{1}+\chbfn{0}{2}{\xitwo}\evalat{
-    \delby{\vect{x}}{\xione}}{3}+\chbfn{1}{1}{\xitwo}\evalat{
-    \deltwoby{\vect{x}}{\xione}{\xitwo}}{1}+\chbfn{1}{2}{\xitwo}\evalat{
-    \deltwoby{\vect{x}}{\xione}{\xitwo}}{3}
+  \delby{\fnof{\coordinatevector}{0,\elemcoordtwo}}{\elemcoordone}=\chbfn{0}{1}{\elemcoordtwo}\evalat{
+    \delby{\coordinatevector}{\elemcoordone}}{1}+\chbfn{0}{2}{\elemcoordtwo}\evalat{
+    \delby{\coordinatevector}{\elemcoordone}}{3}+\chbfn{1}{1}{\elemcoordtwo}\evalat{
+    \deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{1}+\chbfn{1}{2}{\elemcoordtwo}\evalat{
+    \deltwoby{\coordinatevector}{\elemcoordone}{\elemcoordtwo}}{3}
   \label{eqn:c1contelem2}
 \end{equation}
 
 Now substituting \eqnrefs{eqn:xitosbich}{eqn:xitosbichcd} into the
-above equations yields for element $\mathit{1}$
+above equations yields for element $\elementnumber{1}$
 \begin{equation}
   \begin{split}
-    \delby{\fnof{\vect{x}}{1,\xitwo}}{\xione} &=
-    \chbfn{0}{1}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{1}}\esfone{2}+
-    \chbfn{0}{2}{\xitwo}\delby{\nodept{\vect{x}}{4}}{s_{1}}\esfone{5}+ \\
-    &\quad\chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{2}}{s_{1}}{s_{2}}
+    \delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone} &=
+    \chbfn{0}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}\esfone{2}+
+    \chbfn{0}{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{4}}{\arclengthcoordinate{1}}\esfone{5}+ \\
+    &\quad\chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
     \esfone{2}\esfone{4}+
-    \chbfn{1}{2}{\xitwo}\deltwoby{\nodept{\vect{x}}{4}}{s_{1}}{s_{2}}
+    \chbfn{1}{2}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{4}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
     \esfone{5}\esfone{4}
   \end{split}
 \end{equation}
-and for element $\mathit{2}$
+and for element $\elementnumber{2}$
 \begin{equation}
   \begin{split}
-    \delby{\fnof{\vect{x}}{0,\xitwo}}{\xione} &=
-    \chbfn{0}{1}{\xione}\delby{\nodept{\vect{x}}{1}}{s_{1}}\esfone{3}+
-    \chbfn{0}{2}{\xitwo}\delby{\nodept{\vect{x}}{3}}{s_{1}}\esfone{6}+ \\
-    &\quad\chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{1}}{s_{1}}{s_{2}}
+    \delby{\fnof{\coordinatevector}{0,\elemcoordtwo}}{\elemcoordone} &=
+    \chbfn{0}{1}{\elemcoordone}\delby{\nodept{\coordinatevector}{1}}{\arclengthcoordinate{1}}\esfone{3}+
+    \chbfn{0}{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}\esfone{6}+ \\
+    &\quad\chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{1}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
     \esfone{3}\esfone{4}+ 
-    \chbfn{1}{2}{\xitwo}\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}
+    \chbfn{1}{2}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
     \esfone{6}\esfone{4}
   \end{split}
 \end{equation}
 
-Now local node $2$ in element $\mathit{1}$ and local node $1$ in element
-$\mathit{2}$ is the same as global node $\mathbf{1}$ and local node $4$ in
-element $\mathit{1}$ and local node $3$ in element $\mathit{2}$ is the same as
-global node $\mathbf{2}$. Hence for a given $\xitwo$ the condition for $C^{1}$
+Now local node $2$ in element $\elementnumber{1}$ and local node $1$ in element
+$\elementnumber{2}$ is the same as global node $\nodenumber{1}$ and local node $4$ in
+element $\elementnumber{1}$ and local node $3$ in element $\elementnumber{2}$ is the same as
+global node $\nodenumber{2}$. Hence for a given $\elemcoordtwo$ the condition for $C^{1}$
 continuity across the element boundary is
 \begin{multline}
-  \chbfn{0}{1}{\xitwo}\delby{\nodept{\vect{x}}{\mathbf{1}}}{s_{1}}\esfone{2}+
-  \chbfn{0}{2}{\xitwo}\delby{\nodept{\vect{x}}{\mathbf{2}}}{s_{1}}\esfone{5}+ 
-  \chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{\mathbf{1}}}{s_{1}}{s_{2}}
+  \chbfn{0}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{\mathbf{1}}}{\arclengthcoordinate{1}}\esfone{2}+
+  \chbfn{0}{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{\mathbf{2}}}{\arclengthcoordinate{1}}\esfone{5}+ 
+  \chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{\mathbf{1}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
   \esfone{2}\esfone{4} \\
-  +\chbfn{1}{2}{\xitwo}\deltwoby{\nodept{\vect{x}}{\mathbf{2}}}{s_{1}}{s_{2}}
-  \esfone{5}\esfone{4} = \chbfn{0}{1}{\xitwo}\delby{\nodept{\vect{x}}
-    {\mathbf{1}}}{s_{1}}\esfone{3}+\chbfn{0}{2}{\xitwo}\delby{\nodept{\vect{x}}
-    {\mathbf{2}}}{s_{1}}\esfone{6} \\
-  +\chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{\mathbf{1}}}{s_{1}}{s_{2}}
-  \esfone{3}\esfone{4}+\chbfn{1}{2}{\xitwo}\deltwoby{\nodept{\vect{x}}
-    {\mathbf{2}}}{s_{1}}{s_{2}}\esfone{6}\esfone{4}
+  +\chbfn{1}{2}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{\mathbf{2}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
+  \esfone{5}\esfone{4} = \chbfn{0}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}
+    {\mathbf{1}}}{\arclengthcoordinate{1}}\esfone{3}+\chbfn{0}{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}
+    {\mathbf{2}}}{\arclengthcoordinate{1}}\esfone{6} \\
+  +\chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{\mathbf{1}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
+  \esfone{3}\esfone{4}+\chbfn{1}{2}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}
+    {\mathbf{2}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\esfone{6}\esfone{4}
 \end{multline}
 or
 \begin{multline}
-  \pbrac{\esfone{2}-\esfone{3}}\pbrac{\chbfn{0}{1}{\xitwo}
-    \delby{\nodept{\vect{x}}{\mathbf{1}}}{s_{1}}+\chbfn{1}{1}{\xitwo}
-    \deltwoby{\nodept{\vect{x}}{\mathbf{1}}}{s_{1}}{s_{2}}\esfone{4}} = \\
-  \pbrac{\esfone{6}-\esfone{5}}\pbrac{\chbfn{0}{2}{\xitwo}
-    \delby{\nodept{\vect{x}}{\mathbf{2}}}{s_{1}}+\chbfn{1}{2}{\xitwo}
-    \deltwoby{\nodept{\vect{x}}{\mathbf{2}}}{s_{1}}{s_{2}}\esfone{4}}
+  \pbrac{\esfone{2}-\esfone{3}}\pbrac{\chbfn{0}{1}{\elemcoordtwo}
+    \delby{\nodept{\coordinatevector}{\mathbf{1}}}{\arclengthcoordinate{1}}+\chbfn{1}{1}{\elemcoordtwo}
+    \deltwoby{\nodept{\coordinatevector}{\mathbf{1}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\esfone{4}} = \\
+  \pbrac{\esfone{6}-\esfone{5}}\pbrac{\chbfn{0}{2}{\elemcoordtwo}
+    \delby{\nodept{\coordinatevector}{\mathbf{2}}}{\arclengthcoordinate{1}}+\chbfn{1}{2}{\elemcoordtwo}
+    \deltwoby{\nodept{\coordinatevector}{\mathbf{2}}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\esfone{4}}
   \label{eqn:bchc1condition}
 \end{multline}
 
 Now by choosing the scale factors to be equal on either side of node
-$\mathbf{1}$ and $\mathbf{2}$ (\ie $\esfone{2}=\esfone{3}=\nsfone{\mathbf{1}}$
-and $\esfone{5}=\esfone{6}=\nsfone{\mathbf{2}}$), that is nodal based scale
+$\nodenumber{1}$ and $\nodenumber{2}$ (\ie $\esfone{2}=\esfone{3}=\nsfone{\nodenumber{1}}$
+and $\esfone{5}=\esfone{6}=\nsfone{\nodenumber{2}}$), that is nodal based scale
 factors, \eqnref{eqn:bchc1condition} is satisfied for any choice of the scale
 factors.  Hence nodal scale factors are a sufficient condition to ensure
 $C^{1}$ continuity. If it is desired that the scale factors be different
 either side of the node then \eqnref{eqn:bchc1condition} must be satisfied to
 ensure continuity.
 
-The choice of the scale factors again determines the $\xi$
-to $s$ spacing. We have a number of choices for the scale factor depending on
-whether or not the $\xi$ to $s$ spacing should favour bigger or smaller
+The choice of the scale factors again determines the $\elementcoordinatesymbol$
+to $\arclengthcoordinatesymbol$ spacing. We have a number of choices for the scale factor depending on
+whether or not the $\elementcoordinatesymbol$ to $\arclengthcoordinatesymbol$ spacing should favour bigger or smaller
 elements. One choice which equally favours both elements either side of the
 node is for the scale factors to be chosen to be nodally based and equal to the average \arclen on either side
-of the node for each $\xi$ direction \ie for the $\nth{l}$ direction
+of the node for each $\elementcoordinatesymbol$ direction \ie for the $\nth{l}$ direction
 \begin{equation}
-  \nsftwo{A}{l}=\dfrac{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}}+
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}{2}
+  \nsftwo{A}{l}=\dfrac{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}}+ 
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}{2}
   \label{eqn:arithmeanarclenscale}
 \end{equation}
-where $\nsftwo{A}{l}$ is the nodal scale factor in the $\nth{l}$ $\xi$
+where $\nsftwo{A}{l}$ is the nodal scale factor in the $\nth{l}$ $\elementcoordinatesymbol$
 direction at global node $A$, $\fnof{A_{\ominus}}{l}$ is the element
 immediately preceding (in the \nth{l} direction) node $A$, and
 $\fnof{A_{\oplus}}{l}$ is the element immediately after (in the \nth{l}
-direction) node $A$ and $\fnof{s_{l}}{e}$ is the \arclen in the \nth{l} $\xi$
+direction) node $A$ and $\fnof{\arclengthcoordinate{l}}{e}$ is the \arclen in the \nth{l} $\elementcoordinatesymbol$
 direction from node $A$ in element $e$. This type of scaling is known as
 \emph{arithmetic mean \arclen scaling}.
 
 Other means can be used \ie \emph{geometric mean \arclen scaling}
 \begin{equation}
-  \nsftwo{A}{l}=\sqrt{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}}
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}
+  \nsftwo{A}{l}=\sqrt{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}}
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}
   \label{eqn:geomeanarclenscale}
 \end{equation}
 or \emph{harmonic mean \arclen scaling}
 \begin{equation}
-  \nsftwo{A}{l}=\dfrac{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}}
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}}+
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}
+  \nsftwo{A}{l}=\dfrac{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}}
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}}+
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}
   \label{eqn:harmonicmeanarclenscale}
 \end{equation}
 
 Other possible scalings include \emph{minimum \arclen scaling}
 \begin{equation}
-  \nsftwo{A}{l}=\min\pbrac{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}},
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}
+  \nsftwo{A}{l}=\min\pbrac{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}},
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}
   \label{eqn:minimumarclenscale}
 \end{equation}
 and \emph{maximum \arclen scaling}
 \begin{equation}
-  \nsftwo{A}{l}=\max\pbrac{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}},
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}}
+  \nsftwo{A}{l}=\max\pbrac{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}},
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}}
   \label{eqn:maximumarclenscale}
 \end{equation}
 and \emph{Root Mean Squared (RMS) \arclen scaling}
 \begin{equation}
-  \nsftwo{A}{l}=\sqrt{\dfrac{\fnof{s_{l}}{\fnof{A_{\ominus}}{l}}^{2}+
-    \fnof{s_{l}}{\fnof{A_{\oplus}}{l}}^{2}}{2}}
+  \nsftwo{A}{l}=\sqrt{\dfrac{\fnof{\arclengthcoordinate{l}}{\fnof{A_{\ominus}}{l}}^{2}+
+    \fnof{\arclengthcoordinate{l}}{\fnof{A_{\oplus}}{l}}^{2}}{2}}
   \label{eqn:rmsarclenscale}
 \end{equation}
 
@@ -959,46 +966,46 @@ continuous at element boundaries for all scaling types.
 
 One problem that arises when using quadrilateral elements (such as
 \bicubicherm elements) to describe a surface is that it is impossible to
-'close the surface' in three-dimensions whilst maintaining consistent $\xione$
-and $\xitwo$ directions throughout the mesh. This is important as $C^{1}$
-continuity requires either consistent $\xi$ directions or a transformation at
+'close the surface' in three-dimensions whilst maintaining consistent $\elemcoordone$
+and $\elemcoordtwo$ directions throughout the mesh. This is important as $C^{1}$
+continuity requires either consistent $\elementcoordinatesymbol$ directions or a transformation at
 each node to take into account the inconsistent directions \citep{petera:1994}.
 
 One solution to this problem is to \emph{collapse} a \bicubicherm element.
 This entails placing one of the four local nodes of the element at the same
 geometric location as another local node of the element and results in a
 triangular element from which it is possible to close the surface. There are
-two main problems with this solution.  The first is that one of the two $\xi$
+two main problems with this solution.  The first is that one of the two $\elementcoordinatesymbol$
 directions at the collapsed node is undefined.  The second is that the
 distance between the two nodes at the same location is zero.  Numerical
 problems can result from this zero distance.  An alternative strategy has
 been developed in which special elements, called ``Hermite-sector''
 elements\index{Hermite-sector elements}, are used to close a \bicubicherm
 surface in three-dimensions. There are two types of elements depending on
-whether the $\xi$ (or $s$) directions come together at local node one or local
+whether the $\elementcoordinatesymbol$ (or $\arclengthcoordinatesymbol$) directions come together at local node one or local
 node three.  These two elements are shown in \figref{fig:hermitesectors}.
 
 \epstexfigure{BasisFunctions/svgs/hermitesectors.eps_tex}{Hermite-sector elements.}
 {Hermite-sector elements. (a) Apex node one element. (b) Apex node three
   element.}{fig:hermitesectors}{0.3}
 
-From \figref{fig:hermitesectors} it can be seen that the $s_{2}$ direction is
+From \figref{fig:hermitesectors} it can be seen that the $\arclengthcoordinate{2}$ direction is
 not unique at the apex nodes. This gives us two choices for the interpolation
-within the element: ignore the $s_{2}$ derivative when interpolating or set
-the $s_{2}$ derivative identically to zero.
+within the element: ignore the $\arclengthcoordinate{2}$ derivative when interpolating or set
+the $\arclengthcoordinate{2}$ derivative identically to zero.
 
-\textbf{Ignore $s_{2}$ apex derivative}: For this case it can be seen from
-\figref{fig:hermitesectors} that the interpolation in the $\xione$ direction
+\textbf{Ignore $\arclengthcoordinate{2}$ apex derivative}: For this case it can be seen from
+\figref{fig:hermitesectors} that the interpolation in the $\elemcoordone$ direction
 is just the standard cubic Hermite interpolation. The interpolation in the
-$\xitwo$ direction is now a little different in that the nodal \arclen
+$\elemcoordtwo$ direction is now a little different in that the nodal \arclen
 derivative has been dropped as it is no longer defined at the apex node.  For
 an apex node one element shown in \figref{fig:hermitesectors}(a) the
 interpolation for the line between local node one and local node $n$ is now
 quadratic and is given by
 \begin{equation}
-  \fnof{\vect{x}}{\xitwo}=\hsonebfn{1}{\xitwo}\nodept{\vect{x}}{1}+
-  \hsonebfn{2}{\xitwo}\nodept{\vect{x}}{n}+
-  \hsonebfn{3}{\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{n}
+  \fnof{\coordinatevector}{\elemcoordtwo}=\hsonebfn{1}{\elemcoordtwo}\nodept{\coordinatevector}{1}+
+  \hsonebfn{2}{\elemcoordtwo}\nodept{\coordinatevector}{n}+
+  \hsonebfn{3}{\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{n}
   \label{eqn:hsapex1xiinterp}
 \end{equation}
 with the basis functions given by
@@ -1016,9 +1023,9 @@ For the apex node three element shown in \figref{fig:hermitesectors}(b) the
 interpolation for the line connecting local node $n$ with local node three is
 given by
 \begin{equation}
-  \fnof{\vect{x}}{\xitwo}=\hsthreebfn{1}{\xitwo}\nodept{\vect{x}}{3}+
-  \hsthreebfn{2}{\xitwo}\nodept{\vect{x}}{n}+
-  \hsthreebfn{3}{\xitwo}\evalat{\delby{\vect{x}}{\xitwo}}{n}
+  \fnof{\coordinatevector}{\elemcoordtwo}=\hsthreebfn{1}{\elemcoordtwo}\nodept{\coordinatevector}{3}+
+  \hsthreebfn{2}{\elemcoordtwo}\nodept{\coordinatevector}{n}+
+  \hsthreebfn{3}{\elemcoordtwo}\evalat{\delby{\coordinatevector}{\elemcoordtwo}}{n}
   \label{eqn:hsapex3xiinterp}
 \end{equation}
 with the basis functions given by
@@ -1033,145 +1040,145 @@ with the basis functions given by
 \end{equation}
  
 The full interpolation formula for the sector element can then be found by
-taking the tensor product of the interpolation in the $\xione$ direction,
+taking the tensor product of the interpolation in the $\elemcoordone$ direction,
 given in \eqnref{eqn:chxiinterpolation}, with the interpolation in the
-$\xitwo$ direction (given by either Equations \bref{eqn:hsapex1xiinterp} or
+$\elemcoordtwo$ direction (given by either Equations \bref{eqn:hsapex1xiinterp} or
 \bref{eqn:hsapex3xiinterp}). The interpolation formula can be converted from
-nodal $\xi$ derivatives to nodal \arclen derivatives using the procedure
+nodal $\elementcoordinatesymbol$ derivatives to nodal \arclen derivatives using the procedure
 outlined for the \bicubicherm case. For example, the interpolation formulae for
 an apex node one element is \index{Hermite-sector basis!apex node one!\arclen
   interpolation formula}
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo} &=
-    \hsonebfn{1}{\xitwo}\nodept{\vect{x}}{1}+\chbfn{1}{0}{\xione}\hsonebfn{2}
-    {\xitwo}\nodept{\vect{x}}{2}+\chbfn{2}{0}{\xione}\hsonebfn{2}{\xitwo}
-    \nodept{\vect{x}}{3} + \\
-    & \chbfn{1}{1}{\xione}\hsonebfn{2}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{1}}
-    \nsftwo{2}{1}+\chbfn{2}{1}{\xione}\hsonebfn{2}{\xitwo}\delby{\nodept{\vect{x}}
-      {3}}{s_{1}}\nsftwo{3}{1} + \\
-    & \chbfn{1}{0}{\xione}\hsonebfn{3}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{2}}
-    \nsftwo{2}{2} + \chbfn{2}{0}{\xione}\hsonebfn{3}{\xitwo}
-    \delby{\nodept{\vect{x}}{3}}{s_{2}}\nsftwo{3}{2} + \\
-    & \chbfn{1}{1}{\xione}\hsonebfn{3}{\xitwo}\deltwoby{\nodept{\vect{x}}{2}}
-    {s_{1}}{s_{2}}\nsftwo{2}{1}\nsftwo{2}{2} + 
-    \chbfn{2}{1}{\xione}\hsonebfn{3}{\xitwo}\deltwoby{\nodept{\vect{x}}{3}}
-    {s_{1}}{s_{2}}\nsftwo{3}{1}\nsftwo{3}{2}    
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo} &=
+    \hsonebfn{1}{\elemcoordtwo}\nodept{\coordinatevector}{1}+\chbfn{1}{0}{\elemcoordone}\hsonebfn{2}
+    {\elemcoordtwo}\nodept{\coordinatevector}{2}+\chbfn{2}{0}{\elemcoordone}\hsonebfn{2}{\elemcoordtwo}
+    \nodept{\coordinatevector}{3} + \\
+    & \chbfn{1}{1}{\elemcoordone}\hsonebfn{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}
+    \nsftwo{2}{1}+\chbfn{2}{1}{\elemcoordone}\hsonebfn{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}
+      {3}}{\arclengthcoordinate{1}}\nsftwo{3}{1} + \\
+    & \chbfn{1}{0}{\elemcoordone}\hsonebfn{3}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{2}}
+    \nsftwo{2}{2} + \chbfn{2}{0}{\elemcoordone}\hsonebfn{3}{\elemcoordtwo}
+    \delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{2}}\nsftwo{3}{2} + \\
+    & \chbfn{1}{1}{\elemcoordone}\hsonebfn{3}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{2}}
+    {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{2}{1}\nsftwo{2}{2} + 
+    \chbfn{2}{1}{\elemcoordone}\hsonebfn{3}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{3}}
+    {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{3}{1}\nsftwo{3}{2}    
   \end{split}
   \label{eqn:hsapex1sinterp}
 \end{equation}
 
 Care must be taken when using Hermite-sector elements for rapidly changing
-surfaces. Consider an apex node one element with undefined $s_{2}$ apex
-derivatives. The rate of change of $\vect{x}$ with respect to
-$\xione$ along the line from node one to node three (\ie $\xione=1$) is
+surfaces. Consider an apex node one element with undefined $\arclengthcoordinate{2}$ apex
+derivatives. The rate of change of $\coordinatevector$ with respect to
+$\elemcoordone$ along the line from node one to node three (\ie $\elemcoordone=1$) is
 \begin{equation}
   \begin{split}
-    \delby{\fnof{\vect{x}}{1,\xitwo}}{\xione} &= \hsonebfn{2}{\xitwo}\delby{
-      \nodept{\vect{x}}{3}}{s_{1}}\nsftwo{3}{1}+\hsonebfn{3}{\xitwo}\deltwoby{
-      \nodept{\vect{x}}{3}}{s_{1}}{s_{2}}\nsftwo{3}{1}\nsftwo{3}{2} \\
-    &= \nsftwo{3}{1}\pbrac{\pbrac{2\xitwo-\xitwosq}\delby{\nodept{\vect{x}}{3}}
-      {s_{1}}+\pbrac{\xitwosq-\xitwo}\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}
+    \delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone} &= \hsonebfn{2}{\elemcoordtwo}\delby{
+      \nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}\nsftwo{3}{1}+\hsonebfn{3}{\elemcoordtwo}\deltwoby{
+      \nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{3}{1}\nsftwo{3}{2} \\
+    &= \nsftwo{3}{1}\pbrac{\pbrac{2\elemcoordtwo-\elemcoordtwosq}\delby{\nodept{\coordinatevector}{3}}
+      {\arclengthcoordinate{1}}+\pbrac{\elemcoordtwosq-\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}
       \nsftwo{3}{2}}
   \end{split}
 \end{equation}
 
-Taking the dot product of $\delby{\fnof{\vect{x}}{1,\xitwo}}{\xione}$ with 
-$\delby{\nodept{\vect{x}}{3}}{s_{1}}$ gives
+Taking the dot product of $\delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone}$ with 
+$\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}$ gives
 \begin{equation}
-  \dotprod{\delby{\fnof{\vect{x}}{1,\xitwo}}{\xione}}{\delby{\nodept{\vect{x}}{3}}
-    {s_{1}}} = \nsftwo{3}{1}
-  \pbrac{\pbrac{2\xitwo-\xitwosq}\dotprod{\delby{\nodept{\vect{x}}{3}}{s_{1}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}}+\pbrac{\xitwosq-\xitwo}\nsftwo{3}{2}
-    \dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}}}
+  \dotprod{\delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone}}{\delby{\nodept{\coordinatevector}{3}}
+    {\arclengthcoordinate{1}}} = \nsftwo{3}{1}
+  \pbrac{\pbrac{2\elemcoordtwo-\elemcoordtwosq}\dotprod{\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}+\pbrac{\elemcoordtwosq-\elemcoordtwo}\nsftwo{3}{2}
+    \dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}}
   \label{eqn:hsonedirectiondotprod}
 \end{equation}
 
 The normality constraint for \arclen derivatives means that
-$\dotprod{\delby{\nodept{\vect{x}}{3}}{s_{1}}}{\delby{\nodept{\vect{x}}{3}}
-  {s_{1}}}=1$ and thus the right hand side of
+$\dotprod{\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}{\delby{\nodept{\coordinatevector}{3}}
+  {\arclengthcoordinate{1}}}=1$ and thus the right hand side of
 \eqnref{eqn:hsonedirectiondotprod} divided by $\nsftwo{3}{1}$ (\ie normalised
 by $\nsftwo{3}{1}$) is the quadratic
 \begin{equation*}
-  \pbrac{2\xitwo-\xitwosq}+\pbrac{\xitwosq-\xitwo}\nsftwo{3}{2}
-  \dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}
-      {3}}{s_{1}}} 
+  \pbrac{2\elemcoordtwo-\elemcoordtwosq}+\pbrac{\elemcoordtwosq-\elemcoordtwo}\nsftwo{3}{2}
+  \dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}
+      {3}}{\arclengthcoordinate{1}}} 
 \end{equation*}
 or
 \begin{equation*}
-  \pbrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}} -1}\xitwosq+
-  \pbrac{2-\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}}}\xitwo
+  \pbrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}} -1}\elemcoordtwosq+
+  \pbrac{2-\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}}\elemcoordtwo
   \label{eqn:hsonedirectionpolynomial}
 \end{equation*}
 
-This quadratic is $1$ at $\xitwo=1$ and always has a root at $\xitwo=0$.
+This quadratic is $1$ at $\elemcoordtwo=1$ and always has a root at $\elemcoordtwo=0$.
 Consider the case of this quadratic having its second root in the interval
 $(0,1)$. This would mean that at some point in the interval $(0,1)$ the dot
-product of \delby{\fnof{\vect{x}}{1,\xitwo}}{\xione} and
-\delby{\nodept{\vect{x}}{3}}{s_{1}} would go from zero to negative and then
-positive as $\xitwo$ changed from $0$ to $1$ \ie the angle between
-$\delby{\fnof{\vect{x}}{1,\xitwo}}{\xione}$ and
-$\delby{\nodept{\vect{x}}{3}}{s_{1}}$ would, at some stage, be greater than
+product of \delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone} and
+\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}} would go from zero to negative and then
+positive as $\elemcoordtwo$ changed from $0$ to $1$ \ie the angle between
+$\delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone}$ and
+$\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}$ would, at some stage, be greater than
 ninety degrees. As the direction of the normal to the surface along the line
 between local node one and three is given by the cross product of
-$\delby{\fnof{\vect{x}}{1,\xitwo}}{\xione}$ and
-$\delby{\fnof{\vect{x}}{1,\xitwo}}{\xitwo}$ then, if the quadratic became
+$\delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordone}$ and
+$\delby{\fnof{\coordinatevector}{1,\elemcoordtwo}}{\elemcoordtwo}$ then, if the quadratic became
 sufficiently negative, the normal to the surface could reverse direction from
-an outward to an inward normal as $\xitwo$ changed from $0$ to $1$. This is
+an outward to an inward normal as $\elemcoordtwo$ changed from $0$ to $1$. This is
 clearly undesirable. In fact even if the quadratic is only slightly negative
 the resulting surface would be grossly deformed.
 
 To avoid these effects the second root of the quadratic must be outside the
 interval $(0,1)$. From the quadratic formula the conditions for this are
 \begin{equation}
-  \dfrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}}-2}{\nsftwo{3}{2}\dotprod{
-      \deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}{3}}
-      {s_{1}}}-1}<0
+  \dfrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}-2}{\nsftwo{3}{2}\dotprod{
+      \deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}{3}}
+      {\arclengthcoordinate{1}}}-1}<0
 \end{equation}
 and 
 \begin{equation}
-  \dfrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}
-    {\delby{\nodept{\vect{x}}{3}}{s_{1}}}-2}{\nsftwo{3}{2}\dotprod{
-      \deltwoby{\nodept{\vect{x}}{3}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}{3}}
-      {s_{1}}}-1}>1
+  \dfrac{\nsftwo{3}{2}\dotprod{\deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}
+    {\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}}-2}{\nsftwo{3}{2}\dotprod{
+      \deltwoby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}{3}}
+      {\arclengthcoordinate{1}}}-1}>1
 \end{equation}
 that is (for the line from local node one to local node $n$) 
 \index{Hermite-sector basis!apex node one!cross-derivative condition}
 \begin{equation}
-  \dotprod{\deltwoby{\nodept{\vect{x}}{n}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}
-      {n}}{s_{1}}}<\dfrac{2}{\nsftwo{n}{2}}
+  \dotprod{\deltwoby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}
+      {n}}{\arclengthcoordinate{1}}}<\dfrac{2}{\nsftwo{n}{2}}
 \end{equation}
 
 The simplest way to interpret this constraint is that if the element is large
-(\ie $\nsftwo{n}{2}$ is large) then $\dotprod{\deltwoby{\nodept{\vect{x}}{n}}
-  {s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}{n}}{s_{1}}}$ must be small. The
+(\ie $\nsftwo{n}{2}$ is large) then $\dotprod{\deltwoby{\nodept{\coordinatevector}{n}}
+  {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}}$ must be small. The
 simplest way for this to happen is to ensure the magnitude of the components of
-$\deltwoby{\nodept{\vect{x}}{n}}{s_{1}}{s_{2}}$ are small (or of opposite sign to
-the comparable components of $\delby{\nodept{\vect{x}}{n}}{s_{1}}$).
+$\deltwoby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}$ are small (or of opposite sign to
+the comparable components of $\delby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}$).
 
 The equivalent interpolation formula to \eqnref{eqn:hsapex1sinterp} for an
 apex node three Hermite-sector element is 
 \index{Hermite-sector basis!apex node three!\arclen interpolation formula}
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo} &=
-    \chbfn{1}{0}{\xione}\hsthreebfn{2}{\xitwo}\nodept{\vect{x}}{1}+
-    \chbfn{2}{0}{\xione}\hsthreebfn{2}{\xitwo}\nodept{\vect{x}}{2}+
-    \hsthreebfn{1}{\xitwo}\nodept{\vect{x}}{3}+ \\
-    & \chbfn{1}{1}{\xione}\hsthreebfn{2}{\xitwo}\delby{\nodept{\vect{x}}{1}}
-    {s_{1}}\nsftwo{1}{1}+\chbfn{2}{1}{\xione}\hsthreebfn{2}{\xitwo}
-    \delby{\nodept{\vect{x}}{2}}{s_{1}}\nsftwo{2}{1} + \\
-    & \chbfn{1}{0}{\xione}\hsthreebfn{3}{\xitwo}\delby{\nodept{\vect{x}}{1}}
-    {s_{2}}\nsftwo{1}{2}+\chbfn{2}{0}{\xione}\hsthreebfn{3}{\xitwo}
-    \delby{\nodept{\vect{x}}{2}}{s_{2}}\nsftwo{2}{2} + \\
-    & \chbfn{1}{1}{\xione}\hsthreebfn{3}{\xitwo}\deltwoby{\nodept{\vect{x}}{1}}
-    {s_{1}}{s_{2}}\nsftwo{1}{1}\nsftwo{1}{2} + 
-    \chbfn{2}{1}{\xione}\hsthreebfn{3}{\xitwo}\deltwoby{\nodept{\vect{x}}{2}}
-    {s_{1}}{s_{2}}\nsftwo{2}{1}\nsftwo{2}{2}    
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo} &=
+    \chbfn{1}{0}{\elemcoordone}\hsthreebfn{2}{\elemcoordtwo}\nodept{\coordinatevector}{1}+
+    \chbfn{2}{0}{\elemcoordone}\hsthreebfn{2}{\elemcoordtwo}\nodept{\coordinatevector}{2}+
+    \hsthreebfn{1}{\elemcoordtwo}\nodept{\coordinatevector}{3}+ \\
+    & \chbfn{1}{1}{\elemcoordone}\hsthreebfn{2}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{1}}
+    {\arclengthcoordinate{1}}\nsftwo{1}{1}+\chbfn{2}{1}{\elemcoordone}\hsthreebfn{2}{\elemcoordtwo}
+    \delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}\nsftwo{2}{1} + \\
+    & \chbfn{1}{0}{\elemcoordone}\hsthreebfn{3}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{1}}
+    {\arclengthcoordinate{2}}\nsftwo{1}{2}+\chbfn{2}{0}{\elemcoordone}\hsthreebfn{3}{\elemcoordtwo}
+    \delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{2}}\nsftwo{2}{2} + \\
+    & \chbfn{1}{1}{\elemcoordone}\hsthreebfn{3}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{1}}
+    {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{1}{1}\nsftwo{1}{2} + 
+    \chbfn{2}{1}{\elemcoordone}\hsthreebfn{3}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{2}}
+    {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{2}{1}\nsftwo{2}{2}    
   \end{split}
   \label{eqn:hsapex3sinterp}
 \end{equation}
@@ -1179,180 +1186,594 @@ and the equivalent constraint for apex node three Hermite-sector elements (for
 the line from local node $n$ to local node three) is
 \index{Hermite-sector basis!apex node three!cross-derivative condition}
 \begin{equation}
-  \dotprod{\deltwoby{\nodept{\vect{x}}{n}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}
-      {n}}{s_{1}}}>\dfrac{-2}{\nsftwo{n}{2}}
+  \dotprod{\deltwoby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}
+      {n}}{\arclengthcoordinate{1}}}>\dfrac{-2}{\nsftwo{n}{2}}
 \end{equation}
 
-\textbf{Zero $s_{2}$ apex derivative}: For this case the sector basis
+\textbf{Zero $\arclengthcoordinate{2}$ apex derivative}: For this case the sector basis
 functions are just the cubic Hermite basis functions. The corresponding
 interpolation formulae for an apex node one element is hence
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo} &= \chbfn{1}{0}{\xitwo}
-    \nodept{\vect{x}}{1} + 
-     \chbfn{1}{0}{\xione}\chbfn{2}{0}{\xitwo}\nodept{\vect{x}}{2} +
-    \chbfn{2}{0}{\xione}\chbfn{2}{0}{\xitwo}\nodept{\vect{x}}{3} + \\
-    & \chbfn{1}{1}{\xione}\chbfn{2}{0}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{1}}
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo} &= \chbfn{1}{0}{\elemcoordtwo}
+    \nodept{\coordinatevector}{1} + 
+     \chbfn{1}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\nodept{\coordinatevector}{2} +
+    \chbfn{2}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\nodept{\coordinatevector}{3} + \\
+    & \chbfn{1}{1}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}
     \nsftwo{2}{1}+
-    \chbfn{2}{1}{\xione}\chbfn{2}{0}{\xitwo}\delby{\nodept{\vect{x}}{3}}{s_{1}}
+    \chbfn{2}{1}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{3}}{\arclengthcoordinate{1}}
     \nsftwo{3}{1} + \\ 
-    & \chbfn{1}{0}{\xione}\chbfn{2}{1}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{2}}
+    & \chbfn{1}{0}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{2}}
     \nsftwo{2}{2}+
-    \chbfn{2}{0}{\xione}\chbfn{2}{1}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{2}}
+    \chbfn{2}{0}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{2}}
     \nsftwo{3}{2} + \\ 
-    & \chbfn{1}{1}{\xione}\chbfn{2}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{2}}
-      {s_{1}}{s_{2}}\nsftwo{2}{1}\nsftwo{2}{2} + 
-    \chbfn{2}{1}{\xione}\chbfn{2}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{3}}
-      {s_{1}}{s_{2}}\nsftwo{3}{1}\nsftwo{3}{2}
+    & \chbfn{1}{1}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{2}}
+      {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{2}{1}\nsftwo{2}{2} + 
+    \chbfn{2}{1}{\elemcoordone}\chbfn{2}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{3}}
+      {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{3}{1}\nsftwo{3}{2}
   \end{split}
 \end{equation}
 and the condition to avoid reversal of the normal is
 \begin{equation}
-  \dotprod{\deltwoby{\nodept{\vect{x}}{n}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}
-      {n}}{s_{1}}}<\dfrac{3}{\nsftwo{n}{2}}
+  \dotprod{\deltwoby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}
+      {n}}{\arclengthcoordinate{1}}}<\dfrac{3}{\nsftwo{n}{2}}
 \end{equation}
 and for the apex node three element the interpolation formula is
 \begin{equation}
   \begin{split}
-    \fnof{\vect{x}}{\xione,\xitwo} &=
-    \chbfn{1}{0}{\xione}\chbfn{2}{0}{\xitwo}\nodept{\vect{x}}{1} +
-    \chbfn{2}{0}{\xione}\chbfn{2}{0}{\xitwo}\nodept{\vect{x}}{2} + 
-    \chbfn{2}{0}{\xitwo}\nodept{\vect{x}}{3} + \\
-    & \chbfn{1}{1}{\xione}\chbfn{1}{0}{\xitwo}\delby{\nodept{\vect{x}}{1}}{s_{1}}
+    \fnof{\coordinatevector}{\elemcoordone,\elemcoordtwo} &=
+    \chbfn{1}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\nodept{\coordinatevector}{1} +
+    \chbfn{2}{0}{\elemcoordone}\chbfn{2}{0}{\elemcoordtwo}\nodept{\coordinatevector}{2} + 
+    \chbfn{2}{0}{\elemcoordtwo}\nodept{\coordinatevector}{3} + \\
+    & \chbfn{1}{1}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{1}}{\arclengthcoordinate{1}}
     \nsftwo{1}{1}+
-    \chbfn{2}{1}{\xione}\chbfn{1}{0}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{1}}
+    \chbfn{2}{1}{\elemcoordone}\chbfn{1}{0}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{1}}
     \nsftwo{2}{1} + \\ 
-    & \chbfn{1}{0}{\xione}\chbfn{1}{1}{\xitwo}\delby{\nodept{\vect{x}}{1}}{s_{2}}
+    & \chbfn{1}{0}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{1}}{\arclengthcoordinate{2}}
     \nsftwo{1}{2}+
-    \chbfn{2}{0}{\xione}\chbfn{1}{1}{\xitwo}\delby{\nodept{\vect{x}}{2}}{s_{2}}
+    \chbfn{2}{0}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}\delby{\nodept{\coordinatevector}{2}}{\arclengthcoordinate{2}}
     \nsftwo{2}{2} + \\ 
-    & \chbfn{1}{1}{\xione}\chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{1}}
-      {s_{1}}{s_{2}}\nsftwo{1}{1}\nsftwo{1}{2} + 
-    \chbfn{2}{1}{\xione}\chbfn{1}{1}{\xitwo}\deltwoby{\nodept{\vect{x}}{2}}
-      {s_{1}}{s_{2}}\nsftwo{2}{1}\nsftwo{2}{2}
+    & \chbfn{1}{1}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{1}}
+      {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{1}{1}\nsftwo{1}{2} + 
+    \chbfn{2}{1}{\elemcoordone}\chbfn{1}{1}{\elemcoordtwo}\deltwoby{\nodept{\coordinatevector}{2}}
+      {\arclengthcoordinate{1}}{\arclengthcoordinate{2}}\nsftwo{2}{1}\nsftwo{2}{2}
   \end{split}
 \end{equation}
 with a condition of
 \begin{equation}
-  \dotprod{\deltwoby{\nodept{\vect{x}}{n}}{s_{1}}{s_{2}}}{\delby{\nodept{\vect{x}}
-      {n}}{s_{1}}}>\dfrac{-3}{\nsftwo{n}{2}}
+  \dotprod{\deltwoby{\nodept{\coordinatevector}{n}}{\arclengthcoordinate{1}}{\arclengthcoordinate{2}}}{\delby{\nodept{\coordinatevector}
+      {n}}{\arclengthcoordinate{1}}}>\dfrac{-3}{\nsftwo{n}{2}}
 \end{equation}
 
-Although the Hermite-sector basis function in which the $s_{2}$ apex node
+Although the Hermite-sector basis function in which the $\arclengthcoordinate{2}$ apex node
 derivatives are identically zero have an increased limit on the
 cross-derivative constraints (a right hand side numerator of $\pm 3$ instead
 of $\pm 2$) they have the problem that as all derivatives vanish at the apex
 any interpolated function has a zero Hessian at the apex. As this can cause
 numerical problems the Hermite-sector basis functions which have an undefined
-$s_{2}$ derivative are prefered.
-
+$\arclengthcoordinate{2}$ derivative are prefered.
 
 \subsection{Simplex Basis Functions}
+\label{subsec:BasisFunctionsSimplex}
 
-Simplex basis function and its derivatives are evaluated with respect to external $\vect{\xi}$ coordinates.
+A simplex is a generalisation of the idea of a triangle to an
+arbitrary number of dimensions. The name simplex derives from the idea
+that it is the simplest flat sided geometric shape that can occur in a
+given dimensional space.
 
+A $d$ dimensional simplex, $K\subset\rntopology{d}$, is formed from $d+1$ vertices in the
+space. Edges are formed between vertices. The family of simplex
+elements for different dimensions is shown
+in \figref{fig:SimplexFamily}.
+
+\epstexfigure{BasisFunctions/svgs/SimplexFamily.eps_tex}{Family of simplexes for different dimensions.}{Family of simplex elements of dimension $d$ formed by vertices and edges.}{fig:SimplexFamily}{0.75}
+
+If we now consider the matrix $\matr{M}_{d}$ of size
+$\rntopology{\pbrac{d+1}\times\pbrac{d+1}}$ formed by column vectors
+of the coordinates of the vertices completed by a row of ones \ie
+\begin{equation}
+\matr{M}_{1}=\begin{bmatrix}
+ \nodept{x}{1} & \nodept{x}{2} \\
+ 1 & 1
+\end{bmatrix}\qquad \matr{M}_{2}=\begin{bmatrix}
+ \nodept{x}{1} & \nodept{x}{2} & \nodept{x}{3} \\
+ \nodept{y}{1} & \nodept{y}{2} & \nodept{y}{3} \\
+ 1 & 1 & 1
+ \end{bmatrix}\qquad \matr{M}_{3}=\begin{bmatrix}
+ \nodept{x}{1} & \nodept{x}{2} & \nodept{x}{3} & \nodept{x}{4} \\
+ \nodept{y}{1} & \nodept{y}{2} & \nodept{y}{3} & \nodept{y}{4} \\
+ \nodept{z}{1} & \nodept{z}{2} & \nodept{z}{3} & \nodept{z}{4} \\
+ 1 & 1 & 1 & 1
+ \end{bmatrix}
+\end{equation}
+then the volume of the simplex, $V$, is given by
+\begin{equation}
+V=\determinant{\matr{M}_{d}}=\pm\factorial{d}\abs{K}
+\end{equation}
+where $\abs{K}$ is the \emph{measure} of the simplex and the
+$\pm$ factor is related to the \emph{orientation} of the
+simplex.
+
+\subsubsection{Barycentric coordinates}
+\label{subsubsec:BasisFunctionsSimplexBarycentricCoords}\
+
+Simplex basis functions are based on \emph{barycentric coordinates},
+also called area coordinates. If we consider a $d$ dimensional simplex
+the location of a point in space, $\coordinatevector\in\rntopology{d}$, is
+given by
+\begin{equation}
+ \coordinatevector=\gsum{i=1}{d+1}{\fnof{\barycoordinate{i}}{\coordinatevector}\nodept{\coordinatevector}{i}}
+\end{equation}
+where $\fnof{\barycoordinate{i}}{\coordinatevector}$ is the \nth{i}
+barycentric coordinate and $\nodept{\coordinatevector}{i}$ is the location of
+the \nth{i} vertex of the simplex.
+
+The barycentric coordinates have the properties that they sum to one \ie
+\begin{equation}
+  \gsum{i=1}{d+1}{\fnof{\barycoordinate{i}}{\coordinatevector}}=1
+\end{equation}
+and that they are $1$ at one vertex and $0$ at the other vertices \ie
+\begin{equation}
+\fnof{\barycoordinate{i}}{\nodept{\coordinatevector}{j}}=\kronecker{i}{j}\qquad i,j=1,\ldots,d+1
+\end{equation}
+
+In general the \nth{i} barycentric coordinate can be found from
+\begin{equation}
+  \fnof{\barycoordinate{i}}{\coordinatevector}=1-
+  \dfrac{
+    \dotprod{\pbrac{\coordinatevector-\nodept{\coordinatevector}{i}}}{\nodept{\normal}{i}}
+  }{ 
+    \dotprod{\pbrac{\nodept{\coordinatevector}{f}-\nodept{\coordinatevector}{i}}}{\nodept{\normal}{i}}
+  }
+\end{equation}
+where $\nodept{\normal}{i}$ is the outward normal of the facet
+opposite the \nth{i} vertex and $\nodept{\coordinatevector}{f}$ is any
+vertex belonging to this facet.
+
+On simplex elements barycentric coordinates are also called area
+coordinates as they are related to the relative areas defined areas
+formed by the point of interest and the vertices. Consider the \twodal
+simplex in \figref{fig:AreaCoordinates}. For a point of interest,
+$\coordinatevector$, an area associated with the \nth{i} vertex, can be
+formed from the the point of interest and the two other opposite facet
+vertices, $\nodept{\coordinatevector}{f}$. The \nth{i} barycentric
+coordinate is then found from the ratio of this area to the total area
+of the simplex.
 
 \epstexfigure{BasisFunctions/svgs/areacoordinates.eps_tex}{Area coordiantes
-  for a quadratic triangular simplex.}{Area coordinates for a quadratic
-  triangular simplex element.}{fig:AreaCoordiantes}{0.75}
+  for a quadratic triangular simplex.}{Barycentric or area coordinates
+  for a (quadratic) triangular simplex element. For a point of
+  interest, $\coordinatevector$, three triangles can be formed from the point
+  to two other vertices. The triangle is then associated with the
+  vertex opposite the edge associated with the two other vertices. In
+  this example the blue triangle is associated with vertiex $1$, the
+  green triangle with vertex $2$, and the red triangle with vertex
+  $3$. The barycentric coordinate
+  $\fnof{\barycoordinate{i}}{\coordinatevector}$ is then given by the ratio
+  of area of the triangle associated with the \nth{i} vertex and the
+  total area of the simplex (the sum of the blue, green, and red
+  areas).}{fig:AreaCoordinates}{0.75}
 
-For Simplex line elements there are two area coordinates which are a function of $\xi_{1}$ \ie
+\subsubsection{Simplex reference element}
+\label{subsubsec:BasisFunctionsSimplexReferenceElement}
+
+The reference element for simplex elements can be defined as
+in \figref{fig:SimplexReference}. The reference element is defined
+with respect to a normalised element coordinate system,
+$\elementcoordinatevector$. There is some choice as to how a simplex is mapped to
+the reference element coordinate system. For example is the first
+vertex mapped to the origin of the reference coordinate or is it the
+last vertex? To keep some concistency with the quadralateral reference
+elements in \OpenCMISS the simplex reference element of dimension $d$
+is defined by mapping vertex 1 to the origin of the elemental
+$\elementcoordinatevector$ coordinate system and the \nth{i+1} vertex to location
+$1$ on the \nth{i} $\elementcoordinatesymbol$ coordinate.
+
+\epstexfigure{BasisFunctions/svgs/SimplexReference.eps_tex}{Reference elements for simplex elements of different dimensions.}{Mapping of simplex elements of various dimension in the top row to their respective reference elements in the bottom row. The reference elements are defined with respect to normalised elemental coordinates, $\elementcoordinatevector$. Vertex 1 is mapped to the origin of the reference element coordinate system and the \nth{i+1} vertex is mapped to location $1$ on the \nth{i} $\elementcoordinatesymbol$ coordinate.}{fig:SimplexReference}{0.66}
+
+On the reference simplex element the barycentric coordinates are given by
+\begin{alignat}{3}
+\fnof{\barycoordone}{\elementcoordinatevector}&=1-\gsum{i=1}{d}{\elementcoordinate{i}}& \\
+\fnof{\barycoordinate{i+1}}{\elementcoordinatevector}&=\elementcoordinate{i} & i=1,\ldots,d
+\end{alignat}
+
+Thus, for simplex line elements there are two area coordinates which are a function of $\elementcoordinatevector=\bbrac{\elemcoordone}$ \ie
 \begin{align}
-  L_{1} &= 1 - \xi_{1} \\
-  L_{2} &= \xi_{1} - 1
+  \fnof{\barycoordone}{\elementcoordinatevector} &= 1-\elemcoordone \\
+  \fnof{\barycoordtwo}{\elementcoordinatevector} &= \elemcoordone
 \end{align}
-
-The derivatives wrt to external coordinates are then given by 
+and for simplex triangle elements there are three area coordinates which are a function of $\elementcoordinatevector=\bbrac{\elemcoordone,\elemcoordtwo}$ \ie
 \begin{align}
-  \delby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \delby{\vect{\sbfnsymb{}}}{L_{2}}-\delby{\vect{\sbfnsymb{}}}{L_{1}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{1}}-
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{2}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{2}}
+  \fnof{\barycoordone}{\elementcoordinatevector} &= 1-\elemcoordone-\elemcoordtwo \\
+  \fnof{\barycoordtwo}{\elementcoordinatevector} &= \elemcoordone \\
+  \fnof{\barycoordthree}{\elementcoordinatevector} &= \elemcoordtwo
 \end{align}
-
-For Simplex triangle elements there are three area coordinates which are a function of $\xi_{1}$ and
-$\xi_{2}$ \ie
-\begin{align} 
-  L_{1} &= 1 - \xi_{1} \\
-  L_{2} &= 1 - \xi_{2} \\
-  L_{3} &= \xi_{1} + \xi_{2} - 1 
-\end{align}
-
-The derivatives wrt to external coordinates are then given by 
+and for simplex tetrahedral elements there are four area coordinates which are a function of $\elementcoordinatevector=\bbrac{\elemcoordone,\elemcoordtwo,\elemcoordthree}$ \ie
 \begin{align}
-  \delby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \delby{\vect{\sbfnsymb{}}}{L_{3}}-\delby{\vect{\sbfnsymb{}}}{L_{1}} \\
-  \delby{\vect{\sbfnsymb{}}}{\xi_{2}} &= \delby{\vect{\sbfnsymb{}}}{L_{3}}-\delby{\vect{\sbfnsymb{}}}{L_{2}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{1}}- 
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{3}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{3}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{2}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{2}}- 
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{3}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{3}} \\
-  \deltwoby{\vect{\sbfnsymb{}}}{\xi_{1}}{\xi_{2}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{3}}-
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{3}}-\deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{3}}+
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{2}}
+  \fnof{\barycoordone}{\elementcoordinatevector} &= 1-\elemcoordone-\elemcoordtwo-\elemcoordthree \\
+  \fnof{\barycoordtwo}{\elementcoordinatevector} &= \elemcoordone \\
+  \fnof{\barycoordthree}{\elementcoordinatevector} &= \elemcoordtwo \\
+  \fnof{\barycoordfour}{\elementcoordinatevector} &= \elemcoordthree
 \end{align}
-  
-For Simplex tetrahedral elements there are four area coordinates which are a
-function of $\xi_{1}$, $\xi_{2}$ and $\xi_{3}$ \ie
+
+The interpolation formulae for simplex elements of dimension $d$ is
+\begin{equation}
+  \fnof{u}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}=\sbfn{i}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}\nodept{u}{i}\qquad i=1,\dots,d+1
+\end{equation}
+
+Care must be taken to obtain the derivative of the basis functions with respect to the reference elemental coordinate. For example
+\begin{equation}
+\begin{aligned}
+  \delby{\fnof{u}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\elemcoordone}&=\delby{\pbrac{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}\nodept{u}{i}}}{\elemcoordone}\\
+  &=\delby{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\barycoordinate{j}}\delby{\barycoordinate{j}}{\elemcoordone}\nodept{u}{i}\\
+  &=\pbrac{\delby{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\barycoordone}\delby{\barycoordone}{\elemcoordone}+ \delby{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\barycoordtwo}\delby{\barycoordtwo}{\elemcoordone}}\nodept{u}{i}\\
+  &=\pbrac{\delby{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\barycoordtwo}-\delby{\sbfn{i}{\fnof{\barycoordinatevector}{\elemcoordone}}}{\barycoordone}}\nodept{u}{i}
+\end{aligned} 
+\end{equation}
+
+In general, the derivative of the line basis functions vector with
+respect to the reference elemental coordinates is given by
+\begin{equation}
+\begin{aligned}
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordone} &=
+  -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+\delby{\vect{\sbfnsymb{}}}{\barycoordtwo} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordone} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordtwo} 
+\end{aligned}
+\end{equation}
+
+For triangular elements the derivative of the basis functions vector
+with respect to the reference elemental coordinates are given by
 \begin{align}
-  L_{1} &= 1 - \xi_{1} \\
-  L_{2} &= 1 - \xi_{2} \\
-  L_{3} &= 1 - \xi_{3} \\
-  L_{4} &= \xi_{1} + \xi_{2} + \xi_{3} - 2
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordone} &= -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \delby{\vect{\sbfnsymb{}}}{\barycoordtwo} \\
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordtwo} &= -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \delby{\vect{\sbfnsymb{}}}{\barycoordthree} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordone} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}- 
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordtwo} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordtwo} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}- 
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordthree} \\
+  \deltwoby{\vect{\sbfnsymb{}}}{\elemcoordone}{\elemcoordtwo} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}+
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordtwo}{\barycoordthree}
 \end{align}
 
-The derivatives wrt to external coordinates are then given by
+For tetrahedral elements the derivative of the basis functions vector
+with respect to the reference elemental coordinates are given by
 \begin{align}
-  \delby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \delby{\vect{\sbfnsymb{}}}{L_{4}}-\delby{\vect{\sbfnsymb{}}}{L_{1}} \\
-  \delby{\vect{\sbfnsymb{}}}{\xi_{2}} &= \delby{\vect{\sbfnsymb{}}}{L_{4}}-\delby{\vect{\sbfnsymb{}}}{L_{2}} \\
-  \delby{\vect{\sbfnsymb{}}}{\xi_{3}} &= \delby{\vect{\sbfnsymb{}}}{L_{4}}-\delby{\vect{\sbfnsymb{}}}{L_{3}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{1}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{1}}-
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{4}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{4}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{2}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{2}}-
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{4}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{4}} \\
-  \deltwosqby{\vect{\sbfnsymb{}}}{\xi_{3}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{3}}-
-  2\deltwoby{\vect{\sbfnsymb{}}}{L_{3}}{L_{4}}+\deltwosqby{\vect{\sbfnsymb{}}}{L_{4}} \\  
-  \deltwoby{\vect{\sbfnsymb{}}}{\xi_{1}}{\xi_{2}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{4}}-
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{4}}-\deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{4}}+
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{2}} \\
-  \deltwoby{\vect{\sbfnsymb{}}}{\xi_{1}}{\xi_{3}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{4}}-
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{4}}-\deltwoby{\vect{\sbfnsymb{}}}{L_{3}}{L_{4}}+
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{3}} \\
-  \deltwoby{\vect{\sbfnsymb{}}}{\xi_{2}}{\xi_{3}} &= \deltwosqby{\vect{\sbfnsymb{}}}{L_{4}}-
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{4}}-\deltwoby{\vect{\sbfnsymb{}}}{L_{3}}{L_{4}}+
-  \deltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{3}} \\
-  \delthreeby{\vect{\sbfnsymb{}}}{\xi_{1}}{\xi_{2}}{\xi_{3}} &= \delthreecuby{\vect{\sbfnsymb{}}}{L_{4}}-
-  \deldeltwoby{\vect{\sbfnsymb{}}}{L_{1}}{L_{4}}-\deldeltwoby{\vect{\sbfnsymb{}}}{L_{2}}{L_{4}}-
-  \deldeltwoby{\vect{\sbfnsymb{}}}{L_{3}}{L_{4}}+ \\
-  &\delthreeby{\vect{\sbfnsymb{}}}{L_{1}}{L_{2}}{L_{4}}+\delthreeby{\vect{\sbfnsymb{}}}{L_{1}}{L_{3}}{L_{4}}+
-  \delthreeby{\vect{\sbfnsymb{}}}{L_{2}}{L_{3}}{L_{4}}-\delthreeby{\vect{\sbfnsymb{}}}{L_{1}}{L_{2}}{L_{3}}
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordone} &=
+  -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \delby{\vect{\sbfnsymb{}}}{\barycoordtwo} \\
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordtwo} &=
+  -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \delby{\vect{\sbfnsymb{}}}{\barycoordthree} \\
+  \delby{\vect{\sbfnsymb{}}}{\elemcoordthree} &=
+  -\delby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \delby{\vect{\sbfnsymb{}}}{\barycoordfour} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordone} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordtwo} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordtwo} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordthree} \\
+  \deltwosqby{\vect{\sbfnsymb{}}}{\elemcoordthree} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  2\deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordfour}+
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordfour} \\  
+  \deltwoby{\vect{\sbfnsymb{}}}{\elemcoordone}{\elemcoordtwo} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}+
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordtwo}{\barycoordthree} \\
+  \deltwoby{\vect{\sbfnsymb{}}}{\elemcoordone}{\elemcoordthree} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordfour}+
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordtwo}{\barycoordfour} \\
+  \deltwoby{\vect{\sbfnsymb{}}}{\elemcoordtwo}{\elemcoordthree} &=
+  \deltwosqby{\vect{\sbfnsymb{}}}{\barycoordone}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}-
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordfour}+
+  \deltwoby{\vect{\sbfnsymb{}}}{\barycoordthree}{\barycoordfour} \\
+  \delthreeby{\vect{\sbfnsymb{}}}{\elemcoordone}{\elemcoordtwo}{\elemcoordthree} &=
+  -\delthreecuby{\vect{\sbfnsymb{}}}{\barycoordone}+
+  \deltwodelby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}+
+  \deltwodelby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}+
+  \deltwodelby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordfour} \\
+   &-\delthreeby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}{\barycoordthree}-
+   \delthreeby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordtwo}{\barycoordfour}-
+   \delthreeby{\vect{\sbfnsymb{}}}{\barycoordone}{\barycoordthree}{\barycoordfour}+
+   \delthreeby{\vect{\sbfnsymb{}}}{\barycoordtwo}{\barycoordthree}{\barycoordfour}
 \end{align}
 
-\epstexfigure{BasisFunctions/svgs/lineartriangle.eps_tex}{Linear Triangle
-  Definition.}{Linear triangle local node ordering.}{fig:lineartriangle}{0.5}
-\epstexfigure{BasisFunctions/svgs/quadratictriangle.eps_tex}{Quadratic Triangle
-  Definition.}{Quadratic triangle local node ordering.}{fig:quadratictriangle}{0.5}
-\epstexfigure{BasisFunctions/svgs/cubictriangle.eps_tex}{Cubic Triangle
-  Definition.}{Cubic triangle local node ordering.}{fig:cubictriangle}{0.5}
 
-\epstexfigure{BasisFunctions/svgs/lineartetrahedron.eps_tex}{Linear Tetrahedron
-  Definition.}{Linear tetrahedron local node ordering.}{fig:lineartetrahedron}{0.5}
-\epstexfigure{BasisFunctions/svgs/quadratictetrahedron.eps_tex}{Quadratic Tetrahedron
-  Definition.}{Qudadratic tetrahedron local node ordering.}{fig:quadratictetrahedron}{0.5}
-\epstexfigure{BasisFunctions/svgs/cubictetrahedron.eps_tex}{Cubic Tetrahedron
-  Definition.}{Cubic tetrahedron local node ordering.}{fig:cubictetrahedron}{0.5}
+\subsubsection{Linear simplex elements}
+\label{subsubsec:BasisFunctionsSimplexLinear}
 
+The linear simplex elements are shown in \figref{fig:LinearSimplex}.
+
+\epstexfigure{BasisFunctions/svgs/LinearSimplex.eps_tex}{Linear simplex reference elements.}{Linear simplex reference elements in 1D (left), 2D (middle), and 3D (right).}{fig:LinearSimplex}{0.66}
+
+The linear simplex basis functions for 1D line elements are given by
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\\
+  &=1-\elemcoordone\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\\
+  &=\elemcoordone
+\end{aligned}
+\label{eqn:OneDLinearSimplexBasisFunctions}
+\end{equation}
+and for 2D triangular elements are
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\\
+  &=1-\elemcoordone-\elemcoordtwo\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\\
+  &=\elemcoordone\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordthree\\
+  &=\elemcoordtwo
+\end{aligned}
+\label{eqn:TwoDLinearSimplexBasisFunctions}
+\end{equation}
+and for 3D tetrahedral elements are
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\\
+  &=1-\elemcoordone-\elemcoordtwo-\elemcoordthree\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\\
+  &=\elemcoordone\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordthree\\
+  &=\elemcoordtwo\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordfour\\
+  &=\elemcoordthree
+\end{aligned}
+\label{eqn:ThreeDLinearSimplexBasisFunctions}
+\end{equation}
+
+
+\begin{figure}[hbtp]
+   \centering
+   \gnuplotsubfigure{BasisFunctions/gnuplots/linsimplextriangle1.gnuplot}{2D linear simplex basis function $1$.}
+     {2D linear simplex basis function $1$, $\sbfn{1}{\elemcoordone,\elemcoordtwo}$.}{subfig:LinearSimplexTriangle1}{0.45\linewidth}{10}{3}{}
+   \hfil
+   \gnuplotsubfigure{BasisFunctions/gnuplots/linsimplextriangle2.gnuplot}{2D linear simplex basis function $2$.}
+     {2D linear simplex basis function $2$, $\sbfn{2}{\elemcoordone,\elemcoordtwo}$.}{subfig:LinearSimplexTriangle2}{0.45\linewidth}{10}{3}{}
+   \hfil
+   \gnuplotsubfigure{BasisFunctions/gnuplots/linsimplextriangle3.gnuplot}{2D linear simplex basis function $3$.}
+     {2D linear simplex basis function $3$, $\sbfn{3}{\elemcoordone,\elemcoordtwo}$.}{subfig:LinearSimplexTriangle3}{0.45\linewidth}{10}{3}{}
+   \caption[2D linear simplex basis functions.]{2D linear simplex basis functions.}
+   \label{fig:LinearSimplexTriangleBasisFunctions}
+\end{figure}
+            
+
+
+\subsubsection{Quadratic simplex elements}
+\label{subsubsec:BasisFunctionsSimplexQuadratic}
+
+The quadratic simplex elements are shown in \figref{fig:QuadraticSimplex}.
+
+\epstexfigure{BasisFunctions/svgs/QuadraticSimplex.eps_tex}{Quadratic simplex reference elements.}{Quadratic simplex reference elements in 1D (left), 2D (middle), and 3D (right).}{fig:QuadraticSimplex}{0.66}
+
+The quadratic simplex basis functions for 1D line elements are given by
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\pbrac{2\barycoordone-1}=2\barycoordonesq-\barycoordone\\
+  &=\pbrac{1-\elemcoordone}\pbrac{2\pbrac{1-\elemcoordone}-1}\\
+  &=2\elemcoordonesq-3\elemcoordone+1\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=4\barycoordone\barycoordtwo \\
+  &=4\pbrac{1-\elemcoordone}\elemcoordone\\
+  &=-4\elemcoordonesq+4\elemcoordone\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\pbrac{2\barycoordtwo-1}=2\barycoordtwosq-\barycoordtwo\\
+  &=\elemcoordone\pbrac{2\elemcoordone-1}\\
+  &=2\elemcoordonesq-2\elemcoordone
+\end{aligned}
+\label{eqn:OneDQuadraticSimplexBasisFunctions}
+\end{equation}
+and for 2D triangular elements are
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\pbrac{2\barycoordone-1}=2\barycoordonesq-\barycoordone\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{2\pbrac{1-\elemcoordone-\elemcoordtwo}-1}\\
+  &=2\pbrac{\elemcoordonesq+\elemcoordtwosq}+4\elemcoordone\elemcoordtwo-3\pbrac{\elemcoordone+\elemcoordtwo}+1\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\pbrac{2\barycoordtwo-1}=2\barycoordtwosq-\barycoordtwo\\
+  &=\elemcoordone\pbrac{2\elemcoordone-1}\\
+  &=2\elemcoordonesq-\elemcoordone\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordthree\pbrac{2\barycoordthree-1}=2\barycoordthreesq-\barycoordthree\\
+  &=\elemcoordtwo\pbrac{2\elemcoordtwo-1}\\
+  &=2\elemcoordtwosq-\elemcoordtwo\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=4\barycoordone\barycoordtwo\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo}\elemcoordone\\
+  &=-\elemcoordonesq-\elemcoordone\elemcoordtwo+\elemcoordone\\
+  \sbfn{5}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=4\barycoordtwo\barycoordthree\\
+  &=\elemcoordone\elemcoordtwo\\
+  \sbfn{6}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=4\barycoordone\barycoordthree\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo}\elemcoordtwo\\
+  &=-\elemcoordtwosq-\elemcoordone\elemcoordtwo+\elemcoordtwo
+\end{aligned}
+\label{eqn:TwoDQuadraticSimplexBasisFunctions}
+\end{equation}
+and for 3D tetrahedral elements are
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\pbrac{2\barycoordone-1}=2\barycoordonesq-\barycoordone\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{2\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-1}\\
+  &=2\pbrac{\elemcoordonesq+\elemcoordtwosq+\elemcoordthreesq}+4\pbrac{\elemcoordone\elemcoordtwo+\elemcoordtwo\elemcoordthree+\elemcoordone\elemcoordthree}-3\pbrac{\elemcoordone+\elemcoordtwo+\elemcoordthree}+1\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\pbrac{2\barycoordtwo-1}=2\barycoordtwosq-\barycoordtwo\\
+  &=\elemcoordone\pbrac{2\elemcoordone-1}\\
+  &=2\elemcoordonesq-\elemcoordone\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordthree\pbrac{2\barycoordthree-1}=2\barycoordthreesq-\barycoordthree\\
+  &=\elemcoordtwo\pbrac{2\elemcoordtwo-1}\\
+  &=2\elemcoordtwosq-\elemcoordtwo\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordfour\pbrac{2\barycoordfour-1}=2\barycoordfoursq-\barycoordfour\\
+  &=\elemcoordthree\pbrac{2\elemcoordthree-1}\\
+  &=2\elemcoordthreesq-\elemcoordthree\\
+  \sbfn{5}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\barycoordtwo\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordone\\
+  &=-\elemcoordonesq-\elemcoordone\elemcoordtwo-\elemcoordone\elemcoordtwo+\elemcoordone\\
+  \sbfn{6}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\barycoordthree\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordtwo\\
+  &=-\elemcoordtwosq-\elemcoordone\elemcoordtwo-\elemcoordtwo\elemcoordthree+\elemcoordtwo\\
+  \sbfn{7}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordone\barycoordfour\\
+  &=\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordthree\\
+  &=-\elemcoordthreesq-\elemcoordone\elemcoordthree-\elemcoordtwo\elemcoordthree+\elemcoordthree\\
+  \sbfn{8}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\barycoordthree\\
+  &=\elemcoordone\elemcoordtwo\\
+  \sbfn{9}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordthree\barycoordfour\\
+  &=\elemcoordtwo\elemcoordthree\\
+  \sbfn{10}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\barycoordtwo\barycoordfour\\
+  &=\elemcoordone\elemcoordthree
+\end{aligned}
+\label{eqn:ThreeDQuadraticSimplexBasisFunctions}
+\end{equation}
+ 
+\subsubsection{Cubic simplex elements}
+\label{subsubsec:BasisFunctionsSimplexCubic}
+
+The cubic simplex elements are shown in \figref{fig:CubicSimplex}.
+
+\epstexfigure{BasisFunctions/svgs/CubicSimplex.eps_tex}{Cubic simplex reference elements.}{Cubic simplex reference elements in 1D (left), 2D (middle), and 3D (right).}{fig:CubicSimplex}{0.66}
+
+The cubic simplex basis functions for 1D line elements are given by
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordone\pbrac{3\barycoordone-1}\pbrac{3\barycoordone-2}=\frac{1}{2}\pbrac{9\barycoordonecube-9\barycoordonesq+2\barycoordone}\\
+  &=\frac{1}{2}\pbrac{1-\elemcoordone}\pbrac{3\pbrac{1-\elemcoordone}-1}\pbrac{3\pbrac{1-\elemcoordone}-2}\\
+  &=\frac{1}{2}\pbrac{-9\elemcoordonecube+18\elemcoordonesq-11\elemcoordone+2}\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordtwo-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone}\pbrac{3\pbrac{1-\elemcoordone}-1}\elemcoordone\\
+  &=\frac{9}{2}\pbrac{3\elemcoordonecube-5\elemcoordonesq+2\elemcoordone}\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordtwo-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordone\barycoordtwosq-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone}\pbrac{3\elemcoordone-1}\elemcoordone\\
+  &=\frac{9}{2}\pbrac{-3\elemcoordonesq+4\elemcoordonesq-\elemcoordone}\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\pbrac{3\barycoordtwo-2}=\frac{1}{2}\pbrac{9\barycoordtwocube-9\barycoordonesq+2\barycoordtwo}\\
+  &=\frac{1}{2}\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordonecube-9\elemcoordonesq+2\elemcoordone}
+\end{aligned}
+\label{eqn:OneDCubicSimplexBasisFunctions}
+\end{equation}
+and for 2D triangle elements are
+\footnotesize
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordone\pbrac{3\barycoordone-1}\pbrac{3\barycoordone-2}=\frac{1}{2}\pbrac{9\barycoordonecube-9\barycoordonesq+2\barycoordone}\\
+  &=\frac{1}{2}\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo}-1}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo}-2}\\
+  &=\frac{1}{2}\pbrac{-9\pbrac{\elemcoordonecube+\elemcoordtwocube}-27\pbrac{\elemcoordonesq\elemcoordtwo+\elemcoordone\elemcoordtwosq}+18\pbrac{\elemcoordonesq+\elemcoordtwosq}+36\elemcoordone\elemcoordtwo-8\pbrac{\elemcoordone+\elemcoordtwo}+2}\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\pbrac{3\barycoordtwo-2}=\frac{1}{2}\pbrac{9\barycoordtwocube-9\barycoordtwosq+2\barycoordtwo}\\
+  &=\frac{1}{2}\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordonecube-9\elemcoordonesq+2\elemcoordone}\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordthree\pbrac{3\barycoordthree-1}\pbrac{3\barycoordthree-2}=\frac{1}{2}\pbrac{9\barycoordthreecube-9\barycoordthreesq+2\barycoordthree}\\
+  &=\frac{1}{2}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordtwocube-9\elemcoordtwosq+2\elemcoordtwo}\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordtwo-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo}-1}\elemcoordone\\
+  &=\frac{9}{2}\pbrac{3\elemcoordonecube+6\elemcoordonesq\elemcoordtwo+3\elemcoordone\elemcoordtwosq-5\elemcoordonesq-5\elemcoordone\elemcoordtwo+2\elemcoordone}\\
+  \sbfn{5}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordtwo-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordone\barycoordtwosq-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{3\elemcoordone-1}\elemcoordone\\
+  &=\frac{9}{2}\pbrac{-3\pbrac{\elemcoordonesq\elemcoordtwo+\elemcoordone\elemcoordtwosq}+\elemcoordtwosq+4\elemcoordone\elemcoordtwo-\elemcoordtwo}\\
+  \sbfn{6}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordtwosq\barycoordthree-\barycoordtwo\barycoordthree}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordone-1}\elemcoordtwo\\
+  &=\frac{9}{2}\pbrac{3\elemcoordonesq\elemcoordtwo-\elemcoordone\elemcoordtwo}\\
+  \sbfn{7}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordthree-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordtwo\barycoordthreesq-\barycoordtwo\barycoordthree}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordtwo-1}\elemcoordtwo\\
+  &=\frac{9}{2}\pbrac{3\elemcoordone\elemcoordtwosq-\elemcoordone\elemcoordtwo}\\
+  \sbfn{8}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordthree-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordone\barycoordthreesq-\barycoordone\barycoordthree}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{3\elemcoordtwo-1}\elemcoordtwo\\
+  &=\frac{9}{2}\pbrac{-3\elemcoordtwocube-3\elemcoordone\elemcoordtwosq+4\elemcoordtwosq+\elemcoordone\elemcoordtwo-\elemcoordtwo}\\
+  \sbfn{9}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordthree-\barycoordone\barycoordthree}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo}-1}\elemcoordtwo\\
+  &=\frac{9}{2}\pbrac{3\elemcoordtwocube+3\elemcoordonesq\elemcoordtwo+6\elemcoordone\elemcoordtwosq-5\elemcoordtwosq-5\elemcoordone\elemcoordtwo+2\elemcoordtwo}\\
+  \sbfn{10}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=27\barycoordone\barycoordtwo\barycoordthree\\
+  &=27\pbrac{1-\elemcoordone-\elemcoordtwo}\elemcoordone\elemcoordtwo\\
+  &=-\elemcoordonesq\elemcoordtwo-\elemcoordone\elemcoordtwosq+\elemcoordone\elemcoordtwo  
+\end{aligned}
+\label{eqn:TwoDCubicSimplexBasisFunctions}
+\end{equation}
+\normalsize
+and for 3D tetrahedral elements are
+\footnotesize
+\begin{equation}
+\begin{aligned}
+  \sbfn{1}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordone\pbrac{3\barycoordone-1}\pbrac{3\barycoordone-2}=\frac{1}{2}\pbrac{9\barycoordonecube-9\barycoordonesq+2\barycoordone}\\
+  &=\frac{1}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-1}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-2}\\
+  &=\frac{1}{2}\left(-9\pbrac{\elemcoordonecube+\elemcoordtwocube+\elemcoordthreecube}-27\pbrac{\elemcoordonesq\elemcoordtwo+\elemcoordone\elemcoordtwosq+\elemcoordtwosq\elemcoordthree+\elemcoordtwo\elemcoordthreesq+\elemcoordonesq\elemcoordthree+\elemcoordone\elemcoordthreesq}\right.\\
+  &\qquad\left.-54\elemcoordone\elemcoordtwo\elemcoordthree+18\pbrac{\elemcoordonesq+\elemcoordtwosq+\elemcoordthreesq}+36\pbrac{\elemcoordone\elemcoordtwo+\elemcoordtwo\elemcoordthree+\elemcoordone\elemcoordthree}-11\pbrac{\elemcoordone+\elemcoordtwo+\elemcoordthree}+2\right)\\
+  \sbfn{2}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\pbrac{3\barycoordtwo-2}=\frac{1}{2}\pbrac{9\barycoordtwocube-9\barycoordtwosq+2\barycoordtwo}\\
+  &=\frac{1}{2}\elemcoordone\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordonecube-9\elemcoordonesq+2\elemcoordone}\\
+  \sbfn{3}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordthree\pbrac{3\barycoordthree-1}\pbrac{3\barycoordthree-2}=\frac{1}{2}\pbrac{9\barycoordthreecube-9\barycoordthreesq+2\barycoordthree}\\
+  &=\frac{1}{2}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\pbrac{3\elemcoordtwo-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordtwocube-9\elemcoordtwosq+2\elemcoordone}\\
+  \sbfn{4}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{1}{2}\barycoordfour\pbrac{3\barycoordfour-1}\pbrac{3\barycoordfour-2}=\frac{1}{2}\pbrac{9\barycoordfourcube-9\barycoordfoursq+2\barycoordfour}\\  
+  &=\frac{1}{2}\elemcoordthree\pbrac{3\elemcoordthree-1}\pbrac{3\elemcoordthree-2}\\
+  &=\frac{1}{2}\pbrac{9\elemcoordthreecube-9\elemcoordthreesq+2\elemcoordthree}\\
+  \sbfn{5}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordtwo-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-1}\elemcoordone\\
+  \sbfn{6}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordtwo-1}\barycoordtwo=\frac{9}{2}\pbrac{3\barycoordone\barycoordtwosq-\barycoordone\barycoordtwo}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\elemcoordone-1}\pbrac{3\elemcoordone-2}\\
+  \sbfn{7}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordthree-\barycoordone\barycoordthree}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-1}\elemcoordtwo\\
+  \sbfn{8}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordthree-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordone\barycoordthreesq-\barycoordone\barycoordthree}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\elemcoordtwo-1}\elemcoordtwo\\
+  \sbfn{9}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordone-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordonesq\barycoordfour-\barycoordone\barycoordfour}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}-1}\elemcoordthree\\
+  \sbfn{10}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordone\pbrac{3\barycoordfour-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordone\barycoordfoursq-\barycoordone\barycoordfour}\\
+  &=\frac{9}{2}\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\pbrac{3\elemcoordthree-1}\elemcoordthree
+\end{aligned}
+\label{eqn:ThreeDCubicSimplexBasisFunctions1}
+\end{equation}
+\normalsize
+and
+\footnotesize
+\begin{equation}
+\begin{aligned}
+  \sbfn{11}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordtwosq\barycoordthree-\barycoordtwo\barycoordthree}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordone-1}\elemcoordtwo\\
+  \sbfn{12}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordthree-1}\barycoordthree=\frac{9}{2}\pbrac{3\barycoordtwo\barycoordthreesq-\barycoordtwo\barycoordthree}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordtwo-1}\elemcoordtwo\\
+  \sbfn{13}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordthree\pbrac{3\barycoordthree-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordthreesq\barycoordfour-\barycoordthree\barycoordfour}\\
+  &=\frac{9}{2}\elemcoordtwo\pbrac{3\elemcoordtwo-1}\elemcoordthree\\
+  \sbfn{14}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordthree\pbrac{3\barycoordfour-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordthree\barycoordfoursq-\barycoordthree\barycoordfour}\\
+  &=\frac{9}{2}\elemcoordtwo\pbrac{3\elemcoordthree-1}\elemcoordthree\\
+  \sbfn{15}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordtwo-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordtwosq\barycoordfour-\barycoordtwo\barycoordfour}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordone-1}\elemcoordthree\\
+  \sbfn{16}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=\frac{9}{2}\barycoordtwo\pbrac{3\barycoordfour-1}\barycoordfour=\frac{9}{2}\pbrac{3\barycoordtwo\barycoordfoursq-\barycoordtwo\barycoordfour}\\
+  &=\frac{9}{2}\elemcoordone\pbrac{3\elemcoordthree-1}\elemcoordthree\\
+  \sbfn{17}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=27\barycoordone\barycoordtwo\barycoordthree\\
+  &=27\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordone\elemcoordtwo\\
+  \sbfn{18}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=27\barycoordone\barycoordtwo\barycoordfour\\
+  &=27\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordone\elemcoordthree\\
+  \sbfn{19}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=27\barycoordone\barycoordthree\barycoordfour\\
+  &=27\pbrac{1-\elemcoordone-\elemcoordtwo-\elemcoordthree}\elemcoordtwo\elemcoordthree\\
+  \sbfn{20}{\fnof{\barycoordinatevector}{\elementcoordinatevector}}&=27\barycoordtwo\barycoordthree\barycoordfour\\
+  &=27\elemcoordone\elemcoordtwo\elemcoordthree
+\end{aligned}
+\label{eqn:ThreeDCubicSimplexBasisFunctions2}
+\end{equation}
+\normalsize
 
 \subsection{General linear map}
 
 From the definition of Christoffel symbols
 \begin{equation}
-  \deltwoby{x^{p}}{\xi^{j}}{\xi^{k}}=\christoffel{m}{k}{j}\delby{x^{p}}{\xi^{m}}
+  \deltwoby{x^{p}}{\elementcoordinate{j}}{\elementcoordinate{k}}=\christoffel{m}{k}{j}\delby{x^{p}}{\elementcoordinate{m}}
 \end{equation}
 \ie
 \begin{equation}
-  \christoffel{i}{k}{j}=\deltwoby{x^{l}}{\xi^{k}}{\xi^{j}}\delby{\xi^{i}}{x^{l}}
+  \christoffel{i}{k}{j}=\deltwoby{x^{l}}{\elementcoordinate{k}}{\elementcoordinate{j}}\delby{\elementcoordinate{i}}{x^{l}}
 \end{equation}
 or in vector form
 \begin{equation}
-  \christoffel{i}{j}{k}=\dotprod{\deltwoby{\vectr{x}}{\xi^{k}}{\xi^{j}}}{\gradient{}{\xi^{i}}}
+  \christoffel{i}{j}{k}=\dotprod{\deltwoby{\coordinatevector}{\elementcoordinate{k}}{\elementcoordinate{j}}}{\gradient{}{\elementcoordinate{i}}}
 \end{equation}
 

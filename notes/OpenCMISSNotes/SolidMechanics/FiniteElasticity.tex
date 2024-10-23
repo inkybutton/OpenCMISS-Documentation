@@ -85,59 +85,59 @@ where $J$ is the \emph{Jacobian} of the mapping and is given by
 Let
 $\mapping{\chi}{\embedmanifold{B}_{0}}{\fnof{\chi}{\embedmanifold{B}_{0}}\subset\manifold{S}}$
 be a deformation configuration of $\embedmanifold{B}$ in $\manifold{S}$. The
-tangent of the mapping \ie $\tangentbundle{\chi}$ is denoted as $\tensor{F}$
+tangent of the mapping \ie $\tangentbundle{\chi}$ is denoted as $\deformationgradienttensor$
 and is called the \emph{deformation gradient} of $\chi$ \ie
-$\tensor{F}=\tangentbundle{\chi}$. For $X\in\embedmanifold{B}_{0}$ we
+$\deformationgradienttensor=\tangentbundle{\chi}$. For $X\in\embedmanifold{B}_{0}$ we
 have\symbolat{$\tensortwo{F}$}{Deformation gradient tensor}
 \begin{equation}
-  \tensor{F}_{X}=\mapping{\fnof{\tensor{F}}{X}}{\tangentspace{\embedmanifold{B}_{0}}{X}}{\tangentspace{\manifold{S}}{\fnof{\chi}{X}}}
+  \deformationgradienttensor_{X}=\mapping{\fnof{\deformationgradienttensor}{X}}{\tangentspace{\embedmanifold{B}_{0}}{X}}{\tangentspace{\manifold{S}}{\fnof{\chi}{X}}}
 \end{equation}
  
 If $X^{I}$ and $x^{i}$ are the coordinates on $\embedmanifold{B}_{0}$ and
 $\manifold{S}$ then the deformation gradient tensor with respect to the
 coordinate bases are
 \begin{equation}
-  \fnof{\tensor{F}}{X}=\fnof{F^{i}_{I}}{X}\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}=\delby{\fnof{\chi^{i}}{X}}{X^{I}}\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}
+  \fnof{\deformationgradienttensor}{X}=\fnof{\deformationgradienttensorsymbol^{i}_{I}}{X}\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}=\delby{\fnof{\chi^{i}}{X}}{X^{I}}\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}
 \end{equation}
 
-Note that $\tensor{F}$ is a two-point tensor. 
+Note that $\deformationgradienttensor$ is a two-point tensor. 
 
 The polar decomposition
 
 \begin{diagram}
  & & \tangentspace{B}{X} & & \\
- & \ruTo^{\tensor{U}} & & \rdTo^{\tensor{R}} \\
-\tangentspace{B}{X} & & \rTo^{\tensor{F}} & & \tangentspace{S}{x}\\
- & \rdTo_{\tensor{R}} & & \ruTo_{\tensor{V}} \\
+ & \ruTo^{\rightstretchtensor} & & \rdTo^{\tensor{R}} \\
+\tangentspace{B}{X} & & \rTo^{\deformationgradienttensor} & & \tangentspace{S}{x}\\
+ & \rdTo_{\tensor{R}} & & \ruTo_{\leftstretchtensor} \\
  & &  \tangentspace{S}{x} & &
 \end{diagram}
 
 is given by
 \begin{equation}
-  \tensor{F}=\dotprod{\tensor{R}}{\tensor{U}}=\dotprod{\tensor{V}}{\tensor{R}}
+  \deformationgradienttensor=\dotprod{\tensor{R}}{\rightstretchtensor}=\dotprod{\leftstretchtensor}{\tensor{R}}
 \end{equation}
-where $\tensor{U}$ is the \emph{right stretch tensor}, $\tensor{V}$ is the
+where $\rightstretchtensor$ is the \emph{right stretch tensor}, $\leftstretchtensor$ is the
 \emph{left stretch tensor} and $\tensor{R}$ is the \emph{rotation
-  tensor}.\symbolat{$\tensor{U}$}{Right stretch
-  tensor}\symbolat{$\tensor{V}$}{Left stretch
+  tensor}.\symbolat{$\rightstretchtensor$}{Right stretch
+  tensor}\symbolat{$\leftstretchtensor$}{Left stretch
   tensor}\symbolat{$\tensor{R}$}{Rotation tensor}
 
 If we let the deformed coordinates be given by the position vector,
 $\fnof{\vectr{z}}{\vectr{x},t}$ then the deformation gradient tensor with
 respect to the undeformed $\vectr{X}$ coordinates is given by
 \begin{equation}
-  \fnof{\tensor{F}}{\vectr{X}}=\delby{\vectr{z}}{\vectr{X}}
-\end{equation}
+  \fnof{\deformationgradienttensor}{\vectr{X}}=\delby{\vectr{z}}{\vectr{X}}
+\end{equation} 
 or, in component form,
 \begin{equation}
-  F^{i}_{I}=\delby{z^{i}}{X^{I}}=\delby{z^{i}}{\xi^{r}}\delby{\xi^{r}}{X^{I}}
+  \deformationgradienttensorsymbol^{i}_{I}=\delby{z^{i}}{X^{I}}=\delby{z^{i}}{\xi^{r}}\delby{\xi^{r}}{X^{I}}
 \end{equation}
 
 The deformation gradient tensor can also be used to map lines, area and volume forms
 between the reference and current configurations and vice versa \ie
 \begin{align}
-  \exteriorderiv{\covectr{x}} &= \tensor{F}\exteriorderiv{\covectr{X}} \\
-  \exteriorderiv{\covectr{a}} &= J\invtranspose{\tensor{F}}\exteriorderiv{\covectr{A}} \\
+  \exteriorderiv{\covectr{x}} &= \deformationgradienttensor\exteriorderiv{\covectr{X}} \\
+  \exteriorderiv{\covectr{a}} &= J\invtranspose{\deformationgradienttensor}\exteriorderiv{\covectr{A}} \\
   \exteriorderiv{v} &= J\exteriorderiv{V}
 \end{align}
 where $\exteriorderiv{\covectr{X}}$, $\exteriorderiv{\covectr{A}}$ and
@@ -146,7 +146,7 @@ configuration and $\exteriorderiv{\covectr{x}}$, $\exteriorderiv{\covectr{a}}$ a
 $\exteriorderiv{v}$ are the line, area and volume forms in the current
 configuration. $J$ is the \emph{Jacobian} and is given by
 \begin{equation}
-  J=\sqrt{\dfrac{\determinant{\tensor{g}}}{\determinant{\tensor{G}}}}\determinant{\tensor{F}}
+  J=\sqrt{\dfrac{\determinant{\tensor{g}}}{\determinant{\materialmetrictensor}}}\determinant{\deformationgradienttensor}
 \end{equation}
 
 The formula for mapping areas is known as \emph{Nanson's formula} and is
@@ -156,7 +156,7 @@ given by
 \end{equation}
 or
 \begin{equation}
-  \covectr{n}\exteriorderiv{\covectr{a}}=J\invtranspose{\tensor{F}}\covectr{N}\exteriorderiv{\covectr{A}}
+  \covectr{n}\exteriorderiv{\covectr{a}}=J\invtranspose{\deformationgradienttensor}\covectr{N}\exteriorderiv{\covectr{A}}
 \end{equation}
 where $\covectr{N}$ and $\exteriorderiv{\covectr{A}}$ are the unit normal and
 area form in the reference configuration,  $\covectr{n}$ and $\exteriorderiv{\covectr{a}}$ are the unit normal and
@@ -168,63 +168,70 @@ Strain and deformation tensors quantify the amount of strain or deformation
 \ie the amount of stretch or distance between material points.  
 
 There are three strain tensors in the \emph{material} coordinate system. The
-\emph{right Cauchy-Green (or Green) deformation tensor}, $\tensor{C}$, is
+\emph{right Cauchy-Green (or Green) deformation tensor}, $\rightcauchygreentensor$, is
 defined by\symbolat{$\tensortwo{C}$}{Right Cauchy-Green (or Green) deformation
   tensor}
 \begin{equation}
-  \mapping{\fnof{\tensor{C}}{X}}{\tangentspace{\embedmanifold{B}}{X}}{\tangentspace{\embedmanifold{B}}{X}}
+  \mapping{\fnof{\rightcauchygreentensor}{X}}{\tangentspace{\embedmanifold{B}}{X}}{\tangentspace{\embedmanifold{B}}{X}}
 \end{equation}
-as the pullback of the spatial metric tensor \ie $\fnof{\tensor{C}}{X}=\transpose{\fnof{\tensor{F}}{X}}\fnof{\tensor{g}}{x}\fnof{\tensor{F}}{X}$
-or $\tensor{C}=\transpose{\tensor{F}}\tensor{g}\tensor{F}$ where $x=\fnof{\chi}{X}$. In terms of coordinates we
-have
+as the pullback of the spatial metric tensor \ie
+$\fnof{\rightcauchygreentensor}{X}=\transpose{\fnof{\deformationgradienttensor}{X}}\fnof{\spatialmetrictensor}{x}
+\fnof{\deformationgradienttensor}{X}$ or
+$\rightcauchygreentensor=\transpose{\deformationgradienttensor}\spatialmetrictensor\deformationgradienttensor$
+where $x=\fnof{\chi}{X}$. In terms of coordinates we have
 \begin{equation}
-  \tensor{C}=C_{IJ}\tensorprod{\vectr{G}^{I}}{\vectr{G}^{J}}=g_{ij}F^{i}_{I}F^{j}_{J}\,\dotprodthree{\tensorprod{\vectr{G}^{I}}{\vectr{g}_{i}}}{\tensorprod{\vectr{g}^{i}}{\vectr{g}^{j}}}{\tensorprod{\vectr{g}_{j}}{\vectr{G}^{J}}}=\transpose{\tensor{F}}\tensor{g}\tensor{F}
+  \rightcauchygreentensor=\rightcauchygreentensorsymbol_{IJ}
+  \tensorprod{\materialbasevector^{I}}{\materialbasevector^{J}}=
+  \spatialmetrictensorsymbol_{ij}\deformationgradienttensorsymbol^{i}_{I}\deformationgradienttensorsymbol^{j}_{J}\,
+  \dotprodthree{\tensorprod{\materialbasevector^{I}}{\spatialbasevector_{i}}}{\tensorprod{\spatialbasevector^{i}}{
+      \spatialbasevector^{j}}}{\tensorprod{\spatialbasevector_{j}}{\materialbasevector^{J}}}=
+  \transpose{\deformationgradienttensor}\spatialmetrictensor\deformationgradienttensor
 \end{equation}
 
-If $\tensor{C}$ is invertible we also have $\tensor{B}=\inverse{\tensor{C}}$
-where $\tensor{B}$ is called the \emph{Piola deformation
-  tensor}.\symbolat{$\tensortwo{B}$}{Piola deformation tensor}
+If $\rightcauchygreentensor$ is invertible we also have $\pioladeformationtensor=\inverse{\rightcauchygreentensor}$
+where $\pioladeformationtensor$ is called the \emph{Piola deformation
+  tensor}.\symbolat{$\pioladeformationtensor$}{Piola deformation tensor}
 
 We also have the \emph{Green-Lagrange strain tensor} is given by the difference
-in metric tensors\symbolat{$\tensortwo{E}$}{Green-Lagrange strain tensor}
+in metric tensors\symbolat{$\greenlagrangestraintensor$}{Green-Lagrange strain tensor}
 \begin{equation}
-  \fnof{\tensor{E}}{X}=\frac{1}{2}\pbrac{\fnof{\tensor{C}}{X}-\tensor{G}}
+  \fnof{\greenlagrangestraintensor}{X}=\frac{1}{2}\pbrac{\fnof{\rightcauchygreentensor}{X}-\materialmetrictensor}
 \end{equation}
 of, in component form
 \begin{equation}
-  \tensor{E}=E_{IJ}\tensorprod{\vectr{G}^{I}}{\vectr{G}^{J}}=\frac{1}{2}\pbrac{C_{IJ}-G_{IJ}}\tensorprod{\vectr{G}^{I}}{\vectr{G}^{J}}
+  \greenlagrangestraintensor=\greenlagrangestraintensorsymbol_{IJ}\tensorprod{\materialbasevector^{I}}{\materialbasevector^{J}}=\frac{1}{2}\pbrac{\rightcauchygreentensorsymbol_{IJ}-\materialmetrictensorsymbol_{IJ}}\tensorprod{\materialbasevector^{I}}{\materialbasevector^{J}}
 \end{equation}
 
 There are also three strain tensors in the \emph{spatial} coordinate
 sytsem. The \emph{left Cauchy-Green (or Finger) deformation tensor},
-$\tensor{b}$, is defined by\symbolat{$\tensortwo{b}$}{Left Cauchy-Green (or
+$\leftcauchygreentensor$, is defined by\symbolat{$\tensortwo{b}$}{Left Cauchy-Green (or
   Finger) deformation tensor}
 \begin{equation}
-  \mapping{\fnof{\tensor{b}}{x}}{\tangentspace{\fnof{\chi}{\embedmanifold{B}}}{x}}{\tangentspace{\fnof{\chi}{\embedmanifold{B}}}{x}}
+  \mapping{\fnof{\leftcauchygreentensor}{x}}{\tangentspace{\fnof{\chi}{\embedmanifold{B}}}{x}}{\tangentspace{\fnof{\chi}{\embedmanifold{B}}}{x}}
 \end{equation}
 as the push forward of the material metric tensor \ie
-$\fnof{\tensor{b}}{x}=\fnof{\tensor{F}}{X}\fnof{\tensor{G}}{X}\transpose{\fnof{\tensor{F}}{X}}$
-or $\tensor{b}=\tensor{F}\tensor{G}\transpose{\tensor{F}}$ where
+$\fnof{\leftcauchygreentensor}{x}=\fnof{\deformationgradienttensor}{X}\fnof{\materialmetrictensor}{X}\transpose{\fnof{\deformationgradienttensor}{X}}$
+or $\leftcauchygreentensor=\deformationgradienttensor\materialmetrictensor\transpose{\deformationgradienttensor}$ where
 $X=\fnof{\inverse{\chi}}{x}$. In terms of coordinates we have
 \begin{equation}
-  \tensor{b}=b^{ij}\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}=G^{IJ}F^{i}_{I}F^{j}_{J}\dotprodthree{\tensorprod{\vectr{g}_{i}}{\vectr{G}^{I}}}{\tensorprod{\vectr{G}_{I}}{\vectr{G}_{J}}}{\tensorprod{\vectr{G}^{J}}{\vectr{g}_{j}}}=\tensor{F}\tensor{G}\transpose{\tensor{F}}
+  \leftcauchygreentensor=\leftcauchygreentensorsymbol^{ij}\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}=\materialmetrictensorsymbol^{IJ}\deformationgradienttensorsymbol^{i}_{I}\deformationgradienttensorsymbol^{j}_{J}\dotprodthree{\tensorprod{\spatialbasevector_{i}}{\materialbasevector^{I}}}{\tensorprod{\materialbasevector_{I}}{\materialbasevector_{J}}}{\tensorprod{\materialbasevector^{J}}{\spatialbasevector_{j}}}=\deformationgradienttensor\materialmetrictensor\transpose{\deformationgradienttensor}
 \end{equation}
 
 The left and right Cauchy-Green deformation tensors get their left and right
 names from their relationship to the left and right stretch tensors \ie in
 cartesian coordinates
 \begin{equation}
-  \tensor{U}=\sqrt{\tensor{C}}
+  \rightstretchtensor=\sqrt{\rightcauchygreentensor}
 \end{equation}
 and
 \begin{equation}
-  \tensor{V}=\sqrt{\tensor{b}}
+  \leftstretchtensor=\sqrt{\leftcauchygreentensor}
 \end{equation}
 
-We also have $\tensor{c}=\inverse{\tensor{b}}$ where $\tensor{c}$ is the
+We also have $\tensor{c}=\inverse{\leftcauchygreentensor}$ where $\tensor{c}$ is the
 \emph{Cauchy deformation tensor} \ie \symbolat{$\tensor{c}$}{Cauchy deformation tensor}
 \begin{equation}
-	  \tensor{c}=c_{ij}\tensorprod{\vectr{g}^{i}}{\vectr{g}^{j}}
+	  \tensor{c}=c_{ij}\tensorprod{\spatialbasevector^{i}}{\spatialbasevector^{j}}
 \end{equation}
 
 The final spatial strain tensor is the \emph{Euler-Almansi strain tensor},
@@ -242,29 +249,29 @@ and
 \end{equation}
 where $\tensor{c}=\inverse{\tensor{b}}$. In component form we have
 \begin{equation}
-  \tensor{e}=e_{ij}\tensorprod{\vectr{g}^{i}}{\vectr{g}^{j}}=\frac{1}{2}\pbrac{g_{ij}-c_{ij}}\tensorprod{\vectr{g}^{i}}{\vectr{g}^{j}}
+  \tensor{e}=e_{ij}\tensorprod{\spatialbasevector^{i}}{\spatialbasevector^{j}}=\frac{1}{2}\pbrac{g_{ij}-c_{ij}}\tensorprod{\spatialbasevector^{i}}{\spatialbasevector^{j}}
 \end{equation}
 
 Note that we have the following relationships between the deformation tensors
 and metric tensors
 \begin{alignat}{7}
-  \flattensor{\tensor{C}}&=&\pullback{\chi}{\flattensor{\tensor{g}}} &&\quad&
-  \flattensor{\tensor{c}}&=&\pushforward{\chi}{\flattensor{\tensor{G}}} \\
-  \sharptensor{\tensor{B}}&=&\pullback{\chi}{\sharptensor{\tensor{g}}} &&\quad&
-  \sharptensor{\tensor{b}}&=&\pushforward{\chi}{\sharptensor{\tensor{G}}} \\
-  \flattensor{\tensor{E}}&=&\pullback{\chi}{\flattensor{\tensor{e}}} &&\quad&
-  \flattensor{\tensor{e}}&=&\pushforward{\chi}{\flattensor{\tensor{E}}} \\ 
-  &=&\frac{1}{2}\pbrac{\pullback{\chi}{\flattensor{\tensor{g}}}-\flattensor{\tensor{G}}}&&\quad&
-  &=&\frac{1}{2}\pbrac{\flattensor{\tensor{g}}-\pushforward{\chi}{\flattensor{\tensor{G}}}}
+  \flattensor{\rightcauchygreentensor}&=&\pullback{\chi}{\flattensor{\tensor{g}}} &&\quad&
+  \flattensor{\tensor{c}}&=&\pushforward{\chi}{\flattensor{\materialmetrictensor}} \\
+  \sharptensor{\pioladeformationtensor}&=&\pullback{\chi}{\sharptensor{\tensor{g}}} &&\quad&
+  \sharptensor{\tensor{b}}&=&\pushforward{\chi}{\sharptensor{\materialmetrictensor}} \\
+  \flattensor{\greenlagrangestraintensor}&=&\pullback{\chi}{\flattensor{\tensor{e}}} &&\quad&
+  \flattensor{\tensor{e}}&=&\pushforward{\chi}{\flattensor{\greenlagrangestraintensor}} \\ 
+  &=&\frac{1}{2}\pbrac{\pullback{\chi}{\flattensor{\tensor{g}}}-\flattensor{\materialmetrictensor}}&&\quad&
+  &=&\frac{1}{2}\pbrac{\flattensor{\tensor{g}}-\pushforward{\chi}{\flattensor{\materialmetrictensor}}}
 \end{alignat}
 \ie
 \begin{alignat}{7}
-  \flattensor{\tensor{C}}&=&\transpose{\tensor{F}}\flattensor{\tensor{g}}\tensor{F} &\quad&
-  \flattensor{\tensor{c}}&=&\invtranspose{\tensor{F}}\flattensor{\tensor{G}}\inverse{\tensor{F}} \\
-  \sharptensor{\tensor{B}}&=&\inverse{\tensor{F}}\sharptensor{\tensor{g}}\invtranspose{\tensor{F}} &\quad&
-  \sharptensor{\tensor{b}}&=&\tensor{F}\sharptensor{\tensor{G}}\transpose{\tensor{F}} \\
-  \flattensor{\tensor{E}}&=&\transpose{\tensor{F}}\flattensor{\tensor{e}}\tensor{F} &\quad&
-  \flattensor{\tensor{e}}&=&\invtranspose{\tensor{F}}\flattensor{\tensor{E}}\inverse{\tensor{F}}   
+  \flattensor{\rightcauchygreentensor}&=&\transpose{\deformationgradienttensor}\flattensor{\tensor{g}}\deformationgradienttensor &\quad&
+  \flattensor{\tensor{c}}&=&\invtranspose{\deformationgradienttensor}\flattensor{\materialmetrictensor}\inverse{\deformationgradienttensor} \\
+  \sharptensor{\pioladeformationtensor}&=&\inverse{\deformationgradienttensor}\sharptensor{\tensor{g}}\invtranspose{\deformationgradienttensor} &\quad&
+  \sharptensor{\tensor{b}}&=&\deformationgradienttensor\sharptensor{\materialmetrictensor}\transpose{\deformationgradienttensor} \\
+  \flattensor{\greenlagrangestraintensor}&=&\transpose{\deformationgradienttensor}\flattensor{\tensor{e}}\deformationgradienttensor &\quad&
+  \flattensor{\tensor{e}}&=&\invtranspose{\deformationgradienttensor}\flattensor{\greenlagrangestraintensor}\inverse{\deformationgradienttensor}   
 \end{alignat}
 or, in component form,
 \begin{alignat}{3}
@@ -291,7 +298,7 @@ configuration and can be measured. It is defined by
 \end{equation}
 \ie
 \begin{equation}
-  \fnof{\tensor{\sigma}}{x}=\sigma^{ij}\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}
+  \fnof{\tensor{\sigma}}{x}=\sigma^{ij}\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}
 \end{equation}
 
 Cauchy's law....
@@ -309,7 +316,7 @@ The \emph{Piola transform} allows mapping of vector fields on the current
 configuration to equivalent vector fields in the reference configuration. The
 transform is given by
 \begin{equation}
-  \vectr{Y}=J\pullback{\chi}{\vectr{y}}=J\inverse{\tensor{F}}\vectr{y}
+  \vectr{Y}=J\pullback{\chi}{\vectr{y}}=J\inverse{\deformationgradienttensor}\vectr{y}
 \end{equation}
 where $\vectr{y}$ is the vector field on the current configuration and
 $\vectr{Y}$ is the equivalent vector field on the reference configuration. In
@@ -330,7 +337,7 @@ Using the Piola transform we can construct two new stress tensors. If we apply
 the Piola transform to the second index of the Cauchy stress tensor we obtain
 the \emph{First Piola-Kirchoff Stress Tensor}\symbolat{$\tensortwo{P}$}{First Piola-Kirchoff stress tensor} \ie
 \begin{equation}
-  \tensor{P}=P^{iI}\tensorprod{\vectr{g}_{i}}{\vectr{G}_{I}}=J\pbrac{\inverse{F}}^{I}_{j}\sigma^{ij}\dotprod{\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}}{\tensorprod{\vectr{g}^{j}}{\vectr{G}_{I}}}=J\tensor{\sigma}\invtranspose{\tensor{F}}
+  \tensor{P}=P^{iI}\tensorprod{\spatialbasevector_{i}}{\materialbasevector_{I}}=J\pbrac{\inverse{F}}^{I}_{j}\sigma^{ij}\dotprod{\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}}{\tensorprod{\spatialbasevector^{j}}{\materialbasevector_{I}}}=J\tensor{\sigma}\invtranspose{\deformationgradienttensor}
 \end{equation}
 
 The first Piola-Kirchoff stress tensor relates forces in the current
@@ -340,17 +347,17 @@ $\tensor{P}$ is a two point tensor and is not symmetric.
 The relationship between Cauchy stress and the First Piola-Kirchoff stress is
 given by
 \begin{equation}
-  \tensor{\sigma}=\inverse{J}\tensor{P}\transpose{\tensor{F}}
+  \tensor{\sigma}=\inverse{J}\tensor{P}\transpose{\deformationgradienttensor}
 \end{equation}
 
 If we now apply the Piola transform to the first index of the First Piola-Kirchoff stress tensor we obtain
 the \emph{Second Piola-Kirchoff Stress Tensor}\symbolat{$\tensortwo{S}$}{Second Piola-Kirchoff stress tensor} \ie
 \begin{equation}
-  \tensor{S}=\inverse{\tensor{F}}\tensor{P}
+  \tensor{S}=\inverse{\deformationgradienttensor}\tensor{P}
 \end{equation}
 or, in terms of the Cauchy stress,
 \begin{equation}
-  \tensor{S}=S^{IJ}\tensorprod{\vectr{G}_{I}}{\vectr{G}_{J}}=J\pbrac{\inverse{F}}^{I}_{i}\pbrac{\inverse{F}}^{J}_{j}\sigma^{ij}\dotprod{\dotprod{\tensorprod{\vectr{G}_{I}}{\vectr{g}^{i}}}{\tensorprod{\vectr{g}_{i}}{\vectr{g}_{j}}}}{\tensorprod{\vectr{g}^{j}}{\vectr{G}_{J}}}=J\inverse{\tensor{F}}\tensor{\sigma}\invtranspose{\tensor{F}}
+  \tensor{S}=S^{IJ}\tensorprod{\materialbasevector_{I}}{\materialbasevector_{J}}=J\pbrac{\inverse{F}}^{I}_{i}\pbrac{\inverse{F}}^{J}_{j}\sigma^{ij}\dotprod{\dotprod{\tensorprod{\materialbasevector_{I}}{\spatialbasevector^{i}}}{\tensorprod{\spatialbasevector_{i}}{\spatialbasevector_{j}}}}{\tensorprod{\spatialbasevector^{j}}{\materialbasevector_{J}}}=J\inverse{\deformationgradienttensor}\tensor{\sigma}\invtranspose{\deformationgradienttensor}
 \end{equation}
 
 The second Piola-Kirchoff stress tensor relates forces in the reference
@@ -359,11 +366,11 @@ configuration with areas in the reference configuration.
 Note that the Kirchoff stress is just the push forward of the second
 Piola-Kirchoff stress \ie
 \begin{equation}
-  \tensor{\tau}=\tensor{F}\tensor{S}\transpose{\tensor{F}}
+  \tensor{\tau}=\deformationgradienttensor\tensor{S}\transpose{\deformationgradienttensor}
 \end{equation}
 and
 \begin{equation}
-  \tensor{S}=\inverse{\tensor{F}}\tensor{\tau}\invtranspose{\tensor{F}}
+  \tensor{S}=\inverse{\deformationgradienttensor}\tensor{\tau}\invtranspose{\deformationgradienttensor}
 \end{equation}
 
 BIOT STRESS
@@ -379,17 +386,17 @@ The relationships between the stress tensors are given in \Tabref{tab:Relationsh
     & $\tensor{\sigma}$ & $\tensor{\tau}$ & $\tensor{P}$ & $\tensor{S}$
     \\ \hline \hline
     $\tensor{\sigma}$ & - & $\inverse{J}\tensor{\tau}$ &
-    $\inverse{J}\tensor{P}\transpose{\tensor{F}}$ &
-    $\inverse{J}\tensor{F}\tensor{S}\transpose{\tensor{F}}$ \\
+    $\inverse{J}\tensor{P}\transpose{\deformationgradienttensor}$ &
+    $\inverse{J}\deformationgradienttensor\tensor{S}\transpose{\deformationgradienttensor}$ \\
     $\tensor{\tau}$ & $J\tensor{\sigma}$ & - &
-    $\tensor{P}\transpose{\tensor{F}}$ &
-    $\tensor{F}\tensor{S}\transpose{\tensor{F}}$ \\
-    $\tensor{P}$ & $J\tensor{\sigma}\invtranspose{\tensor{F}}$ &
-    $\tensor{\tau}\invtranspose{\tensor{F}}$ & - & $\tensor{F}\tensor{S}$ \\
+    $\tensor{P}\transpose{\deformationgradienttensor}$ &
+    $\deformationgradienttensor\tensor{S}\transpose{\deformationgradienttensor}$ \\
+    $\tensor{P}$ & $J\tensor{\sigma}\invtranspose{\deformationgradienttensor}$ &
+    $\tensor{\tau}\invtranspose{\deformationgradienttensor}$ & - & $\deformationgradienttensor\tensor{S}$ \\
     $\tensor{S}$ &
-    $J\inverse{\tensor{F}}\tensor{\sigma}\invtranspose{\tensor{F}}$ &
-    $\inverse{\tensor{F}}\tensor{\tau}\invtranspose{\tensor{F}}$ &
-    $\inverse{\tensor{F}}\tensor{P}$ & - \\ \hline
+    $J\inverse{\deformationgradienttensor}\tensor{\sigma}\invtranspose{\deformationgradienttensor}$ &
+    $\inverse{\deformationgradienttensor}\tensor{\tau}\invtranspose{\deformationgradienttensor}$ &
+    $\inverse{\deformationgradienttensor}\tensor{P}$ & - \\ \hline
   \end{tabular}
   \caption{Relationships between stress tensors.}
   \label{tab:RelationshipBetweenStressTensors}
@@ -557,6 +564,12 @@ Also note that in \OpenCMISS we have
     \tilde{\deformationgradienttensorsymbol}^{i}_{A}&=\delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
     \delby{\materialxicoordinatesymbol^{R}}{\materialfibrecoordinatesymbol^{A}}\\
     &=\delby{\materialcoordinatesymbol^{J}}{\materialfibrecoordinatesymbol^{A}}\deformationgradienttensorsymbol^{i}_{J}=
+    \delby{\materialcoordinatesymbol^{J}}{\materialfibrecoordinatesymbol^{A}}
+    \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{J}}
+    \delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}\\
+    &=\delby{\materialcoordinatesymbol^{J}}{\materialxicoordinatesymbol^{R}}
+    \delby{\materialxicoordinatesymbol^{R}}{\materialfibrecoordinatesymbol^{A}}
+    \deformationgradienttensorsymbol^{i}_{J}=
     \delby{\materialcoordinatesymbol^{J}}{\materialfibrecoordinatesymbol^{A}}
     \delby{\materialxicoordinatesymbol^{R}}{\materialcoordinatesymbol^{J}}
     \delby{\spatialcoordinatesymbol^{i}}{\materialxicoordinatesymbol^{R}}
@@ -865,13 +878,13 @@ The principal stretches in spatial fibre coordinates are then given by
 \subsection{Elasticity Tensors}
 \label{subsec:FiniteElasticityElasticityTensors}
 
-If $\fnof{\tensor{P}}{\vectr{X},\tensor{F}}$ is the first Piola-Kirchoff
+If $\fnof{\tensor{P}}{\vectr{X},\deformationgradienttensor}$ is the first Piola-Kirchoff
 constitutive function that depends on $\vectr{X}$ and the deformation
-gradient tensor $\tensor{F}$. The \emph{first elasticity tensor}\symbolat{$\tensorfour{A}$}{First elasticity
+gradient tensor $\deformationgradienttensor$. The \emph{first elasticity tensor}\symbolat{$\tensorfour{A}$}{First elasticity
   tensor},
 $\tensorfour{A}$, is given by 
 \begin{equation}
-  \tensorfour{A}=\delby{\tensor{P}}{\tensor{F}}
+  \tensorfour{A}=\delby{\tensor{P}}{\deformationgradienttensor}
 \end{equation}
 or
 \begin{equation}
@@ -880,13 +893,13 @@ or
 
 Note that $\tensorfour{A}$ is a two-point tensor. 
 
-If $\fnof{\tensor{S}}{\vectr{X},\tensor{C}}$ is the second Piola-Kirchoff
+If $\fnof{\tensor{S}}{\vectr{X},\rightcauchygreentensor}$ is the second Piola-Kirchoff
 constitutive function that depends on $\vectr{X}$ and the right Cauchy-Green
-strain tensor $\tensor{C}$. The \emph{second elasticity tensor}\symbolat{$\tensorfour{C}$}{Second elasticity
+strain tensor $\rightcauchygreentensor$. The \emph{second elasticity tensor}\symbolat{$\tensorfour{C}$}{Second elasticity
   tensor},
 $\tensorfour{C}$, is given by 
 \begin{equation}
-  \tensorfour{C}=\delby{\tensor{S}}{\tensor{C}}
+  \tensorfour{C}=\delby{\tensor{S}}{\rightcauchygreentensor}
 \end{equation}
 or
 \begin{equation}
@@ -895,7 +908,7 @@ or
 
 We can derive a relationship between $\tensorfour{A}$ and $\tensorfour{C}$. Differentiating
 \begin{equation}
-  \tensor{P}=\tensor{F}\tensor{S}
+  \tensor{P}=\deformationgradienttensor\tensor{S}
 \end{equation}
 or
 \begin{equation}
@@ -903,7 +916,7 @@ or
 \end{equation}
 with respect to the deformation gradient tensor gives
 \begin{equation}
-  \delby{P^{iA}}{F^{j}_{B}}=F^{i}_{C}\delby{S^{CA}}{C_{DE}}\delby{C_{DE}}{F^{i}_{C}}+\delby{F^{i}_{C}}{F^{j}_{B}}T^{CA}
+  \delby{P^{iA}}{F^{j}_{B}}=F^{i}_{C}\delby{S^{CA}}{C_{DE}}\delby{C_{DE}}{F^{i}_{C}}+\delby{F^{i}_{C}}{F^{j}_{B}}\secondpiolakirchofftensorsymbol^{CA}
 \end{equation}
 
 Now
@@ -1004,16 +1017,16 @@ WORK CONJUGATES: P and F, S and C/E.
 The first Piola-Kirchoff stress tensor is thus a function of postion and the
 deformation gradient tensor \ie
 \begin{equation}
-  \tensor{P}=\fnof{\tensor{P}}{\vectr{X},\fnof{\tensor{F}}{\vectr{X}}}
+  \tensor{P}=\fnof{\tensor{P}}{\vectr{X},\fnof{\deformationgradienttensor}{\vectr{X}}}
 \end{equation}
 
 In terms of the stored energy function we have
 \begin{equation}
-  \fnof{\tensor{P}}{\vectr{X}}=\delby{\fnof{\psi}{\fnof{\tensor{F}}{\vectr{X}},\vectr{X}}}{\fnof{\tensor{F}}{\vectr{X}}}
+  \fnof{\tensor{P}}{\vectr{X}}=\delby{\fnof{\psi}{\fnof{\deformationgradienttensor}{\vectr{X}},\vectr{X}}}{\fnof{\deformationgradienttensor}{\vectr{X}}}
 \end{equation}
 or, in component form,
 \begin{equation}
-  \tensor{P}=P^{iI}\tensorprod{\vectr{g}_{i}}{\vectr{G}_{I}}=\delby{\psi}{F^{i}_{I}}\tensorprod{\vectr{g}_{i}}{\vectr{G}_{I}}
+  \tensor{P}=P^{iI}\tensorprod{\spatialbasevector_{i}}{\materialbasevector_{I}}=\delby{\psi}{F^{i}_{I}}\tensorprod{\spatialbasevector_{i}}{\materialbasevector_{I}}
 \end{equation}
 ABOVE IS NOT RIGHT IN TERMS OF POSITION OF INDICES.
 
@@ -1021,7 +1034,7 @@ The second Piola-Kirchoff stress tensor is thus a function of position and
 the right Cauchy-Green deformation tensor (or, equivalently, the
 Green-Lagrange strain tensor) \ie
 \begin{equation}
-  \tensor{S}=\fnof{\tensor{S}}{\vectr{X},\fnof{\tensor{C}}{\vectr{X}}}
+  \tensor{S}=\fnof{\tensor{S}}{\vectr{X},\fnof{\rightcauchygreentensor}{\vectr{X}}}
 \end{equation}
 
 
@@ -1030,22 +1043,31 @@ stress tensor in fibre coordinates, $\fnof{\tensor{S}}{\vectr{N}}$, from
 either the right Cauchy-Green deformation tensor or the Green-Lagrange strain
 tensor \ie
 \begin{equation}
-  \fnof{\tensor{S}}{\vectr{N}}=2\delby{\fnof{W}{\fnof{\tensor{C}}{\vectr{N}}}}{\fnof{\tensor{C}}{\vectr{N}}}
+  \fnof{\tensor{S}}{\vectr{N}}=2\delby{\fnof{W}{\fnof{\rightcauchygreentensor}{\vectr{N}}}}{\fnof{\rightcauchygreentensor}{\vectr{N}}}
 \end{equation}
 or
 \begin{equation}
-  \fnof{\tensor{S}}{\vectr{N}}=\delby{\fnof{W}{\fnof{\tensor{E}}{\vectr{N}}}}{\fnof{\tensor{E}}{\vectr{N}}}
+  \fnof{\tensor{S}}{\vectr{N}}=\delby{\fnof{W}{\fnof{\greenlagrangestraintensor}{\vectr{N}}}}{\fnof{\greenlagrangestraintensor}{\vectr{N}}}
 \end{equation}
-where $\fnof{W}{\fnof{\tensor{C}}{\vectr{N}}}$ or
-$\fnof{W}{\fnof{\tensor{E}}{\vectr{N}}}$ is the strain energy
+where $\fnof{W}{\fnof{\rightcauchygreentensor}{\vectr{N}}}$ or
+$\fnof{W}{\fnof{\greenlagrangestraintensor}{\vectr{N}}}$ is the strain energy
 function. In component form we have
 \begin{equation}
-  \tensor{S}=S^{AB}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}=2\delby{\fnof{W}{\tensor{C}}}{\tensor{C}}=2\delby{\fnof{W}{\tensor{C}}}{C_{AB}}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}
+  \tensor{S}=S^{AB}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}=2\delby{\fnof{W}{\rightcauchygreentensor}}{\rightcauchygreentensor}=2\delby{\fnof{W}{\rightcauchygreentensor}}{C_{AB}}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}
 \end{equation}
 or
 \begin{equation}
-  \tensor{S}=S^{AB}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}=\delby{\fnof{W}{\tensor{E}}}{\tensor{E}}=\delby{\fnof{W}{\tensor{E}}}{E_{AB}}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}
+  \tensor{S}=S^{AB}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}=\delby{\fnof{W}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}=\delby{\fnof{W}{\greenlagrangestraintensor}}{E_{AB}}\tensorprod{\vectr{N}_{A}}{\vectr{N}_{B}}
 \end{equation}
+
+TIDY UP ABOVE.
+
+Constituative relationships in the spatial frame.
+
+
+
+
+
 
 \subsection{Compressible and Nearly-Incompressibile Materials}
 \label{subsec:FiniteElasticityCompressibleNearlyIncompressibleMat}
@@ -1070,33 +1092,33 @@ deviatoric). Following \citet{federico:2012} we start with a
 tensor}\symbolat{$\bar{\tensortwo{F}}$}{modified deformation gradient
   tensor} \ie
 \begin{equation}
-  \tensor{F}=J^{\frac{1}{3}}\bar{\tensor{F}} \quad\Rightarrow\quad \bar{\tensor{F}} =J^{-\frac{1}{3}}\tensor{F}
+  \deformationgradienttensor=J^{\frac{1}{3}}\bar{\deformationgradienttensor} \quad\Rightarrow\quad \bar{\deformationgradienttensor} =J^{-\frac{1}{3}}\deformationgradienttensor
   \label{eqn:modifiedDeformationGradientTensor}
 \end{equation}
-Note that $\determinant{\bar{\tensor{F}}}=1$ and so represents deformation that is
+Note that $\determinant{\bar{\deformationgradienttensor}}=1$ and so represents deformation that is
 purely distortional rather than dialational. 
 
 From the modified deformation gradient tensor we can construct the various
 deformation and strain tensors as before. In the reference configuration we
 have
 \begin{equation}
-  \tensor{C} = J^{\frac{1}{3}}J^{\frac{1}{3}}\transpose{\bar{\tensor{F}}}\tensor{g}\bar{\tensor{F}}=J^{\frac{2}{3}}\bar{\tensor{C}} \quad\Rightarrow\quad \bar{\tensor{C}} =J^{-\frac{2}{3}}\tensor{C}
+  \rightcauchygreentensor = J^{\frac{1}{3}}J^{\frac{1}{3}}\transpose{\bar{\deformationgradienttensor}}\tensor{g}\bar{\deformationgradienttensor}=J^{\frac{2}{3}}\bar{\rightcauchygreentensor} \quad\Rightarrow\quad \bar{\rightcauchygreentensor} =J^{-\frac{2}{3}}\rightcauchygreentensor
 \end{equation}
-where $\bar{\tensor{C}}$ is the \emph{modified right Cauchy-Green deformation
+where $\bar{\rightcauchygreentensor}$ is the \emph{modified right Cauchy-Green deformation
   tensor}\symbolat{$\bar{\tensortwo{C}}$}{modified right Cauchy-Green deformation tensor} and
 \begin{equation}
-  \tensor{E} =
-  J^{\frac{2}{3}}{\bar{\tensor{E}}}+\dfrac{1}{2}\pbrac{J^{\frac{2}{3}}-1}\tensor{G}
-  \quad\Rightarrow\quad \bar{\tensor{E}} = \dfrac{1}{2}\pbrac{\bar{\tensor{C}}-\tensor{G}}
+  \greenlagrangestraintensor =
+  J^{\frac{2}{3}}{\bar{\greenlagrangestraintensor}}+\dfrac{1}{2}\pbrac{J^{\frac{2}{3}}-1}\materialmetrictensor
+  \quad\Rightarrow\quad \bar{\greenlagrangestraintensor} = \dfrac{1}{2}\pbrac{\bar{\rightcauchygreentensor}-\materialmetrictensor}
 \end{equation}
-where $\bar{\tensor{E}}$ is the \emph{modified right Green-Lagrange strain
-  tensor}\symbolat{$\bar{\tensortwo{E}}$}{modified Green-Lagrange strain tensor}. Note that we also have
-$\bar{\tensor{B}}=\inverse{\bar{\tensor{C}}}$ the \emph{modified Piola
+where $\bar{\greenlagrangestraintensor}$ is the \emph{modified right Green-Lagrange strain
+  tensor}\symbolat{$\bar{\greenlagrangestraintensor}$}{modified Green-Lagrange strain tensor}. Note that we also have
+$\bar{\pioladeformationtensor}=\inverse{\bar{\rightcauchygreentensor}}$ the \emph{modified Piola
   deformation tensor}\symbolat{$\bar{\tensortwo{B}}$}{modified Piola deformation tensor}.
 
 The modified strain tensors in the current configuration are 
 \begin{equation}
-  \tensor{b} = J^{\frac{1}{3}}J^{\frac{1}{3}}\bar{\tensor{F}}\tensor{G}\transpose{\bar{\tensor{F}}}=J^{\frac{2}{3}}\bar{\tensor{b}} \quad\Rightarrow\quad \bar{\tensor{b}} =J^{-\frac{2}{3}}\tensor{b}
+  \tensor{b} = J^{\frac{1}{3}}J^{\frac{1}{3}}\bar{\deformationgradienttensor}\materialmetrictensor\transpose{\bar{\deformationgradienttensor}}=J^{\frac{2}{3}}\bar{\tensor{b}} \quad\Rightarrow\quad \bar{\tensor{b}} =J^{-\frac{2}{3}}\tensor{b}
 \end{equation}
 where $\bar{\tensor{b}}$ is the \emph{modified left Cauchy-Green deformation
   tensor}\symbolat{$\bar{\tensortwo{b}}$}{modified left Cauchy-Green deformation tensor} and
@@ -1114,37 +1136,37 @@ Consider now decomposing the strain energy function into a
 isochoric/deviatoric part and a volumetric/spherical part \ie
 \begin{equation}
   \begin{split}
-    \fnof{W}{\tensor{C}} &=
-    \fnof{W_{\Devop}}{\tensor{C}}+\fnof{W_{\Sphop}}{\tensor{C}} \\
-    &=\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensor{C}}}+\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensor{C}}}\\
-    &=\fnof{\bar{W}}{\fnof{\bar{\tensor{C}}}{\tensor{C}},\fnof{J}{\tensor{C}}}
+    \fnof{W}{\rightcauchygreentensor} &=
+    \fnof{W_{\Devop}}{\rightcauchygreentensor}+\fnof{W_{\Sphop}}{\rightcauchygreentensor} \\
+    &=\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}+\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\rightcauchygreentensor}}\\
+    &=\fnof{\bar{W}}{\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor},\fnof{J}{\rightcauchygreentensor}}
   \end{split}
   \label{eqn:FiniteElasticityDecomposedStrainEnergy}
 \end{equation}
 where
-$\fnof{\bar{W}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}$
-is the \emph{modified strain energy function}, $\fnof{J}{\tensor{C}}$ is the
+$\fnof{\bar{W}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}$
+is the \emph{modified strain energy function}, $\fnof{J}{\rightcauchygreentensor}$ is the
 Jacobian which quantifies volume change and
-$\fnof{\bar{\tensor{C}}}{\tensor{C}}$, is the modified right Cauchy-Green
+$\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}$, is the modified right Cauchy-Green
 deformation tensor.
 
 The second Piola-Kirchoff stress can now be obtained from
 \begin{equation}
   \begin{split}
-    \fnof{\tensor{S}}{\tensor{C}} &= 2\delby{\fnof{W}{\tensor{C}}}{\tensor{C}} \\
-    &=2\delby{\fnof{\bar{W}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{\tensor{C}}\\
+    \fnof{\tensor{S}}{\rightcauchygreentensor} &= 2\delby{\fnof{W}{\rightcauchygreentensor}}{\rightcauchygreentensor} \\
+    &=2\delby{\fnof{\bar{W}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{\rightcauchygreentensor}\\
     &=2\doubledotprod{
-      \delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}}{\bar{\tensortwo{C}}}
-    }{\delby{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}{\tensor{C}}}
-      +2\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}{J}\delby{\fnof{J}{\tensortwo{C}}}{\tensor{C}}
+      \delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}}{\bar{\tensortwo{C}}}
+    }{\delby{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}{\rightcauchygreentensor}}
+      +2\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}{J}\delby{\fnof{J}{\tensortwo{C}}}{\rightcauchygreentensor}
   \end{split}
 \end{equation}
 or equivalently
 \begin{equation}
   \begin{split}
-    \fnof{\tensor{S}}{\tensor{E}} &= \delby{\fnof{W}{\tensor{E}}}{\tensor{E}} \\
-    &=\delby{\fnof{\bar{W}}{\fnof{\bar{\tensor{E}}}{\tensortwo{E}},\fnof{J}{\tensortwo{E}}}}{\tensor{E}}\\
-    &=\doubledotprod{\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}}{\bar{\tensor{E}}}}{\delby{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}{\tensor{E}}}+\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{E}}}}{J}\delby{\fnof{J}{\tensortwo{E}}}{\tensor{E}}
+    \fnof{\tensor{S}}{\greenlagrangestraintensor} &= \delby{\fnof{W}{\greenlagrangestraintensor}}{\greenlagrangestraintensor} \\
+    &=\delby{\fnof{\bar{W}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor},\fnof{J}{\greenlagrangestraintensor}}}{\greenlagrangestraintensor}\\
+    &=\doubledotprod{\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\bar{\greenlagrangestraintensor}}}{\delby{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}+\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\greenlagrangestraintensor}}}{J}\delby{\fnof{J}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}
   \end{split}
 \end{equation}
 
@@ -1152,21 +1174,21 @@ We now define $\bar{\tensor{S}}$ as the \emph{second Piola-Kirchoff psuedo
   stress tensor}\symbolat{$\bar{\tensortwo{S}}$}{second Piola-Kirchoff
   psuedo stress tensor} \ie 
 \begin{equation}
-  \bar{\tensor{S}}=2\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}}{\bar{\tensor{C}}}=\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}}{\bar{\tensor{E}}}
+  \bar{\tensor{S}}=2\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}}{\bar{\rightcauchygreentensor}}=\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\bar{\greenlagrangestraintensor}}
 \end{equation}
 and
 \begin{equation}
-  p = -\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}{J}= -\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{E}}}}{J}
+  p = -\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}{J}= -\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\greenlagrangestraintensor}}}{J}
 \end{equation}
 as the \emph{hydrostatic pressure} to give
 \begin{align}
   \fnof{\tensor{S}}{\tensortwo{C}}
-  &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}{\tensor{C}}}
-  -2p\delby{\fnof{J}{\tensortwo{C}}}{\tensor{C}}
+  &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}{\rightcauchygreentensor}}
+  -2p\delby{\fnof{J}{\tensortwo{C}}}{\rightcauchygreentensor}
   \label{eqn:PK2StressC1} \\
-  \fnof{\tensor{S}}{\tensortwo{E}}
-  &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}}{\delby{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}{\tensor{E}}}
-  -p\delby{\fnof{J}{\tensortwo{E}}}{\tensor{E}}
+  \fnof{\tensor{S}}{\greenlagrangestraintensor}
+  &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\delby{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}
+  -p\delby{\fnof{J}{\greenlagrangestraintensor}}{\tensor{E}}
   \label{eqn:PK2StressE1}
 \end{align}
 
@@ -1236,14 +1258,14 @@ rearranging we obtain
   \label{eqn:DelCBarDelC}
 \end{equation}
 
-Similarily, as $\tensortwo{C}\sim 2\tensortwo{E}$, we have
+Similarily, as $\tensortwo{C}\sim 2\greenlagrangestraintensor$, we have
 \begin{equation}
-  \delby{\fnof{J}{\tensortwo{E}}}{\tensortwo{E}}=\fnof{J}{\tensortwo{E}}\tensortwo{B}
+  \delby{\fnof{J}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}=\fnof{J}{\greenlagrangestraintensor}\tensortwo{B}
   \label{eqn:DelJacobianDelE}
 \end{equation}
 and
 \begin{equation}
-  \delby{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}{\tensortwo{E}}=
+  \delby{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}=
   \fnof{J^{-\frac{2}{3}}}{\tensortwo{C}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\tensortwo{B}}{\tensortwo{C}}}{3}}
   \label{eqn:DelEBarDelE}
 \end{equation}
@@ -1253,9 +1275,9 @@ Substituting \eqnref{eqn:DelJacobianDelC} and \eqnref{eqn:DelCBarDelC} into
 \eqnref{eqn:DelEBarDelE} into \eqnref{eqn:PK2StressE1} we can thus find that
 \begin{equation}
   \begin{split}
-    \fnof{\tensor{S}}{\tensor{C}}
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}{\tensor{C}}}-2p\delby{\fnof{J}{\tensortwo{C}}}{\tensor{C}}\\
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\fnof{J^{-\frac{2}{3}}}{\tensortwo{C}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\tensor{C}}{\tensor{B}}}{3}}}-pJ\tensor{B}\\
+    \fnof{\tensor{S}}{\rightcauchygreentensor}
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}{\rightcauchygreentensor}}-2p\delby{\fnof{J}{\tensortwo{C}}}{\rightcauchygreentensor}\\
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\fnof{J^{-\frac{2}{3}}}{\tensortwo{C}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\rightcauchygreentensor}{\pioladeformationtensor}}{3}}}-pJ\pioladeformationtensor\\
     &=\fnof{\tensor{S}_{\pullback{\Devop}{}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}
     +\fnof{\tensor{S}_{\pullback{\Sphop}{}}}{\fnof{J}{\tensortwo{C}}}
   \end{split}
@@ -1265,10 +1287,10 @@ or
 \begin{equation}
   \begin{split}
     \fnof{\tensor{S}}{\tensor{E}}
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}}{\delby{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}{\tensor{E}}}-p\delby{\fnof{J}{\tensortwo{E}}}{\tensor{E}}\\
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}}{\fnof{J^{-\frac{2}{3}}}{\tensortwo{E}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\tensor{C}}{\tensor{B}}}{3}}}-pJ\tensor{B}\\
-    &=\fnof{\tensor{S}_{\pullback{\Devop}{}}}{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}
-    +\fnof{\tensor{S}_{\pullback{\Sphop}{}}}{\fnof{J}{\tensortwo{E}}}
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\delby{\fnof{\bar{\tensor{E}}}{\greenlagrangestraintensor}}{\tensor{E}}}-p\delby{\fnof{J}{\greenlagrangestraintensor}}{\tensor{E}}\\
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\fnof{J^{-\frac{2}{3}}}{\greenlagrangestraintensor}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\rightcauchygreentensor}{\pioladeformationtensor}}{3}}}-pJ\pioladeformationtensor\\
+    &=\fnof{\tensor{S}_{\pullback{\Devop}{}}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}
+    +\fnof{\tensor{S}_{\pullback{\Sphop}{}}}{\fnof{J}{\greenlagrangestraintensor}}
   \end{split}
   \label{eqn:FiniteElasticityDecomposedSecondPKinE}
 \end{equation}
@@ -1277,7 +1299,7 @@ It should be noted that $\tensor{S}_{\pullback{\Devop}{}}$ and
 $\tensor{S}_{\pullback{\Sphop}{}}$ are not the deviatoric and spherical parts
 of $\tensor{S}$. However, we do not require the deviatoric and spherical parts
 of the second Piola-Kirchoff stress tensor in the reference configuration (\ie
-with respect to the metric $\tensor{G}$) but rather we require that when we
+with respect to the metric $\materialmetrictensor$) but rather we require that when we
 push $\tensor{S}_{\pullback{\Devop}{}}$ and
 $\tensor{S}_{\pullback{\Sphop}{}}$ forward to give $\tensor{\sigma}_{\devop}$
 and $\tensor{\sigma}_{\sphop}$ that these tensors are deviatoric and
@@ -1289,18 +1311,18 @@ $\spatialidentitytensorfour$, spherical, $\spatialsphericaltensorfour$, and devi
 $\spatialdeviatorictensorfour$, tensors as
 \begin{align}
   \spatialsymidentitytensorfour=\symtensorprod{\spatialidentitytensortwo}{\tensortwo{\spatialidentitytensortwo}}&=
-  \spatialidentitytensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}\\ \nonumber
+  \spatialidentitytensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}\\ \nonumber
   &=
-  \dfrac{1}{2}\pbrac{\mixedkronecker{a}{c}\mixedkronecker{b}{d}+\mixedkronecker{a}{d}\mixedkronecker{b}{c}}\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  \dfrac{1}{2}\pbrac{\mixedkronecker{a}{c}\mixedkronecker{b}{d}+\mixedkronecker{a}{d}\mixedkronecker{b}{c}}\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\
   \spatialsphericaltensorfour=\dfrac{1}{3}\tensorprod{\sharptensor{\tensor{g}}}{\flattensor{\tensor{g}}}&=
-  \spatialsphericaltensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}\\ \nonumber
+  \spatialsphericaltensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}\\ \nonumber
   &=
-  \dfrac{1}{3}g^{ab}g_{cd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}\\
+  \dfrac{1}{3}g^{ab}g_{cd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}\\
   \spatialdeviatorictensorfour=\spatialsymidentitytensorfour-\spatialsphericaltensorfour&=
-  \spatialdeviatorictensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}\\ \nonumber
+  \spatialdeviatorictensorsymbol^{ab..}_{..cd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}\\ \nonumber
   &=
-  \pbrac{\dfrac{1}{2}\pbrac{\mixedkronecker{a}{c}\mixedkronecker{b}{d}+\mixedkronecker{a}{d}\mixedkronecker{b}{c}}-\dfrac{1}{3}g^{ab}g_{cd}}\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  \pbrac{\dfrac{1}{2}\pbrac{\mixedkronecker{a}{c}\mixedkronecker{b}{d}+\mixedkronecker{a}{d}\mixedkronecker{b}{c}}-\dfrac{1}{3}g^{ab}g_{cd}}\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
 \end{align}
 where $\spatialidentitytensortwo$ is the spatial identity tensor \ie
 $\spatialidentitytensortwo=\sharptensor{\tensortwo{g}}\flattensor{\tensortwo{g}}$.
@@ -1321,42 +1343,42 @@ The musical isomorphisms of these tensors are
 \begin{align}
   \sharptensor{\spatialsymidentitytensorfour}=
   \symtensorprod{\sharptensor{\tensortwo{g}}}{\sharptensor{\tensortwo{g}}} &=
-  \spatialidentitytensorsymbol^{abcd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  \spatialidentitytensorsymbol^{abcd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
   \\ \nonumber
   &=
-  \dfrac{1}{2}\pbrac{g^{ac}g^{bd}+g^{ad}g^{bc}}\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  \dfrac{1}{2}\pbrac{g^{ac}g^{bd}+g^{ad}g^{bc}}\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
   \\
   \sharptensor{\spatialsphericaltensorfour}=
   \dfrac{1}{3}\tensorprod{\sharptensor{\tensor{g}}}{\sharptensor{\tensor{g}}}&=
-  \spatialsphericaltensorsymbol^{abcd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  \spatialsphericaltensorsymbol^{abcd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
   \\ \nonumber
-  &=\dfrac{1}{3}g^{ab}g^{cd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  &=\dfrac{1}{3}g^{ab}g^{cd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
   \\
   \sharptensor{\spatialdeviatorictensorfour}=
   \sharptensor{\spatialsymidentitytensorfour}-\sharptensor{\spatialsphericaltensorfour}&=
-  \spatialdeviatorictensorsymbol^{abcd}\,\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  \spatialdeviatorictensorsymbol^{abcd}\,\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
   \\ \nonumber
-  &=\pbrac{\dfrac{1}{2}\pbrac{g^{ac}g^{bd}+g^{ad}g^{bc}}-\dfrac{1}{3}g^{ab}g^{cd}}\tensorprodfour{\vectr{g}_{a}}{\vectr{g}_{b}}{\vectr{g}_{c}}{\vectr{g}_{d}}
+  &=\pbrac{\dfrac{1}{2}\pbrac{g^{ac}g^{bd}+g^{ad}g^{bc}}-\dfrac{1}{3}g^{ab}g^{cd}}\tensorprodfour{\spatialbasevector_{a}}{\spatialbasevector_{b}}{\spatialbasevector_{c}}{\spatialbasevector_{d}}
 \end{align}
 and
 \begin{align}
   \flattensor{\spatialsymidentitytensorfour}=
   \symtensorprod{\flattensor{\tensortwo{g}}}{\flattensor{\tensortwo{g}}}&=
-  i_{abcd}\,\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  i_{abcd}\,\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\ \nonumber
-  &=\dfrac{1}{2}\pbrac{g_{ac}g_{bd}+g_{ad}g_{bc}}\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  &=\dfrac{1}{2}\pbrac{g_{ac}g_{bd}+g_{ad}g_{bc}}\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\
   \flattensor{\spatialsphericaltensorfour}=
   \dfrac{1}{3}\tensorprod{\flattensor{\tensor{g}}}{\flattensor{\tensor{g}}}&=
-  \spatialsphericaltensorsymbol_{abcd}\,\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  \spatialsphericaltensorsymbol_{abcd}\,\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\ \nonumber
-  &=\dfrac{1}{3}g_{ab}g_{cd}\,\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  &=\dfrac{1}{3}g_{ab}g_{cd}\,\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\
   \flattensor{\spatialdeviatorictensorfour}=
   \flattensor{\spatialsymidentitytensorfour}-\flattensor{\spatialsphericaltensorfour}&=
-  \spatialdeviatorictensorsymbol_{abcd}\,\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  \spatialdeviatorictensorsymbol_{abcd}\,\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
   \\ \nonumber
-  &=\pbrac{\dfrac{1}{2}\pbrac{g_{ac}g_{bd}+g_{ad}g_{bc}}-\dfrac{1}{3}g_{ab}g_{cd}}\tensorprodfour{\vectr{g}^{a}}{\vectr{g}^{b}}{\vectr{g}^{c}}{\vectr{g}^{d}}
+  &=\pbrac{\dfrac{1}{2}\pbrac{g_{ac}g_{bd}+g_{ad}g_{bc}}-\dfrac{1}{3}g_{ab}g_{cd}}\tensorprodfour{\spatialbasevector^{a}}{\spatialbasevector^{b}}{\spatialbasevector^{c}}{\spatialbasevector^{d}}
 \end{align}
 
 We can pull-back these spatial tensors into the material configuration \ie
@@ -1412,23 +1434,23 @@ Note that
 \end{align}
 
 We can now define for the reference configuration (\ie with respect to the
-metric tensor $\flattensor{\tensor{G}}$) the fourth order identity,
+metric tensor $\flattensor{\materialmetrictensor}$) the fourth order identity,
 $\materialsymidentitytensorfour$, spherical, $\materialsphericaltensorfour$, and deviatoric,
 $\materialdeviatorictensorfour$, tensors as
 \begin{align}
   \materialsymidentitytensorfour= \symtensorprod{\materialidentitytensortwo}{\materialidentitytensortwo}&=
-  \materialidentitytensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \materialidentitytensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
-  &=\dfrac{1}{2}\pbrac{\mixedkronecker{A}{C}\mixedkronecker{B}{D}+\mixedkronecker{D}{A}\mixedkronecker{C}{B}}\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  &=\dfrac{1}{2}\pbrac{\mixedkronecker{A}{C}\mixedkronecker{B}{D}+\mixedkronecker{D}{A}\mixedkronecker{C}{B}}\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\
-  \materialsphericaltensorfour=\dfrac{1}{3}\tensorprod{\sharptensor{\tensor{G}}}{\flattensor{\tensor{G}}}&=
-  \materialsphericaltensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \materialsphericaltensorfour=\dfrac{1}{3}\tensorprod{\sharptensor{\materialmetrictensor}}{\flattensor{\materialmetrictensor}}&=
+  \materialsphericaltensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
-  &=\dfrac{1}{3}G^{AB}G_{CD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}\\
+  &=\dfrac{1}{3}G^{AB}G_{CD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}\\
   \materialdeviatorictensorfour=\materialsymidentitytensorfour-\materialsphericaltensorfour&=
-  \materialdeviatorictensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \materialdeviatorictensorsymbol^{AB..}_{..CD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
- &= \pbrac{\dfrac{1}{2}\pbrac{\mixedkronecker{A}{C}\mixedkronecker{B}{D}+\mixedkronecker{A}{D}\mixedkronecker{B}{C}}-\dfrac{1}{3}G^{AB}G_{CD}}\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+ &= \pbrac{\dfrac{1}{2}\pbrac{\mixedkronecker{A}{C}\mixedkronecker{B}{D}+\mixedkronecker{A}{D}\mixedkronecker{B}{C}}-\dfrac{1}{3}G^{AB}G_{CD}}\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
 \end{align}
 
 Note that these tensors act on a second order symmetric (contravariant) tensor
@@ -1447,42 +1469,42 @@ The musical isomorphisms of these tensors are
 \begin{align}
   \sharptensor{\materialsymidentitytensorfour}=
   \symtensorprod{\sharptensor{\tensortwo{G}}}{\sharptensor{\tensortwo{G}}} &=
-  \materialidentitytensorsymbol^{ABCD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{C}}{\vectr{G}_{D}}
+  \materialidentitytensorsymbol^{ABCD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{C}}{\materialbasevector_{D}}
   \\ \nonumber
   &=
-  \dfrac{1}{2}\pbrac{G^{AC}G^{BD}+G^{AD}G^{BC}}\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{C}}{\vectr{G}_{D}}
+  \dfrac{1}{2}\pbrac{G^{AC}G^{BD}+G^{AD}G^{BC}}\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{C}}{\materialbasevector_{D}}
   \\
   \sharptensor{\materialsphericaltensorfour}=
-  \dfrac{1}{3}\tensorprod{\sharptensor{\tensor{G}}}{\sharptensor{\tensor{G}}}&=
-  \materialsphericaltensorsymbol^{ABCD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{B}}{\vectr{G}_{D}}
+  \dfrac{1}{3}\tensorprod{\sharptensor{\materialmetrictensor}}{\sharptensor{\materialmetrictensor}}&=
+  \materialsphericaltensorsymbol^{ABCD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{B}}{\materialbasevector_{D}}
   \\ \nonumber
-  &=\dfrac{1}{3}G^{AB}G^{CD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{C}}{\vectr{G}_{D}}
+  &=\dfrac{1}{3}G^{AB}G^{CD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{C}}{\materialbasevector_{D}}
   \\
   \sharptensor{\materialdeviatorictensorfour}=
   \sharptensor{\materialidentitytensorfour}-\sharptensor{\materialsphericaltensorfour}&=
-  \materialdeviatorictensorsymbol^{ABCD}\,\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{C}}{\vectr{G}_{D}}
+  \materialdeviatorictensorsymbol^{ABCD}\,\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{C}}{\materialbasevector_{D}}
   \\ \nonumber
-  &=\pbrac{\dfrac{1}{2}\pbrac{G^{AC}G^{BD}+G^{AD}G^{BC}}-\dfrac{1}{3}G^{AB}G^{CD}}\tensorprodfour{\vectr{G}_{A}}{\vectr{G}_{B}}{\vectr{G}_{C}}{\vectr{G}_{D}}
+  &=\pbrac{\dfrac{1}{2}\pbrac{G^{AC}G^{BD}+G^{AD}G^{BC}}-\dfrac{1}{3}G^{AB}G^{CD}}\tensorprodfour{\materialbasevector_{A}}{\materialbasevector_{B}}{\materialbasevector_{C}}{\materialbasevector_{D}}
 \end{align}
 and
 \begin{align}
   \flattensor{\materialsymidentitytensorfour}=
   \symtensorprod{\flattensor{\tensortwo{G}}}{\flattensor{\tensortwo{G}}}&=
-  \materialidentitytensorsymbol_{ABCD}\,\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \materialidentitytensorsymbol_{ABCD}\,\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
-  &=\dfrac{1}{2}\pbrac{G_{AC}G_{BD}+G_{AD}G_{BC}}\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  &=\dfrac{1}{2}\pbrac{G_{AC}G_{BD}+G_{AD}G_{BC}}\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\
   \flattensor{\materialsphericaltensorfour}=
-  \dfrac{1}{3}\tensorprod{\flattensor{\tensor{G}}}{\flattensor{\tensor{G}}}&=
-  \materialsphericaltensorfour_{ABCD}\,\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \dfrac{1}{3}\tensorprod{\flattensor{\materialmetrictensor}}{\flattensor{\materialmetrictensor}}&=
+  \materialsphericaltensorfour_{ABCD}\,\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
-  &=\dfrac{1}{3}G_{AB}G_{CD}\,\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  &=\dfrac{1}{3}G_{AB}G_{CD}\,\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\
   \flattensor{\materialdeviatorictensorfour}=
   \flattensor{\materialsymidentitytensorfour}-\flattensor{\materialsphericaltensorfour}&=
-  \materialdeviatorictensorsymbol_{ABCD}\,\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  \materialdeviatorictensorsymbol_{ABCD}\,\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
   \\ \nonumber
-  &=\pbrac{\dfrac{1}{2}\pbrac{G_{AC}G_{BD}+G_{AD}G_{BC}}-\dfrac{1}{3}G_{AB}G_{CD}}\tensorprodfour{\vectr{G}^{A}}{\vectr{G}^{B}}{\vectr{G}^{C}}{\vectr{G}^{D}}
+  &=\pbrac{\dfrac{1}{2}\pbrac{G_{AC}G_{BD}+G_{AD}G_{BC}}-\dfrac{1}{3}G_{AB}G_{CD}}\tensorprodfour{\materialbasevector^{A}}{\materialbasevector^{B}}{\materialbasevector^{C}}{\materialbasevector^{D}}
 \end{align}
 
 We can push-forward these material tensors into the spatial configuration \ie
@@ -1538,11 +1560,11 @@ $\doubledotprod{\bar{\tensortwo{S}}}{\tensorfour{M}^{*T}}=\doubledotprod{\pullba
 we can write
 \begin{equation}
   \begin{split}
-    \tensor{S}&=\doubledotprod{\bar{\tensor{S}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}-2p\delby{J}{\tensor{C}}=
+    \tensor{S}&=\doubledotprod{\bar{\tensor{S}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}-2p\delby{J}{\rightcauchygreentensor}=
     \doubledotprod{\bar{\tensor{S}}}{\delby{\bar{\tensor{E}}}{\tensor{E}}}-p\delby{J}{\tensor{E}}\\
     &=
-    \doubledotprod{\bar{\tensor{S}}}{J^{-\frac{2}{3}}\pbrac{\materialsymidentitytensorfour-\dfrac{\tensorprod{\tensor{C}}{\tensor{B}}}{3}}}-pJ\tensor{B}\\
-    &=J^{-\frac{2}{3}}\doubledotprod{\pullback{\tensorfour{M}}{}}{\bar{\tensortwo{S}}}-pJ\tensor{B}\\
+    \doubledotprod{\bar{\tensor{S}}}{J^{-\frac{2}{3}}\pbrac{\materialsymidentitytensorfour-\dfrac{\tensorprod{\rightcauchygreentensor}{\pioladeformationtensor}}{3}}}-pJ\pioladeformationtensor\\
+    &=J^{-\frac{2}{3}}\doubledotprod{\pullback{\tensorfour{M}}{}}{\bar{\tensortwo{S}}}-pJ\pioladeformationtensor\\
     &=\doubledotprod{\pullback{\tensorfour{M}}{}}{\tensortwo{S}}+\doubledotprod{\pullback{\tensorfour{K}}{}}{\tensortwo{S}}\\
     &=\tensor{S}_{\pullback{\Devop}{}}+\tensor{S}_{\pullback{\Sphop}{}}
   \end{split}
@@ -1553,14 +1575,14 @@ where
 \end{equation}
 and
 \begin{equation}
-  \tensor{S}_{\pullback{\Sphop}{}}=\doubledotprod{\pullback{\tensorfour{K}}{}}{\tensortwo{S}}=-pJ\tensor{B}
+  \tensor{S}_{\pullback{\Sphop}{}}=\doubledotprod{\pullback{\tensorfour{K}}{}}{\tensortwo{S}}=-pJ\pioladeformationtensor
 \end{equation}
 
 We can now push the second Piola-Kirchoff stress forward to give the Cauchy
 stress \ie
 \begin{equation}
   \begin{split}
-    \tensor{\sigma}&=\inverse{J}\pushforward{\chi}{\tensor{S}}=\inverse{J}\tensor{F}\tensor{S}\transpose{\tensor{F}}
+    \tensor{\sigma}&=\inverse{J}\pushforward{\chi}{\tensor{S}}=\inverse{J}\deformationgradienttensor\tensor{S}\transpose{\deformationgradienttensor}
     \\
     &=\inverse{J}\pushforward{\chi}{\pbrac{\tensor{S}_{\pullback{\Devop}{}}+\tensor{S}_{\pullback{\Sphop}{}}}}\\
     &=J^{-\frac{2}{3}}\doubledotprod{\tensorfour{m}}{\bar{\tensortwo{\sigma}}}-p\inverse{\tensor{g}}\\
@@ -1587,10 +1609,10 @@ We can also use the constitutive law to obtain the elasticity
 tensor. Following \citet{holzapfel:2000} we obtain
 \begin{equation}
   \begin{split}
-    \fnof{\tensorfour{C}}{\tensor{C}}&=2\delby{\fnof{\tensor{S}}{\tensor{C}}}{\tensor{C}}\\
+    \fnof{\tensorfour{C}}{\rightcauchygreentensor}&=2\delby{\fnof{\tensor{S}}{\rightcauchygreentensor}}{\rightcauchygreentensor}\\
     &=2\delby{\fnof{\tensortwo{S}_{\Devop}}{\tensortwo{C}}}{\tensortwo{C}}+2\delby{\fnof{\tensortwo{S}_{\Sphop}}{\tensortwo{C}}}{\tensortwo{C}}\\
     &=2\delby{}{\tensortwo{C}}\pbrac{2\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\tensortwo{C}}}+2\delby{}{\tensortwo{C}}\pbrac{2\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}{\tensortwo{C}}}\\
-    &=4\deltwosqby{\pbrac{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}}}{\tensor{C}}+4\deltwosqby{\pbrac{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}}{\tensortwo{C}}
+    &=4\deltwosqby{\pbrac{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}}}{\rightcauchygreentensor}+4\deltwosqby{\pbrac{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{C}}}}}{\tensortwo{C}}
     \\
     &=\fnof{\tensorfour{C}_{\Devop}}{\tensortwo{C}}+\fnof{\tensorfour{C}_{\Sphop}}{\tensortwo{C}}
   \end{split}
@@ -1599,17 +1621,17 @@ or
 \begin{equation}
   \begin{split}
     \fnof{\tensorfour{C}}{\tensor{E}}&=\delby{\fnof{\tensor{S}}{\tensor{E}}}{\tensor{E}}\\
-    &=\delby{\fnof{\tensortwo{S}_{\Devop}}{\tensortwo{E}}}{\tensortwo{E}}+\delby{\fnof{\tensortwo{S}_{\Sphop}}{\tensortwo{E}}}{\tensortwo{E}}\\
-    &=\delby{}{\tensortwo{C}}\pbrac{\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensortwo{E}}}{\tensortwo{E}}}}{\tensortwo{E}}}+\delby{}{\tensortwo{E}}\pbrac{\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{E}}}}{\tensortwo{E}}}\\
-    &=\deltwosqby{\pbrac{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{E}}}{\tensortwo{E}}}}}{\tensor{E}}+\deltwosqby{\pbrac{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensortwo{E}}}}}{\tensortwo{E}}
+    &=\delby{\fnof{\tensortwo{S}_{\Devop}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}+\delby{\fnof{\tensortwo{S}_{\Sphop}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}\\
+    &=\delby{}{\tensortwo{C}}\pbrac{\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\greenlagrangestraintensor}}{\greenlagrangestraintensor}}}{\greenlagrangestraintensor}}+\delby{}{\greenlagrangestraintensor}\pbrac{\delby{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\greenlagrangestraintensor}}}{\greenlagrangestraintensor}}\\
+    &=\deltwosqby{\pbrac{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{E}}}{\greenlagrangestraintensor}}}}{\tensor{E}}+\deltwosqby{\pbrac{\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\greenlagrangestraintensor}}}}{\greenlagrangestraintensor}
     \\
-    &=\fnof{\tensorfour{C}_{\Devop}}{\tensortwo{E}}+\fnof{\tensorfour{C}_{\Sphop}}{\tensortwo{E}}
+    &=\fnof{\tensorfour{C}_{\Devop}}{\greenlagrangestraintensor}+\fnof{\tensorfour{C}_{\Sphop}}{\greenlagrangestraintensor}
   \end{split}
 \end{equation}
 
 \begin{equation}
   \begin{split}
-    \fnof{\tensorfour{C}}{\tensor{C}}&=2\delby{\fnof{\tensortwo{S}}{\tensortwo{C}}}{\tensortwo{C}}\\
+    \fnof{\tensorfour{C}}{\rightcauchygreentensor}&=2\delby{\fnof{\tensortwo{S}}{\tensortwo{C}}}{\tensortwo{C}}\\
     &=2\delby{}{\tensortwo{C}}\pbrac{2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{\bar{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}{\tensortwo{C}}}+2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{J}}{\delby{\fnof{J}{\tensortwo{C}}}{\tensortwo{C}}}}\\
     &=2\doubledotprod{\delby{}{\bar{\tensortwo{C}}}\pbrac{2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{\bar{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}{\tensortwo{C}}}+2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{J}}{\delby{\fnof{J}{\tensortwo{C}}}{\tensortwo{C}}}}}{\delby{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}{\tensortwo{C}}}\\
     &+2\doubledotprod{\delby{}{J}\pbrac{2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{\bar{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}{\tensortwo{C}}}+2\doubledotprod{\delby{\fnof{\bar{W}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}}{J}}{\delby{\fnof{J}{\tensortwo{C}}}{\tensortwo{C}}}}}{\delby{\fnof{J}{\tensortwo{C}}}{\tensortwo{C}}}\\
@@ -1662,9 +1684,9 @@ Now considering $\fnof{\tensorfour{C}_{\Sphop}}{\tensortwo{C}}$ we have
 Now if we decompose the strain energy function into volumetric/spherical and
 isochoric/deviatoric components we have
 \begin{multline}
-  \fnof{\tensorfour{C}}{\tensor{C}}=2\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}{\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{\bar{\tensor{C}}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}+2\doubledotprod{\delby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{\bar{\tensor{C}}}}{\deltwosqby{\bar{\tensor{C}}}{\tensor{C}}}\\
-  +2\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}\tensorprod{\delby{J}{\tensor{C}}}{\delby{J}{\tensor{C}}}+2\delby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}\deltwosqby{J}{\tensor{C}}\\
-  +2\tensorprod{\delby{J}{\tensor{C}}}{\pbrac{\doubledotprod{\deltwoby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}{\bar{\tensor{C}}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}+2\tensorprod{\pbrac{\doubledotprod{\deltwoby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}{\bar{\tensor{C}}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}{\delby{J}{\tensor{C}}}
+  \fnof{\tensorfour{C}}{\rightcauchygreentensor}=2\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}{\deltwosqby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{\bar{\rightcauchygreentensor}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}+2\doubledotprod{\delby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{\bar{\rightcauchygreentensor}}}{\deltwosqby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}\\
+  +2\deltwosqby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}\tensorprod{\delby{J}{\rightcauchygreentensor}}{\delby{J}{\rightcauchygreentensor}}+2\delby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}\deltwosqby{J}{\rightcauchygreentensor}\\
+  +2\tensorprod{\delby{J}{\rightcauchygreentensor}}{\pbrac{\doubledotprod{\deltwoby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}{\bar{\rightcauchygreentensor}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}+2\tensorprod{\pbrac{\doubledotprod{\deltwoby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}{\bar{\rightcauchygreentensor}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}{\delby{J}{\rightcauchygreentensor}}
 \end{multline}
 or
 \begin{multline}
@@ -1675,23 +1697,23 @@ or
 
 If we now define
 \begin{equation}
-  \bar{\tensorfour{C}}=2\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{\bar{\tensor{C}}}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{\bar{\tensor{E}}}
+  \bar{\tensorfour{C}}=2\deltwosqby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{\bar{\rightcauchygreentensor}}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{\bar{\tensor{E}}}
 \end{equation}
 as the \emph{material psuedo second elasticity
   tensor}\symbolat{$\bar{\tensorfour{C}}$}{Material pseudo second elasticity tensor} and
 \begin{equation}
-  \tensor{Y}=2\deltwoby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}{\bar{\tensor{C}}}=\deltwoby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}{\bar{\tensor{E}}}
+  \tensor{Y}=2\deltwoby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}{\bar{\rightcauchygreentensor}}=\deltwoby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}{\bar{\tensor{E}}}
 \end{equation}
 as the \emph{material coupling tensor}\symbolat{$\tensortwo{Y}$}{Material coupling tensor} (\ie representing any coupling between
 deviatoric and spherical parts of the stress) and
 \begin{equation}
-  K=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}
+  K=\deltwosqby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}
 \end{equation}
 as the \emph{large strain bulk modulus}\symbolat{$K$}{Large strain bulk modulus}, then we obtain
 \begin{multline}
-  \fnof{\tensorfour{C}}{\tensor{C}}=\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}{\bar{\tensorfour{C}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}+\doubledotprod{\bar{\tensor{S}}}{\deltwosqby{\bar{\tensor{C}}}{\tensor{C}}}\\
-  +2K\tensorprod{\delby{J}{\tensor{C}}}{\delby{J}{\tensor{C}}}-2p\deltwosqby{J}{\tensor{C}}\\
-  +\tensorprod{\delby{J}{\tensor{C}}}{\pbrac{\doubledotprod{\tensor{Y}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}+\tensorprod{\pbrac{\doubledotprod{\tensor{Y}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}{\delby{J}{\tensor{C}}}
+  \fnof{\tensorfour{C}}{\rightcauchygreentensor}=\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}{\bar{\tensorfour{C}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}+\doubledotprod{\bar{\tensor{S}}}{\deltwosqby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}\\
+  +2K\tensorprod{\delby{J}{\rightcauchygreentensor}}{\delby{J}{\rightcauchygreentensor}}-2p\deltwosqby{J}{\rightcauchygreentensor}\\
+  +\tensorprod{\delby{J}{\rightcauchygreentensor}}{\pbrac{\doubledotprod{\tensor{Y}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}+\tensorprod{\pbrac{\doubledotprod{\tensor{Y}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}{\delby{J}{\rightcauchygreentensor}}
 \end{multline}
 or
 \begin{multline}
@@ -1702,15 +1724,15 @@ or
 
 Using
 \begin{align}
-  2\delby{J}{\tensor{C}}&=\delby{J}{\tensor{E}}=J\tensor{B} \\
-  4\tensorprod{\delby{J}{\tensor{C}}}{\delby{J}{\tensor{C}}}&=\tensorprod{\delby{J}{\tensor{E}}}{\delby{J}{\tensor{E}}}=\tensorprod{\pbrac{J\tensor{B}}}{\pbrac{J\tensor{B}}}=3J^{2}\tensorfour{K}^{\sharp
+  2\delby{J}{\rightcauchygreentensor}&=\delby{J}{\tensor{E}}=J\pioladeformationtensor \\
+  4\tensorprod{\delby{J}{\rightcauchygreentensor}}{\delby{J}{\rightcauchygreentensor}}&=\tensorprod{\delby{J}{\tensor{E}}}{\delby{J}{\tensor{E}}}=\tensorprod{\pbrac{J\pioladeformationtensor}}{\pbrac{J\pioladeformationtensor}}=3J^{2}\tensorfour{K}^{\sharp
     *} \\
-  \delby{\bar{\tensor{C}}}{\tensor{C}}&=\delby{\bar{\tensor{E}}}{\tensor{E}}=J^{-\frac{2}{3}}\pbrac{\transpose{\tensorfour{I}}-\dfrac{\tensorprod{\tensor{C}}{\tensor{B}}}{3}}=J^{-\frac{2}{3}}\tensorfour{M}^{*T} \\
-  4\deltwosqby{J}{\tensor{C}}&=\deltwosqby{J}{\tensor{E}}=\tensorprod{\tensor{B}}{\pbrac{J\tensor{B}}}+2J\delby{\tensor{B}}{\tensor{C}}=3J\tensorfour{M}^{\sharp
+  \delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}&=\delby{\bar{\tensor{E}}}{\tensor{E}}=J^{-\frac{2}{3}}\pbrac{\transpose{\tensorfour{I}}-\dfrac{\tensorprod{\rightcauchygreentensor}{\pioladeformationtensor}}{3}}=J^{-\frac{2}{3}}\tensorfour{M}^{*T} \\
+  4\deltwosqby{J}{\rightcauchygreentensor}&=\deltwosqby{J}{\tensor{E}}=\tensorprod{\pioladeformationtensor}{\pbrac{J\pioladeformationtensor}}+2J\delby{\pioladeformationtensor}{\rightcauchygreentensor}=3J\tensorfour{M}^{\sharp
     *}-2J\tensorfour{I}^{\sharp
     *} \\
-  \doubledotprod{\tensor{Q}}{\deltwosqby{\bar{\tensor{C}}}{\tensor{C}}}&=\doubledotprod{\tensor{Q}}{\deltwosqby{\bar{\tensor{E}}}{\tensor{E}}}=\dfrac{2J^{-\frac{2}{3}}\pullback{\Trop}{\tensor{Q}}}{3}\tensorfour{M}^{\sharp
-  *}-\dfrac{2J^{-\frac{2}{3}}}{3}\sqbrac{\tensorprod{\tensor{B}}{\pbrac{\doubledotprod{\pullback{\tensorfour{M}}{}}{\tensor{Q}}}}+\tensorprod{\pbrac{\doubledotprod{\pullback{\tensorfour{M}}{}}{\tensor{Q}}}}{\tensor{B}}}
+  \doubledotprod{\tensor{Q}}{\deltwosqby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}&=\doubledotprod{\tensor{Q}}{\deltwosqby{\bar{\tensor{E}}}{\tensor{E}}}=\dfrac{2J^{-\frac{2}{3}}\pullback{\Trop}{\tensor{Q}}}{3}\tensorfour{M}^{\sharp
+  *}-\dfrac{2J^{-\frac{2}{3}}}{3}\sqbrac{\tensorprod{\pioladeformationtensor}{\pbrac{\doubledotprod{\pullback{\tensorfour{M}}{}}{\tensor{Q}}}}+\tensorprod{\pbrac{\doubledotprod{\pullback{\tensorfour{M}}{}}{\tensor{Q}}}}{\pioladeformationtensor}}
 \end{align}
 we can derive the second material elasticity tensor
 \begin{multline}
@@ -1745,16 +1767,16 @@ Note that if we do not allow for any coupling between the deviatoric and
 spherical parts of stress or for any change in pressure with volume then we
 can make the following simplicifications
 \begin{equation}
-  \tensor{Y}=2\deltwoby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}{\bar{\tensor{C}}}=\deltwoby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}{\bar{\tensor{E}}}=\tensor{0}
+  \tensor{Y}=2\deltwoby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}{\bar{\rightcauchygreentensor}}=\deltwoby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}{\bar{\tensor{E}}}=\tensor{0}
 \end{equation}
 and
 \begin{equation}
-  K=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{C}},J}}{J}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}=0
+  K=\deltwosqby{\fnof{\bar{W}}{\bar{\rightcauchygreentensor},J}}{J}=\deltwosqby{\fnof{\bar{W}}{\bar{\tensor{E}},J}}{J}=0
 \end{equation}
 
 We thus have
 \begin{equation}
-  \fnof{\tensorfour{C}}{\tensor{C}}=\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\tensor{C}}}{\tensor{C}}}}}{\bar{\tensorfour{C}}}{\delby{\bar{\tensor{C}}}{\tensor{C}}}+\doubledotprod{\bar{\tensor{S}}}{\deltwosqby{\bar{\tensor{C}}}{\tensor{C}}}-2p\deltwosqby{J}{\tensor{C}}
+  \fnof{\tensorfour{C}}{\rightcauchygreentensor}=\doubledotprodthree{\transpose{\pbrac{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}}}{\bar{\tensorfour{C}}}{\delby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}+\doubledotprod{\bar{\tensor{S}}}{\deltwosqby{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}-2p\deltwosqby{J}{\rightcauchygreentensor}
 \end{equation}
 or
 \begin{equation}
@@ -1780,73 +1802,76 @@ and the second spatial elasticity tensor is thus
 
 \subsection{Isotropic materials}
 
-Because $\tensor{C}$ is symmetric then we can deal with the invariants \ie
+Because $\rightcauchygreentensor$ is symmetric then we can deal with the invariants \ie
 We thus have
-$\fnof{W}{\fnof{\tensor{C}}{\vectr{N}}}=\fnof{W}{\fnof{I_{1}}{\tensor{C}},\fnof{I_{2}}{\tensor{C}},\fnof{I_{3}}{\tensor{C}}}$ and
+$\fnof{W}{\fnof{\rightcauchygreentensor}{\vectr{N}}}=\fnof{W}{\fnof{I_{1}}{\rightcauchygreentensor},\fnof{I_{2}}{\rightcauchygreentensor},\fnof{I_{3}}{\rightcauchygreentensor}}$ and
 thus
 \begin{equation}
-  S^{AB}=2\pbrac{\delby{W}{I_{1}}\delby{I_{1}}{C_{AB}}+\delby{W}{I_{2}}\delby{I_{2}}{C_{AB}}+\delby{W}{I_{3}}\delby{I_{3}}{C_{AB}}}
+  \secondpiolakirchofftensorsymbol^{AB}=2\pbrac{\delby{W}{I_{1}}\delby{I_{1}}{\rightcauchygreentensorsymbol_{AB}}+\delby{W}{I_{2}}\delby{I_{2}}{\rightcauchygreentensorsymbol_{AB}}+\delby{W}{I_{3}}\delby{I_{3}}{\rightcauchygreentensorsymbol_{AB}}}
 \end{equation}
 or if we have
 $\fnof{W}{\fnof{\tensor{E}}{\vectr{N}}}=\fnof{W}{\fnof{I_{1}}{\tensor{E}},\fnof{I_{2}}{\tensor{E}},\fnof{I_{3}}{\tensor{E}}}$ and
 thus
 \begin{equation}
-  S^{AB}=\pbrac{\delby{W}{I_{1}}\delby{I_{1}}{E_{AB}}+\delby{W}{I_{2}}\delby{I_{2}}{E_{AB}}+\delby{W}{I_{3}}\delby{I_{3}}{E_{AB}}}
+  \secondpiolakirchofftensorsymbol^{AB}=\pbrac{\delby{W}{I_{1}}\delby{I_{1}}{E_{AB}}+\delby{W}{I_{2}}\delby{I_{2}}{E_{AB}}+\delby{W}{I_{3}}\delby{I_{3}}{E_{AB}}}
 \end{equation}
 
 The three invariants are given by
 \begin{equation}
   \begin{split}
-    \fnof{I_{1}}{\tensor{C}} &= \trop\tensor{C} \\
-    &= C_{11} + C_{22} + C_{33} \\
-    \fnof{I_{2}}{\tensor{C}} &=
-    \dfrac{1}{2}\pbrac{\pbrac{\trop\tensor{C}}^{2}-\trop\tensor{C}^{2}}
-    = \determinant{\tensor{C}}\trop\inverse{\tensor{C}}\\
+    \fnof{I_{1}}{\rightcauchygreentensor} &= \trop\rightcauchygreentensor \\
+    &= \rightcauchygreentensorsymbol_{11} + \rightcauchygreentensorsymbol_{22} + \rightcauchygreentensorsymbol_{33} \\
+    \fnof{I_{2}}{\rightcauchygreentensor} &=
+    \dfrac{1}{2}\pbrac{\pbrac{\trop\rightcauchygreentensor}^{2}-\trop\rightcauchygreentensor^{2}}
+    = \determinant{\rightcauchygreentensor}\trop\inverse{\rightcauchygreentensor}\\
     &=
-    \dfrac{1}{2}\left(\pbrac{C_{11}+C_{22}+C_{33}}^{2}\right. \\
-      & \quad\left.-\pbrac{C_{11}^{2}+C_{12}C_{21}+C_{13}C_{31}+
-        C_{21}C_{12}+C_{22}^{2}+C_{23}C_{32}+C_{31}C_{13}+C_{32}C_{23}+C_{33}^{2}}\right) \\
-    \fnof{I_{3}}{\tensor{C}} &= \determinant{\tensor{C}} \\
-    &=C_{11}C_{22}C_{33}+C_{12}C_{23}C_{31}+C_{13}C_{21}C_{32}\\
-    &\quad-C_{13}C_{22}C_{31}-C_{12}C_{21}C_{33}-C_{11}C_{23}C_{32}
+    \dfrac{1}{2}\left(\pbrac{\rightcauchygreentensorsymbol_{11}+\rightcauchygreentensorsymbol_{22}+\rightcauchygreentensorsymbol_{33}}^{2}\right. \\
+      & \quad\left.-\pbrac{\rightcauchygreentensorsymbol_{11}^{2}+\rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{21}+\rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{31}+
+        \rightcauchygreentensorsymbol_{21}\rightcauchygreentensorsymbol_{12}+\rightcauchygreentensorsymbol_{22}^{2}+\rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{32}+\rightcauchygreentensorsymbol_{31}\rightcauchygreentensorsymbol_{13}+\rightcauchygreentensorsymbol_{32}\rightcauchygreentensorsymbol_{23}+\rightcauchygreentensorsymbol_{33}^{2}}\right) \\
+    \fnof{I_{3}}{\rightcauchygreentensor} &= \determinant{\rightcauchygreentensor} \\
+    &=\rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{22}\rightcauchygreentensorsymbol_{33}+\rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{31}+\rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{21}\rightcauchygreentensorsymbol_{32}\\
+    &\quad-\rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{22}\rightcauchygreentensorsymbol_{31}-\rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{21}\rightcauchygreentensorsymbol_{33}-\rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{32}
   \end{split}
 \end{equation}
 
 Note that we also have \citep{adkins:1954},
 \begin{equation}
  \begin{split}
-    \fnof{I_{1}}{\tensor{C}} &= G^{ij}g_{ij} \\
-    \fnof{I_{2}}{\tensor{C}} &= I_{3}G_{ij}g^{ij}\\
-    \fnof{I_{3}}{\tensor{C}} &= \frac{\abs{g_{ij}}}{\abs{G_{ij}}}
+    \fnof{I_{1}}{\rightcauchygreentensor} &= \materialmetrictensorsymbol^{ij}\spatialmetrictensorsymbol_{ij} \\
+    \fnof{I_{2}}{\rightcauchygreentensor} &= I_{3}\materialmetrictensorsymbol_{ij}\spatialmetrictensorsymbol^{ij}\\
+    \fnof{I_{3}}{\rightcauchygreentensor} &= \frac{\abs{\spatialmetrictensorsymbol_{ij}}}{\abs{\materialmetrictensorsymbol_{ij}}}
   \end{split}  
 \end{equation}
 
-Now we have
+Now we have I2 NEEDS TO BE CORRECTED HERE
 \begin{align}
-  \delby{I_{1}}{\tensor{C}}&=\sharptensor{\tensor{G}}\\
-  \delby{I_{2}}{\tensor{C}}&=\inverse{\tensor{C}}\determinant{\tensor{C}}\trop\inverse{\tensor{C}}-\determinant{\tensor{C}}\trop\delby{\inverse{\tensor{C}}}{\tensor{C}}\\
-  &=I_{2}\inverse{\tensor{C}}-I_{3}\invsquared{\tensor{C}} \\
-  \delby{I_{3}}{\tensor{C}}&=\determinant{\tensor{C}}\inverse{\tensor{C}} \\
-  &= I_{3}\inverse{\tensor{C}} 
+  \delby{I_{1}}{\rightcauchygreentensor}&=\sharptensor{\materialmetrictensor}\\
+  \delby{I_{2}}{\rightcauchygreentensor}&=\delby{\determinant{\rightcauchygreentensor}\trace{\inverse{\rightcauchygreentensor}}}{\rightcauchygreentensor}\\
+  &=\determinant{\rightcauchygreentensor}\invtranspose{\rightcauchygreentensor}\trace{\inverse{\rightcauchygreentensor}}+
+  \determinant{\rightcauchygreentensor}\sharptensor{\materialmetrictensor}
+  &=\inverse{\rightcauchygreentensor}\determinant{\rightcauchygreentensor}\trop\inverse{\rightcauchygreentensor}-\determinant{\rightcauchygreentensor}\trop\delby{\inverse{\rightcauchygreentensor}}{\rightcauchygreentensor}\\
+  &=I_{2}\inverse{\rightcauchygreentensor}-I_{3}\invsquared{\rightcauchygreentensor} \\
+  \delby{I_{3}}{\rightcauchygreentensor}&=\determinant{\rightcauchygreentensor}\inverse{\rightcauchygreentensor} \\
+  &= I_{3}\inverse{\rightcauchygreentensor} 
 \end{align}
 and thus
 \begin{equation}
-  \tensor{S}=2\pbrac{\delby{W}{I_{1}}\sharptensor{\tensor{G}}+\pbrac{\delby{W}{I_{2}}I_{2}+\delby{W}{I_{3}}I_{3}}\inverse{\tensor{C}}+\delby{W}{I_{2}}I_{3}\invsquared{\tensor{C}}}
+  \secondpiolakirchoffstresstensor=2\pbrac{\delby{W}{I_{1}}\sharptensor{\materialmetrictensor}+\pbrac{\delby{W}{I_{2}}I_{2}+\delby{W}{I_{3}}I_{3}}\inverse{\rightcauchygreentensor}+\delby{W}{I_{2}}I_{3}\invsquared{\rightcauchygreentensor}}
 \end{equation}
 or equivalently
 \begin{equation}
-  \tensor{S}=2\pbrac{\delby{W}{I_{1}}\sharptensor{\tensor{G}}+\pbrac{\delby{W}{I_{2}}I_{2}+\delby{W}{I_{3}}I_{3}}\tensor{B}+\delby{W}{I_{2}}I_{3}\tensor{B}^{2}}
+  \secondpiolakirchoffstresstensor=2\pbrac{\delby{W}{I_{1}}\sharptensor{\materialmetrictensor}+\pbrac{\delby{W}{I_{2}}I_{2}+\delby{W}{I_{3}}I_{3}}\pioladeformationtensor+\delby{W}{I_{2}}I_{3}\pioladeformationtensor^{2}}
 \end{equation}
-as $\tensor{B}=\inverse{\tensor{C}}$.
+as $\pioladeformationtensor=\inverse{\rightcauchygreentensor}$.
 
 Note that
 \begin{equation}
-  \inverse{\tensor{C}}=\dfrac{1}{\determinant{\tensor{C}}}\adjop\tensor{C}=\dfrac{1}{I_{3}}\adjop\tensor{C}=\dfrac{1}{I_{3}}\delby{I_{3}}{\tensor{C}}
+  \inverse{\rightcauchygreentensor}=\dfrac{1}{\determinant{\rightcauchygreentensor}}\adjop\rightcauchygreentensor=\dfrac{1}{I_{3}}\adjop\rightcauchygreentensor=\dfrac{1}{I_{3}}\delby{I_{3}}{\rightcauchygreentensor}
 \end{equation}
 
 Now we have
 \begin{equation}
-  \delby{I_{1}}{C_{AB}}=\begin{bmatrix}
+  \delby{I_{1}}{\rightcauchygreentensorsymbol_{AB}}=\begin{bmatrix}
     1 & 0 & 0 \\
     0 & 1 & 0 \\
     0 & 0 & 1
@@ -1854,26 +1879,34 @@ Now we have
 \end{equation}
 and
 \begin{equation}
-  \delby{I_{2}}{C_{AB}}=\begin{bmatrix}
-    C_{22}+C_{33} & -C_{21} & -C_{31} \\
-    -C_{12} & C_{11}+C_{33} & -C_{32} \\
-    -C_{13} & -C_{23} & C_{11}+C_{22}
+  \delby{I_{2}}{\rightcauchygreentensorsymbol_{AB}}=\begin{bmatrix}
+    \rightcauchygreentensorsymbol_{22}+\rightcauchygreentensorsymbol_{33} & -\rightcauchygreentensorsymbol_{21} & -\rightcauchygreentensorsymbol_{31} \\
+    -\rightcauchygreentensorsymbol_{12} & \rightcauchygreentensorsymbol_{11}+\rightcauchygreentensorsymbol_{33} & -\rightcauchygreentensorsymbol_{32} \\
+    -\rightcauchygreentensorsymbol_{13} & -\rightcauchygreentensorsymbol_{23} & \rightcauchygreentensorsymbol_{11}+\rightcauchygreentensorsymbol_{22}
   \end{bmatrix}
 \end{equation}
 and
 \begin{equation}
-  \delby{I_{3}}{C_{AB}}=\begin{bmatrix}
-    C_{22}C_{33}-C_{23}C_{32} & C_{23}C_{31}-C_{21}C_{33} & C_{23}C_{32}-C_{22}C_{31} \\
-    C_{13}C_{32}-C_{12}C_{33} & C_{11}C_{33}-C_{13}C_{31} & C_{12}C_{31}-C_{11}C_{32} \\
-    C_{12}C_{32}-C_{22}C_{31} & C_{13}C_{23}-C_{11}C_{23} & C_{11}C_{22}-C_{12}C_{21}
+  \delby{I_{3}}{\rightcauchygreentensorsymbol_{AB}}=\begin{bmatrix}
+    \rightcauchygreentensorsymbol_{22}\rightcauchygreentensorsymbol_{33}-\rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{32} & \rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{31}-\rightcauchygreentensorsymbol_{21}\rightcauchygreentensorsymbol_{33} & \rightcauchygreentensorsymbol_{23}\rightcauchygreentensorsymbol_{32}-\rightcauchygreentensorsymbol_{22}\rightcauchygreentensorsymbol_{31} \\
+    \rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{32}-\rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{33} & \rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{33}-\rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{31} & \rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{31}-\rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{32} \\
+    \rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{32}-\rightcauchygreentensorsymbol_{22}\rightcauchygreentensorsymbol_{31} & \rightcauchygreentensorsymbol_{13}\rightcauchygreentensorsymbol_{23}-\rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{23} & \rightcauchygreentensorsymbol_{11}\rightcauchygreentensorsymbol_{22}-\rightcauchygreentensorsymbol_{12}\rightcauchygreentensorsymbol_{21}
   \end{bmatrix}
 \end{equation}
+
+Now, in terms of the spatial stresses we have
+\begin{equation}
+  \cauchystresstensor=\inverse{J}\deformationgradienttensor\secondpiolakirchoffstresstensor\transpose{\deformationgradienttensor}
+\end{equation}
+and so
+
 
 \subsubsection{Viscoelasticity}
 
 \subsubsection{Plasticity}
 
 \section{Principle of Virtual Work}
+\label{sec:ElasticityVirtualWork}
 
 Consider a configuration, defined by a displacement field $\vectr{u}$, of some
 deformable body, $\embedmanifold{B}$, subject to some \emph{displacement
@@ -1901,14 +1934,14 @@ as a \emph{statically admissable stress field}.
 For a statically admissable stress field $\tensor{\sigma}$ conservation of
 momentum gives us the equations of motion \ie
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\rho\vectr{a}}{v}=\gint{\embedmanifold{B}}{}{\pbrac{\divergence{}{\tensor{\sigma}}+\vectr{b}}}{v}
+  \gint{\embedmanifold{B}}{}{\densitysymbol\vectr{a}}{v}=\gint{\embedmanifold{B}}{}{\pbrac{\divergence{}{\tensor{\sigma}}+\vectr{b}}}{v}
 \end{equation}
 where $\vectr{a}$ is the acceleration of the body and $\vectr{b}$ are the body
 forces. If we now multiply by the equations of motion by a kinematically
 admissable displacement field $\vectr{u}$ we obtain
 \begin{equation}
   \begin{split}
-    \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}}}{v} &=
+    \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}}}{v} &=
     \gint{\embedmanifold{B}}{}{\dotprod{\pbrac{\divergence{}{\tensor{\sigma}}+\vectr{b}}}{\vectr{u}}}{v}\\
     &=\gint{\embedmanifold{B}}{}{\dotprod{\pbrac{\divergence{}{\tensor{\sigma}}}}{\vectr{u}}}{v}+
     \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\vectr{u}}}{v}
@@ -1930,7 +1963,7 @@ as the stress tensor, $\tensortwo{\sigma}$, symmetric and so
 $\transpose{\tensortwo{\sigma}}=\tensortwo{\sigma}$. \Eqnref{eqn:equationsofwork} becomes
 \begin{equation}
   \begin{split}
-    \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}}}{v}&=
+    \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}}}{v}&=
     \gint{\embedmanifold{B}}{}{\pbrac{\divergence{}{\pbrac{\dotprod{\tensor{\sigma}}{\vectr{u}}}}-
         \doubledotprod{\tensor{\sigma}}{\gradient{}{\vectr{u}}}}}{v}+
     \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\vectr{u}}}{v} \\
@@ -1957,14 +1990,14 @@ or, by Cauchy's law, $\vectr{t}=\dotprod{\tensor{\sigma}}{\vectr{n}}$, we have
 
 \Eqnref{eqn:equationsofwork} thus becomes
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}}}{v}=
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}}}{v}=
   \gint{\boundary{\embedmanifold{B}}}{}{\dotprod{\vectr{t}}{\vectr{u}}}{a}-
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\vectr{u}}}}{v}+
   \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\vectr{u}}}{v}
 \end{equation}
 or
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}}}{v}+
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}}}{v}+
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\vectr{u}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}}{}{\dotprod{\vectr{t}}{\vectr{u}}}{a}+
   \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\vectr{u}}}{v}
@@ -1972,7 +2005,7 @@ or
 
 Taking the boundary conditions into account we have
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}}}{v}+
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}}}{v}+
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\vectr{u}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}_{u}}{}{\dotprod{\vectr{t}}{\bar{\vectr{u}}}}{a}+
   \gint{\boundary{\embedmanifold{B}}_{t}}{}{\dotprod{\bar{\vectr{t}}}{\vectr{u}}}{a}+
@@ -1983,7 +2016,7 @@ Taking the boundary conditions into account we have
 If we now consider a second kinematically admissable displacement field
 $\vectr{u}^{*}$ then the above equation will also hold \ie
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\vectr{u}^{*}}}{v}+
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\vectr{u}^{*}}}{v}+
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\vectr{u}^{*}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}_{u}}{}{\dotprod{\vectr{t}}{\bar{\vectr{u}}}}{a}+
   \gint{\boundary{\embedmanifold{B}}_{t}}{}{\dotprod{\bar{\vectr{t}}}{\vectr{u}^{*}}}{a}+
@@ -1994,7 +2027,7 @@ $\vectr{u}^{*}$ then the above equation will also hold \ie
 Now, subtracting \Eqnref{eqn:virtualworkdisp2} from
 \Eqnref{eqn:virtualworkdisp1} gives us
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\pbrac{\vectr{u}-\vectr{u}^{*}}}}{v}+
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\pbrac{\vectr{u}-\vectr{u}^{*}}}}{v}+
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\pbrac{\vectr{u}-\vectr{u}^{*}}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}_{u}}{}{\dotprod{\vectr{t}}{\bar{\vectr{u}}}}{a}+
   \gint{\boundary{\embedmanifold{B}}_{t}}{}{\dotprod{\bar{\vectr{t}}}{\pbrac{\vectr{u}-\vectr{u}^{*}}}}{a}+
@@ -2007,7 +2040,7 @@ $\delta\vectr{u}=\vectr{u}-\vectr{u}^{*}$ and note that
 $\delta\vectr{u}=\vectr{u}-\vectr{u}^{*}=\bar{\vectr{u}}-\bar{\vectr{u}}=\vectr{0}$
 on $\boundary{\embedmanifold{B}}_{u}$ then we have
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\delta\vectr{u}}}{v}+
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\delta\vectr{u}}}{v}+
   \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\delta\vectr{u}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}_{t}}{}{\dotprod{\bar{\vectr{t}}}{\delta\vectr{u}}}{a}+
   \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\delta\vectr{u}}}{v}
@@ -2022,7 +2055,7 @@ $\fnof{W_{ext}}{\delta\vectr{u}}$, where
 \begin{equation}
   \begin{split}
     \fnof{W_{kin}}{\delta\vectr{u}}&=
-    \gint{\embedmanifold{B}}{}{\rho\dotprod{\vectr{a}}{\delta\vectr{u}}}{v}\\
+    \gint{\embedmanifold{B}}{}{\densitysymbol\dotprod{\vectr{a}}{\delta\vectr{u}}}{v}\\
     \fnof{W_{int}}{\delta\vectr{u}}&=
     \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\gradient{}{\delta\vectr{u}}}}{v}\\
     \fnof{W_{ext}}{\delta\vectr{u}}&=\fnof{W_{surf}}{\delta\vectr{u}}+\fnof{W_{body}}{\delta\vectr{u}}\\
@@ -2044,26 +2077,26 @@ instead of virtual displacement. Consider
     \dfrac{1}{2}\pbrac{\gradient{}{\delta\vectr{u}}-\transpose{\pbrac{\gradient{}{\delta\vectr{u}}}}}\\
     &=\delta\sqbrac{\dfrac{1}{2}\pbrac{\gradient{}{\vectr{u}}+\transpose{\pbrac{\gradient{}{\vectr{u}}}}}}+
     \delta\sqbrac{\dfrac{1}{2}\pbrac{\gradient{}{\vectr{u}}-\transpose{\pbrac{\gradient{}{\vectr{u}}}}}} \\
-    &=\delta\tensor{\epsilon} +\delta\tensor{\omega}
+    &=\delta\smallstraintensor +\delta\smallrotationtensor
   \end{split}
 \end{equation}
-where $\tensor{\epsilon}$ is the \emph{small strain tensor} and
-$\tensor{\omega}$ is the \emph{small rotation tensor}. The internal work is now
+where $\smallstraintensor$ is the \emph{small strain tensor} and
+$\smallrotationtensor$ is the \emph{small rotation tensor}. The internal work is now
 given by
 \begin{equation}
   \begin{split}
     \fnof{W_{int}}{\vectr{u},\delta\vectr{u}}&=
     \gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\gradient{}{\delta\vectr{u}}}}{v}\\
     &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{
-        \pbrac{\fnof{\delta\tensor{\epsilon}}{\delta\vectr{u}}+\fnof{\delta\tensor{\omega}}{\delta\vectr{u}}}}}{v} \\
-    &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\tensor{\epsilon}}{\delta\vectr{u}}}}{v}+
-    \gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\tensor{\omega}}{\delta\vectr{u}}}}{v}
+        \pbrac{\fnof{\delta\smallstraintensor}{\delta\vectr{u}}+\fnof{\delta\smallrotationtensor}{\delta\vectr{u}}}}}{v} \\
+    &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\smallstraintensor}{\delta\vectr{u}}}}{v}+
+    \gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\smallrotationtensor}{\delta\vectr{u}}}}{v}
   \end{split}
 \end{equation}
 Therefore
 \begin{equation}
   \fnof{W_{int}}{\vectr{u},\delta\vectr{u}}=
-  \gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\tensor{\epsilon}}{\delta\vectr{u}}}}{v}
+  \gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{\vectr{u}}}{\fnof{\delta\smallstraintensor}{\delta\vectr{u}}}}{v}
 \end{equation}
 as the stress tensor is a symmetric tensor and the small rotation tensor is a
 skew-symmetric tensor and the double dot product between a symmetric and
@@ -2071,11 +2104,11 @@ skew-symmetric tensor is always zero.
 
 In terms of strain the principle of virtual work can thus be stated as
 \begin{equation}
-  \gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}}{\delta\vectr{u}}}{v}+
-  \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\fnof{\delta\tensor{\epsilon}}{\delta\vectr{u}}}}{v}=
+  \gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}}{\delta\vectr{u}}}{v}+
+  \gint{\embedmanifold{B}}{}{\doubledotprod{\tensor{\sigma}}{\fnof{\delta\smallstraintensor}{\delta\vectr{u}}}}{v}=
   \gint{\boundary{\embedmanifold{B}}_{t}}{}{\dotprod{\bar{\vectr{t}}}{\delta\vectr{u}}}{a}+
   \gint{\embedmanifold{B}}{}{\dotprod{\vectr{b}}{\delta\vectr{u}}}{v}
-  \label{eqn:virtualworkstrainstatment}
+  \label{eqn:ElasticityVirtualWorkStrainStatement}
 \end{equation}
 
 TALK ABOUT WORK CONJUGACY AND SHOW OTHER CONJUGATE FORMS
@@ -2181,12 +2214,12 @@ second Piola-Kirchoff stress and the Green-Lagrange strain \ie
   \end{split}
 \end{equation}
 
-Now, $\variation{\fnof{\tensortwo{E}}{\vectr{u}}}{\vectr{u}}$ can be found by pulling
-back $\variation{\fnof{\tensortwo{\epsilon}}{\vectr{u}}}{\vectr{u}}$ \ie
+Now, $\variation{\fnof{\greenlagrangestraintensor}{\vectr{u}}}{\vectr{u}}$ can be found by pulling
+back $\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}$ \ie
 \begin{equation}
   \begin{split}
-    \variation{\fnof{\tensortwo{E}}{\vectr{u}}}{\vectr{u}}&=\pullback{\chi}{\pbrac{\variation{\fnof{\tensortwo{\epsilon}}{\vectr{u}}}{\vectr{u}}}}\\
-    &=\transpose{\tensortwo{F}}\variation{\fnof{\tensortwo{\epsilon}}{\vectr{u}}}{\vectr{u}}\tensortwo{F}\\
+    \variation{\fnof{\greenlagrangestraintensor}{\vectr{u}}}{\vectr{u}}&=\pullback{\chi}{\pbrac{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}}\\
+    &=\transpose{\tensortwo{F}}\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}\tensortwo{F}\\
     &=\transpose{\tensortwo{F}}\frac{1}{2}\pbrac{\transpose{\pbrac{\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}}
       +\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}\tensortwo{F}\\
     &=\frac{1}{2}\pbrac{\transpose{\tensortwo{F}}\transpose{\pbrac{\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}}\tensortwo{F}+
@@ -2200,25 +2233,25 @@ back $\variation{\fnof{\tensortwo{\epsilon}}{\vectr{u}}}{\vectr{u}}$ \ie
 To find the directional derivative of the deformation gradient consider
 \begin{equation}
   \begin{split}
-    \directionalderiv{\vectr{X}}{\fnof{\tensor{F}}{\vectr{X}}}{\linearisationdir{\vectr{U}}}&=\evalat{\dby{}{\epsilon}\fnof{\tensor{F}}{\vectr{X}+\epsilon\linearisationdir{\vectr{U}}}}{\epsilon=0}\\    
+    \directionalderiv{\vectr{X}}{\fnof{\deformationgradienttensor}{\vectr{X}}}{\linearisationdir{\vectr{U}}}&=\evalat{\dby{}{\epsilon}\fnof{\deformationgradienttensor}{\vectr{X}+\epsilon\linearisationdir{\vectr{U}}}}{\epsilon=0}\\    
     &=\evalat{\dby{}{\epsilon}\delby{\fnof{\vectr{x}}{\vectr{X}+\epsilon\linearisationdir{\vectr{U}}}}{\vectr{X}}}{\epsilon=0}\\
-    &=\evalat{\dby{}{\epsilon}\delby{\pbrac{\vectr{x}+\tensor{F}\epsilon\linearisationdir{\vectr{U}}}}{\vectr{X}}}{\epsilon=0}\\
-    &=\gradient{\vectr{X}}{\pbrac{\tensor{F}\linearisationdir{\vectr{U}}}}\\
+    &=\evalat{\dby{}{\epsilon}\delby{\pbrac{\vectr{x}+\deformationgradienttensor\epsilon\linearisationdir{\vectr{U}}}}{\vectr{X}}}{\epsilon=0}\\
+    &=\gradient{\vectr{X}}{\pbrac{\deformationgradienttensor\linearisationdir{\vectr{U}}}}\\
     &=\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}
   \end{split}
 \end{equation}
 where $\linearisationdir{\vectr{U}}$ is a direction relative to the position in the
-reference configuration, $\vectr{X}$, and $\linearisationdir{\vectr{u}}=\tensor{F}\linearisationdir{\vectr{U}}$ is a direction
+reference configuration, $\vectr{X}$, and $\linearisationdir{\vectr{u}}=\deformationgradienttensor\linearisationdir{\vectr{U}}$ is a direction
 relative to the position in the current configuration, $\vectr{x}$. The
 directional derivative with respect to the current configuation is given by
 \begin{equation}
-  \directionalderiv{\vectr{x}}{\fnof{\tensor{F}}{\vectr{x}}}{\linearisationdir{\vectr{u}}}=\pbrac{\gradient{\vectr{x}}{\linearisationdir{\vectr{u}}}}\tensor{F}
+  \directionalderiv{\vectr{x}}{\fnof{\deformationgradienttensor}{\vectr{x}}}{\linearisationdir{\vectr{u}}}=\pbrac{\gradient{\vectr{x}}{\linearisationdir{\vectr{u}}}}\deformationgradienttensor
 \end{equation}
 
 We thus have
 \begin{equation}
   \begin{split}
-    \directionalderiv{}{\variation{\fnof{\tensortwo{E}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}&=
+    \directionalderiv{}{\variation{\fnof{\greenlagrangestraintensor}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}&=
     \directionalderiv{}{\symop\pbrac{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}}{\linearisationdir{\vectr{u}}}\\
     &=\symop\pbrac{\transpose{\tensortwo{F}}\directionalderiv{}{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}{\linearisationdir{\vectr{u}}}+
       \transpose{\pbrac{\directionalderiv{}{\tensortwo{F}}{\linearisationdir{\vectr{u}}}}}\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}\\
@@ -2231,7 +2264,7 @@ the directional derivative (CHECK).
 
 We also have
 \begin{equation}
-  \directionalderiv{}{\fnof{\tensortwo{E}}{\variationdir{\vectr{u}}}}{\linearisationdir{\vectr{u}}}=
+  \directionalderiv{}{\fnof{\greenlagrangestraintensor}{\variationdir{\vectr{u}}}}{\linearisationdir{\vectr{u}}}=
   \symop\pbrac{\transpose{\pbrac{\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}\tensortwo{F}}
 \end{equation}
 (DERIVE).
@@ -2247,7 +2280,7 @@ The derivative of the stress tensor with respect to the strain tensor is the
 fourth order \emph{elasticity tensor} (sometimes called the \emph{stiffness
   tensor}) \ie
 \begin{equation}
-  \tensorfour{C}=\delby{\fnof{\tensortwo{S}}{\tensortwo{E}}}{\tensortwo{E}}
+  \tensorfour{C}=\delby{\fnof{\tensortwo{S}}{\greenlagrangestraintensor}}{\greenlagrangestraintensor}
 \end{equation}
 or in component form
 \begin{equation}
@@ -2264,10 +2297,10 @@ Thus we have
   \end{split}
 \end{equation}
 as
-$\doubledotprod{\tensor{A}}{\transpose{\tensor{B}}\tensor{C}}=\doubledotprod{\tensor{C}}{\tensor{B}\tensor{A}}$, and
+$\doubledotprod{\tensor{A}}{\transpose{\pioladeformationtensor}\rightcauchygreentensor}=\doubledotprod{\rightcauchygreentensor}{\tensor{B}\tensor{A}}$, and
 \begin{equation}
   \begin{split}
-    \doubledotprod{\directionalderiv{}{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}{\variation{\fnof{\tensortwo{E}}{\vectr{u}}}{\vectr{u}}}
+    \doubledotprod{\directionalderiv{}{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}{\variation{\fnof{\greenlagrangestraintensor}{\vectr{u}}}{\vectr{u}}}
     &=\doubledotprod{\doubledotprod{\delby{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}{\fnof{\tensor{E}}{\vectr{u}}}}{\directionalderiv{}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}}}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}\\
     &=\doubledotprod{\doubledotprod{\tensorfour{C}}{\symop\pbrac{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}}{\symop\pbrac{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}}\\
     &=\doubledotprod{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}{\doubledotprod{\tensorfour{C}}{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}
@@ -2298,11 +2331,11 @@ configuration \ie with respect to cauchy stress and ??? strain
   \begin{split}
     \directionalderiv{}{\variation{\fnof{\Pi_{int}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}
     &=\directionalderiv{}{\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}}{
-            \fnof{\tensor{e}}{\vectr{u}}}}{\variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}}}{v}}{\linearisationdir{\vectr{u}}}\\
+            \fnof{\tensor{e}}{\vectr{u}}}}{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}}{v}}{\linearisationdir{\vectr{u}}}\\
     &=\gint{\embedmanifold{B}}{}{\left(\doubledotprod{\fnof{\tensor{\sigma}}{
-          \fnof{\tensor{e}}{\vectr{u}}}}{\directionalderiv{}{\variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}}\right.\\
+          \fnof{\tensor{e}}{\vectr{u}}}}{\directionalderiv{}{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}}\right.\\
      & \qquad\qquad + \left.\doubledotprod{\directionalderiv{}{\fnof{\tensor{\sigma}}{
-            \fnof{\tensor{e}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}{\variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}}\right)}{v}
+            \fnof{\tensor{e}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}\right)}{v}
   \end{split}
 \end{equation}
 
@@ -2315,8 +2348,8 @@ Piola-Kirchoff stress \ie
     \inverse{J}\pushforward{\chi}{\pbrac{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}}\\
     \directionalderiv{}{\fnof{\tensor{\sigma}}{\fnof{\tensor{e}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}&=
     \inverse{J}\pushforward{\chi}{\pbrac{\directionalderiv{}{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}}\\
-    \variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}&=\pushforward{\chi}{\pbrac{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}} \\
-    \directionalderiv{}{\variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}&=
+    \variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}&=\pushforward{\chi}{\pbrac{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}} \\
+    \directionalderiv{}{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}&=
     \pushforward{\chi}{\pbrac{\directionalderiv{}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}{\linearisationdir{\vectr{u}}}}}
   \end{split}
 \end{equation}
@@ -2327,7 +2360,7 @@ Now,
     \directionalderiv{}{\fnof{\tensor{\sigma}}{\fnof{\tensor{e}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}&=
     \inverse{J}\pushforward{\chi}{\pbrac{\directionalderiv{}{\fnof{\tensor{S}}{\fnof{\tensor{E}}{\vectr{u}}}}{\linearisationdir{\vectr{u}}}}}\\
     &=\inverse{J}\pushforward{\chi}{\pbrac{\doubledotprod{\tensorfour{C}}{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}}\\
-    &=\inverse{J}\tensor{F}\pbrac{\doubledotprod{\tensorfour{C}}{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}\transpose{\tensor{F}}
+    &=\inverse{J}\deformationgradienttensor\pbrac{\doubledotprod{\tensorfour{C}}{\transpose{\tensortwo{F}}\gradient{\vectr{X}}{\linearisationdir{\vectr{u}}}}}\transpose{\deformationgradienttensor}
   \end{split}
 \end{equation}
 
@@ -2391,22 +2424,22 @@ and
 
 For the body force variation it is often the case that The body force is due to the effect of gravity on the body \ie
 \begin{equation}
-  \fnof{\vectr{b}}{\vectr{u}}=\rho_{0}\vectr{a}_{g}
+  \fnof{\vectr{b}}{\vectr{u}}=\densitysymbol_{0}\vectr{a}_{g}
 \end{equation}
-where $\rho_{0}$ is the density of the reference configuration and $\vectr{a}_{g}$ is
+where $\densitysymbol_{0}$ is the density of the reference configuration and $\vectr{a}_{g}$ is
 the acceleration vector due to gravity.
 
 The external body work variation is thus given by
 \begin{equation}
   \begin{split}
     \variation{\fnof{\Pi_{body}}{\vectr{u},\vectr{b}}}{\vectr{u}}
-    &=\gint{\embedmanifold{B}_{0}}{}{\dotprod{\rho_{0}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{V} \\
-    &=\gint{\embedmanifold{B}_{0}}{}{\dotprod{\fnof{J}{\vectr{u}}\fnof{\inverse{J}}{\vectr{u}}\rho_{0}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{V} \\
-    &=\gint{\embedmanifold{B}}{}{\dotprod{\rho_{0}\fnof{\inverse{J}}{\vectr{u}}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{v} \\
-    &=\gint{\embedmanifold{B}}{}{\dotprod{\rho\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{v}
+    &=\gint{\embedmanifold{B}_{0}}{}{\dotprod{\densitysymbol_{0}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{V} \\
+    &=\gint{\embedmanifold{B}_{0}}{}{\dotprod{\fnof{J}{\vectr{u}}\fnof{\inverse{J}}{\vectr{u}}\densitysymbol_{0}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{V} \\
+    &=\gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol_{0}\fnof{\inverse{J}}{\vectr{u}}\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{v} \\
+    &=\gint{\embedmanifold{B}}{}{\dotprod{\densitysymbol\vectr{a}_{g}}{\variationdir{\vectr{u}}}}{v}
   \end{split}
 \end{equation}
-where $\rho=\rho_{0}\fnof{\inverse{J}}{\vectr{u}}$ is the density in the current configuration.
+where $\densitysymbol=\densitysymbol_{0}\fnof{\inverse{J}}{\vectr{u}}$ is the density in the current configuration.
 
 Now for the pressure potential energy variation consider where the surface
 tracktion is given by an external pressure \ie
@@ -2551,16 +2584,16 @@ and
 Now
 \begin{equation}
   \begin{split}
-    \variation{\fnof{J}{\vectr{u}}}{\vectr{u}}&=\variation{\determinant{\fnof{\tensor{F}}{\vectr{u}}}}{\vectr{u}}
+    \variation{\fnof{J}{\vectr{u}}}{\vectr{u}}&=\variation{\determinant{\fnof{\deformationgradienttensor}{\vectr{u}}}}{\vectr{u}}
     \\
-    &=\directionalderiv{\vectr{u}}{\determinant{\fnof{\tensor{F}}{\vectr{u}}}}{\variationdir{\vectr{u}}}\\
-    &=\directionalderiv{\tensor{F}}{\determinant{\fnof{\tensor{F}}{\vectr{u}}}}{\directionalderiv{}{\fnof{\tensor{F}}{\vectr{u}}}{\variationdir{\vectr{u}}}}
+    &=\directionalderiv{\vectr{u}}{\determinant{\fnof{\deformationgradienttensor}{\vectr{u}}}}{\variationdir{\vectr{u}}}\\
+    &=\directionalderiv{\deformationgradienttensor}{\determinant{\fnof{\deformationgradienttensor}{\vectr{u}}}}{\directionalderiv{}{\fnof{\deformationgradienttensor}{\vectr{u}}}{\variationdir{\vectr{u}}}}
     \\
-    &=\directionalderiv{\tensor{F}}{\determinant{\fnof{\tensor{F}}{\vectr{u}}}}{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}
+    &=\directionalderiv{\deformationgradienttensor}{\determinant{\fnof{\deformationgradienttensor}{\vectr{u}}}}{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}
     \\
     &=
-    \determinant{\fnof{\tensor{F}}{\vectr{u}}}\doubledotprod{\invtranspose{\tensor{F}}}{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}\\
-    &=\fnof{J}{\vectr{u}}\trop\pbrac{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}\inverse{\tensor{F}}}
+    \determinant{\fnof{\deformationgradienttensor}{\vectr{u}}}\doubledotprod{\invtranspose{\deformationgradienttensor}}{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}}\\
+    &=\fnof{J}{\vectr{u}}\trop\pbrac{\gradient{\vectr{X}}{\variationdir{\vectr{u}}}\inverse{\deformationgradienttensor}}
     \\
     &= \fnof{J}{\vectr{u}}\trop\pbrac{\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}\\
     &=\fnof{J}{\vectr{u}}\divergence{\vectr{x}}{\variationdir{\vectr{u}}}
@@ -2585,7 +2618,7 @@ $\sharptensor{\tensor{g}}=\inverse{\tensor{g}}$ and so we obtain
   \begin{split}
     \variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}&=\gint{\embedmanifold{B}}{}{\doubledotprod{-p\inverse{\tensor{g}}}{\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}}{v}\\
     &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}_{\sphop}}{p}}{\gradient{\vectr{x}}{\variationdir{\vectr{u}}}}}{v} \\
-    &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}_{\sphop}}{p}}{\variation{\fnof{\tensor{\epsilon}}{\vectr{u}}}{\vectr{u}}}}{v}
+    &=\gint{\embedmanifold{B}}{}{\doubledotprod{\fnof{\tensor{\sigma}_{\sphop}}{p}}{\variation{\fnof{\smallstraintensor}{\vectr{u}}}{\vectr{u}}}}{v}
   \end{split}
 \end{equation}
 as the spherical stress tensor due to pressure is symmetric. Note that we have
@@ -2605,14 +2638,14 @@ obtain an equivalent expression in the reference configuration via a pull back
 \ie
 \begin{equation}
   \begin{split}
-    \variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}&=\gint{\embedmanifold{B}_{0}}{}{\doubledotprod{-p\fnof{J}{\vectr{u}}\fnof{\inverse{\tensor{C}}}{\vectr{u}}}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}}{V}\\
+    \variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}&=\gint{\embedmanifold{B}_{0}}{}{\doubledotprod{-p\fnof{J}{\vectr{u}}\fnof{\inverse{\rightcauchygreentensor}}{\vectr{u}}}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}}{V}\\
     &=\gint{\embedmanifold{B}_{0}}{}{\doubledotprod{\fnof{\tensor{S}_{sph}}{\vectr{u},p}}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}}{V}\\
   \end{split}
 \end{equation}
 as $\exteriorderiv{v}=J\exteriorderiv{V}$,
-$\tensor{E}=\pullback{\chi}{\tensor{\epsilon}}$, $\tensor{S}_{sph}=J\pullback{\chi}{\tensor{\sigma}_{sph}}$,
-$\tensor{C}=\pullback{\chi}{\tensor{g}}$ and so
-$\inverse{\tensor{C}}=\pullback{\chi}{\inverse{\tensor{g}}}$. Thus
+$\tensor{E}=\pullback{\chi}{\smallstraintensor}$, $\tensor{S}_{sph}=J\pullback{\chi}{\tensor{\sigma}_{sph}}$,
+$\rightcauchygreentensor=\pullback{\chi}{\tensor{g}}$ and so
+$\inverse{\rightcauchygreentensor}=\pullback{\chi}{\inverse{\tensor{g}}}$. Thus
 \begin{equation}
   \begin{split}
     \variation{\fnof{\bar{\Pi}_{int}}{\vectr{u}}}{\vectr{u}}+\variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}&=\gint{\embedmanifold{B}_{0}}{}{\variation{\fnof{\bar{W}}{\vectr{u}}}{\vectr{u}}}{V}+\gint{\embedmanifold{B}_{0}}{}{\doubledotprod{\fnof{\tensor{S}_{sph}}{\vectr{u},p}}{\variation{\fnof{\tensor{E}}{\vectr{u}}}{\vectr{u}}}}{v}\\
@@ -2624,7 +2657,7 @@ where
 \begin{equation}
   \begin{split}
     \tensor{S}&=\tensor{S}_{dev}+\tensor{S}_{sph}\\
-    &= \bar{\tensor{S}}-pJ\inverse{\tensor{C}}
+    &= \bar{\tensor{S}}-pJ\inverse{\rightcauchygreentensor}
   \end{split}
 \end{equation}
 
@@ -2665,7 +2698,7 @@ and
     \tensorfour{C}_{e}&=J^{-\frac{4}{3}}\doubledotprodthree{\pullback{\tensorfour{M}}{}}{\bar{\tensorfour{C}}}{\tensorfour{M}^{*T}}+\dfrac{2}{3}J^{-\frac{2}{3}}\pullback{\Trop}{}\bar{\tensortwo{S}}\tensorfour{M}^{\sharp *}
     -\dfrac{2}{3}\sqbrac{\tensorprod{\tensortwo{B}}{\tensor{S}_{\pullback{\Devop}{}}}+\tensorprod{\tensortwo{S}_{\pullback{\Devop}{}}}{\tensortwo{B}}}\\
     \tensorfour{C}_{p}&=-pJ\pbrac{3\tensorfour{K}^{\sharp *}-2\tensorfour{I}^{\sharp *}}\\
-    \bar{\tensorfour{C}}&=2\delby{\bar{\tensortwo{S}}}{\tensortwo{C}}=\delby{\bar{\tensortwo{S}}}{\tensortwo{E}}
+    \bar{\tensorfour{C}}&=2\delby{\bar{\tensortwo{S}}}{\tensortwo{C}}=\delby{\bar{\tensortwo{S}}}{\greenlagrangestraintensor}
   \end{split}
 \end{equation}
 
@@ -2781,7 +2814,7 @@ The pressure part of the elasticity tensor (in Voigt form) is given by
 
 The linearisation of the other terms are
 \begin{equation}
-  \directionalderiv{}{\variation{\fnof{\bar{\Pi}_{int}}{\vectr{u}}}{\vectr{u}}+\variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}}{\linearisationdir{p}}=\gint{\embedmanifold{B}_{0}}{}{-\linearisationdir{p}J\inverse{\tensor{C}}}{V}
+  \directionalderiv{}{\variation{\fnof{\bar{\Pi}_{int}}{\vectr{u}}}{\vectr{u}}+\variation{\fnof{\Pi_{P}}{\vectr{u},p}}{\vectr{u}}}{\linearisationdir{p}}=\gint{\embedmanifold{B}_{0}}{}{-\linearisationdir{p}J\inverse{\rightcauchygreentensor}}{V}
 \end{equation}
 or
 \begin{equation}
@@ -3005,7 +3038,7 @@ where the residual vector is thus given by
 \begin{multline}
   r_{m}^{j\alpha}=\gsf{m}{\alpha}\left(
     \gint{\vectr{0}}{\vectr{1}}{\pbrac{\fnof{\sigma^{ij}}{\vectr{\xi}}\delby{\xi_{l}}{x^{i}}\delby{
-          \idxgbfn{\pbrac{j}}{m}{\alpha}{\vectr{\xi}}}{\xi^{l}}+\rho\pbrac{
+          \idxgbfn{\pbrac{j}}{m}{\alpha}{\vectr{\xi}}}{\xi^{l}}+\densitysymbol\pbrac{
         \fnof{a^{j}}{\vectr{\xi}}-\fnof{b^{j}}{\vectr{\xi}}}\idxgbfn{\pbrac{j}}{m}{\alpha}{\vectr{\xi}}}
       \fnof{J_{\embedmanifold{B}}}{\vectr{\xi}}}{\vectr{\xi}}\right. \\
     \left.-\gint{\vectr{0}}{\vectr{1}}{\fnof{P_{ext}}{\vectr{\xi}}\fnof{n^{j}}{\vectr{\xi}}
@@ -3137,7 +3170,7 @@ The simplest constitutive non-linear model is the Neo-Hookean model. It correspo
    \fnof{\bar{W}}{\bar{I}_{1},J}=c_{10}\pbrac{\bar{I}_{1}-n}+\dfrac{1}{d_{1}}\pbrac{J-1}^{2}
 \end{equation}
 
-Here the equivalent/initial shear modulus is given by $G_{0}=2c_{10}$ and the equivalent bulk modulus is given by $K_{0}=\frac{1}{d_{1}}$.
+Here the equivalent/initial shear modulus is given by $\frac{G_{0}}{2}=c_{10}$ and the equivalent bulk modulus is given by $\frac{K_{0}}{2}=\frac{1}{d_{1}}$.
 
 Note that an equivalent Poisson's ratio can be calculated from the initial shear and bulk modulii by
 \begin{equation}
@@ -3148,52 +3181,37 @@ This means that
 \begin{equation}
   d_{1}=\dfrac{2}{K_{0}}=\dfrac{3\pbrac{1-2\nu}}{G_{0}\pbrac{1+\nu}}
 \end{equation}
-NOTE: WHY 2 DIVIDED BY $K_{0}$ ABOVE BUT ONLY 1 DIVIDED BY $K_{0}$ ABOVE THAT???
-  
-\subsection{Mooney-Rivlin}
 
-As an example consider a Mooney-Rivlin material.
-
-For two dimensions the strain energy function is given by
-\begin{equation}
-  \fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}=c_{1}\pbrac{\bar{I}_{1}-2}+c_{2}\pbrac{\bar{I}_{2}-2}
-\end{equation}
-where $\bar{I}_{1}$ and $\bar{I}_{2}$ are the invariants of either $\bar{\tensor{C}}$ or $\bar{\tensor{E}}$.
-
-The equivalent/initial shear modulus for a Mooney-Rivlin material is given by $G_{0}=2\pbrac{c_{10}+c_{01}}$.
 
 The second Piola Kirchoff tensor is thus
 \begin{equation}
   \begin{split}
-    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}\\
-    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\tensor{C}}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\tensor{C}}}}\\
-    &=2\pbrac{c_{1}\begin{bmatrix}
+    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}\\
+      &=2\delby{\fnof{\bar{W}}{\bar{I}_{1}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}\\
+      &=2c_{1}\begin{bmatrix}
         1 & 0 \\
         0 & 1
-    \end{bmatrix}+c_{2}\begin{bmatrix}
-        \bar{C}_{22} & -\bar{C}_{21} \\
-        -\bar{C}_{12} & \bar{C}_{11}
-    \end{bmatrix}} \\
-    &=\begin{bmatrix}
-        2c_{1}+2c_{2}\bar{C}_{22} & -2c_{2}\bar{C}_{21} \\
-        -2c_{2}\bar{C}_{12} & 2c_{1}+2c_{2}\bar{C}_{11}
-    \end{bmatrix}
+      \end{bmatrix} \\
+      &=\begin{bmatrix}
+      2c_{1} & 0 \\
+        0 & 2c_{1}
+      \end{bmatrix}
   \end{split}
 \end{equation}
 or, in terms of the Lagrange strain tensor
 \begin{equation}
   \begin{split}
-    \bar{\tensor{S}}&=\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{E}}}\\
+    \bar{\tensor{S}}&=\delby{\fnof{\bar{W}}{\bar{I}_{1}}}{\bar{\tensor{E}}}\\
     &=\begin{bmatrix}
-    c_{1}+c_{2}\bar{E}_{22} & -c_{2}\bar{E}_{21} \\
-    -c_{2}\bar{E}_{12} & c_{1}+c_{2}\bar{E}_{11}
+    c_{1} & 0 \\
+    0 & c_{1}
     \end{bmatrix}
   \end{split}
 \end{equation}
 
 The second material elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\tensor{C}}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}\\
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1}}}{\bar{\rightcauchygreentensor}}\\
 \end{equation}
 and thus
 \begin{equation}
@@ -3222,13 +3240,13 @@ For three dimensions the strain energy function is given by
 \begin{equation}
   \fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}=c_{1}\pbrac{\bar{I}_{1}-3}+c_{2}\pbrac{\bar{I}_{2}-3}
 \end{equation}
-where $\bar{I}_{1}$ and $\bar{I}_{2}$ are the invariants of either $\bar{\tensor{C}}$ or $\bar{\tensor{E}}$.
+where $\bar{I}_{1}$ and $\bar{I}_{2}$ are the invariants of either $\bar{\rightcauchygreentensor}$ or $\bar{\tensor{E}}$.
 
 The second Piola Kirchoff tensor is thus
 \begin{equation}
   \begin{split}
-    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}\\
-    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\tensor{C}}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\tensor{C}}}}\\
+    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
     &=2\pbrac{c_{1}\begin{bmatrix}
         1 & 0 & 0 \\
         0 & 1 & 0 \\
@@ -3260,7 +3278,174 @@ or, in terms of the Lagrange strain tensor
 
 The second material elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\tensor{C}}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}\\
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+\end{equation}
+and thus
+\begin{equation}
+  \begin{split}
+    \bar{C}^{1111}&=\delby{\bar{S}^{11}}{\bar{C}^{11}}=0\\
+    \bar{C}^{1122}&=\delby{\bar{S}^{11}}{\bar{C}^{22}}=4c_{2}\\
+    \bar{C}^{1133}&=\delby{\bar{S}^{11}}{\bar{C}^{33}}=4c_{2}\\
+    \bar{C}^{1123}&=\delby{\bar{S}^{11}}{\bar{C}^{23}}=0\\
+    \bar{C}^{1113}&=\delby{\bar{S}^{11}}{\bar{C}^{13}}=0\\
+    \bar{C}^{1112}&=\delby{\bar{S}^{11}}{\bar{C}^{12}}=0\\
+    \bar{C}^{2211}&=\delby{\bar{S}^{22}}{\bar{C}^{11}}=4c_{2}\\
+    \bar{C}^{2222}&=\delby{\bar{S}^{22}}{\bar{C}^{22}}=0\\
+    \bar{C}^{2233}&=\delby{\bar{S}^{22}}{\bar{C}^{33}}=4c_{2}\\
+    \bar{C}^{2223}&=\delby{\bar{S}^{22}}{\bar{C}^{23}}=0\\
+    \bar{C}^{2213}&=\delby{\bar{S}^{22}}{\bar{C}^{13}}=0\\
+    \bar{C}^{2212}&=\delby{\bar{S}^{22}}{\bar{C}^{12}}=0\\
+    \bar{C}^{3311}&=\delby{\bar{S}^{33}}{\bar{C}^{11}}=4c_{2}\\
+    \bar{C}^{3322}&=\delby{\bar{S}^{33}}{\bar{C}^{22}}=4c_{2}\\
+    \bar{C}^{3333}&=\delby{\bar{S}^{33}}{\bar{C}^{33}}=0\\
+    \bar{C}^{3323}&=\delby{\bar{S}^{33}}{\bar{C}^{23}}=0\\
+    \bar{C}^{3313}&=\delby{\bar{S}^{33}}{\bar{C}^{13}}=0\\
+    \bar{C}^{3312}&=\delby{\bar{S}^{33}}{\bar{C}^{12}}=0\\
+    \bar{C}^{2311}&=\delby{\bar{S}^{23}}{\bar{C}^{11}}=0\\
+    \bar{C}^{2322}&=\delby{\bar{S}^{23}}{\bar{C}^{22}}=0\\
+    \bar{C}^{2333}&=\delby{\bar{S}^{23}}{\bar{C}^{33}}=0\\
+    \bar{C}^{2323}&=\delby{\bar{S}^{23}}{\bar{C}^{23}}=-4c_{2}\\
+    \bar{C}^{2313}&=\delby{\bar{S}^{23}}{\bar{C}^{13}}=0\\
+    \bar{C}^{2312}&=\delby{\bar{S}^{23}}{\bar{C}^{12}}=0\\
+    \bar{C}^{1311}&=\delby{\bar{S}^{13}}{\bar{C}^{11}}=0\\
+    \bar{C}^{1322}&=\delby{\bar{S}^{13}}{\bar{C}^{22}}=0\\
+    \bar{C}^{1333}&=\delby{\bar{S}^{13}}{\bar{C}^{33}}=0\\
+    \bar{C}^{1323}&=\delby{\bar{S}^{13}}{\bar{C}^{23}}=0\\
+    \bar{C}^{1313}&=\delby{\bar{S}^{13}}{\bar{C}^{13}}=-4c_{2}\\
+    \bar{C}^{1312}&=\delby{\bar{S}^{13}}{\bar{C}^{12}}=0\\
+    \bar{C}^{1211}&=\delby{\bar{S}^{12}}{\bar{C}^{11}}=0\\
+    \bar{C}^{1222}&=\delby{\bar{S}^{12}}{\bar{C}^{22}}=0\\
+    \bar{C}^{1233}&=\delby{\bar{S}^{12}}{\bar{C}^{33}}=0\\
+    \bar{C}^{1223}&=\delby{\bar{S}^{12}}{\bar{C}^{23}}=0\\
+    \bar{C}^{1213}&=\delby{\bar{S}^{12}}{\bar{C}^{13}}=0\\
+    \bar{C}^{1212}&=\delby{\bar{S}^{12}}{\bar{C}^{12}}=-4c_{2}\\
+  \end{split}
+\end{equation}
+or, in Voigt form
+\begin{equation}
+  \bar{\tensorfour{C}}^{V}=\begin{bmatrix}
+  0 & 4c_{2} & 4c_{2} & 0 & 0 & 0 \\
+  4c_{2} & 0 & 4c_{2} & 0 & 0 & 0 \\
+  4c_{2} & 4c_{2} & 0 & 0 & 0 & 0 \\
+  0     & 0      & 0 & -4c_{2} & 0 & 0 \\
+  0     & 0      & 0 & 0      & -4c_{2} & 0 \\
+  0     & 0      & 0 & 0      & 0      & -4c_{2} 
+  \end{bmatrix}
+\end{equation}
+
+
+  
+\subsection{Mooney-Rivlin}
+
+As an example consider a Mooney-Rivlin material.
+
+For two dimensions the strain energy function is given by
+\begin{equation}
+  \fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}=c_{1}\pbrac{\bar{I}_{1}-2}+c_{2}\pbrac{\bar{I}_{2}-2}
+\end{equation}
+where $\bar{I}_{1}$ and $\bar{I}_{2}$ are the invariants of either $\bar{\rightcauchygreentensor}$ or $\bar{\tensor{E}}$.
+
+The equivalent/initial shear modulus for a Mooney-Rivlin material is given by $\frac{G_{0}}{2}=\pbrac{c_{10}+c_{01}}$.
+
+The second Piola Kirchoff tensor is thus
+\begin{equation}
+  \begin{split}
+    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
+    &=2\pbrac{c_{1}\begin{bmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{bmatrix}+c_{2}\begin{bmatrix}
+        \bar{C}_{22} & -\bar{C}_{21} \\
+        -\bar{C}_{12} & \bar{C}_{11}
+    \end{bmatrix}} \\
+    &=\begin{bmatrix}
+        2c_{1}+2c_{2}\bar{C}_{22} & -2c_{2}\bar{C}_{21} \\
+        -2c_{2}\bar{C}_{12} & 2c_{1}+2c_{2}\bar{C}_{11}
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+or, in terms of the Lagrange strain tensor
+\begin{equation}
+  \begin{split}
+    \bar{\tensor{S}}&=\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{E}}}\\
+    &=\begin{bmatrix}
+    c_{1}+c_{2}\bar{E}_{22} & -c_{2}\bar{E}_{21} \\
+    -c_{2}\bar{E}_{12} & c_{1}+c_{2}\bar{E}_{11}
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+
+The second material elasticity tensor is given by
+\begin{equation}
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+\end{equation}
+and thus
+\begin{equation}
+  \begin{split}
+    \bar{C}^{1111}&=\delby{\bar{S}^{11}}{\bar{C}^{11}}=0\\
+    \bar{C}^{1122}&=\delby{\bar{S}^{11}}{\bar{C}^{22}}=4c_{2}\\
+    \bar{C}^{1112}&=\delby{\bar{S}^{11}}{\bar{C}^{22}}=0\\
+    \bar{C}^{2211}&=\delby{\bar{S}^{22}}{\bar{C}^{11}}=4c_{2}\\
+    \bar{C}^{2222}&=\delby{\bar{S}^{22}}{\bar{C}^{22}}=0\\
+    \bar{C}^{2212}&=\delby{\bar{S}^{22}}{\bar{C}^{22}}=0\\
+    \bar{C}^{1211}&=\delby{\bar{S}^{22}}{\bar{C}^{11}}=4c_{2}\\
+    \bar{C}^{1222}&=\delby{\bar{S}^{22}}{\bar{C}^{22}}=0\\
+    \bar{C}^{1212}&=\delby{\bar{S}^{22}}{\bar{C}^{22}}=-4c_{2}\\
+  \end{split}
+\end{equation}
+or, in Voigt form
+\begin{equation}
+  \bar{\tensorfour{C}}^{V}=\begin{bmatrix}
+  0 & 4c_{2} & 0 \\
+  4c_{2} & 0 & 0 \\
+  0 & 0 & -4c_{2}
+  \end{bmatrix}
+\end{equation}
+
+For three dimensions the strain energy function is given by
+\begin{equation}
+  \fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}=c_{1}\pbrac{\bar{I}_{1}-3}+c_{2}\pbrac{\bar{I}_{2}-3}
+\end{equation}
+where $\bar{I}_{1}$ and $\bar{I}_{2}$ are the invariants of either $\bar{\rightcauchygreentensor}$ or $\bar{\tensor{E}}$.
+
+The second Piola Kirchoff tensor is thus
+\begin{equation}
+  \begin{split}
+    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
+    &=2\pbrac{c_{1}\begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+      \end{bmatrix}+c_{2}\begin{bmatrix}
+        \bar{C}_{22}+\bar{C}_{33} & -\bar{C}_{21} & \bar{C}_{31} \\
+        -\bar{C}_{12} & \bar{C}_{11}+\bar{C}_{33} & -\bar{C}_{32} \\
+        -\bar{C}_{13} & -\bar{C}_{23} & \bar{C}_{11}+\bar{C}_{22}
+    \end{bmatrix}} \\
+    &=\begin{bmatrix}
+    2c_{1}+2c_{2}\pbrac{\bar{C}_{22}+\bar{C}_{33}} & -2c_{2}\bar{C}_{21} &
+    -2c_{2}\bar{C}_{31} \\
+    -2c_{2}\bar{C}_{12} & 2c_{1}+2c_{2}\pbrac{\bar{C}_{11}+\bar{C}_{33}} & -2c_{2}\bar{C}_{32} \\
+    -2c_{2}\bar{C}_{13} & -2c_{2}\bar{C}_{23} & 2c_{1}+2c_{2}\pbrac{\bar{C}_{11}+\bar{C}_{22}} 
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+or, in terms of the Lagrange strain tensor
+\begin{equation}
+  \begin{split}
+    \bar{\tensor{S}}&=\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{E}}}\\
+    &=\begin{bmatrix}
+    c_{1}+c_{2}\pbrac{\bar{E}_{22}+\bar{E}_{33}} & -c_{2}\bar{E}_{21} & -c_{2}\bar{E}_{31} \\
+    -c_{2}\bar{E}_{12} & c_{1}+c_{2}\pbrac{\bar{E}_{11}+\bar{E}_{33}} & -c_{2}\bar{E}_{32} \\
+    -c_{2}\bar{E}_{13} & -c_{2}\bar{E}_{23} & c_{1}+c_{2}\pbrac{\bar{E}_{11}+\bar{E}_{22}}
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+
+The second material elasticity tensor is given by
+\begin{equation}
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
 \end{equation}
 and thus
 \begin{equation}
@@ -3343,19 +3528,19 @@ configuration will be a square of dimensions $1+\alpha$ by $1-\beta$.
 
 The deformation gradient tensor will be
 \begin{equation}
-  \tensor{F}= \begin{bmatrix}
+  \deformationgradienttensor= \begin{bmatrix}
     1+\alpha & 0  \\
     0 & 1-\beta
   \end{bmatrix}
 \end{equation}
 everywhere, and the Jacobian of the deformation will be 
 \begin{equation}
-  J = \determinant{\tensor{F}}=\pbrac{1+\alpha}\pbrac{1-\beta}
+  J = \determinant{\deformationgradienttensor}=\pbrac{1+\alpha}\pbrac{1-\beta}
 \end{equation}
 
 The modified deformation gradient tensor will be
 \begin{equation}
-  \bar{\tensortwo{F}}=J^{-\frac{1}{2}}\tensor{F}=\frac{1}{\sqrt{\pbrac{1+\alpha}\pbrac{1+\beta}}}\begin{bmatrix}
+  \bar{\tensortwo{F}}=J^{-\frac{1}{2}}\deformationgradienttensor=\frac{1}{\sqrt{\pbrac{1+\alpha}\pbrac{1+\beta}}}\begin{bmatrix}
     1+\alpha & 0  \\
     0 & 1-\beta
   \end{bmatrix}=\begin{bmatrix}
@@ -3366,7 +3551,7 @@ The modified deformation gradient tensor will be
 
 The modified right Cauchy-Green tensor is
 \begin{equation}
-  \bar{\tensor{C}} = \transpose{\bar{\tensor{F}}}\bar{\tensor{F}} =
+  \bar{\rightcauchygreentensor} = \transpose{\bar{\deformationgradienttensor}}\bar{\deformationgradienttensor} =
   J^{-\frac{1}{2}}J^{-\frac{1}{2}}\transpose{\tensortwo{F}}\tensortwo{F} =
   \begin{bmatrix}
     \frac{\sqrt{1+\alpha}}{\sqrt{1-\beta}} & 0  \\
@@ -3382,7 +3567,7 @@ The modified right Cauchy-Green tensor is
 
 The modified Lagrange strain tensor is
 \begin{equation}
-  \bar{\tensor{E}} = \frac{1}{2}\pbrac{\bar{\tensor{C}}-\tensor{I}} = \frac{1}{2}\pbrac{\begin{bmatrix}
+  \bar{\tensor{E}} = \frac{1}{2}\pbrac{\bar{\rightcauchygreentensor}-\tensor{I}} = \frac{1}{2}\pbrac{\begin{bmatrix}
     \frac{1+\alpha}{1-\beta} & 0  \\
     0 & \frac{1-\beta}{1+\alpha}
   \end{bmatrix} - \begin{bmatrix}
@@ -3401,16 +3586,16 @@ Now consider a Mooney-Rivlin material. The strain energy function is given by
 where
 \begin{equation}
   \begin{split}
-    \bar{I}_{1}&=\trace{}{\bar{\tensor{C}}}=\bar{C}_{11}+\bar{C}_{22}\\
-    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\tensor{C}}}}^{2}-\trace{}{\bar{\tensor{C}}^{2}}}=\bar{C}_{11}\bar{C}_{22}-\bar{C}_{12}\bar{C}_{21}
+    \bar{I}_{1}&=\trace{}{\bar{\rightcauchygreentensor}}=\bar{C}_{11}+\bar{C}_{22}\\
+    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\rightcauchygreentensor}}}^{2}-\trace{}{\bar{\rightcauchygreentensor}^{2}}}=\bar{C}_{11}\bar{C}_{22}-\bar{C}_{12}\bar{C}_{21}
   \end{split}
 \end{equation}
 
 Now
 \begin{equation}
   \begin{split}
-    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}\\
-    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\tensor{C}}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\tensor{C}}}}\\
+    \bar{\tensor{S}}&=2\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
     &=2\pbrac{c_{1}\begin{bmatrix}
         1 & 0 \\
         0 & 1
@@ -3436,7 +3621,7 @@ And so we have
 Now
 \begin{equation}
   \begin{split}
-    \bar{\tensor{\sigma}}&=\inverse{J}\pushforward{\chi}{\bar{\tensor{S}}}=\inverse{J}\bar{\tensor{F}}\bar{\tensor{S}}\transpose{\bar{\tensor{F}}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}{\bar{\tensor{S}}}\\
+    \bar{\tensor{\sigma}}&=\inverse{J}\pushforward{\chi}{\bar{\tensor{S}}}=\inverse{J}\bar{\deformationgradienttensor}\bar{\tensor{S}}\transpose{\bar{\deformationgradienttensor}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}{\bar{\tensor{S}}}\\
     &=\dfrac{1}{\pbrac{1+\alpha}\pbrac{1-\beta}}\begin{bmatrix}
       \frac{\sqrt{1+\alpha}}{\sqrt{1-\beta}} & 0  \\
       0 & \frac{\sqrt{1-\beta}}{\sqrt{1+\alpha}}
@@ -3460,7 +3645,7 @@ Now
 
 Note that the psuedo Cauchy stress can also be calculated from
 \begin{equation}
-  \bar{\tensor{\sigma}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}{\bar{\tensor{S}}}\\
+  \bar{\tensor{\sigma}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}{\bar{\tensor{S}}}\\
 \end{equation}
 
 In Voigt form this is given by
@@ -3607,7 +3792,7 @@ and so
 
 Now the second material elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\tensor{C}}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}
 \end{equation}
 
 In Voigt notation we have
@@ -3621,7 +3806,7 @@ In Voigt notation we have
 
 The second spatial elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{c}}=\inverse{J}\pushforward{\chi}{\bar{\tensorfour{C}}}=\inverse{J}\doubledotprodthree{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}{\bar{\tensorfour{C}}}{\transpose{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}}
+  \bar{\tensorfour{c}}=\inverse{J}\pushforward{\chi}{\bar{\tensorfour{C}}}=\inverse{J}\doubledotprodthree{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}{\bar{\tensorfour{C}}}{\transpose{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}}
 \end{equation}
 
 In Voigt notation for the uniaxial square case we have
@@ -3814,7 +3999,7 @@ $1-\gamma$.
 
 The deformation gradient tensor will be
 \begin{equation}
-  \tensor{F}= \begin{bmatrix}
+  \deformationgradienttensor= \begin{bmatrix}
     1+\alpha & 0 & 0 \\
     0 & 1-\beta & 0 \\
     0 & 0 & 1-\gamma
@@ -3823,14 +4008,14 @@ The deformation gradient tensor will be
 \end{equation}
 everywhere, and the Jacobian of the deformation will be 
 \begin{equation}
-  J = \determinant{\tensor{F}}=\pbrac{1+\alpha}\pbrac{1-\beta}\pbrac{1-\gamma}
+  J = \determinant{\deformationgradienttensor}=\pbrac{1+\alpha}\pbrac{1-\beta}\pbrac{1-\gamma}
   \label{eqn:FiniteElasticityUniaxialCubeJacobian}
 \end{equation}
 
 The modified deformation gradient tensor will be
 \begin{equation}
   \begin{split}
-    \bar{\tensor{F}}&=J^{-\frac{1}{3}}\tensor{F}=\frac{1}{\cuberoot{\pbrac{1+\alpha}\pbrac{1+\beta}\pbrac{1+\gamma}}}\begin{bmatrix}
+    \bar{\deformationgradienttensor}&=J^{-\frac{1}{3}}\deformationgradienttensor=\frac{1}{\cuberoot{\pbrac{1+\alpha}\pbrac{1+\beta}\pbrac{1+\gamma}}}\begin{bmatrix}
       1+\alpha & 0 & 0 \\
       0 & 1-\beta & 0 \\
       0 & 0 & 1-\gamma
@@ -3850,8 +4035,8 @@ The modified deformation gradient tensor will be
 The modified right Cauchy-Green tensor is
 \begin{equation}
   \begin{split}
-    \bar{\tensor{C}} &= \transpose{\bar{\tensor{F}}}\bar{\tensor{F}}=
-    \transpose{\pbrac{J^{-\frac{1}{3}}\tensor{F}}}\pbrac{J^{-\frac{1}{3}}\tensor{F}}\\
+    \bar{\rightcauchygreentensor} &= \transpose{\bar{\deformationgradienttensor}}\bar{\deformationgradienttensor}=
+    \transpose{\pbrac{J^{-\frac{1}{3}}\deformationgradienttensor}}\pbrac{J^{-\frac{1}{3}}\deformationgradienttensor}\\
     &= J^{-\frac{2}{3}}\begin{bmatrix}
       1+\alpha & 0 & 0 \\
       0 & 1-\beta & 0 \\
@@ -3882,25 +4067,25 @@ strain energy function. From
 \eqnref{eqn:FiniteElasticityDecomposedStrainEnergy} we have
 \begin{equation}
   \begin{split}
-    \fnof{W}{\tensor{C}} &=
-    \fnof{W_{\Devop}}{\tensor{C}}+\fnof{W_{\Sphop}}{\tensor{C}} \\
-    &=\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensor{C}}}+\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\tensor{C}}}\\
-    &=\fnof{\bar{W}}{\fnof{\bar{\tensor{C}}}{\tensor{C}},\fnof{J}{\tensor{C}}}
+    \fnof{W}{\rightcauchygreentensor} &=
+    \fnof{W_{\Devop}}{\rightcauchygreentensor}+\fnof{W_{\Sphop}}{\rightcauchygreentensor} \\
+    &=\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}}+\fnof{\bar{W}_{\Sphop}}{\fnof{J}{\rightcauchygreentensor}}\\
+    &=\fnof{\bar{W}}{\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor},\fnof{J}{\rightcauchygreentensor}}
   \end{split}
 \end{equation}
 where
-$\fnof{\bar{W}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}$
-is the \emph{modified strain energy function}, $\fnof{J}{\tensor{C}}$
+$\fnof{\bar{W}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}},\fnof{J}{\tensortwo{C}}}$
+is the \emph{modified strain energy function}, $\fnof{J}{\rightcauchygreentensor}$
 is the Jacobian which quantifies volume change and
-$\fnof{\bar{\tensor{C}}}{\tensor{C}}$, is the modified right
+$\fnof{\bar{\rightcauchygreentensor}}{\rightcauchygreentensor}$, is the modified right
 Cauchy-Green deformation tensor.
 
 From \eqnref{eqn:FiniteElasticityDecomposedSecondPKinC} we can determine the second Piola-Kirchoff stress tensor, $\tensortwo{S}$, as a function of the right Cauchy-Green deformation tensor, $\tensortwo{C}$, \ie
 \begin{equation}
   \begin{split}
-    \fnof{\tensor{S}}{\tensor{C}}
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}{\tensor{C}}}-2p\delby{\fnof{J}{\tensortwo{C}}}{\tensor{C}}\\
-    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\fnof{J^{-\frac{2}{3}}}{\tensortwo{C}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\tensor{C}}{\tensor{B}}}{3}}}-pJ\tensor{B}\\
+    \fnof{\tensor{S}}{\rightcauchygreentensor}
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\delby{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}{\rightcauchygreentensor}}-2p\delby{\fnof{J}{\tensortwo{C}}}{\rightcauchygreentensor}\\
+    &=\doubledotprod{\fnof{\bar{\tensor{S}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}}{\fnof{J^{-\frac{2}{3}}}{\tensortwo{C}}\pbrac{\symidentitytensorfour-\dfrac{\tensorprod{\rightcauchygreentensor}{\tensor{B}}}{3}}}-pJ\tensor{B}\\
     &=\fnof{\tensor{S}_{\pullback{\Devop}{}}}{\fnof{\bar{\tensortwo{C}}}{\tensortwo{C}}}
     +\fnof{\tensor{S}_{\pullback{\Sphop}{}}}{\fnof{J}{\tensortwo{C}}}
   \end{split}
@@ -3916,7 +4101,7 @@ which resists volume change.
 
 The second Piola-Kirchoff psuedo stress tensor can be found from the modified strain engergy function \ie
 \begin{equation}
-  \bar{\tensor{S}}=2\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\tensor{C}}}{\tensortwo{C}}}}{\bar{\tensor{C}}}
+  \bar{\tensor{S}}=2\delby{\fnof{\bar{W}_{\Devop}}{\fnof{\bar{\rightcauchygreentensor}}{\tensortwo{C}}}}{\bar{\rightcauchygreentensor}}
 \end{equation}
 
 For a Mooney-Rivlin material the modified deviatoric strain energy function is given by
@@ -3926,8 +4111,8 @@ For a Mooney-Rivlin material the modified deviatoric strain energy function is g
 where $c_{10}$ and $c_{01}$ are the Mooney-Rivlin material constants and
 \begin{equation}
   \begin{split}
-    \bar{I}_{1}&=\trace{}{\bar{\tensor{C}}}=\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33}\\
-    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\tensor{C}}}}^{2}-\trace{}{\bar{\tensor{C}}^{2}}}
+    \bar{I}_{1}&=\trace{}{\bar{\rightcauchygreentensor}}=\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33}\\
+    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\rightcauchygreentensor}}}^{2}-\trace{}{\bar{\rightcauchygreentensor}^{2}}}
     \\ &=\dfrac{1}{2}\left(\pbrac{\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33}}^{2}\right. \\ &
     \quad\left.-\pbrac{\bar{C}_{11}^{2}+\bar{C}_{12}\bar{C}_{21}+\bar{C}_{13}\bar{C}_{31}+
       \bar{C}_{21}\bar{C}_{12}+\bar{C}_{22}^{2}+\bar{C}_{23}\bar{C}_{32}+\bar{C}_{31}\bar{C}_{13}+\bar{C}_{32}\bar{C}_{23}+\bar{C}_{33}^{2}}\right)
@@ -3940,7 +4125,7 @@ Now
 \begin{equation}
   \begin{split}
     \bar{\tensortwo{S}}_{\Devop}&=2\delby{\fnof{\bar{W}_{\Devop}}{\bar{\tensortwo{C}}}}{\bar{\tensortwo{C}}} \\
-    &=2\pbrac{\delby{\fnof{\bar{W}_{\Devop}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\tensor{C}}}+\delby{\fnof{\bar{W}_{\Devop}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\tensor{C}}}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}_{\Devop}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}_{\Devop}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
     &=2\pbrac{c_{10}\begin{bmatrix}
         1 & 0 & 0 \\
         0 & 1 & 0 \\
@@ -3969,7 +4154,7 @@ And so we have
 
 Now the psuedo Cauchy stress can also be calculated from
 \begin{equation}
-  \bar{\tensor{\sigma}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}{\bar{\tensor{S}}}\\
+  \bar{\tensor{\sigma}}=\inverse{J}\doubledotprod{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}{\bar{\tensor{S}}}\\
 \end{equation}
 
 In Voigt form this is given by
@@ -4170,7 +4355,7 @@ The spherical cauchy tensor is
 
 Now the second material elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\tensor{C}}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}
+  \bar{\tensorfour{C}}=2\delby{\bar{\tensor{S}}}{\bar{\rightcauchygreentensor}}=4\deltwosqby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}
 \end{equation}
 
 In Voigt notation we have
@@ -4187,7 +4372,7 @@ In Voigt notation we have
 
 The second spatial elasticity tensor is given by
 \begin{equation}
-  \bar{\tensorfour{c}}=\inverse{J}\pushforward{\chi}{\bar{\tensorfour{C}}}=\inverse{J}\doubledotprodthree{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}{\bar{\tensorfour{C}}}{\transpose{\pbrac{\tensorprod{\bar{\tensor{F}}}{\bar{\tensor{F}}}}}}
+  \bar{\tensorfour{c}}=\inverse{J}\pushforward{\chi}{\bar{\tensorfour{C}}}=\inverse{J}\doubledotprodthree{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}{\bar{\tensorfour{C}}}{\transpose{\pbrac{\tensorprod{\bar{\deformationgradienttensor}}{\bar{\deformationgradienttensor}}}}}
 \end{equation}
 
 In Voigt notation for the uniaxial cube case we have
@@ -4483,14 +4668,14 @@ and \ref{eqn:FiniteElasticityUniaxialCubeModRightCachyGreen} \ie
   J=\pbrac{1+\alpha}\pbrac{1-\beta}\pbrac{1-\gamma}
 \end{equation}
 \begin{equation}
-  \bar{\tensortwo{F}}=J^{-\frac{1}{3}}\tensor{F}=\frac{1}{\cuberoot{\pbrac{1+\alpha}\pbrac{1+\beta}\pbrac{1+\gamma}}}\begin{bmatrix}
+  \bar{\tensortwo{F}}=J^{-\frac{1}{3}}\deformationgradienttensor=\frac{1}{\cuberoot{\pbrac{1+\alpha}\pbrac{1+\beta}\pbrac{1+\gamma}}}\begin{bmatrix}
       1+\alpha & 0 & 0 \\
       0 & 1-\beta & 0 \\
       0 & 0 & 1-\gamma
     \end{bmatrix}
 \end{equation}
 \begin{equation}
-  \bar{\tensortwo{C}}=\transpose{\bar{\tensor{F}}}\bar{\tensor{F}}=J^{-\frac{2}{3}}\begin{bmatrix}
+  \bar{\tensortwo{C}}=\transpose{\bar{\deformationgradienttensor}}\bar{\deformationgradienttensor}=J^{-\frac{2}{3}}\begin{bmatrix}
     \pbrac{1+\alpha}^{2} & 0 & 0 \\
     0 & \pbrac{1-\beta}^{2} & 0  \\
     0 & 0 & \pbrac{1-\gamma}^{2}
@@ -4504,8 +4689,8 @@ Now consider an incompressible Mooney-Rivlin material. The strain energy functio
 where
 \begin{equation}
   \begin{split}
-    \bar{I}_{1}&=\trace{}{\bar{\tensor{C}}}=\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33} \\
-    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\tensor{C}}}}^{2}-\trace{}{\bar{\tensor{C}}^{2}}} \\
+    \bar{I}_{1}&=\trace{}{\bar{\rightcauchygreentensor}}=\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33} \\
+    \bar{I}_{2}&=\frac{1}{2}\pbrac{\pbrac{\trace{}{\bar{\rightcauchygreentensor}}}^{2}-\trace{}{\bar{\rightcauchygreentensor}^{2}}} \\
     &=\dfrac{1}{2}\left(\pbrac{\bar{C}_{11}+\bar{C}_{22}+\bar{C}_{33}}^{2}\right. \\
     & \quad\left.-\pbrac{\bar{C}_{11}^{2}+\bar{C}_{12}\bar{C}_{21}+\bar{C}_{13}\bar{C}_{31}+
       \bar{C}_{21}\bar{C}_{12}+\bar{C}_{22}^{2}+\bar{C}_{23}\bar{C}_{32}+\bar{C}_{31}\bar{C}_{13}+
@@ -4517,8 +4702,8 @@ The modified second Piola-Kirchoff stress tensor is then given by
 Now
 \begin{equation}
   \begin{split}
-    \bar{\tensor{S}}&=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\tensor{C}}}}\\
-    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\tensor{C}}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\tensor{C}}}}\\
+    \bar{\tensor{S}}&=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{\rightcauchygreentensor}}}\\
+    &=2\pbrac{\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{1}}\delby{\bar{I}_{1}}{\bar{\rightcauchygreentensor}}+\delby{\fnof{\bar{W}}{\bar{I}_{1},\bar{I}_{2}}}{\bar{I}_{2}}\delby{\bar{I}_{2}}{\bar{\rightcauchygreentensor}}}\\
     &=2\pbrac{c_{10}\begin{bmatrix}
         1 & 0 & 0 \\
         0 & 1 & 0 \\
@@ -4550,4 +4735,340 @@ in an infinitely thick plate.
 \subsection{\Onedal}
 \label{subsec:FiniteElasticityOneDimension}
 
+\section{Analytic Solutions}
+\label{sec:FiniteElasticityAnalyticSolutions}
+
+\subsection{Inflation, Extension and Torsion of a Tube}
+\label{subsec:FiniteElasticityAnalyticSolutionTube}
+
+Consider a cylindrical tube of inner radius $R_{i}$, outer radius
+$R_{o}$, and length $L$ undergoing deformation from a uniaxial load
+$F$, a twisting moment $M$, and an internal pressure $P$, as shown in
+\figref{fig:FiniteElasticityAnalyticTube}.
+
+\epstexfigure{SolidMechanics/svgs/AnalyticTube.eps_tex}{}{}{fig:FiniteElasticityAnalyticTube}{0.50}
+
+Using a cylindrical polar coordinate system these loads a point an
+undeformed location of $\materialcoordinatevector:\pbrac{R,\Theta,Z}$
+will move to the point $\spatialcoordinatevector:\pbrac{r,\theta,z}$
+\ie
+\begin{align}
+  \fnof{r}{R,\Theta,Z}&=\fnof{f}{R} \\
+  \fnof{\theta}{R,\Theta,Z}&=\Theta+\phi\lambda_{z} Z \\
+  \fnof{z}{R,\Theta,Z}&=\lambda_{z} Z
+\end{align}
+where $\lambda_{z}$ is the uniaxial extension ratio and $\phi$ is the twisting angle per unit length.
+
+From \secref{sec:CoordinateSystemsCylindricalPolar} we have
+\begin{equation}
+  \sharptensor{\generalmetrictensor}=\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & \frac{1}{r^{2}} & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}
+\end{equation}
+and
+\begin{align}
+  \christoffelsecond{r}{\theta}{\theta}&=-r \\
+  \christoffelsecond{\theta}{r}{\theta}=\christoffelsecond{\theta}{\theta}{r}&=\frac{1}{r}
+\end{align}
+with all other Christofell symbols zero.
+
+The deformation gradient tensor in this case is given by
+\begin{equation}
+  \deformationgradienttensor=\begin{bmatrix}
+  \delby{r}{R} & \dfrac{1}{R}\delby{r}{\Theta} & \delby{r}{Z} \\
+  r\delby{\theta}{R} & \dfrac{r}{R}\delby{\theta}{\Theta} & r \delby{\theta}{Z} \\
+  \delby{z}{R} & \dfrac{1}{R}\delby{z}{\Theta} & \delby{z}{Z}
+  \end{bmatrix}=\begin{bmatrix}
+  \delby{f}{R} & 0 & 0 \\
+  0 & \dfrac{r}{R} & r\phi\lambda_{z} \\
+  0 & 0 & \lambda_{z}
+  \end{bmatrix}
+\end{equation}
+
+As the tube is incompressible we have the condition that
+\begin{equation}
+  \det{\deformationgradienttensor}=1
+\end{equation}
+or
+\begin{equation}
+  \delby{r}{R}.\dfrac{r}{R}.\lambda_{z}=1
+\end{equation}
+or
+\begin{equation}
+  r\delby{r}{R}=\dfrac{R}{\lambda_{z}}
+\end{equation}
+
+Integrating both sides gives
+\begin{equation}
+  \dfrac{r^{2}}{2}=\dfrac{R^{2}}{2\lambda_{z}}+c
+\end{equation}
+where $c$ is a constant of integration.
+
+We known that $\fnof{r}{R_{i}}=r_{i}=\mu_{i}R_{i}$ and
+$\fnof{r}{R_{o}}=r_{o}=\mu_{o}R_{o}$, where $\mu_{i}$ and $\mu_{o}$
+are two constants to be determined. We thus obtain
+\begin{equation}
+  \begin{split}
+    c&=\dfrac{r_{i}^{2}}{2}-\dfrac{R_{i}^{2}}{2\lambda_{z}}=\dfrac{\mu_{i}^{2}R_{i}^{2}}{2}-\dfrac{R_{i}^{2}}{2\lambda_{z}}
+    =\dfrac{\pbrac{\mu_{i}^{2}\lambda_{z}-1}R_{i}^{2}}{2\lambda_{z}} \\
+    &=\dfrac{r_{o}^{2}}{2}-\dfrac{R_{o}^{2}}{2\lambda_{z}}=\dfrac{\mu_{o}^{2}R_{o}^{2}}{2}-\dfrac{R_{o}^{2}}{2\lambda_{z}}
+    =\dfrac{\pbrac{\mu_{o}^{2}\lambda_{z}-1}R_{o}^{2}}{2\lambda_{z}} 
+  \end{split}
+\end{equation}
+
+The expression for deformed radius is thus
+\begin{equation}
+  \begin{split}
+    \dfrac{r^{2}}{2}&=\dfrac{R^{2}}{2\lambda_{z}}+\dfrac{\pbrac{\mu_{i}^{2}\lambda_{z}-1}R_{i}^{2}}{2\lambda_{z}}\\
+    &=\dfrac{R^{2}+\mu_{i}^{2}\lambda_{z}R_{i}^{2}-R_{i}^{2}}{2\lambda_{z}}\\
+    &=\dfrac{\mu_{i}^{2}R_{i}^{2}}{2}+\dfrac{R^{2}-R_{i}^{2}}{2\lambda_{z}}
+  \end{split}
+\end{equation}
+or
+\begin{equation}
+  \fnof{r}{R}=\sqrt{K^{2}+\inverse{\lambda_{z}}\pbrac{R^{2}-R_{i}^2}}
+  \label{eqn:AnalyticTubeRadialPosition}
+\end{equation}
+where $K=\mu_{i}R_{i}=\mu_{o}R_{o}$.
+
+Finally, \eqnref{eqn:AnalyticTubeRadialPosition} is of the more general form \todo{make this $r=\sqrt{\alpha+\beta R}$ and then do with with general terms in $\deformationgradienttensor$???}
+\begin{equation}
+  \fnof{r}{R}=\sqrt{\dfrac{a+R^{2}}{\lambda_{z}}}
+  \label{eqn:AnalyticTubeGeneralRadialPosition}
+\end{equation}
+where $a=K^{2}\lambda_{z}-\dfrac{R_{i}^{2}}{\lambda_{z}}$.
+
+We can now differentiate \eqnref{eqn:AnalyticTubeGeneralRadialPosition} to
+finalise our expression for the deformation gradient tensor. Thus
+\begin{equation}
+  \begin{split}
+    \delby{\fnof{r}{R}}{R}&=\delby{\pbrac{\sqrt{\dfrac{a+R^{2}}{\lambda_{z}}}}}{R}\\
+    &=\dfrac{R}{\lambda_{z}\sqrt{\dfrac{a+R^{2}}{\lambda_{z}}}}\\
+    &=\dfrac{R}{r\lambda_{z}}
+  \end{split}
+  \label{eqn:AnalyticTubedfdR}
+\end{equation}
+
+The deformation gradient tensor, in physical components, is thus
+\begin{equation}
+  \deformationgradienttensor=\begin{bmatrix}
+  \dfrac{R}{r\lambda_{z}} & 0 & 0 \\
+  0 & \dfrac{r}{R} & r\phi\lambda_{z} \\
+  0 & 0 & \lambda_{z}
+  \end{bmatrix}
+  \label{eqn:FEAnalyticTubeDeformationGradientTensor}
+\end{equation}
+
+From the deformation gradient tensor we can find the left and right Cauchy-Green deformation tensors \ie
+\begin{equation}
+  \rightcauchygreentensor=\transpose{\deformationgradienttensor}\deformationgradienttensor=\begin{bmatrix}
+    \dfrac{R}{r\lambda_{z}} & 0 & 0 \\
+    0 & \dfrac{r}{R} & 0 \\
+    0 & r\phi\lambda_{z} & \lambda_{z}
+  \end{bmatrix}\begin{bmatrix}
+    \dfrac{R}{r\lambda_{z}} & 0 & 0 \\
+    0 & \dfrac{r}{R} & r\phi\lambda_{z}\\
+    0 & 0 & \lambda_{z}
+  \end{bmatrix}=\begin{bmatrix}
+  \dfrac{R^{2}}{r^{2}\lambda_{z}^{2}} & 0 & 0 \\
+  0 &\dfrac{r^{2}}{R^{2}} & \dfrac{r^{2}\phi\lambda_{z}}{R} \\
+  0 & \dfrac{r^{2}\phi\lambda_{z}}{R} & \pbrac{1+r^{2}\phi^{2}}\lambda_{z}^{2}
+  \end{bmatrix}
+  \label{eqn:FEAnalyticTubeRightCauchyGreenTensor}
+\end{equation}
+and
+\begin{equation}
+  \leftcauchygreentensor=\deformationgradienttensor\transpose{\deformationgradienttensor}=\begin{bmatrix}
+    \dfrac{R}{r\lambda_{z}} & 0 & 0 \\
+    0 & \dfrac{r}{R} & r\phi\lambda_{z}\\
+    0 & 0 & \lambda_{z}
+  \end{bmatrix}\begin{bmatrix}
+    \dfrac{R}{r\lambda_{z}} & 0 & 0 \\
+    0 & \dfrac{r}{R} & 0 \\
+    0 & r\phi\lambda_{z} & \lambda_{z}
+  \end{bmatrix}=\begin{bmatrix}
+  \dfrac{R^{2}}{r^{2}\lambda_{z}^2} & 0 & 0 \\
+  0 & r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} & r\phi\lambda_{z}^{2} \\
+  0 & r\phi\lambda_{z}^{2} & \lambda_{z}^{2}
+  \end{bmatrix}
+  \label{eqn:FEAnalyticTubeLeftCauchyGreenTensor}
+\end{equation}
+
+Now for hyperelastic materials that can be described using a strain energy function, $W=\fnof{W}{\leftcauchygreentensor}$. The strain energy function can also be described using invariants \ie
+\begin{equation}
+  W=\fnof{W}{\leftcauchygreentensor}=\fnof{\tilde{W}}{I_{1},I_{2},I_{3}}
+\end{equation}
+where $I_{1}$, $I_{2}$, $I_{3}$ are the invariants of $\leftcauchygreentensor$ given by
+\begin{align}
+  I_{1}&=\trace{}{\leftcauchygreentensor}\\
+  I_{2}&=\dfrac{1}{2}\pbrac{\pbrac{\trace{}{\leftcauchygreentensor}}^{2}-\trace{}{\leftcauchygreentensor^{2}}}=\trace{}{\inverse{\leftcauchygreentensor}}\determinant{\leftcauchygreentensor}\\
+  I_{3}&=\determinant{\leftcauchygreentensor}
+\end{align}
+
+For an incompressible material (\ie $J=1$) the Cauchy stress is given by
+\begin{equation}
+  \cauchystresstensor=2\pbrac{W_{1}+I_{1}W_{2}}\leftcauchygreentensor-2W_{2}\leftcauchygreentensor^{2}-p\spatialidentitytensortwo
+\end{equation}
+or
+\begin{equation}
+  \cauchystresstensor=2W_{1}\leftcauchygreentensor-2W_{2}\inverse{\leftcauchygreentensor}-p\spatialidentitytensortwo
+\end{equation}
+where $W_{i}=\delby{\tilde{W}}{I_{i}}$ and $p$ is the hydrostatic pressure. \todo{Shouldn't p be multiplied by the metric rather than identity tensor????}
+
+For the case of a Mooney-Rivilin material we have
+\begin{equation}
+  \fnof{W}{\fnof{I_{1}}{\leftcauchygreentensor},\fnof{I_{2}}{\leftcauchygreentensor}}=c_{1}\pbrac{\fnof{I_{1}}{\leftcauchygreentensor}-3}+c_{2}\pbrac{\fnof{I_{2}}{\leftcauchygreentensor}-3}
+\end{equation}
+and so we have $W_{1}=c_{1}$ and $W_{2}=c_{2}$. Now
+\begin{equation}
+  \fnof{I_{1}}{\leftcauchygreentensor}=\dfrac{R^{2}}{r^{2}\lambda_{z}^{2}} + r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} + \lambda_{z}^{2}
+\end{equation}
+and
+\begin{equation}
+  \begin{split}
+    \leftcauchygreentensor^{2} &=
+    \begin{bmatrix}
+      \dfrac{R^{2}}{r^{2}\lambda_{z}^{2}} & 0 & 0 \\
+      0 & r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} & r\phi\lambda_{z}^{2} \\
+      0 & r\phi\lambda_{z}^{2} & \lambda_{z}^{2}
+    \end{bmatrix}
+    \begin{bmatrix}
+      \dfrac{R^{2}}{r^{2}\lambda_{z}^{2}} & 0 & 0 \\
+      0 & r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} & r\phi\lambda_{z}^{2} \\
+      0 & r\phi\lambda_{z}^{2} & \lambda_{z}^{2}
+    \end{bmatrix} \\
+    &=\begin{bmatrix}
+    \dfrac{R^{4}}{r^{4}\lambda_{z}^{4}} & 0 & 0 \\
+    0 & r^{2}\phi^{2}\lambda_{z}^{4}+\dfrac{r^{2}\pbrac{1+R^{2}\phi^{2}\lambda_{z}^{2}}^{2}}{R^{4}} & r\phi\lambda_{z}^{2}\pbrac{1+r^{2}\phi^{2}\lambda_{z}^{2}}+\dfrac{r^{3}\phi\lambda_{z}^{2}}{R^{2}} \\
+    0 & r\phi\lambda_{z}^{2}\pbrac{1+r^{2}\phi^{2}\lambda_{z}^{2}}+\dfrac{r^{3}\phi\lambda_{z}^{2}}{R^{2}} & \pbrac{1+r^{2}\phi^{2}}\lambda_{z}^{4}
+    \end{bmatrix} 
+  \end{split}
+\end{equation}
+and
+\begin{equation}
+  \inverse{\leftcauchygreentensor}=\inverse{\begin{bmatrix}
+      \dfrac{R^{2}}{r^{2}\lambda_{z}^{2}} & 0 & 0 \\
+      0 & r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} & r\phi\lambda_{z}^{2} \\
+      0 & r\phi\lambda_{z}^{2} & \lambda_{z}^{2}
+  \end{bmatrix}}=\begin{bmatrix}
+  \dfrac{r^{2}\lambda_{z}^{2}}{R^{2}} & 0 & 0 \\
+  0 & \dfrac{R^{2}}{r^{2}} & -\dfrac{R^{2}\phi}{r} \\
+  0 & -\dfrac{R^{2}\phi}{r} & R^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}
+  \end{bmatrix}
+\end{equation}
+
+The Cauchy stress tensor is thus
+\begin{equation}
+  \begin{split}
+    \cauchystresstensor &= 2c_{1}\begin{bmatrix}
+      \dfrac{R^{2}}{r^{2}\lambda_{z}^2} & 0 & 0 \\
+      0 & r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}} & r\phi\lambda_{z}^{2} \\
+      0 & r\phi\lambda_{z}^{2} & \lambda_{z}^{2}
+    \end{bmatrix}-2c_{2}\begin{bmatrix}
+      \dfrac{r^{2}\lambda_{z}^{2}}{R^{2}} & 0 & 0 \\
+      0 & \dfrac{R^{2}}{r^{2}} & -\dfrac{R^{2}\phi}{r} \\
+      0 & -\dfrac{R^{2}\phi}{r} & R^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}
+    \end{bmatrix}-p\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+    \end{bmatrix} \\
+    &=\begin{bmatrix}
+    2c_{1}\dfrac{R^{2}}{r^{2}\lambda_{z}^{2}}-2c_{2}\dfrac{r^{2}\lambda_{z}^{2}}{R^{2}} - p & 0 & 0 \\
+    0 & 2c_{1}\pbrac{r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}}}-2c_{2}\dfrac{R^{2}}{r^{2}} - p & 2c_{1}r\phi\lambda_{z}^{2}+2c_{2}\dfrac{R^{2}\phi}{r} \\
+    0 & 2c_{1}r\phi\lambda_{z}^{2}+2c_{2}\dfrac{R^{2}\phi}{r} & 2c_{1}\lambda_{z}^{2}-2c_{2}\pbrac{R^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}}-p
+    \end{bmatrix}
+  \end{split}
+\end{equation}
+
+This gives
+\begin{align}
+  \cauchystresstensorsymbol_{rr}&=2c_{1}\dfrac{R^{2}}{r^{2}\lambda_{z}^{2}}-2c_{2}\dfrac{r^{2}\lambda_{z}^{2}}{R^{2}} -p\\
+  \cauchystresstensorsymbol_{\theta\theta}&=2c_{1}\pbrac{r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{R^{2}}}-2c_{2}\dfrac{R^{2}}{r^{2}} - p\\
+  \cauchystresstensorsymbol_{zz}&=2c_{1}\lambda_{z}^{2}-2c_{2}\pbrac{R^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}}-p\\
+  \cauchystresstensorsymbol_{\theta z}=\cauchystresstensorsymbol_{z \theta}&= 2c_{1}r\phi\lambda_{z}^{2}+2c_{2}\dfrac{R^{2}\phi}{r} 
+\end{align}
+
+Now from \eqnref{eqn:AnalyticTubeGeneralRadialPosition} we have $r=\sqrt{\dfrac{a+R^{2}}{\lambda_{z}}}$ or $r^{2}=\dfrac{R^{2}+a}{\lambda_{z}}$ and so we have
+\begin{equation}
+  \begin{split} 
+    \cauchystresstensorsymbol_{rr}&=2c_{1}\dfrac{R^{2}}{\pbrac{R^{2}+a}\lambda_{z}}-2c_{2}\dfrac{\pbrac{R^{2}+a}\lambda_{z}}{R^{2}} - p\\
+    \cauchystresstensorsymbol_{\theta\theta}&=2c_{1}\pbrac{\pbrac{R^{2}+a}\phi^{2}\lambda_{z}+\dfrac{R^{2}+a}{R^{2}\lambda_{z}}}
+    -2c_{2}\dfrac{R^{2}\lambda_{z}}{R^{2}+a}-p \\
+    \cauchystresstensorsymbol_{zz}&=2c_{1}\lambda_{z}^{2}-2c_{2}\pbrac{R^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}} -p \\
+    \cauchystresstensorsymbol_{\theta z}=\cauchystresstensorsymbol_{z \theta}&= 2c_{1}\dfrac{\sqrt{R^{2}+a}\phi\lambda_{z}^{2}}{\sqrt{\lambda_{z}}}+2c_{2}\dfrac{R^{2}\phi\sqrt{\lambda_{z}}}{\sqrt{R^{2}+a}}
+  \end{split}
+  \label{eqn:FEAnalyticTubeStressComponentsR}
+\end{equation}
+
+From \eqnref{eqn:AnalyticTubeGeneralRadialPosition} we also have $R=\sqrt{r^{2}\lambda_{z}-a}$ or $R^{2}=r^{2}\lambda_{z}-a$ which gives
+\begin{equation}
+  \begin{split} 
+    \cauchystresstensorsymbol_{rr}&= 2c_{1}\dfrac{r^{2}-a}{r^{2}\lambda_{z}^{2}}-2c_{2}\dfrac{r^{2}\lambda_{z}}{r^{2}\lambda_{z}-a} - p\\
+    \cauchystresstensorsymbol_{\theta\theta} &=2c_{1}\pbrac{r^{2}\phi^{2}\lambda_{z}^{2}+\dfrac{r^{2}}{r^{2}\lambda_{z}-a}}-2c_{2}\dfrac{\pbrac{r^{2}\lambda_{z}-a}^{2}}{r^{2}}-p \\
+    \cauchystresstensorsymbol_{zz}&=2c_{1}\lambda_{z}^{2}-2c_{2}\pbrac{\pbrac{r^{2}\lambda_{z}-a}^{2}\phi^{2}+\dfrac{1}{\lambda_{z}^{2}}} -p \\
+    \cauchystresstensorsymbol_{\theta z}=\cauchystresstensorsymbol_{z \theta}&= 2c_{1}r\phi\lambda_{z}^{2}+2c_{2}\dfrac{\pbrac{r^{2}\lambda_{z}-a}\phi}{r}
+  \end{split}
+  \label{eqn:FEAnalyticTubeStressComponentsr}
+\end{equation}
+
+
+In the absense of any body forces the equation for the equillibrium of stress is
+\begin{equation}
+  \divergence{\spatialcoordinatevector}{\cauchystresstensor}=\vectr{0}
+\end{equation}
+or, in cylindrical polar coordinates,
+\begin{equation}
+  \begin{split}
+    \delby{\cauchystresstensorsymbol^{rr}}{r}+\dfrac{1}{r}\delby{\cauchystresstensorsymbol^{r\theta}}{\theta}+\delby{\cauchystresstensorsymbol^{rz}}{z}+\dfrac{1}{r}\pbrac{\cauchystresstensorsymbol^{rr}-\cauchystresstensorsymbol^{\theta\theta}}  &= 0\\
+    \delby{\cauchystresstensorsymbol^{r\theta}}{r}+\dfrac{1}{r}\delby{\cauchystresstensorsymbol^{\theta\theta}}{\theta}+\delby{\cauchystresstensorsymbol^{\theta z}}{z}+\dfrac{2}{r}\cauchystresstensorsymbol^{r\theta} &= 0 \\
+    \delby{\cauchystresstensorsymbol^{rz}}{r}+\dfrac{1}{r}\delby{\cauchystresstensorsymbol^{\theta z}}{\theta}+\delby{\cauchystresstensorsymbol^{zz}}{z}+\dfrac{1}{r}\cauchystresstensorsymbol^{rz}&= 0 
+  \end{split}
+\end{equation}
+
+Now, given the stress components for this problem the equillibrium equations reduce to
+\begin{equation}
+  \delby{\cauchystresstensorsymbol^{rr}}{r}+\dfrac{1}{r}\pbrac{\cauchystresstensorsymbol^{rr}-\cauchystresstensorsymbol^{\theta\theta}} = 0
+  \label{eqn:FEAnalyticTubeEquillibriumEquation}
+\end{equation}
+or
+\begin{equation}
+  \delby{\pbrac{\bar{\cauchystresstensorsymbol}^{rr}-p}}{r}+\dfrac{1}{r}\pbrac{\bar{\cauchystresstensorsymbol}^{rr}-p-\bar{\cauchystresstensorsymbol}^{\theta\theta}+p} = 0
+  \label{eqn:FEAnalyticTubeEquillibriumEquationSplit}
+\end{equation}
+where $\fnof{\cauchystresstensorsymbol^{rr}}{r}=\fnof{\bar{\cauchystresstensorsymbol}^{rr}}{r}-\fnof{p}{r}$ and $\fnof{\cauchystresstensorsymbol^{\theta\theta}}{r}=\fnof{\bar{\cauchystresstensorsymbol}^{\theta\theta}}{r}-\fnof{p}{r}$.
+
+Integrating \eqnref{eqn:FEAnalyticTubeEquillibriumEquationSplit} we can obtain the form of the hydrostatic pressure \ie
+\begin{equation}
+  \fnof{p}{r}=\fnof{\bar{\cauchystresstensorsymbol}^{rr}}{r}+\gint{r}{r_{o}}{\dfrac{\pbrac{\fnof{\bar{\cauchystresstensorsymbol}^{rr}}{r}-\fnof{\bar{\cauchystresstensorsymbol}^{\theta\theta}}{r}}}{r}}{r}
+  \label{eqn:FEAnalyticTubeHydrostaticPressureFormSpatial}
+\end{equation}
+
+\Eqnref{eqn:FEAnalyticTubeHydrostaticPressureForm} can be integrated to give the hydrostatic pressure as a function of the spatial coordinate, $r$. To obtain an equivalent expression in terms of the material coordinate, $R$, we can make use \eqnref{eqn:AnalyticTubedfdR} \ie $\infinitesimal{r}=\dfrac{r}{R\lambda_{z}}\infinitesimal{R}$. We now have
+\begin{equation}
+  \fnof{p}{R}=\fnof{\bar{\cauchystresstensorsymbol}^{rr}}{R}+\gint{R}{R_{o}}{\dfrac{\pbrac{\fnof{\bar{\cauchystresstensorsymbol}^{rr}}{R}-\fnof{\bar{\cauchystresstensorsymbol}^{\theta\theta}}{R}}}{R}\dfrac{1}{\lambda_{z}}}{R}
+  \label{eqn:FEAnalyticTubeHydrostaticPressureFormMaterial} 
+\end{equation}
+
+
+Now if we substitute \eqnref{eqn:FEAnalyticTubeStressComponentsR} into \eqnref{eqn:FEAnalyticTubeEquillibriumEquation} we obtain
+\begin{multline}
+\end{multline}
+or
+\begin{multline}
+\end{multline}
+
+The boundary conditions are at $r=r_{i}$ then
+$\cauchystresstensorsymbol_{rr}=-P$ and at $r=r_{o}$ then
+$\cauchystresstensorsymbol_{rr}=0$. Integrating the equillibrium
+equations we obtain
+\begin{equation}
+  \evalat{\cauchystresstensorsymbol_{rr}}{r=r_{o}}-\evalat{\cauchystresstensorsymbol_{rr}}{r=r_{i}}=\gint{r_{i}}{r_{o}}{\dfrac{\cauchystresstensorsymbol^{rr}-\cauchystresstensorsymbol^{\theta\theta}}{r}}{r}
+\end{equation}
+or
+\begin{equation}
+  P=\gint{r_{i}}{r_{o}}{\dfrac{\cauchystresstensorsymbol^{rr}-\cauchystresstensorsymbol^{\theta\theta}}{r}}{r}
+\end{equation}
 

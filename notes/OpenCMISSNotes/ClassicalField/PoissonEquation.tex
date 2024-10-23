@@ -244,7 +244,7 @@ where $\fnof{\gamma^{rs}}{\vectr{\xi}}$ is defined in
 
 For a \emph{generalised Poisson's equation} \eqnref{eqn:PoissonFemForm} is an equation of the form
 \begin{equation}
-  \matr{K}\vect{u}+\matr{R}\vect{s}+\vect{f}=\matr{K}\vect{u}+\matr{R}\vect{s}+\matr{N}\vect{q}=\vect{0}
+  \matr{K}\vect{u}-\matr{R}\vect{s}-\vect{f}=\matr{K}\vect{u}-\matr{R}\vect{s}-\matr{N}\vect{q}=\vect{0}
 \end{equation}
 where $\vect{u}$ is the vector of $u$ DOFs, $\vect{s}$ is the vector of source
 DOFs and $\vectr{q}$ is the vector of flux DOFs.
@@ -276,14 +276,14 @@ and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 For a \emph{linear source Poisson's equation}
  \eqnref{eqn:PoissonFemForm} is an equation of the form
 \begin{equation}
-  \matr{K}\vect{u}+\matr{R}\vect{s}+\vect{f}=\matr{K}\vect{u}+\matr{R}\vect{s}+\matr{N}\vect{q}=\vect{0}
+  \matr{K}\vect{u}-\matr{R}\vect{s}-\vect{f}=\matr{K}\vect{u}-\matr{R}\vect{s}-\matr{N}\vect{q}=\vect{0}
 \end{equation}
 
 The elemental stiffness matrix, $K^{\alpha\beta}_{mn}$, is given by
 \begin{equation}
   K^{\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{m}{\beta}
   \gint{\vectr{0}}{\vectr{1}}{\pbrac{\delby{\gbfn{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
-      \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}+
+      \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}-
       \fnof{a}{\vectr{\xi}}\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{n}{\beta}{\vectr{\xi}}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
   \label{eqn:elementalfemlhs2}
@@ -297,7 +297,7 @@ The elemental source matrix, $R^{\alpha\epsilon}_{me}$,
 \end{equation}
 and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 \begin{equation}
-  N^{\alpha\gamma}_{mo} =-\gsf{m}{\alpha}\gsf{o}{\gamma}
+  N^{\alpha\gamma}_{mo} = \gsf{m}{\alpha}\gsf{o}{\gamma}
   \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
 \end{equation}
@@ -307,14 +307,14 @@ and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 For a \emph{Quadratic source Poisson's equation}
 \eqnref{eqn:PoissonFemForm} is an equation of the form
 \begin{equation}
-  \matr{K}\vect{u}+\fnof{\vect{g}}{\vect{u}}+\matr{R}\vect{s}+\vect{f}=\matr{K}\vect{u}+\fnof{\vect{g}}{\vect{u}}+\matr{R}\vect{s}+\matr{N}\vect{q}=\vect{0}
+  \matr{K}\vect{u}-\fnof{\vect{g}}{\vect{u}}-\matr{R}\vect{s}-\vect{f}=\matr{K}\vect{u}-\fnof{\vect{g}}{\vect{u}}-\matr{R}\vect{s}-\matr{N}\vect{q}=\vect{0}
 \end{equation}
 
 The elemental stiffness matrix, $K^{\alpha\beta}_{mn}$, is given by
 \begin{equation}
   K^{\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{m}{\beta}
   \gint{\vectr{0}}{\vectr{1}}{\pbrac{\delby{\gbfn{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
-      \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}+
+      \delby{\gbfn{n}{\beta}{\vectr{\xi}}}{\xi^{s}}\fnof{\gamma^{rs}}{\vectr{\xi}}-
       \fnof{a}{\vectr{\xi}}\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{n}{\beta}{\vectr{\xi}}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
   \label{eqn:elementalfemlhs2}
@@ -339,7 +339,7 @@ The elemental source matrix, $R^{\alpha\epsilon}_{me}$,
 \end{equation}
 and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 \begin{equation}
-  N^{\alpha\gamma}_{mo} =-\gsf{m}{\alpha}\gsf{o}{\gamma}
+  N^{\alpha\gamma}_{mo} = \gsf{m}{\alpha}\gsf{o}{\gamma}
   \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
 \end{equation}
@@ -349,7 +349,7 @@ and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 For an \emph{Exponential source Poisson's equation}
 \eqnref{eqn:PoissonFemForm} is an equation of the form
 \begin{equation}
-  \matr{K}\vect{u}+\fnof{\vect{g}}{\vect{u}}+\matr{R}\vect{s}+\vect{f}=\matr{K}\vect{u}+\fnof{\vect{g}}{\vect{u}}+\matr{R}\vect{s}+\matr{N}\vect{q}=\vect{0}
+  \matr{K}\vect{u}-\fnof{\vect{g}}{\vect{u}}-\matr{R}\vect{s}-\vect{f}=\matr{K}\vect{u}-\fnof{\vect{g}}{\vect{u}}-\matr{R}\vect{s}-\matr{N}\vect{q}=\vect{0}
 \end{equation}
 
 The elemental stiffness matrix, $K^{\alpha\beta}_{mn}$, is given by
@@ -382,7 +382,7 @@ The elemental source matrix, $R^{\alpha\epsilon}_{me}$,
 \end{equation}
 and the elemental flux matrix, $N^{\alpha\gamma}_{mo}$, is given by
 \begin{equation}
-  N^{\alpha\gamma}_{mo} =-\gsf{m}{\alpha}\gsf{o}{\gamma}
+  N^{\alpha\gamma}_{mo} = \gsf{m}{\alpha}\gsf{o}{\gamma}
   \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}}
 \end{equation}

@@ -107,7 +107,8 @@ MY_SVG_SRC="BasisFunctions/svgs/*.svg "\
 "Fitting/svgs/*.svg "\
 "PortHamiltonian/svgs/*.svg "\
 "ComputationAndNumerics/svgs/*.svg "\
-"DevelopersDocument/svgs/*.svg "
+"DevelopersDocument/svgs/*.svg "\
+"Appendices/svgs/*.svg "
 MY_PLOT_SRC="BasisFunctions/plots/*.gnu "\
 "BasisFunctions/plots/*.gnu8 "\
 "ComputationAndNumerics/plots/*.gnu"

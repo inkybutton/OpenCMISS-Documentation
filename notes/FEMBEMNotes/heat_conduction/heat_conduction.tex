@@ -93,17 +93,17 @@ by parts (or, equivalently for 2D problems, by applying Green's theorem - see
 later).  Thus, substituting $f=\omega$ and $g=-k\dby{u}{x}$ into the
 \emph{integration by parts}\index{integration by parts} formula
 \begin{equation*}
-  \gint{0}{1}{f\dby{g}{x}}{x} = \inteval{f.g}{0}{1}- \gint{0}{1}{g\dby{f}{x}}{x}
+  \gint{0}{1}{f\dby{g}{x}}{x} = \intevaluated{f.g}{0}{1}- \gint{0}{1}{g\dby{f}{x}}{x}
 \end{equation*}
 gives
 \begin{equation*}
   \gint{0}{1}{\omega\dby{ }{x}\pbrac{-k\dby{u}{x}}}{x} 
-  = \inteval{\omega\pbrac{-k\dby{u}{x}}}{0}{1}-
+  = \intevaluated{\omega\pbrac{-k\dby{u}{x}}}{0}{1}-
   \gint{0}{1}{\pbrac{-k\dby{u}{x}\dby{\omega}{x}}}{x}
 \end{equation*}
 and \eqnref{eqn:substitution} becomes 
 \begin{equation}
-  \gint{0}{1}{\pbrac{k \dby{u}{x}\dby{\omega}{x}+u\omega}}{x} = \inteval{k\dby{u}{x}\omega}{0}{1}
+  \gint{0}{1}{\pbrac{k \dby{u}{x}\dby{\omega}{x}+u\omega}}{x} = \intevaluated{k\dby{u}{x}\omega}{0}{1}
   \label{eqn:integration_by_parts}
 \end{equation}
 
@@ -244,7 +244,7 @@ local to elements.
 
 The RHS of \eqnref{eqn:integration_by_parts} is 
 \begin{equation}
-  \inteval{k\dby{u}{x}\omega}{x=0}{x=1}=\evalat{\pbrac{k\dby{u}{x}\omega}}{x=1}
+  \intevaluated{k\dby{u}{x}\omega}{x=0}{x=1}=\evalat{\pbrac{k\dby{u}{x}\omega}}{x=1}
     -\evalat{\pbrac{k\dby{u}{x}\omega}}{x=0}
   \label{eqn:a1}
 \end{equation}
@@ -255,16 +255,16 @@ element $1$ and therefore $\evalat{\omega_{1}}{x=0}=1$. Also, since $\omega_{1}$
 identically zero outside element $1$, $\evalat{\omega_{1}}{x=1}=0$. Thus
 \eqnref{eqn:a1} for node $1$ reduces to
 \begin{equation*}
-  \inteval{k\dby{u}{x}\omega_{1}}{x=0}{x=1}=-\evalat{\pbrac{k\dby{u}{x}}}{x=0}
+  \intevaluated{k\dby{u}{x}\omega_{1}}{x=0}{x=1}=-\evalat{\pbrac{k\dby{u}{x}}}{x=0}
     \text{= flux entering node $1$.}
 \end{equation*}
 Similarly,
 \begin{equation*}
-  \inteval{k\dby{u}{x}\omega_{n}}{x=0}{x=1}=0\quad\quad\text{(nodes $2$ and $3$)}
+  \intevaluated{k\dby{u}{x}\omega_{n}}{x=0}{x=1}=0\quad\quad\text{(nodes $2$ and $3$)}
 \end{equation*}
 and
 \begin{equation*}
-  \inteval{k\dby{u}{x}\omega_{4}}{x=0}{x=1}=\evalat{\pbrac{k\dby{u}{x}}}{x=1}
+  \intevaluated{k\dby{u}{x}\omega_{4}}{x=0}{x=1}=\evalat{\pbrac{k\dby{u}{x}}}{x=1}
     \mbox{= flux entering node $4$.}
 \end{equation*}
 Note: $k$ has been left in these expressions to emphasise that they are heat 
@@ -367,7 +367,7 @@ Consider the addition of a source term dependent on $x$ in
 \eqnref{eqn:integration_by_parts} now becomes
 \begin{equation}
   \gint{0}{1}{\pbrac{k\dby{u}{x}\dby{\omega}{x} + u\omega}}{x} 
-    = \inteval{k\dby{u}{x}\omega}{0}{1} +\gint{0}{1}{x\omega}{x}        
+    = \intevaluated{k\dby{u}{x}\omega}{0}{1} +\gint{0}{1}{x\omega}{x}        
   \label{eqn:source_term_dep}
 \end{equation}
 where the $x$-dependent source term appears on the RHS because it is not 
@@ -542,7 +542,7 @@ to reduce the derivative order from two to one as follows:
   \label{eqn:Green-Gauss}
 \end{equation}
 \cf Integration by parts is $\goneint{-\dby{ }{x}\pbrac{k\dby{u}{x}}\omega}{x} =
-\goneint{k \dby{u}{x} \dby{\omega}{x}}{x} - \inteval{k\dby{u}{x}\omega}{x_{1}}{x_{2}}$.
+\goneint{k \dby{u}{x} \dby{\omega}{x}}{x} - \intevaluated{k\dby{u}{x}\omega}{x_{1}}{x_{2}}$.
 
 Using \eqnref{eqn:Green-Gauss} in \eqnref{eqn:weighted_integral} gives the 
 two-dimensional equivalent of \eqnref{eqn:integration_by_parts} 

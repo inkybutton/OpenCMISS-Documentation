@@ -407,12 +407,15 @@ the number of dimensions, is given in
 
 \subsubsection{Dependent field}
 
-The dependent field defintion for $\fnof{u}{\vectr{x},t}$ is given in \tabref{tab:OpenCMISSDependentFieldReactionDiffusionEQS}.
+The dependent field defintion for $\fnof{u}{\vectr{x},t}$ and
+$\delby{\fnof{u}{\vectr{x},t}}{\normal}$ are given in
+\tabref{tab:OpenCMISSDependentFieldReactionDiffusionEQS}.
 
 \begin{table}[htb] \centering
   \begin{tabular}{|c|c|c|} \hline
     \emph{Field variable type} & \emph{Dependent field component} & \emph{Interpretation} \\ \hline \hline
     \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $u$ \\ \hline
+    \compcode{FIELD\_DELUDELN\_VARIABLE\_TYPE} & $1$ & $\delby{u}{\normal}$ \\ \hline
   \end{tabular}
   \caption{\OpenCMISS dependent field components for reaction-diffusion equation sets.}
   \label{tab:OpenCMISSDependentFieldReactionDiffusionEQS}

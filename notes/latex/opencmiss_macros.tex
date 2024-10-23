@@ -905,9 +905,9 @@
 \newcommand{\functionalderiv}[2]{\ensuremath{ %
     \delta #1
 }} % functional deriv e.g., \functionalderiv{f} => \delta f
-\newcommand{\inteval}[3]{\ensuremath{ %
+\newcommand{\intevaluated}[3]{\ensuremath{ %
     \displaystyle\sqbrac{#1}_{#2}^{#3} %
-}} % display evaluated integral with limits e.g. \inteval{xxx}{a}{b} => [xxx]_a^b
+}} % display evaluated integral with limits e.g. \intevaluated{xxx}{a}{b} => [xxx]_a^b
 \newcommand{\inverse}[1]{\ensuremath{ %
     {#1}^{-1} %
 }} % inverse e.g. \inverse{A} => A^-1
@@ -1121,7 +1121,10 @@
 }} % sign function
 \newcommand{\symover}[2]{\ensuremath{
     \stackrel{\scriptscriptstyle #1}{#2} %
-}} % over
+}} % symover
+\newcommand{\tensorrank}[2]{%
+rank(#1,#2)%
+} % tensorrank e.g., \tensorrank(m,n) => rank(m,n)
 \newcommand{\variationsymbol}{\ensuremath{ %
     \delta%
     }} % variation symbol => \delta
@@ -1214,6 +1217,21 @@
 \newcommand{\goneint}[2]{\ensuremath{ %
     \gint{#2}{}{#1}{#2} %
 }} % general integral with one limit. eg. \goneint{xxx}{a} => int_a xxx da
+\newcommand{\jacobian}[2]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{ %
+      \ifthenelse{\equal{#2}{}}{ %
+        \matr{J} %
+      }{
+        \fnof{\matr{J}}{#2} %
+      }
+    }{
+      \ifthenelse{\equal{#2}{}}{ %
+        \matr{J}_{#1} %
+      }{
+        \fnof{\matr{J}_{#1}}{#2} %
+      }
+    }
+}} % Jacobain. e.g. \jacobain{a}{b} => J_a(b)
 
 %
 % Special functions and named polynomials
@@ -1301,16 +1319,16 @@
     \dfrac{ \del^{3} #1}{\del #2 \del #3 \del #4} %
     }} % e.g. \delthreeby{u}{x}{y}{z} => del^3 u / del x del y del z
 \newcommand{\delthreecuby}[2]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2^{3}} %
+    \dfrac{ \del^{3} #1}{\del {#2}^{3}} %
     }} % e.g. \delthreecuby{u}{x} => del^3 u / del x^3
 \newcommand{\deldeltwoby}[3]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2 \del #3^{2}} %
+    \dfrac{ \del^{3} #1}{\del #2 \del {#3}^{2}} %
     }} % e.g. \deldeltwoby{u}{x}{y} => del^3 u / del x del y^2
 \newcommand{\deltwodelby}[3]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2^{2} \del #3} %
+    \dfrac{ \del^{3} #1}{\del {#2}^{2} \del #3} %
     }} % e.g. \deltwodelby{u}{x}{y} => del^3 u / del x^2 del y
 \newcommand{\delnby}[4]{\ensuremath{ %
-    \dfrac{\del^{#1} #2}{\del #3^{#4}} %
+    \dfrac{\del^{#1} #2}{\del {#3}^{#4}} %
     }} % e.g. \delnby{3}{u}{v} => del^3 u / del v^3
 \newcommand{\delntwoby}[6]{\ensuremath{ %
     \dfrac{ \del^{#1} #2}{\del {#3}^{#4} \del {#5}^{#6}} %
@@ -2296,12 +2314,18 @@
 \newcommand{\Mandel}[1]{\ensuremath{ %
     {#1}^{\Mandelsymbol} %
 }} % Mandel notation e.g., \Mandel{A} => A^M
+\newcommand{\numberMandel}[1]{\ensuremath{ %
+    \fnof{\Mandelsymbol}{#1} %
+}} % number of Mandel e.g., \numberMandel{n} => M(n)
 \newcommand{\Voigtsymbol}{\ensuremath{ %
     V %
 }} % Voigt symbol
 \newcommand{\Voigt}[1]{\ensuremath{ %
     {#1}^{\Voigtsymbol} %
 }} % Voigt notation e.g., \Voigt{A} => A^V
+\newcommand{\numberVoigt}[1]{\ensuremath{ %
+    \fnof{\Voigtsymbol}{#1} %
+}} % number of Voigt e.g., \numberVoigt{n} => V(n)
 
 %
 % Vector Calculus
@@ -2418,7 +2442,7 @@
 \newcommand{\norm}[1]{\lnorm{2}{#1}} % normalise i.e. l-2 norm
 \newcommand{\rank}[1]{\ensuremath{ %
     \rankop #1 %
-}} % rank operation e.g., \rank{A} => rank A7
+}} % rank operation e.g., \rank{A} => rank A
 \newcommand{\skewsym}[1]{\ensuremath{
     \skewop #1 % skew-symmetric operator i.e., \skewsym{A} = skw A
   }}
@@ -2636,6 +2660,12 @@
 \newcommand{\elementdof}[2]{\ensuremath{ %
   #1_{#2} %
 }} % Element DOF e.g., \elementdof{\psi}{e} => element dof of \psi at element e
+\newcommand{\barycentricsymb}[0]{\ensuremath{ %
+  \lambda%
+}} % the symbol for a barycentric coordinate e.g., \barycentricsymb => \lambda
+\newcommand{\barycentriccoord}[1]{\ensuremath{ %
+  \barycentricsymb^{#1}%
+}} % a barycentric coordinate e.g., \barycentriccoord{i} => \lambda^{i}
 \newcommand{\chbfnsymb}[2]{\ensuremath{ %
     \Psi_{#1}^{#2} %
     }} % Cubic Hermite basis function symbol
@@ -2644,14 +2674,14 @@
     }} % \chbfn{n}{u}{xi} => cubic Hermite basis function at node n deriv u
        % evaluated at xi
 \newcommand{\hsonebfnsymb}[1]{\ensuremath{ %
-    \zeta_{#1} %
+    \varkappa_{#1} %
     }} % Hermite sector 1 basis function symbol
 \newcommand{\hsonebfn}[2]{\ensuremath{ %
     \fnof{\hsonebfnsymb{#1}}{#2} %
     }} % \hsonebfn{n}{xi} => Hermite sector 1 basis function at node n
        % evaluated at xi
 \newcommand{\hsthreebfnsymb}[1]{\ensuremath{ %
-    \eta_{#1} %
+    \varsigma_{#1} %
     }} % Hermite sector 3 basis function symbol
 \newcommand{\hsthreebfn}[2]{\ensuremath{ %
     \fnof{\hsthreebfnsymb{#1}}{#2} %

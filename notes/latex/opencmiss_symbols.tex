@@ -15,6 +15,9 @@
 \newcommand{\gravityvector}{\ensuremath{ %
     \vectr{\gravitysymbol} %
 }} % gravity vector e.g., \gravityvector => a
+\newcommand{\densitysymbol}{\ensuremath{ %
+    \rho %
+}} % density symbol e.g., \densitysymbol => \rho
 \newcommand{\voltagesymbol}{\ensuremath{ %
     V %
 }} % voltage symbol e.g., \voltagesymbol => V
@@ -68,6 +71,21 @@
 \newcommand{\Xithreesq}{\ensuremath{{\Xi^{3}}^{2}}\xspace} % (Xi 3)^2
 \newcommand{\Xithreecube}{\ensuremath{{\Xi^{3}}^{3}}\xspace} % (Xi 3)^3
 
+\newcommand{\zetaone}{\ensuremath{\zeta^{1}}\xspace} % zeta 1
+\newcommand{\zetaonesq}{\ensuremath{{\zeta^{1}}^{2}}\xspace} % (zeta 1)^2
+\newcommand{\zetaonecube}{\ensuremath{{\zeta^{1}}^{3}}\xspace} % (zeta 1)^3
+\newcommand{\zetatwo}{\ensuremath{\zeta^{2}}\xspace} % zeta 2
+\newcommand{\zetatwosq}{\ensuremath{{zeta^{2}}^{2}}\xspace} % (zeta 2)^2
+\newcommand{\zetatwocube}{\ensuremath{{\zeta^{2}}^{3}}\xspace} % (zeta 2)^3
+
+\newcommand{\Zetaone}{\ensuremath{\Zeta^{1}}\xspace} % Zeta 1
+\newcommand{\Zetaonesq}{\ensuremath{{\Zeta^{1}}^{2}}\xspace} % (Zeta 1)^2
+\newcommand{\Zetaonecube}{\ensuremath{{\Zeta^{1}}^{3}}\xspace} % (Zeta 1)^3
+\newcommand{\Zetatwo}{\ensuremath{\Zeta^{2}}\xspace} % Zeta 2
+\newcommand{\Zetatwosq}{\ensuremath{{\Zeta^{2}}^{2}}\xspace} % (Zeta 2)^2
+\newcommand{\Zetatwocube}{\ensuremath{{\Zeta^{2}}^{3}}\xspace} % (Zeta 2)^3
+
+%
 %
 % Coordinate systems etc. (fibre, elemental, world etc.)
 %
@@ -77,55 +95,184 @@
 \newcommand{\coordinatevector}{\ensuremath{ %
     \vectr{\coordinatesymbol} %
 }} % coordinate vectr e.g., \coordinatevector => x
+\newcommand{\coordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \coordinatesymbol%
+    }{
+      \coordinatesymbol^{#1}%
+}}} % coordinate e.g., \coordinate{i} => x^{i}
 \newcommand{\xicoordinatesymbol}{\ensuremath{ %
     \xi %
 }} % xi coordinate symbol e.g., \xicoordinatesymbol => \xi
 \newcommand{\xicoordinatevector}{\ensuremath{ %
     \vectr{\xicoordinatesymbol} %
 }} % xi coordinate vector e.g., \xicoordinatevector => \xi
+\newcommand{\elementcoordinatesymbol}{\ensuremath{ %
+    \xi %
+}} % element coordinate symbol e.g., \elementcoordymbol => \xi
+\newcommand{\elementcoordinatevector}{\ensuremath{ %
+    \vectr{\elementcoordinatesymbol} %
+}} % element coordinate vector e.g., \elementcoordvector => \xi
+\newcommand{\elementcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \elementcoordinatesymbol%
+    }{
+      \elementcoordinatesymbol^{#1}%
+}}} % element coordinate e.g., \elementcoordinate{i} => \xi^{i}
+
+\newcommand{\elemcoordone}{\ensuremath{\elementcoordinatesymbol^{1}}\xspace} % xi 1
+\newcommand{\elemcoordonesq}{\ensuremath{{\elementcoordinatesymbol^{1}}^{2}}\xspace} % (xi 1)^2
+\newcommand{\elemcoordonecube}{\ensuremath{{\elementcoordinatesymbol^{1}}^{3}}\xspace} % (xi 1)^3
+\newcommand{\elemcoordtwo}{\ensuremath{\elementcoordinatesymbol^{2}}\xspace} % xi 2
+\newcommand{\elemcoordtwosq}{\ensuremath{{\elementcoordinatesymbol^{2}}^{2}}\xspace} % (xi 2)^2
+\newcommand{\elemcoordtwocube}{\ensuremath{{\elementcoordinatesymbol^{2}}^{3}}\xspace} % (xi 2)^3
+\newcommand{\elemcoordthree}{\ensuremath{\elementcoordinatesymbol^{3}}\xspace} % xi 3
+\newcommand{\elemcoordthreesq}{\ensuremath{{\elementcoordinatesymbol^{3}}^{2}}\xspace} % (xi 3)^2
+\newcommand{\elemcoordthreecube}{\ensuremath{{\elementcoordinatesymbol^{3}}^{3}}\xspace} % (xi 3)^3
+\newcommand{\boundarycoordinatesymbol}{\ensuremath{ %
+    \zeta %
+}} % boundary (element) coordinate symbol e.g., \boundarycoordinateymbol => \zeta
+\newcommand{\boundarycoordinatevector}{\ensuremath{ %
+    \vectr{\boundarycoordinatesymbol} %
+}} % boundary (element) coordinate vector e.g., \boundarycoordinatevector => \zeta
+\newcommand{\boundarycoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \boundarycoordinatesymbol%
+    }{
+      \boundarycoordinatesymbol^{#1}%
+}}} % boundary (element) coordinate e.g., \boundarycoordinate{i} => \zeta^{i}
+\newcommand{\boundarycoordone}{\ensuremath{\boundarycoordinatesymbol^{1}}\xspace} % zeta 1
+\newcommand{\boundarycoordonesq}{\ensuremath{{\boundarycoordinatesymbol^{1}}^{2}}\xspace} % (zeta 1)^2
+\newcommand{\boundarycoordonecube}{\ensuremath{{\boundarycoordinatesymbol^{1}}^{3}}\xspace} % (zeta 1)^3
+\newcommand{\boundarycoordtwo}{\ensuremath{\boundarycoordinatesymbol^{2}}\xspace} % zeta 2
+\newcommand{\boundarycoordtwosq}{\ensuremath{{zeta^{2}}^{2}}\xspace} % (zeta 2)^2
+\newcommand{\boundarycoordtwocube}{\ensuremath{{\boundarycoordinatesymbol^{2}}^{3}}\xspace} % (zeta 2)^3
+\newcommand{\arclengthcoordinatesymbol}{\ensuremath{ %
+    s%
+}} % arc-length coordinate symbol e.g., \arclengthcoordinateymbol => s
+\newcommand{\arclengthcoordinatevector}{\ensuremath{ %
+    \vectr{\arclengthcoordinatesymbol} %
+}} % arc-length coordinate vector e.g., \arclengthcoordinatevector => s
+\newcommand{\arclengthcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \arclengthcoordinatesymbol%
+    }{
+      \arclengthcoordinatesymbol_{#1}%
+}}} % arclength coordinate e.g., \arclengthcoordinate{i} => s_{i}
+\newcommand{\barycoordinatesymbol}{\ensuremath{ %
+    \lambda%
+}} % barycentric coordinate symbol e.g., \barycoordinateymbol => \lambda
+\newcommand{\barycoordinatevector}{\ensuremath{ %
+    \vectr{\barycoordinatesymbol} %
+}} % barycentric coordinate vector e.g., \barycoordinatevector => \lambda
+\newcommand{\barycoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \barycoordinatesymbol%
+    }{
+      \barycoordinatesymbol^{#1}%
+}}} % barycentric coordinate e.g., \barycoordinate{i} => \lambda^{i}
+\newcommand{\barycoordone}{\ensuremath{\barycoordinatesymbol^{1}}\xspace} % lambda 1
+\newcommand{\barycoordonesq}{\ensuremath{{\barycoordinatesymbol^{1}}^{2}}\xspace} % (lambda 1)^2
+\newcommand{\barycoordonecube}{\ensuremath{{\barycoordinatesymbol^{1}}^{3}}\xspace} % (lambda 1)^3
+\newcommand{\barycoordtwo}{\ensuremath{\barycoordinatesymbol^{2}}\xspace} % lambda 2
+\newcommand{\barycoordtwosq}{\ensuremath{{\barycoordinatesymbol^{2}}^{2}}\xspace} % (lambda 2)^2
+\newcommand{\barycoordtwocube}{\ensuremath{{\barycoordinatesymbol^{2}}^{3}}\xspace} % (lambda 2)^3
+\newcommand{\barycoordthree}{\ensuremath{\barycoordinatesymbol^{3}}\xspace} % lambda 3
+\newcommand{\barycoordthreesq}{\ensuremath{{\barycoordinatesymbol^{3}}^{2}}\xspace} % (lambda 3)^2
+\newcommand{\barycoordthreecube}{\ensuremath{{\barycoordinatesymbol^{3}}^{3}}\xspace} % (lambda 3)^3
+\newcommand{\barycoordfour}{\ensuremath{\barycoordinatesymbol^{4}}\xspace} % lambda 4
+\newcommand{\barycoordfoursq}{\ensuremath{{\barycoordinatesymbol^{4}}^{2}}\xspace} % (lambda 4)^2
+\newcommand{\barycoordfourcube}{\ensuremath{{\barycoordinatesymbol^{4}}^{3}}\xspace} % (lambda 4)^3
 \newcommand{\fibrecoordinatesymbol}{\ensuremath{ %
     \nu %
 }} % Fibre coordinate symbol e.g., \fibrecoordinatesymbol => \nu
 \newcommand{\fibrecoordinatevector}{\ensuremath{ %
     \vectr{\fibrecoordinatesymbol} %
 }} % Fibre coordinate vector e.g., \fibrecoordinatevector => \nu
-
+\newcommand{\fibrecoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \fibrecoordinatesymbol%
+    }{
+      \fibrecoordinatesymbol^{#1}%
+}}} % fibre coordinate e.g., \fibrecoordinate{i} => \nu^{i}
 \newcommand{\spatialcoordinatesymbol}{\ensuremath{ %
     \coordinatesymbol %
 }} % spatial coordinate symbol e.g., \spatialcoordinatesymbol => x
 \newcommand{\spatialcoordinatevector}{\ensuremath{ %
     \vectr{\spatialcoordinatesymbol} %
 }} % spatial coordinate vector e.g., \spatialcoordinatevector => x
+\newcommand{\spatialcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \spatialcoordinatesymbol%
+    }{
+      \spatialcoordinatesymbol^{#1}%
+}}} % spatial coordinate e.g., \spatialcoordinate{i} => x^{i}
 \newcommand{\materialcoordinatesymbol}{\ensuremath{ %
     X %
 }} % material coordinate symbol e.g., \materialcoordinatesymbol => X
 \newcommand{\materialcoordinatevector}{\ensuremath{ %
     \vectr{\materialcoordinatesymbol} %
 }} % material coordinate vector e.g., \materialcoordinatevector => X
+\newcommand{\materialcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \materialcoordinatesymbol%
+    }{
+      \materialcoordinatesymbol^{#1}%
+}}} % material coordinate e.g., \materialcoordinate{i} => x^{i}
 \newcommand{\spatialxicoordinatesymbol}{\ensuremath{ %
     \xicoordinatesymbol %
 }} % Spatial xi coordinate symbol e.g., \spatialxicoordinatesymbol => \xi
 \newcommand{\spatialxicoordinatevector}{\ensuremath{ %
     \vectr{\spatialxicoordinatesymbol} %
 }} % Spatial xi coordinate vector e.g., \spatialxicoordinatevector => \xi
+\newcommand{\spatialelemcoordinatesymbol}{\ensuremath{ %
+    \elementcoordinatesymbol %
+}} % Spatial element coordinate symbol e.g., \spatialelemcoordinatesymbol => \xi
+\newcommand{\spatialelemcoordinatevector}{\ensuremath{ %
+    \vectr{\spatialelemcoordinatesymbol} %
+}} % Spatial elem coordinate vector e.g., \spatialelemcoordinatevector => \xi
+\newcommand{\spatialelemcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \spatialelemcoordinatesymbol%
+    }{
+      \spatialelemcoordinatesymbol^{#1}%
+}}} % spatial element coordinate e.g., \spatialelemcoordinate{i} => \xi^{i}
 \newcommand{\materialxicoordinatesymbol}{\ensuremath{ %
     \Xi %
 }} % Material xi coordinate symbol e.g., \materialxicoordinatesymbol => \Xi
 \newcommand{\materialxicoordinatevector}{\ensuremath{ %
     \vectr{\materialxicoordinatesymbol} %
 }} % Material xi coordinate vector e.g., \materialxicoordinatevector => \Xi
+\newcommand{\materialelemcoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \materialelemcoordinatesymbol%
+    }{
+      \materialelemcoordinatesymbol^{#1}%
+}}} % material element coordinate e.g., \materialelemcoordinate{i} => \Xi^{i}
 \newcommand{\spatialfibrecoordinatesymbol}{\ensuremath{ %
     \fibrecoordinatesymbol %
 }} % Spatial fibre coordinate symbol e.g., \spatialfibrecoordinatesymbol => \nu
 \newcommand{\spatialfibrecoordinatevector}{\ensuremath{ %
     \vectr{\spatialfibrecoordinatesymbol} %
 }} % Spatial fibre coordinate vector e.g., \spatialfibrecoordinatevector => \nu
+\newcommand{\spatialfibrecoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \spatialfibrecoordinatesymbol%
+    }{
+      \spatialfibrecoordinatesymbol^{#1}%
+}}} % spatial fibre coordinate e.g., \spatialfibrecoordinate{i} => \nu^{i}
 \newcommand{\materialfibrecoordinatesymbol}{\ensuremath{ %
     N %
 }} % Material fibre coordinate symbol e.g., \materialfibrecoordinatesymbol => N
 \newcommand{\materialfibrecoordinatevector}{\ensuremath{ %
     \vectr{\materialfibrecoordinatesymbol} %
 }} % Material fibre coordinate vector e.g., \materialfibrecoordinatevector => N
+\newcommand{\materialfibrecoordinate}[1]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{%
+      \materialfibrecoordinatesymbol%
+    }{
+      \materialfibrecoordinatesymbol^{#1}%
+}}} % material fibre coordinate e.g., \materialfibrecoordinate{i} => \Nu^{i}
 \newcommand{\spatialfibrestructuretensorsymbol}{\ensuremath{ %
     s %
 }} % Spatial fibre structure tensor symbol e.g., \spatialfibrestructuretensorsymbol => s
@@ -135,13 +282,25 @@
 
 %
 % Solid Mechanics
-%
+% 
 
 % Constants
 
+\newcommand{\firstlamesymbol}{\ensuremath{ %
+    \lambda%
+}} % First Lame constant symbol e.g., \firstlamesymbol => \lambda
+\newcommand{\secondlamesymbol}{\ensuremath{ %
+    \mu%
+}} % Second Lame constant symbol e.g., \secondlamesymbol => \mu
 \newcommand{\poissonsratiosymbol}{\ensuremath{ %
-    \nu %
+    \nu%
 }} % Poisson's ratio symbol e.g., \poissonsratiosymbol => \nu
+\newcommand{\youngsmodulussymbol}{\ensuremath{ %
+    E%
+}} % Young's modulus symbol e.g., \youngsmodulussymbol => E
+\newcommand{\shearmodulussymbol}{\ensuremath{ %
+    G%
+}} % Shear modulus symbol e.g., \shearmodulussymbol => G
 \newcommand{\bulkstrainmodulussymbol}{\ensuremath{ %
     K %
 }} % Bulk strain modulus symbol e.g., \bulkstrainmodulussymbol => K
@@ -186,7 +345,7 @@
     E %
 }} % Green-Lagrange strain tensor symbol e.g., \greenlagrangestraintensorsymbol => E
 \newcommand{\greenlagrangestraintensor}{\ensuremath{ %
-    \tensortwo{\greenlagrangetensorsymbol} %
+    \tensortwo{\greenlagrangestraintensorsymbol} %
 }} % Green-Lagrange strain tensor e.g., \greenlagrangestraintensor => B
 \newcommand{\leftcauchygreentensorsymbol}{\ensuremath{ %
     b %
@@ -248,6 +407,12 @@
 \newcommand{\materialsecondelasticitytensor}{\ensuremath{ %
     \tensorfour{\materialsecondelasticitytensorsymbol} %
 }} % Material second elasticity tensor e.g., \materialsecondelasticitytensor => C
+\newcommand{\materialsecondcompliancetensorsymbol}{\ensuremath{ %
+    S %
+}} % Material second compliance tensor symbol e.g., \materialsecondcompliancetensorsymbol => S
+\newcommand{\materialcompliancetensor}{\ensuremath{ %
+    \tensorfour{\materialsecondcompliancetensorsymbol} %
+}} % Material second compliance tensor e.g., \materialsecondcompilancetensor => S
 \newcommand{\spatialfirstelasticitytensorsymbol}{\ensuremath{ %
     a %
 }} % Spatial first elasticity tensor symbol e.g., \spatialfirstelasticitytensorsymbol => a
@@ -260,6 +425,56 @@
 \newcommand{\spatialsecondelasticitytensor}{\ensuremath{ %
     \tensorfour{\spatialsecondelasticitytensorsymbol} %
 }} % Spatial second elasticity tensor e.g., \spatialsecondelasticitytensor => c
+\newcommand{\spatialsecondcomplancetensorsymbol}{\ensuremath{ %
+    s %
+}} % Spatial second compliance tensor symbol e.g., \spatialsecondcompliancetensorsymbol => s
+\newcommand{\spatialsecondcompliancetensor}{\ensuremath{ %
+    \tensorfour{\spatialsecondcompliancetensorsymbol} %
+}} % Spatial second compliance tensor e.g., \spatialsecondcompliancetensor => s
+
+%
+% Linear elasticity
+%
+
+\newcommand{\smallstraintensorsymbol}{\ensuremath{ %
+    \epsilon%
+}} % small strain tensor symbol e.g., \smallstraintensorsymbol => \epsilon
+\newcommand{\smallstraintensor}{\ensuremath{ %
+    \tensortwo{\smallstraintensorsymbol} %
+}} % small strain tensor e.g., \smallstraintensor => \epsilon
+\newcommand{\smallrotationtensorsymbol}{\ensuremath{ %
+    \omega%
+}} % small rotation tensor symbol e.g., \smallstraintensorsymbol => \omega
+\newcommand{\smallrotationtensor}{\ensuremath{ %
+    \tensortwo{\smallrotationtensorsymbol} %
+}} % small rotation tensor e.g., \smallrotationtensor => \omega
+\newcommand{\shearstrainsymbol}{\ensuremath{ %
+    \gamma%
+}} % shear strain symbol e.g., \shearstrainsymbol => \gamma
+\newcommand{\shearstresssymbol}{\ensuremath{ %
+    \tau%
+}} % shear stress symbol e.g., \shearstresssymbol => \tau
+\newcommand{\linearstresstensorsymbol}{\ensuremath{ %
+    \sigma%
+}} % linear stress tensor symbol e.g., \linearstresstensorsymbol => \sigma
+\newcommand{\linearstresstensor}{\ensuremath{ %
+    \tensortwo{\linearstresstensorsymbol}%
+}} % linear stress tensor e.g., \linearstresstensor => \sigma
+\newcommand{\linearelasticitytensorsymbol}{\ensuremath{ %
+    c%
+}} % linear elasticity tensor symbol e.g., \linearelasticitytensorsymbol => c
+\newcommand{\linearelasticitytensor}{\ensuremath{ %
+    \tensorfour{\linearelasticitytensorsymbol}%
+}} % linear elasticity tensor e.g., \linearelasticitytensor => c
+\newcommand{\linearcompliancetensorsymbol}{\ensuremath{ %
+    s%
+}} % linear compliance tensor symbol e.g., \linearcompliancetensorsymbol => s
+\newcommand{\linearcompliancetensor}{\ensuremath{ %
+    \tensorfour{\linearcompliancetensorsymbol}%
+}} % linear compliance tensor e.g., \linearcompliancetensor => s
+\newcommand{\linearstrainenergysymbol}{\ensuremath{ %
+    \varepsilon %
+}} % linear strain energy symbol e.g., \linearstrainenergysymbol => \varepsilon
 
 %
 % Bioelectrics
@@ -267,7 +482,7 @@
 
 \newcommand{\membraneareavolumeratio}{\ensuremath{ %
     A_{m} %
-}} % membrane area to volume ratio e.g., \membraneareavolumeration => A_m
+}} % membrane area to volume ratio e.g., \membraneareavolumeration => A_m 
 \newcommand{\membranecapacitance}{\ensuremath{ %
     C_{m} %
 }} % membrane capacitance e.g., \membranecapacitance => C_m

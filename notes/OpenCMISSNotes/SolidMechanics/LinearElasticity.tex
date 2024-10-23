@@ -1,101 +1,834 @@
 \section{Linear Elasticity}
 \label{sec:LinearElasticity}
 
-
 \subsection{Linearisation of Finite Elasticity}
 
 \subsection{Equations of Linear Elasticity}
+\label{subsec:LinearElasticityEquations}
 
 The equations of \emph{linear (classical) elasticity} are given by
 \begin{equation}
   \addtolength{\fboxsep}{5pt}
   \boxed{
-    \fnof{\rho}{\vectr{x}}\fnof{\ddot{\vectr{u}}}{\vectr{x},t}=\fnof{\rho}{\vectr{x}}\fnof{\vectr{b}}{\vectr{x}}+
-    \divergence{}{\pbrac{\dotprod{\fnof{\tensorfour{c}}{\vectr{x}}}{\gradient{}{\fnof{\vectr{u}}{\vectr{x},t}}}}}
+    \fnof{\densitysymbol}{\coordinatevector}\fnof{\ddot{\vectr{u}}}{\coordinatevector,t}=
+    \fnof{\densitysymbol}{\coordinatevector}\fnof{\vectr{b}}{\coordinatevector}+
+    \divergence{}{\pbrac{\dotprod{\fnof{\linearelasticitytensor}{\coordinatevector}}{\gradient{}{\fnof{\vectr{u}}{\coordinatevector,t}}}}}
   }
   \label{eqn:LinearElasticityEquation}
 \end{equation}
-where $\fnof{\rho}{\vectr{x}}$ is the mass density,
-$\fnof{\vectr{b}}{\vectr{x},t}$ is the body force field,
-$\fnof{\tensorfour{c}}{\vectr{x}}$ is the fourth-order elasticity tensor
-field, and $\fnof{\vectr{u}}{\vect{x},t}$ is the is the displacement field.
+where $\fnof{\densitysymbol}{\coordinatevector}$ is the mass density,
+$\fnof{\vectr{b}}{\coordinatevector,t}$ is the body force field,
+$\fnof{\linearelasticitytensor}{\coordinatevector}$ is the fourth-order elasticity tensor
+field, $\fnof{\ddot{\vectr{u}}}{\coordinatevector,t}$ is the is the acceleration field,
+and $\fnof{\vectr{u}}{\coordinatevector,t}$ is the is the displacement field.
 
 In component form \eqnref{eqn:LinearElasticityEquation} can be written as
 \begin{equation}
-  \rho{\ddot{u}}^{i}=\rho b^{i} + \covarderiv{\pbrac{c^{ijkl}\covarderiv{u_{k}}{l}}}{j}
+  \rho{\ddot{u}}^{i}=\densitysymbol b^{i} + \covarderiv{\pbrac{\linearelasticitytensorsymbol^{ijkl}\covarderiv{u_{k}}{l}}}{j}
 \end{equation}
 
 The elasticity tensor is subject to the following symmetry conditions
 \begin{equation}
-  c^{ijkl}=c^{jikl}=c^{ijlk}=c^{klij}
+  \linearelasticitytensorsymbol^{ijkl}=\linearelasticitytensorsymbol^{jikl}=\linearelasticitytensorsymbol^{ijlk}=\linearelasticitytensorsymbol^{klij}
 \end{equation}
 
 Note that for \emph{linear elastostatics} the
-$\fnof{\rho}{\vectr{x}}\fnof{\ddot{\vectr{u}}}{\vectr{x},t}$ term is zero and
+$\fnof{\densitysymbol}{\coordinatevector}\fnof{\ddot{\vectr{u}}}{\coordinatevector,t}$ term is zero and
 is dropped. 
  
 The boundary conditions for linear elasticity are Dirichlet conditions on
 displacement \ie
 \begin{equation}
-  \fnof{\vectr{u}}{\vectr{x},t} = \fnof{\vectr{g}}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{D},t\in[0,\infty)
+  \fnof{\vectr{u}}{\coordinatevector,t} = \fnof{\vectr{g}}{\coordinatevector,t} \quad \coordinatevector\in\Gamma_{D},t\in[0,\infty)
   \label{eqn:LinearElasticityDirichletBC} 
 \end{equation}
 or, in component form,
 \begin{equation}
-  u^{i}=g^{i} \quad \vectr{x}\in\Gamma_{D},t\in[0,\infty)
+  u^{i}=g^{i} \quad \coordinatevector\in\Gamma_{D},t\in[0,\infty)
 \end{equation}
 and Neumann conditions on traction \ie
 \begin{equation}
-  \fnof{\vectr{t}}{\vectr{x},t} =\dotprod{\pbrac{\dotprod{\fnof{\tensorfour{c}}{\vectr{x}}}
-        {\gradient{}{\fnof{\vectr{u}}{\vectr{x},t}}}}}{\fnof{\normal}{\vectr{x}}}
-  = \fnof{\vectr{h}}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{N},t\in[0,\infty)
+  \fnof{\vectr{t}}{\coordinatevector,t} =\dotprod{\pbrac{\dotprod{\fnof{\linearelasticitytensor}{\coordinatevector}}
+        {\gradient{}{\fnof{\vectr{u}}{\coordinatevector,t}}}}}{\fnof{\normal}{\coordinatevector}}
+  = \fnof{\vectr{h}}{\coordinatevector,t} \quad \coordinatevector\in\Gamma_{N},t\in[0,\infty)
   \label{eqn:LinearElasticityNeumannBC} 
 \end{equation}
 or, in component form,
 \begin{equation}
-  t^{i}=c^{ijkl}\covarderiv{u_{k}}{l}n_{j}=h^{i} \quad \vectr{x}\in\Gamma_{N},t\in[0,\infty)
+  t^{i}=\linearelasticitytensor^{ijkl}\covarderiv{u_{k}}{l}\normalsymbol_{j}=h^{i} \quad \coordinatesymbol\in\Gamma_{N},t\in[0,\infty)
 \end{equation}
-where $\fnof{t}{\vectr{x},t}$ is the boundary traction, $\fnof{\normal}{\vectr{x}}$ is the normal
+where $\fnof{t}{\coordinatesymbol,t}$ is the boundary traction, $\fnof{\normal}{\coordinatesymbol}$ is the normal
 vector to the boundary and $\Gamma = \Gamma_D \cup \Gamma_N$.
 
 The \emph{small strain tensor} is given by a linearisation of the Lagrangian
-strain tensor $\tensortwo{E}=\frac{1}{2}\pbrac{\tensortwo{C}-\tensortwo{G}}$
+strain tensor $\greenlagrangestraintensor=\frac{1}{2}\pbrac{\rightcauchygreentensor-\materialmetrictensor}$
 and can be written as
 \begin{equation}
-  \tensortwo{e}=\frac{1}{2}\liederiv{\vectr{u}}{\tensortwo{g}}=\frac{1}{2}\pbrac{\gradient{}{\vectr{u}}+\transpose{\gradient{}{\vectr{u}}}}
+  \smallstraintensor=\frac{1}{2}\liederiv{\vectr{u}}{\spatialmetrictensor}=\frac{1}{2}\pbrac{\gradient{}{\vectr{u}}+\transpose{\gradient{}{\vectr{u}}}}
+  \label{eqn:LinearElasticitySmallStrainTensor}
 \end{equation}
 or, in component form,
 \begin{equation}
-  e_{ij}=\frac{1}{2}\pbrac{\covarderiv{u_{i}}{j}+\covarderiv{u_{j}}{i}}
+  \smallstraintensor_{ij}=\frac{1}{2}\pbrac{\covarderiv{u_{i}}{j}+\covarderiv{u_{j}}{i}}
+  \label{eqn:LinearElasticitySmallStrainTensorComponents}
 \end{equation}
+\todo{WHY IS THE DISPLACEMENT FIELD A COVECTOR FIELD???}
 
 The \emph{stress tensor} is given by
 \begin{equation}
-  \tensortwo{s}=\dotprod{\tensorfour{c}}{\gradient{}{\vectr{u}}}
+  \linearstresstensor=\dotprod{\linearelasticitytensor}{\gradient{}{\vectr{u}}}
+  \label{eqn:LinearElasticityLinearStressTensor}
 \end{equation}
 or, in component form,
 \begin{equation}
-  s^{ij}=c^{ijkl}\covarderiv{u_{k}}{l}
+  \linearstresstensorsymbol^{ij}=\linearelasticitytensorsymbol^{ijkl}\covarderiv{u_{k}}{l}
+  \label{eqn:LinearElasticityLinearStressTensorComponents}
 \end{equation}
 
-Note that $\tensortwo{s}$ is symmetric and so $s^{ij}=s^{ji}$. The stress
+Note that $\linearstresstensor$ is symmetric and so $\linearstresstensorsymbol^{ij}=\linearstresstensorsymbol^{ji}$. The stress
 tensor, through the symmetry of the elasticity tensor, also follows the
 constitutive relationship
 \begin{equation}
-  \tensortwo{s}=\doubledotprod{\tensorfour{c}}{\tensortwo{e}}
+  \linearstresstensor=\doubledotprod{\linearelasticitytensor}{\smallstraintensor}
+  \label{eqn:LinearElasticityConstitutiveLaw}
 \end{equation}
 
 Similarily to hyperelastic materials the stored energy function for linear
 elasticity is given by
 \begin{equation}
-  \varepsilon=\frac{1}{2}\doubledotprodthree{\tensortwo{e}}{\tensorfour{c}}{\tensortwo{e}}=\frac{1}{2}e_{ij}c^{ijkl}e_{kl}
+  \linearstrainenergysymbol=\frac{1}{2}\doubledotprodthree{\smallstraintensor}{\linearelasticitytensor}{\smallstraintensor}=\frac{1}{2}\smallstraintensorsymbol_{ij}\linearelasticitytensorsymbol^{ijkl}\smallstraintensorsymbol_{kl}
 \end{equation}
 
 The stress tensor is thus given by
 \begin{equation}
-  \tensortwo{s}=s^{ij}=\delby{\varepsilon}{\tensortwo{e}}=\delby{\varepsilon}{e_{ij}}
+  \linearstresstensor=\linearstresstensorsymbol^{ij}=\delby{\linearstrainenergysymbol}{\smallstraintensor}=\delby{\linearstrainenergysymbol}{\smallstraintensorsymbol_{ij}}
 \end{equation}
 and the elasticity tensor is given by
 \begin{equation}
-  \tensorfour{c}=c^{ijkl}=\delby{\tensortwo{s}}{\tensortwo{e}}=\deltwoby{\varepsilon}{\tensortwo{e}}{\tensortwo{e}}=\deltwoby{\varepsilon}{e_{ij}}{e_{kl}}
+  \linearelasticitytensor=\linearelasticitytensorsymbol^{ijkl}=\delby{\linearstresstensor}{\smallstraintensor}=\deltwoby{\linearstrainenergysymbol}{\smallstraintensor}{\smallstraintensor}=\deltwoby{\linearstrainenergysymbol}{\smallstraintensorsymbol_{ij}}{\smallstraintensorsymbol_{kl}}
 \end{equation}
+
+\subsection{Weak Forumulation}
+\label{subsec:LinearElasticityWeakFormulation}
+
+In order to find the weak formula we follow the principle of virtual work as set out in \secref{sec:ElasticityVirtualWork}. Following this principle leads to \eqnref{eqn:ElasticityVirtualWorkStrainStatement} \ie
+\begin{equation}
+  \gint{\Omega}{}{\dotprod{\densitysymbol\ddot{\vectr{u}}}{\variationdir{\vectr{u}}}}{\Omega}+
+  \gint{\Omega}{}{\doubledotprod{\linearstresstensor}{\fnof{\variationdir{\smallstraintensor}}{\variationdir{\vectr{u}}}}}{\Omega}=
+  \gint{\Gamma}{}{\dotprod{\bar{\vectr{t}}}{\variationdir{\vectr{u}}}}{\Gamma}+
+  \gint{\Omega}{}{\dotprod{\vectr{b}}{\variationdir{\vectr{u}}}}{\Omega}
+\end{equation}
+where the term
+$\doubledotprod{\linearstresstensor}{\fnof{\variationdir{\smallstraintensor}}{\variationdir{\vectr{u}}}}$,
+above, is the elastic virtual work that results from the virtual displacements.
+
+Now from \eqnref{eqn:LinearElasticitySmallStrainTensor} we have
+\begin{equation}
+  \fnof{\variationdir{\smallstraintensor}}{\variationdir{\vectr{u}}}=\dfrac{1}{2}\pbrac{\gradient{}{\variationdir{\vectr{u}}}+\transpose{\gradient{}{\variationdir{\vectr{u}}}}}
+\end{equation}
+or, in component form,
+\begin{equation}
+  \variationdir{\smallstraintensorsymbol_{ij}}=\dfrac{1}{2}\pbrac{\covarderiv{\variationdir{u_{i}}}{j}+\covarderiv{\variationdir{u_{j}}}{i}}
+\end{equation}
+
+We therefore have
+\begin{equation}
+  \begin{aligned}
+    \linearstresstensorsymbol^{ij}\variationdir{\smallstraintensorsymbol_{ij}}
+    &=\dfrac{\linearstresstensorsymbol^{ij}\pbrac{\covarderiv{\variationdir{u_{i}}}{j}+\covarderiv{\variationdir{u_{j}}}{i}}}{2}\\
+    &=\dfrac{\linearstresstensorsymbol^{ij}\covarderiv{\variationdir{u_{i}}}{j}
+      +\linearstresstensorsymbol^{ij}\covarderiv{\variationdir{u_{j}}}{i}}{2} \\
+    &=\linearstresstensorsymbol^{ij}\covarderiv{\variationdir{u_{i}}}{j}
+  \end{aligned}
+\end{equation}
+as the stress tensor is symmetric \ie $\linearstresstensorsymbol^{ij}=\linearstresstensorsymbol^{ji}$.
+
+Substituing \eqnref{eqn:LinearElasticityLinearStressTensorComponents} into the above equation gives
+\begin{equation}
+  \begin{aligned}
+    \linearstresstensorsymbol^{ij}\variationdir{\smallstraintensorsymbol_{ij}}
+    &=\linearstresstensorsymbol^{ij}\covarderiv{\variationdir{u_{i}}}{j}\\
+    &=\linearelasticitytensorsymbol^{ijkl}\covarderiv{u_{k}}{l}\covarderiv{\variationdir{u_{i}}}{j}\\
+    &=\linearelasticitytensorsymbol^{ijkl}\covarderiv{\variationdir{u_{i}}}{j}\covarderiv{u_{k}}{l}
+  \end{aligned}
+\end{equation}
+
+The virtual work statement for linear elasticity, in component form, is thus
+\begin{equation}
+  \gint{\Omega}{}{\densitysymbol \ddot{u}^{i} \variationdir{u_{i}}}{\Omega}+
+  \gint{\Omega}{}{\linearelasticitytensorsymbol^{ijkl}\covarderiv{\variationdir{u_{i}}}{j}\covarderiv{u_{k}}{l}}{\Omega}=
+  \gint{\Gamma}{}{\bar{t}^{i} \variationdir{u_{i}}}{\Gamma}+
+  \gint{\Omega}{}{b^{i}\variationdir{u_{i}}}{\Omega}
+  \label{eqn:LinearElasticityVirtualWorkComponent}
+\end{equation}
+
+
+Firstly, consider the displacement, $\vectr{u}$, between the
+reference/material coordinates, $\vectr{X}$, and the current/spatial
+coordinates, $\vectr{z}$. The displacement is defined by
+\begin{equation}
+  \vectr{u}=\vectr{z}-\vectr{X}
+\end{equation}
+
+We thus have
+\begin{equation}
+  \begin{aligned}
+    \variationdir{\vectr{u}} &=\variationdir{\pbrac{\vectr{z} -\vectr{X}}} \\
+    &=\variationdir{\vectr{z}}-\variationdir{\vectr{X}} \\
+    &=\variationdir{\vectr{z}}
+  \end{aligned}
+\end{equation}
+as there is no variation in the original reference configuration $\vectr{X}$. We also have
+\begin{equation}
+  \begin{aligned}
+    \delby{\variationdir{u_{i}}}{x^{j}}&=\delby{\variationdir{z_{i}}-\variationdir{X_{i}}}{x^{j}}\\
+    &=\delby{\variationdir{z_{i}}}{x^{j}}-\delby{\variationdir{X_{i}}}{x^{j}}\\
+    &=\delby{\variationdir{z_{i}}}{x^{j}}
+  \end{aligned}
+\end{equation}
+and \todo{WHY IS $\delby{X_{i}}{x^{j}}=0$???}
+\begin{equation}
+  \begin{aligned}
+    \delby{u_{i}}{x^{j}}&=\delby{z_{i}-X_{i}}{x^{j}}\\
+    &=\delby{z_{i}}{x^{j}}-\delby{X_{i}}{x^{j}}\\
+    &=\delby{z_{i}}{x^{j}}
+  \end{aligned}
+\end{equation}
+\todo{maybe use $\gradient{}{\vectr{u}}=\dfrac{1}{2}\pbrac{\deformationgradienttensor+\transpose{\deformationgradienttensor}}-\identitytensortwo$???}
+
+The left hand side of \eqnref{eqn:LinearElasticityVirtualWorkComponent} is
+\begin{equation}
+  \begin{aligned}
+    \gint{\Omega}{}{\densitysymbol \ddot{u}^{i} \variationdir{u_{i}}}{\Omega}+
+    \gint{\Omega}{}{\linearelasticitytensorsymbol^{ijkl}\covarderiv{\variationdir{u_{i}}}{j}\covarderiv{u_{k}}{l}}{\Omega}&=
+    \gint{\Omega}{}{\densitysymbol a^{i} \variationdir{z_{i}}}{\Omega}+
+    \gint{\Omega}{}{\linearelasticitytensorsymbol^{ijkl}\covarderiv{\variationdir{z_{i}}}{j}\covarderiv{u_{k}}{l}}{\Omega}\\
+    &=\gint{\Omega}{}{\densitysymbol a^{i} \variationdir{z_{i}}}{\Omega}+
+    \gint{\Omega}{}{\linearelasticitytensorsymbol^{ijkl}\pbrac{\delby{\variationdir{z_{i}}}{x^{j}}-
+        \christoffel{o}{i}{j}\variationdir{z_{o}}}\pbrac{\delby{u_{k}}{x^{l}}-
+        \christoffel{p}{k}{l} u_{p}}}{\Omega}\\
+  \end{aligned}
+\end{equation}
+
+
+\subsection{Finite Element Formulation}
+\label{subsec:LinearElasticityFEMFormulation}
+
+We can now discretise the domain into finite elements \ie $\Omega=
+\displaystyle{\bigcup_{e=1}^{E}}\Omega_{e}$ with
+$\Gamma=\displaystyle{\bigcup_{f=1}^{F}}\Gamma_{f}$, 
+\eqnref{eqn:LinearElasticityVirtualWorkComponent} becomes
+\begin{equation}
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{\densitysymbol \ddot{u}^{i} \variationdir{u_{i}}}{\Omega}+
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{\linearelasticitytensorsymbol^{ijkl}\covarderiv{\variationdir{u_{i}}}{j}\covarderiv{u_{k}}{l}}{\Omega}=
+  \dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{\bar{t}^{i} \variationdir{u_{i}}}{\Gamma}+
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{b^{i}\variationdir{u_{i}}}{\Omega}
+  \label{eqn:LinearElasticityVirtualWorkElements}  
+\end{equation}
+
+\subsection{Spatial integration}
+\label{subsec:LinearElasticitySpatialIntegration}
+
+Now, changing the coordinates of integration to elemental coordinates we have
+\begin{equation}
+  \begin{split}
+    \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}} \fnof{\ddot{u}^{i}}{\vectr{\xi}}
+      \fnof{\variationdir{u_{i}}}{\vectr{\xi}}\abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}+
+    \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+      \delby{\fnof{\variationdir{u_{i}}}{\vectr{\xi}}}{\xi^{r}}\delby{\xi^{r}}{x^{j}}
+      \delby{\fnof{u_{k}}{\vectr{\xi}}}{\xi^{s}}\delby{\xi^{s}}{x^{l}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    =\dsum_{f=1}^{F}\gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}\fnof{\variationdir{u_{i}}}{\vectr{\zeta}}
+      \abs{\jacobian{\Gamma_{f}}{\vectr{\zeta}}}}{\vectr{\zeta}}
+    +\dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}\fnof{\variationdir{u_{i}}}{\vectr{\xi}}
+      \abs{\jacobian{\Omega}{\vectr{\xi}}}}{\vectr{\xi}}
+  \end{split}
+  \label{eqn:LinearElasticityVirtualWorkElementsXi}  
+\end{equation}
+
+We can now introduce basis functions to interpolate the vitual displacements
+\begin{equation}
+  \fnof{\variationdir{u_{i}}}{\vectr{\xi}} = \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+\end{equation}
+displacements 
+\begin{equation}
+  \fnof{u_{k}}{\vectr{\xi}} = \idxgbfn{\pbrac{k}}{n}{\beta}{\vectr{\xi}} u_{k,\beta}^{n}\gsf{n}{\beta}
+\end{equation}
+and accerlations
+\begin{equation}
+  \fnof{\ddot{u}_{i}}{\vectr{\xi}} = \idxgbfn{\pbrac{i}}{n}{\beta}{\vectr{\xi}} \ddot{u}_{i,\beta}^{n}\gsf{n}{\beta}
+\end{equation}
+and similarily for $\fnof{\densitysymbol}{\vectr{\xi}}$,
+$\fnof{\linearelasticitytensor}{\vectr{\xi}}$,
+$\fnof{\bar{\vectr{t}}}{\vectr{\zeta}}$, and
+$\fnof{\vectr{b}}{\vectr{\xi}}$.
+
+\Eqnref{eqn:LinearElasticityVirtualWorkElementsXi} now becomes
+\begin{equation}
+  \begin{split}
+    \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{n}{\beta}{\vectr{\xi}} \ddot{u}_{i,\beta}^{n}\gsf{n}{\beta}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    +\dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+      \delby{\pbrac{\idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}}}{\xi^{r}}\delby{\xi^{r}}{x^{j}}
+      \delby{\pbrac{\idxgbfn{\pbrac{k}}{n}{\beta}{\vectr{\xi}} u_{k,\beta}^{n}\gsf{n}{\beta}}}{\xi^{s}}\delby{\xi^{s}}{x^{l}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    =\dsum_{f=1}^{F}\gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\zeta}}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+      \abs{\jacobian{\Gamma_{f}}{\vectr{\zeta}}}}{\vectr{\zeta}}\\
+    +\dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}
+  \end{split}
+  \label{eqn:LinearElasticityVirtualWorkElementsXiBasis}  
+\end{equation}
+
+Taking the fixed nodal degrees-of-freedom and scale factors outside the integral gives
+\begin{equation}
+  \begin{split}
+    \dsum_{e=1}^{E}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}\ddot{u}_{i,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{n}{\beta}{\vectr{\xi}} 
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    +\dsum_{e=1}^{E}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha} u_{k,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+      \delby{\idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
+      \delby{\idxgbfn{\pbrac{k}}{n}{\beta}{\vectr{\xi}}}{\xi^{s}}
+      \delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{l}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    =\dsum_{f=1}^{F}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\zeta}}
+      \abs{\jacobian{\Gamma_{f}}{\vectr{\zeta}}}}{\vectr{\zeta}}\\
+    +\dsum_{e=1}^{E}\variationdir{u_{i,\alpha}^{m}}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}
+  \end{split}
+  \label{eqn:LinearElasticityVirtualWorkElementsXiBasis2}  
+\end{equation}
+
+Now, slightly abusing notation, we can rearrange \eqnref{eqn:LinearElasticityVirtualWorkElementsXiBasis2} to give
+\begin{equation}
+  \begin{split}
+    \left(\dsum_{e=1}^{E}\gsf{m}{\alpha}\ddot{u}_{i,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{n}{\beta}{\vectr{\xi}} 
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\right.\\
+    +\dsum_{e=1}^{E}\gsf{m}{\alpha} u_{k,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+      \delby{\idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
+      \delby{\idxgbfn{\pbrac{k}}{n}{\beta}{\vectr{\xi}}}{\xi^{s}}
+      \delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{l}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    -\dsum_{f=1}^{F}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\zeta}}
+      \abs{\jacobian{\Gamma_{f}}{\vectr{\zeta}}}}{\vectr{\zeta}}\\
+    -\left.\dsum_{e=1}^{E}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\right)\variationdir{u_{i,\alpha}^{m}}=0
+  \end{split}
+  \label{eqn:LinearElasticityVirtualWorkElementsXiBasis2}  
+\end{equation}
+
+Now the vitual work statement must be satisfied for any choice of
+$\variationdir{\vectr{u}}$ and thus any choice of
+$\variationdir{u_{i,\alpha}^{m}}$ provided that
+$\variationdir{u_{i,\alpha}^{m}}=0$ only for those degrees-of-freedom
+on the boundary. This implies that
+\begin{equation}
+  \begin{split}
+    \dsum_{e=1}^{E}\gsf{m}{\alpha}\ddot{u}_{i,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{n}{\beta}{\vectr{\xi}} 
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    +\dsum_{e=1}^{E}\gsf{m}{\alpha} u_{k,\beta}^{n}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+      \delby{\idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
+      \delby{\idxgbfn{\pbrac{k}}{n}{\beta}{\vectr{\xi}}}{\xi^{s}}
+      \delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{l}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}\\
+    -\dsum_{f=1}^{F}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\zeta}}
+      \abs{\jacobian{\Gamma_{f}}{\vectr{\zeta}}}}{\vectr{\zeta}}\\
+    -\dsum_{e=1}^{E}\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}
+      \idxgbfn{\pbrac{i}}{m}{\alpha}{\vectr{\xi}}
+      \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}=0
+  \end{split}
+  \label{eqn:LinearElasticityVirtualWorkElementsXiBasis3}  
+\end{equation}
+
+\subsection{Matrix vector form}
+\label{subsec:LinearElasticityMatrixVectorForm}
+
+\Eqnref{eqn:LinearElasticityVirtualWorkElementsXiBasis3} is a matrix-vector equation of the form
+\begin{equation}
+  \matr{M}\ddot{\vectr{u}}+\matr{K}\vect{u}+\vectr{s}+\vect{f}=\vect{0}
+\end{equation}
+or
+\begin{equation}
+  \matr{M}\ddot{\vectr{u}}+\matr{K}\vect{u}+\vectr{s}+\matr{N}\vectr{t}=\vect{0}
+\end{equation}
+
+Here the elemental mass matrix is given by
+\begin{equation}
+  M^{i\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\densitysymbol}{\vectr{\xi}}
+      \idxgbfn{i}{m}{\alpha}{\vectr{\xi}}
+      \idxgbfn{i}{n}{\beta}{\vectr{\xi}} 
+      \abs{\jacobian{\Omega}{\vectr{\xi}}}}{\vectr{\xi}}
+  \label{eqn:LinearElasticityElementalMassMatrix}
+\end{equation}
+and the elemental stiffness matrix is given by
+\begin{equation}
+  K^{ik\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{n}{\beta}
+  \gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+    \delby{\idxgbfn{i}{m}{\alpha}{\vectr{\xi}}}{\xi^{r}}
+    \delby{\idxgbfn{k}{n}{\beta}{\vectr{\xi}}}{\xi^{s}}
+    \delby{\xi^{r}}{x^{j}}\delby{\xi^{s}}{x^{l}}
+    \abs{\jacobian{\Omega_{e}}{\vectr{\xi}}}}{\vectr{\xi}}
+  \label{eqn:LinearElasticityElementalStiffnessMatrix}
+\end{equation}
+and the elemental source vector is given by
+\begin{equation}
+  s^{i\alpha}_{m}=-\gsf{m}{\alpha}
+  \gint{\vectr{0}}{\vectr{1}}{\fnof{b^{i}}{\vectr{\xi}}
+    \idxgbfn{i}{m}{\alpha}{\vectr{\xi}}
+    \abs{\jacobian{\Omega}{\vectr{\xi}}}}{\vectr{\xi}}
+  \label{eqn:LinearElasticityElementalSourceVector}
+\end{equation}
+and the elemental RHS vector is given by
+\begin{equation}
+  f^{i\alpha}_{m}=-\gsf{m}{\alpha}
+    \gint{\vectr{0}}{\vectr{1}}{\fnof{\bar{t}^{i}}{\vectr{\zeta}}
+      \idxgbfn{i}{m}{\alpha}{\vectr{\zeta}}
+      \abs{\jacobian{\Gamma}{\vectr{\zeta}}}}{\vectr{\zeta}}
+  \label{eqn:LinearElasticityElementalRHSVector}
+\end{equation}
+
+\subsection{Linear Constitutive Laws}
+\label{subsec:LinearElasticityMatrixVectorForm}
+
+The constutive laws relate stress and strain. They are of the following (Voigt) form
+\begin{equation}
+  \Voigt{\linearstresstensor}=\Voigt{\linearelasticitytensor}\Voigt{\smallstraintensor}
+\end{equation}
+or, similiarily,
+\begin{equation} 
+  \Voigt{\smallstraintensor}=\Voigt{\linearcompliancetensor}\Voigt{\linearstresstensor}
+\end{equation}
+where $\Voigt{\linearelasticitytensor}$ is the linear elasticity tensor in Voigt form, $\Voigt{\linearcompliancetensor}$ is the linear compliance tensor in Voigt form, $\Voigt{\linearstresstensor}$ is the linear stress tensor in Voigt form, and $\Voigt{\smallstraintensor}$ is the linear small strain tensor in Voigt form. In \twods we have
+\begin{equation}
+  \Voigt{\linearstresstensor}=\begin{bmatrix}
+  \linearstresstensorsymbol^{11} \\
+  \linearstresstensorsymbol^{22} \\
+  \linearstresstensorsymbol^{12}
+  \end{bmatrix}\qquad\qquad\Voigt{\smallstraintensor}=\begin{bmatrix}
+  \smallstraintensorsymbol_{11} \\
+  \smallstraintensorsymbol_{22} \\
+  2\smallstraintensorsymbol_{12}
+  \end{bmatrix}
+\end{equation}
+and in \threeds we have
+\begin{equation}
+  \Voigt{\linearstresstensor}=\begin{bmatrix}
+  \linearstresstensorsymbol^{11} \\
+  \linearstresstensorsymbol^{22} \\
+  \linearstresstensorsymbol^{33} \\
+  \linearstresstensorsymbol^{23} \\
+  \linearstresstensorsymbol^{13} \\
+  \linearstresstensorsymbol^{12}
+  \end{bmatrix}\qquad\qquad\Voigt{\smallstraintensor}=\begin{bmatrix}
+  \smallstraintensorsymbol_{11} \\
+  \smallstraintensorsymbol_{22} \\
+  \smallstraintensorsymbol_{33} \\
+  2\smallstraintensorsymbol_{23} \\
+  2\smallstraintensorsymbol_{13} \\
+  2\smallstraintensorsymbol_{12}
+  \end{bmatrix}
+\end{equation}
+
+Note that sometimes engineering shear strain, $\shearstrainsymbol$, is used in
+place of small shear strain, $\smallstraintensorsymbol$,
+where
+$\shearstrainsymbol_{mn}=\smallstraintensorsymbol_{mn}+\smallstraintensorsymbol_{nm}=2\smallstraintensorsymbol_{mn}$.
+
+\subsubsection{3D Isotropic Material}
+
+For a \threedal isotropic material the elasticity tensor is given by
+\begin{equation}
+  \fnof{\linearelasticitytensor}{\vectr{\xi}}=
+  \fnof{\linearelasticitytensorsymbol^{ijkl}}{\vectr{\xi}}
+  \tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}=
+  \pbrac{\fnof{\firstlamesymbol}{\vectr{\xi}}\generalmetrictensorsymbol^{ij}\generalmetrictensorsymbol^{kl}+
+    \fnof{\secondlamesymbol}{\vectr{\xi}}\pbrac{\generalmetrictensorsymbol^{ik}\generalmetrictensorsymbol^{il}+
+      \generalmetrictensorsymbol^{ilk}\generalmetrictensorsymbol^{kj}}}
+  \tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}
+  \label{eqn:LinearElasticityIsotropicElasticityTensor}
+\end{equation}
+where $\firstlamesymbol$ and $\secondlamesymbol$ are the
+\link{https://en.wikipedia.org/wiki/Lam\%C3\%A9_parameters}{\emph{Lam\'{e}
+  constants}}\footnote{named after
+\link{https://en.wikipedia.org/wiki/Gabriel_Lam\%C3\%A9}{Gabriel
+  Lam\'{e}} (1795-1870), a French mathematician.}.
+
+In Voigt form in Cartesian coordinates this is
+\begin{equation}
+  \Voigt{\linearelasticitytensor}=\begin{bmatrix}
+  \firstlamesymbol+2\secondlamesymbol & \firstlamesymbol & \firstlamesymbol & 0 & 0 & 0 \\
+  \firstlamesymbol & \firstlamesymbol+2\secondlamesymbol & \firstlamesymbol & 0 & 0 & 0 \\
+  \firstlamesymbol & \firstlamesymbol & \firstlamesymbol+2\secondlamesymbol & 0 & 0 & 0 \\
+  0 & 0 & 0 & \secondlamesymbol & 0 & 0 \\
+  0 & 0 & 0 & 0 & \secondlamesymbol & 0 \\
+  0 & 0 & 0 & 0 & 0 & \secondlamesymbol
+  \end{bmatrix}
+  \label{eqn:LinearElasticityIsotropicElasticityTensorVoigt}
+\end{equation}
+
+In terms of Young's modulus and Poisson's ratio we have
+\begin{equation}
+  \Voigt{\linearelasticitytensor}=\dfrac{\youngsmodulussymbol}{\pbrac{1+\poissonsratiosymbol}\pbrac{1-2\poissonsratiosymbol}}\begin{bmatrix}
+  1-\poissonsratiosymbol & \poissonsratiosymbol & \poissonsratiosymbol & 0 & 0 & 0 \\
+  \poissonsratiosymbol & 1-\poissonsratiosymbol & \poissonsratiosymbol & 0 & 0 & 0 \\
+  \poissonsratiosymbol & \poissonsratiosymbol & 1-\poissonsratiosymbol & 0 & 0 & 0 \\
+  0 & 0 & 0 & \dfrac{1-2\poissonsratiosymbol}{2} & 0 & 0 \\
+  0 & 0 & 0 & 0 & \dfrac{1-2\poissonsratiosymbol}{2} & 0 \\
+  0 & 0 & 0 & 0 & 0 & \dfrac{1-2\poissonsratiosymbol}{2}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityIsotropicElasticityTensorVoigtEnu}
+\end{equation}
+and
+\begin{equation}
+  \Voigt{\linearcompliancetensor}=\dfrac{1}{\youngsmodulussymbol}\begin{bmatrix}
+  1 & -\poissonsratiosymbol & -\poissonsratiosymbol & 0 & 0 & 0 \\
+  -\poissonsratiosymbol & 1 & -\poissonsratiosymbol & 0 & 0 & 0 \\
+  -\poissonsratiosymbol & -\poissonsratiosymbol & 1 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 2\pbrac{1+\poissonsratiosymbol} & 0 & 0 \\
+  0 & 0 & 0 & 0 & 2\pbrac{1+\poissonsratiosymbol} & 0 \\
+  0 & 0 & 0 & 0 & 0 & 2\pbrac{1+\poissonsratiosymbol}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityIsotropicComplianceTensorVoigtEnu}
+\end{equation}
+
+\todo{CHECK ELASTICITY AND COMPILANCE TENSORS FOR THE FACTORS OF 2 THAT COMES FROM VOIGT????}
+
+\subsubsection{3D Orthotropic Material}
+
+The elasticity tensor for \threedal orthotropic material in terms of Young's modulus and Poisson's ratio in Voigt form is
+\begin{equation}
+  \Voigt{\linearelasticitytensor}=\begin{bmatrix}
+  \dfrac{\youngsmodulussymbol_{1}\pbrac{1-\poissonsratiosymbol_{23}\poissonsratiosymbol_{32}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{1}\pbrac{\poissonsratiosymbol_{21}+\poissonsratiosymbol_{23}\poissonsratiosymbol_{31}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{1}\pbrac{\poissonsratiosymbol_{31}+\poissonsratiosymbol_{21}\poissonsratiosymbol_{32}}}{\delta} & 0 & 0 & 0 \\
+  \dfrac{\youngsmodulussymbol_{2}\pbrac{\poissonsratiosymbol_{12}+\poissonsratiosymbol_{13}\poissonsratiosymbol_{32}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{2}\pbrac{1-\poissonsratiosymbol_{13}\poissonsratiosymbol_{31}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{2}\pbrac{\poissonsratiosymbol_{32}+\poissonsratiosymbol_{12}\poissonsratiosymbol_{31}}}{\delta} & 0 & 0 & 0 \\
+  \dfrac{\youngsmodulussymbol_{3}\pbrac{\poissonsratiosymbol_{13}+\poissonsratiosymbol_{12}\poissonsratiosymbol_{23}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{3}\pbrac{\poissonsratiosymbol_{23}+\poissonsratiosymbol_{13}\poissonsratiosymbol_{21}}}{\delta} &
+  \dfrac{\youngsmodulussymbol_{3}\pbrac{1-\poissonsratiosymbol_{12}\poissonsratiosymbol_{21}}}{\delta} & 0 & 0 & 0 \\
+  0 & 0 & 0 & \shearmodulussymbol_{23} & 0 & 0 \\
+  0 & 0 & 0 & 0 & \shearmodulussymbol_{13} & 0 \\
+  0 & 0 & 0 & 0 & 0 & \shearmodulussymbol_{12}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityOrthotropicElasticityTensorVoigtEnu}
+\end{equation}
+where
+\begin{equation}
+  \delta=1
+  -\poissonsratiosymbol_{12}\poissonsratiosymbol_{21}
+  -\poissonsratiosymbol_{23}\poissonsratiosymbol_{32}
+  -\poissonsratiosymbol_{13}\poissonsratiosymbol_{31}
+  -\poissonsratiosymbol_{12}\poissonsratiosymbol_{23}\poissonsratiosymbol_{31}
+  -\poissonsratiosymbol_{21}\poissonsratiosymbol_{32}\poissonsratiosymbol_{13}
+\end{equation}
+and $\youngsmodulussymbol_{m}=\youngsmodulussymbol_{mm}=\dfrac{\linearstresstensorsymbol_{mm}}{\smallstraintensorsymbol_{mm}}$, $\poissonsratiosymbol_{mn}=-\dfrac{\smallstraintensorsymbol_{nn}}{\smallstraintensorsymbol_{mm}}$, and $\shearmodulussymbol_{mn}=\dfrac{\linearstresstensorsymbol_{mn}}{2\smallstraintensorsymbol_{mn}}$. Here $m$ is the loading direction and $n$ is the direction of strain.
+
+Stress symmetry requires that
+$\dfrac{\youngsmodulussymbol_{2}\pbrac{\poissonsratiosymbol_{12}+\poissonsratiosymbol_{13}\poissonsratiosymbol_{32}}}{\delta}=\dfrac{\youngsmodulussymbol_{1}\pbrac{\poissonsratiosymbol_{21}+\poissonsratiosymbol_{23}\poissonsratiosymbol_{31}}}{\delta}$,
+$\dfrac{\youngsmodulussymbol_{3}\pbrac{\poissonsratiosymbol_{13}+\poissonsratiosymbol_{12}\poissonsratiosymbol_{23}}}{\delta}=\dfrac{\youngsmodulussymbol_{1}\pbrac{\poissonsratiosymbol_{31}+\poissonsratiosymbol_{21}\poissonsratiosymbol_{32}}}{\delta}$,
+and
+$\dfrac{\youngsmodulussymbol_{3}\pbrac{\poissonsratiosymbol_{23}+\poissonsratiosymbol_{13}\poissonsratiosymbol_{21}}}{\delta}=\dfrac{\youngsmodulussymbol_{2}\pbrac{\poissonsratiosymbol_{32}+\poissonsratiosymbol_{12}\poissonsratiosymbol_{31}}}{\delta}$.
+
+The compliance tensor for \threedal orthotropic material in terms of
+Young's modulus and Poisson's ratio in Voigt form is
+\begin{equation}
+  \Voigt{\linearcompliancetensor}=\begin{bmatrix}
+  \frac{1}{\youngsmodulussymbol_{1}} & -\frac{\poissonsratiosymbol_{12}}{\youngsmodulussymbol_{2}} & -\frac{\poissonsratiosymbol_{13}}{\youngsmodulussymbol_{3}} & 0 & 0 & 0 \\
+  -\frac{\poissonsratiosymbol_{21}}{\youngsmodulussymbol_{1}} & \frac{1}{\youngsmodulussymbol_{2}} & -\frac{\poissonsratiosymbol_{23}}{\youngsmodulussymbol_{3}} & 0 & 0 & 0 \\
+  -\frac{\poissonsratiosymbol_{31}}{\youngsmodulussymbol_{1}} & -\frac{\poissonsratiosymbol_{32}}{\youngsmodulussymbol_{2}} & \frac{1}{\youngsmodulussymbol_{3}} & 0 & 0 & 0 \\
+  0 & 0 & 0 & \frac{1}{\shearmodulussymbol_{23}} & 0 & 0 \\
+  0 & 0 & 0 & 0 & \frac{1}{\shearmodulussymbol_{13}} & 0 \\
+  0 & 0 & 0 & 0 & 0 & \frac{1}{\shearmodulussymbol_{12}}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityOrthotropicComplianceTensorVoigtEnu}
+\end{equation}
+
+Note that strain comptability requirements mean that $\dfrac{\poissonsratiosymbol_{23}}{\youngsmodulussymbol_{2}}=\dfrac{\poissonsratiosymbol_{32}}{\youngsmodulussymbol_{3}}$, $\dfrac{\poissonsratiosymbol_{13}}{\youngsmodulussymbol_{1}}=\dfrac{\poissonsratiosymbol_{31}}{\youngsmodulussymbol_{3}}$, and $\dfrac{\poissonsratiosymbol_{12}}{\youngsmodulussymbol_{1}}=\dfrac{\poissonsratiosymbol_{21}}{\youngsmodulussymbol_{2}}$. 
+
+\subsubsection{2D Plane Stress Material}
+
+The elasticity tensor for \twodal plane stress materials in terms of $\youngsmodulussymbol$ and $\poissonsratiosymbol$ in Voigt form is
+\begin{equation}
+  \Voigt{\linearelasticitytensor}=\dfrac{\youngsmodulussymbol}{1-\poissonsratiosymbol^{2}}\begin{bmatrix}
+  1 & \poissonsratiosymbol & 0 \\
+  \poissonsratiosymbol & 1 & 0 \\
+  0 & 0 & \dfrac{1-\poissonsratiosymbol}{2}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityPlaneStressElasticityTensorVoigtEnu}
+\end{equation}
+and the equivalent compliance tensor is
+\begin{equation}
+  \Voigt{\linearcompliancetensor}=\dfrac{1}{\youngsmodulussymbol}\begin{bmatrix}
+  1 & -\poissonsratiosymbol & 0 \\
+  -\poissonsratiosymbol & 1 & 0 \\
+  0 & 0 & 2\pbrac{1+\poissonsratiosymbol}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityPlaneStressComplianceTensorVoigtEnu}
+\end{equation}
+plus
+\begin{equation}
+  \smallstraintensorsymbol_{33}=-\dfrac{\poissonsratiosymbol}{\youngsmodulussymbol}\pbrac{\linearstresstensorsymbol_{11}+\linearstresstensorsymbol_{22}}
+\end{equation}
+
+\subsubsection{2D Plane Strain Material}
+
+The elasticity tensor for \twodal plane strain materials in terms of $\youngsmodulussymbol$ and $\poissonsratiosymbol$ in Voigt form is
+\begin{equation}
+  \Voigt{\linearelasticitytensor}=\dfrac{\youngsmodulussymbol}{\pbrac{1+\poissonsratiosymbol}\pbrac{1-2\poissonsratiosymbol}}\begin{bmatrix}
+  1-\poissonsratiosymbol & \poissonsratiosymbol & 0 \\
+  \poissonsratiosymbol & 1-\poissonsratiosymbol & 0 \\
+  0 & 0 & \dfrac{1-2\poissonsratiosymbol}{2}
+  \end{bmatrix}
+  \label{eqn:LinearElasticityPlaneStrainElasticityTensorVoigtEnu}
+\end{equation}
+plus
+\begin{equation}
+  \smallstraintensorsymbol_{33}=\dfrac{\poissonsratiosymbol\youngsmodulussymbol}{\pbrac{1+\poissonsratiosymbol}\pbrac{1-2\poissonsratiosymbol}}\pbrac{\smallstraintensorsymbol_{11}+\smallstraintensorsymbol_{22}}
+\end{equation}
+and the equivalent compliance tensor is
+\begin{equation}
+  \Voigt{\linearcompliancetensor}=\dfrac{1+\poissonsratiosymbol}{\youngsmodulussymbol}\begin{bmatrix}
+  1-\poissonsratiosymbol & -\poissonsratiosymbol & 0 \\
+  -\poissonsratiosymbol & 1-\poissonsratiosymbol & 0 \\
+  0 & 0 & 2
+  \end{bmatrix}
+  \label{eqn:LinearElasticityPlaneStrainComplianceTensorVoigtEnu}
+\end{equation}
+
+\subsection{2D Worked example}
+
+Consider a cantilever as shown in \figref{fig:2DLinearElasticCantileverExample}. 
+
+\epstexfigure{SolidMechanics/svgs/TwoDLinearCantilever.eps_tex}{2D linear elastic cantilever example.}{Two dimensional linear elastic cantilever example. The cantilever is of length $L$ and height $H$ and is built into the wall at the left hand end. A downward force, $f$, is applied at the right hand end. The cantilever is modelled with four simplex elements.}{fig:2DLinearElasticCantileverExample}{0.6}
+
+The static system is governed by the linear system of equations
+\begin{equation}
+  \matr{K}\vectr{u}=\vectr{f}
+\end{equation}
+where $\matr{K}$ is given by \eqnref{eqn:LinearElasticityElementalStiffnessMatrix} \ie
+\begin{equation}
+    K^{ik\alpha\beta}_{mn}=\gsf{m}{\alpha}\gsf{n}{\beta}
+  \gint{\vectr{0}}{\vectr{1}}{\fnof{\linearelasticitytensorsymbol^{ijkl}}{\elementcoordinatevector}
+    \delby{\idxgbfn{i}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+    \delby{\idxgbfn{k}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+    \delby{\elementcoordinate{r}}{\coordinate{j}}\delby{\elementcoordinate{s}}{\coordinate{l}}
+    \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}
+\end{equation}
+where the elasticity tensor, $\linearelasticitytensor$, is given by \eqnref{eqn:LinearElasticityPlaneStressElasticityTensorVoigtEnu} for plane stress elements. The only non-zero entries in the elasticity tensor are $\linearelasticitytensorsymbol^{1111}=\linearelasticitytensorsymbol^{2222}=\dfrac{\youngsmodulussymbol}{1-\poissonsratiosymbol^{2}}$, $\linearelasticitytensorsymbol^{1122}=\linearelasticitytensorsymbol^{2211}=\dfrac{\youngsmodulussymbol\poissonsratiosymbol}{1-\poissonsratiosymbol^{2}}$, and $\linearelasticitytensorsymbol^{1212}=\dfrac{\youngsmodulussymbol}{2\pbrac{1+\poissonsratiosymbol}}$.
+
+major ijkl=klij
+minor ijkl=jikl=jilk
+
+c1111 -
+c2111 mi
+c1211 x
+c2211 -
+c1121 mi
+c2121
+c1221
+c2221 mi
+c1112 x
+c2112
+c1212
+c2212 x
+c1122 -
+c2122 mi
+c1222 x
+c2222 -
+
+Substituting the non-zero elasticity tensor entries into the formulae for the stiffness matrix gives
+\begin{equation}
+  \begin{aligned}
+    K^{11\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{1-\poissonsratiosymbol^{2}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{1}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{1}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{1}}\delby{\elementcoordinate{s}}{\coordinate{1}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector} \\
+    K^{22\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{1-\poissonsratiosymbol^{2}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{2}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{2}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{2}}\delby{\elementcoordinate{s}}{\coordinate{2}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector} \\
+    K^{12\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol\poissonsratiosymbol}{1-\poissonsratiosymbol^{2}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{1}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{2}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{1}}\delby{\elementcoordinate{s}}{\coordinate{2}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector} \\
+    K^{21\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol\poissonsratiosymbol}{1-\poissonsratiosymbol^{2}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{2}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{1}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{2}}\delby{\elementcoordinate{s}}{\coordinate{1}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}\\
+    K^{11\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{2\pbrac{1+\poissonsratiosymbol}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{1}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{1}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{2}}\delby{\elementcoordinate{s}}{\coordinate{2}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}\\
+    K^{12\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{2\pbrac{1+\poissonsratiosymbol}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{1}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{2}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{2}}\delby{\elementcoordinate{s}}{\coordinate{1}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}\\
+    K^{21\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{2\pbrac{1+\poissonsratiosymbol}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{2}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{1}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{1}}\delby{\elementcoordinate{s}}{\coordinate{2}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}\\
+    K^{22\alpha\beta}_{mn}&=\dfrac{\youngsmodulussymbol}{2\pbrac{1+\poissonsratiosymbol}}\gsf{m}{\alpha}\gsf{n}{\beta}
+    \gint{\vectr{0}}{\vectr{1}}{
+      \delby{\idxgbfn{2}{m}{\alpha}{\elementcoordinatevector}}{\elementcoordinate{r}}
+      \delby{\idxgbfn{2}{n}{\beta}{\elementcoordinatevector}}{\elementcoordinate{s}}
+      \delby{\elementcoordinate{r}}{\coordinate{1}}\delby{\elementcoordinate{s}}{\coordinate{1}}
+      \abs{\jacobian{\Omega_{e}}{\elementcoordinatevector}}}{\elementcoordinatevector}
+  \end{aligned}  
+\end{equation}
+
+
+\subsection{Analytic solutions}
+
+\subsubsection{Cantilever beam}
+
+Consider a cantilever as shown in \figref{fig:AnalyticCantilever}.
+
+The beam equation is given by
+\begin{equation}
+  EI\dtwosqby{\fnof{y}{x}}{x}=\fnof{M}{x}
+\end{equation}
+where $E$ is Young's modulus, $I$ is the second moment of inertia, $x$
+is the coordinate along the cantilever, $\fnof{y}{x}$ is the
+displacment, and $\fnof{M}{x}$ is the bending moment.
+
+For the loading condition shown in \figref{fig:AnalyticCantilever} we
+have $\fnof{M}{x}=F\pbrac{L-x}$. We can thus integrate the beam
+equation to obtain the equation for deflection \ie
+\begin{equation}
+  \begin{aligned}
+    EI\dtwosqby{\fnof{y}{x}}{x}&=\fnof{M}{x}\\
+    EI\dtwosqby{\fnof{y}{x}}{x}&=F\pbrac{L-x}\\
+    EI\dby{\fnof{y}{x}}{x}&=FLx-\frac{1}{2}Fx^{2}+C_{1}\\
+    EI\fnof{y}{x}&=\frac{1}{2}FLx^{2}-\frac{1}{6}Fx^{3}+C_{1}x+C_{2}
+  \end{aligned}
+\end{equation}
+
+For a built in cantilever the boundary conditions are $\fnof{y}{0}=0$
+which implies that $C_{2}=0$ and
+$\evalat{\dby{\fnof{y}{x}}{x}}{x=0}=0$ which implies that $C_{1}=0$.
+
+The equation for deflection is thus
+\begin{equation}
+  \fnof{y}{x}=\dfrac{Fx^{2}\pbrac{3L-x}}{6EI}
+\end{equation}
+and the maximum deflection is
+\begin{equation}
+  \fnof{y}{L}=\dfrac{FL^{3}}{3EI}
+\end{equation}
+
+For a simple rectangular beam of height $H$ and width $W$ the second momemnt of area is given by
+\begin{equation}
+  I=\dfrac{WH^{3}}{12}
+\end{equation}
+and thus the equation for deflection is
+\begin{equation}
+  \fnof{y}{x}=\dfrac{2Fx^{2}\pbrac{3L-x}}{EWH^{3}}
+\end{equation}
+and the maximum end deflection is given by
+\begin{equation}
+  \fnof{y}{L}=\dfrac{4FL^{3}}{3EWH^{3}}
+\end{equation}
+
+
+\subsection{\OpenCMISS fields}
+\label{subsec:LinearElasticityOpenCMISSFields}
+
+The following fields are used in the \OpenCMISS implementation of linear elasticity equations.
+
+\subsubsection{Equations set field}
+
+An equations set field is not used for linear elasticity equations sets.
+
+\subsubsection{Geometric field}
+
+The geometric field definition for the coordinate vector
+$\vectr{x}\in\rntopology{n}$, where $n$ is the number of dimensions,
+is given in \tabref{tab:OpenCMISSGeometricFieldLinearElasticityEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Geometric field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $x^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $x^{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS geometric field components for linear elasticity equation sets.}
+  \label{tab:OpenCMISSGeometricFieldLinearElasticityEQS}
+\end{table}
+
+\subsubsection{Fibre field}
+
+A fibre field can be optionally used to define the fibre coordinate
+system rotation angles $\vectr{\alpha}\in\rntopology{n}$, where $n$ is
+the number of dimensions, is given in
+\tabref{tab:OpenCMISSFibreFieldLinearElasticityEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Fibre field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $\alpha^{1}$ \\ 
+    & \vdots & \vdots \\ 
+    & $n$ & $\alpha^{n}$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS fibre field components for linear elasiticity equation sets.}
+  \label{tab:OpenCMISSFibreFieldLinearElasticityEQS}
+\end{table}
+
+\subsubsection{Dependent field}
+
+The dependent field defintion for $\fnof{u}{\vectr{x},t}$ is given in \tabref{tab:OpenCMISSDependentFieldLinearElasticityEQS}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|c|} \hline
+    \emph{Field variable type} & \emph{Dependent field component} & \emph{Interpretation} \\ \hline \hline
+    \compcode{FIELD\_U\_VARIABLE\_TYPE} & $1$ & $u$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS dependent field components for linear elasticity equation sets.}
+  \label{tab:OpenCMISSDependentFieldLinearElasticityEQS}
+\end{table}
+  
+\subsubsection{Materials field}
+
+For an
