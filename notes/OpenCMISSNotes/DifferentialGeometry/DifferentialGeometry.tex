@@ -1560,6 +1560,7 @@ anti-symmetric tensor products \ie
     &=\dfrac{1}{2}\pbrac{\sharpkronecker{i}{k}\flatkronecker{j}{l}+\mixedkronecker{i}{.l}\mixedkronecker{.k}{j}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}\\
     &=I^{i.k.}_{.j.l}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}
   \end{aligned}
+  \label{eqn:SymmetricIdentityTensorFourDefinition}
 \end{equation}
 \begin{equation}
   \begin{aligned}
@@ -1569,6 +1570,7 @@ anti-symmetric tensor products \ie
     &=\dfrac{1}{2}\pbrac{\sharpkronecker{i}{k}\flatkronecker{j}{l}-\mixedkronecker{i}{.l}\mixedkronecker{.k}{j}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}\\
     &=I^{i.k.}_{.j.l}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}
   \end{aligned}
+  \label{eqn:AntisymmetricIdentityTensorFourDefinition}
 \end{equation}
 
 We also the sharp fourth order identity tensors
@@ -1599,20 +1601,20 @@ The differences between the identity tensors can
 be observed when they are contracted with a second order tensor,
 $\tensortwo{A}$, \ie
 \begin{align}
-  \doubledotprod{\identitytensorfour}{\tensortwo{A}}&=\doubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \doubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}} \\
-  \doubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}\\
-  \doubledotprod{\symidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\symtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\symmetric{\tensortwo{A}}\\
-  \doubledotprod{\antisymidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\antisymtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\skewsym{\tensortwo{A}}
+  \doubledotprod{\identitytensorfour}{\tensortwo{A}}&=\doubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo   \label{eqn:DoubleDotIdentityFourTwoTensor} \\
+  \doubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}   \label{eqn:DoubleDotUpperIdentityFourTwoTensor} \\
+  \doubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}   \label{eqn:DoubleDotLowerIdentityFourTwoTensor} \\
+  \doubledotprod{\symidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\symtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\symmetric{\tensortwo{A}}   \label{eqn:DoubleDotSymIdentityFourTwoTensor} \\
+  \doubledotprod{\antisymidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\antisymtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\skewsym{\tensortwo{A}} \label{eqn:DoubleDotAntisymIdentityFourTwoTensor} 
 \end{align}
 and
 \begin{align}
-  \upperdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A} \\
-  \upperdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \upperdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}\\
-  \lowerdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A} \\
-  \lowerdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \lowerdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}\\
+  \upperdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}  \label{eqn:UpperDoubleDotIdentityFourTwoTensor} \\
+  \upperdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo   \label{eqn:UpperDoubleDotUpperIdentityFourTwoTensor} \\
+  \upperdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}   \label{eqn:UpperDoubleDotLowerIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}   \label{eqn:LowerDoubleDotIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo  \label{eqn:LowerDoubleDotUpperIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}} \label{eqn:LowerDoubleDotLowerIdentityFourTwoTensor} 
 \end{align}
 
 In \citep{kintzel_fourth-order_2006,kintzel_fourth-order2_2006}
@@ -1690,110 +1692,110 @@ property relationships.
 
 Single contraction of a fourth order tensor with a second order tensor
 \begin{align}
-  \dotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}}\\
-  \dotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{A}}{\tensortwo{C}}}}{\tensortwo{B}}\\
-  \dotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\lowertensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}
+  \dotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}} \label{eqn:DotProdFourTwoProperty1} \\
+  \dotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{A}}{\tensortwo{C}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty2}  \\
+  \dotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\lowertensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}} \label{eqn:DotProdFourTwoProperty3} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty4} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty5} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty6} 
 \end{align}
 
 Double contraction of a fourth order tensor with a second order tensor for a
 double dot product
 \begin{align}
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{A}}}\tensortwo{B}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{B}}\transpose{\tensortwo{C}}\tensortwo{A}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\tensortwo{B}
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A} \label{eqn:DoubleDotProdFourTwoProperty1} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}} \label{eqn:DoubleDotProdFourTwoProperty2} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:DoubleDotProdFourTwoProperty3} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{A}}}\tensortwo{B} \label{eqn:DoubleDotProdFourTwoProperty4} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{B}}\transpose{\tensortwo{C}}\tensortwo{A} \label{eqn:DoubleDotProdFourTwoProperty5} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\tensortwo{B} \label{eqn:DoubleDotProdFourTwoProperty6}
 \end{align}
 and for an upper double dot product
 \begin{align}
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{B}}}\tensortwo{A}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourTwoProperty1} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}  \label{eqn:UpperDoubleDotProdFourTwoProperty2} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}  \label{eqn:UpperDoubleDotProdFourTwoProperty3} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}  \label{eqn:UpperDoubleDotProdFourTwoProperty4} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{B}}}\tensortwo{A}  \label{eqn:UpperDoubleDotProdFourTwoProperty5} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B} \label{eqn:UpperDoubleDotProdFourTwoProperty6} 
 \end{align}
 and for an lower double dot product
 \begin{align}
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty1} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A} \label{eqn:LowerDoubleDotProdFourTwoProperty2} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty3} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:LowerDoubleDotProdFourTwoProperty4} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty5} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A} \label{eqn:LowerDoubleDotProdFourTwoProperty6} 
 \end{align}
 
 Double contraction of two fourth order tensors for a double dot product
 \begin{align}
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{D}}\transpose{\tensortwo{B}}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\tensortwo{D}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}} \label{eqn:DoubleDotProdFourFourProperty1} \\
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{D}}\transpose{\tensortwo{B}}\tensortwo{C}}}  \label{eqn:DoubleDotProdFourFourProperty2} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}}}{\tensortwo{D}}  \label{eqn:DoubleDotProdFourFourProperty3} \\
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty4} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}}}{\tensortwo{D}}  \label{eqn:DoubleDotProdFourFourProperty5} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}} \label{eqn:DoubleDotProdFourFourProperty6} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}  \label{eqn:DoubleDotProdFourFourProperty7} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty8} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty9}
 \end{align}
 and for an upper double dot product
 \begin{align}
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}{\tensortwo{A}}}}{\pbrac{\tensortwo{B}{\tensortwo{D}}}}\\
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}\transpose{\tensortwo{B}}}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}\tensortwo{D}}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{D}}}\tensortwo{C}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{A}}\tensortwo{D}}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\tensortwo{B}\transpose{\tensortwo{D}}\tensortwo{A}}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}{\tensortwo{A}}}}{\pbrac{\tensortwo{B}{\tensortwo{D}}}} \label{eqn:UpperDoubleDotProdFourFourProperty1} \\
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}\transpose{\tensortwo{B}}}} \label{eqn:UpperDoubleDotProdFourFourProperty2} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}\tensortwo{D}}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty3} \\
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}} \label{eqn:UpperDoubleDotProdFourFourProperty4} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}}}{\pbrac{\tensortwo{B}\tensortwo{D}}} \label{eqn:UpperDoubleDotProdFourFourProperty5} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{D}}}\tensortwo{C}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty6} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{A}}\tensortwo{D}}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty7} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\tensortwo{B}\transpose{\tensortwo{D}}\tensortwo{A}}} \label{eqn:UpperDoubleDotProdFourFourProperty8} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}  \label{eqn:UpperDoubleDotProdFourFourProperty9} 
 \end{align}
 and for an lower double dot product
 \begin{align}
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}{\tensortwo{C}}}}{\pbrac{\tensortwo{D}{\tensortwo{B}}}}\\
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\tensortwo{B}}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\transpose{\tensortwo{D}}}}\\
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{D}\tensortwo{B}}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\tensortwo{D}\transpose{\tensortwo{B}}\tensortwo{C}}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}{\tensortwo{C}}}}{\pbrac{\tensortwo{D}{\tensortwo{B}}}} \label{eqn:LowerDoubleDotProdFourFourProperty1} \\
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\tensortwo{B}}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty2} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\transpose{\tensortwo{D}}}} \label{eqn:LowerDoubleDotProdFourFourProperty3} \\
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{D}\tensortwo{B}}} \label{eqn:LowerDoubleDotProdFourFourProperty4} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}} \label{eqn:LowerDoubleDotProdFourFourProperty5} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty6} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\tensortwo{D}\transpose{\tensortwo{B}}\tensortwo{C}}} \label{eqn:LowerDoubleDotProdFourFourProperty7} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty8} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}  \label{eqn:LowerDoubleDotProdFourFourProperty9} 
 \end{align}
 
 Transposition of a fourth order tensor obtained from the standard tensor
 product of two second order tensors gives
 \begin{align}
-  \fulltranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \leftrighttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \swaptranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \innertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}\\
-  \outertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \lefttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}\\
-  \righttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}
+  \fulltranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}} \label{eqn:FullTransposeProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}} \label{eqn:LeftRightTransposeProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{B}}{\tensortwo{A}} \label{eqn:SwapTransposeProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}  \label{eqn:InnerTransposeProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}  \label{eqn:OuterTransposeProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}  \label{eqn:LeftTransposeProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}  \label{eqn:RightTransposeProductTwoTwoTensor} 
 \end{align}
 and for an upper tensor product
 \begin{align}
-  \fulltranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \leftrighttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \swaptranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \innertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}\\
-  \outertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}\\
-  \lefttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \righttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}
+  \fulltranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}  \label{eqn:FullTransposeUpperProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftRightTransposeUpperProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}} \label{eqn:SwapTransposeUpperProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}  \label{eqn:InnerTransposeUpperProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}  \label{eqn:OuterTransposeUpperProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftTransposeUpperProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}  \label{eqn:RightTransposeUpperProductTwoTwoTensor} 
 \end{align}
 and for an lower tensor product
 \begin{align}
-  \fulltranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \leftrighttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \swaptranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \innertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\tensortwo{B}}\\
-  \outertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \lefttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \righttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}
+  \fulltranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}  \label{eqn:FullTransposeLowerProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftRightTransposeLowerProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}   \label{eqn:SwapTransposeLowerProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\tensortwo{B}}   \label{eqn:InnerTransposeLowerProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}   \label{eqn:OuterTransposeLowerProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}   \label{eqn:LeftTransposeLowerProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}   \label{eqn:RightTransposeLowerProductTwoTwoTensor} 
 \end{align}
 
 Transposition of the contraction of two fourth order tensors for the double

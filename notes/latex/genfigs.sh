@@ -11,5 +11,5 @@
 #
 for filename
 do
-	${OPENCMISS_ROOT}/documentation/notes/latex/genfigs1.sh $filename
+	${OpenCMISS_ROOT}/documentation/notes/latex/genfigs1.sh $filename
 done

@@ -1563,11 +1563,17 @@ rank(#1,#2)%
 \newcommand{\cotangentbundle}[1]{\ensuremath{ %
     \cotangentspacesymbol \manifold{#1} %
 }} % Cotangent bundle e.g., \cotangentbundle{M} => T^*M
+\newcommand{\pushforwardsymbol}{\ensuremath{ %
+    \triangleright %
+}} % push forward symbol e.g., \pushforwardsymbol => \triangleright
 \newcommand{\pushforward}[2]{\ensuremath{ %
-    #1_{\triangleright}#2 %
+    #1_{\pushforwardsymbol}#2 %
 }} % push forward e.g. \pushforward{M}{v} => M_* v
+\newcommand{\pullbacksymbol}{\ensuremath{ %
+    \triangleleft %
+}} % pull back symbol e.g., \pullbacksymbol => \triangleleft
 \newcommand{\pullback}[2]{\ensuremath{ %
-    #1^{\triangleleft}#2
+    #1^{\pullbacksymbol}#2
 }} % pull back e.g., \pullback{M}{v} => M^* v
 \newcommand{\christoffel}[3]{ %
   \christoffelsecond{#1}{#2}{#3}
@@ -1665,10 +1671,16 @@ rank(#1,#2)%
   }{
     \ensuremath{\vol_{#1}} % 
 }} % volume form with optional metric e.g. \volumeform{g} => vol_g
+\newcommand{\sharptensorsymbol}{\ensuremath{ %
+    \sharp %
+}} % sharp tensor symbol e.g.,\sharptensorsymbol => #
 \newcommand{\sharptensor}[1]{\ensuremath{ %
-    #1^{\sharp}
+    #1^{\sharptensorsymbol}
 }} % sharp tensor e.g.,\sharptensor{A} => A^#
-\newcommand{\flattensor}[1]{\ensuremath{#1^{\flat}}} % flat tensor e.g.,
+\newcommand{\flattensorsymbol}{\ensuremath{ %
+    \flat %
+}} % flat tensor symbol e.g.,\flattensorsymbol => b
+\newcommand{\flattensor}[1]{\ensuremath{#1^{\flattensorsymbol}}} % flat tensor e.g.,
 % \flattensor{A} => A^b
 % cpb 19/9/96 Changing from \mathbf to \boldsymbol to allow bold greek tensors
 %\newcommand{\tensor}[1]{\ensuremath{\mathbf{#1}}} % tensor

@@ -101,6 +101,16 @@
     }{
       \coordinatesymbol^{#1}%
 }}} % coordinate e.g., \coordinate{i} => x^{i}
+\newcommand{\coordone}{\ensuremath{\coordinatesymbol^{1}}\xspace} % x^1
+\newcommand{\coordonesq}{\ensuremath{{\coordinatesymbol^{1}}^{2}}\xspace} % (x 1)^2
+\newcommand{\coordonecube}{\ensuremath{{\coordinatesymbol^{1}}^{3}}\xspace} % (x 1)^3
+\newcommand{\coordtwo}{\ensuremath{\coordinatesymbol^{2}}\xspace} % x 2
+\newcommand{\coordtwosq}{\ensuremath{{\coordinatesymbol^{2}}^{2}}\xspace} % (x 2)^2
+\newcommand{\coordtwocube}{\ensuremath{{\coordinatesymbol^{2}}^{3}}\xspace} % (x 2)^3
+\newcommand{\coordthree}{\ensuremath{\coordinatesymbol^{3}}\xspace} % x 3
+\newcommand{\coordthreesq}{\ensuremath{{\coordinatesymbol^{3}}^{2}}\xspace} % (x 3)^2
+\newcommand{\coordthreecube}{\ensuremath{{\coordinatesymbol^{3}}^{3}}\xspace} % (x 3)^3
+
 \newcommand{\xicoordinatesymbol}{\ensuremath{ %
     \xi %
 }} % xi coordinate symbol e.g., \xicoordinatesymbol => \xi
@@ -279,6 +289,27 @@
 \newcommand{\spatialfibrestructuretensor}{\ensuremath{ %
     \tensortwo{\spatialfibrestructuretensorsymbol} %
 }} % Spatial fibre structure tensor e.g., \spatialfibrestructuretensor => s
+
+\newcommand{\materialstructuraltensorsymbol}{\ensuremath{ %
+    M %
+}} % Material structural tensor symbol e.g., \materialtructuretensorsymbol => H
+\newcommand{\materialstructuraltensor}{\ensuremath{ %
+    \tensortwo{\materialstructuraltensorsymbol} %
+}} % Material structural tensor e.g., \materiastructuraltensor => M
+\newcommand{\materialstructuraltensorcomponent}[1]{\ensuremath{ %
+    \tensortwo{\materialstructuraltensorsymbol}_{#1} %
+}} % Material structural tensor component e.g., \materialstructuraltensorcomponent{1} => M_1
+
+\newcommand{\spatialstructuraltensorsymbol}{\ensuremath{ %
+    m %
+}} % Spatial structural tensor symbol e.g., \spatialtructuretensorsymbol => m
+\newcommand{\spatialstructuraltensor}{\ensuremath{ %
+    \tensortwo{\spatialstructuraltensorsymbol} %
+}} %  Spatial structural tensor e.g., \spatialstructuraltensor => m
+\newcommand{\spatialstructuraltensorcomponent}[1]{\ensuremath{ %
+    \tensortwo{\spatialstructuraltensorsymbol}_{#1} %
+}} % Spatial structural tensor component e.g., \spatialstructuraltensorcomponent{1} => m_1
+
 
 %
 % Solid Mechanics

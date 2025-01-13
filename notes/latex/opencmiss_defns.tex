@@ -25,10 +25,17 @@
 % Page style definitions
 %\setlength{\parskip}{\baselineskip} % these two lines for
 %\setlength{\parindent}{0mm}         % no paragraph indents
-\usepackage{vmargin}
-\setpapersize{A4}
-\setmargrb{12mm}{15mm}{12mm}{15mm}
-\addtolength{\headheight}{6pt}
+%\usepackage{vmargin}
+%\setpapersize{A4}
+%\setmargrb{12mm}{15mm}{12mm}{15mm}
+%\addtolength{\headheight}{6pt}
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=15mm,top=20mm,right=15mm,bottom=20mm,
+  headheight=6mm,headsep=7mm,foot=5mm,footskip=15mm,
+  includeheadfoot
+}
 
 % Set the max depth of sections
 \setcounter{secnumdepth}{3} %allow for subsubsections

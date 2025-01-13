@@ -27,7 +27,7 @@ MY_TEX_SRC="TitlePage/TitlePage.tex "\
 "DifferentialGeometry/DifferentialGeometry.tex "\
 "Theory/Theory.tex "\
 "Theory/SolutionMethods.tex "\
-"Theory/MaterialCoordinateTransformations.tex "\
+"Theory/CoordinateTransformations.tex "\
 "Maths/Maths.tex "\
 "Maths/Space/Space.tex "\
 "Maths/Space/Sets/Sets.tex "\
@@ -119,7 +119,7 @@ MY_GNUPLOT_SRC="BasisFunctions/gnuplots/*.gnuplot "
 # Note that the actual file will be placed in the directory
 # MY_HTMLUPDATE_DIR/MY_MAINFILE with filename index.html
 
-MY_HTMLUPDATE_DIR=${OPENCMISS_ROOT}/www/help
+MY_HTMLUPDATE_DIR=${OpenCMISS_ROOT}/www/help
 
 #
 # This next option controls the type of backlinks to add to the footer
@@ -132,7 +132,7 @@ MY_HTMLIDXTYPE=user
 #
 # The name of the bibliography database for the document
 
-MY_BIBS=${OPENCMISS_ROOT}/documentation/notes/references/opencmiss_references.bib
+MY_BIBS=${OpenCMISS_ROOT}/documentation/notes/references/opencmiss_references.bib
 
 #
 # The name of the printer to print the document to
@@ -144,7 +144,7 @@ MY_PRINTER=laserjet_postscript
 #
 # Actual make command:
 #
-make -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile $* \
+make -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile $* \
 	MAINFILE=$MY_MAINFILE \
 	TEX_SRC="$MY_TEX_SRC" \
 	EPS_SRC="$MY_EPS_SRC" \
