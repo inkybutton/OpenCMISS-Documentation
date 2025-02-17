@@ -1,0 +1,188 @@
+\section{Vector Calculus}
+\label{sec:MathsVectorCalculus}
+
+If $\phi$ and $\psi$ are scalars, $\vectr{a}$, $\vectr{b}$, $\vectr{c}$,
+$\vectr{d}$, and $\vectr{e}$ are all vectors, and
+$\tensortwo{A}$, $\tensortwo{B}$, $\tensortwo{C}$, and $\tensortwo{D}$ are all
+second order tensors then
+
+\subsection{Vector and Tensor Identities}
+\label{subsec:VectorTensorIdentities}
+
+\begin{align}
+  \tripleprod{\vectr{a}}{\vectr{b}}{\vectr{c}}&=\tripleprod{\vectr{b}}{\vectr{c}}{\vectr{a}}=\tripleprod{\vectr{c}}{\vectr{a}}{\vectr{b}}
+  \label{eqn:VectorTensorIdentity1} \\
+  \crossprod{\vectr{a}}{\pbrac{\crossprod{\vectr{b}}{\vectr{c}}}}&=
+  \pbrac{\dotprod{\vectr{a}}{\vectr{c}}}\vectr{b}-
+  \pbrac{\dotprod{\vectr{a}}{\vectr{b}}}\vectr{c}
+  \label{eqn:VectorTensorIdentity2} \\
+  \crossprod{\pbrac{\crossprod{\vectr{a}}{\vectr{b}}}}{\vectr{c}}&=
+  \pbrac{\dotprod{\vectr{a}}{\vectr{c}}}\vectr{b}-
+  \pbrac{\dotprod{\vectr{b}}{\vectr{c}}}\vectr{a}
+  \label{eqn:VectorTensorIdentity3} \\
+  \dotprod{\pbrac{\crossprod{\vectr{a}}{\vectr{b}}}}{\pbrac{\crossprod{\vectr{c}}{\vectr{d}}}}&=
+  \pbrac{\dotprod{\vectr{a}}{\vectr{c}}}\pbrac{\dotprod{\vectr{b}}{\vectr{d}}}-
+  \pbrac{\dotprod{\vectr{a}}{\vectr{d}}}\pbrac{\dotprod{\vectr{b}}{\vectr{c}}}
+  \label{eqn:VectorTensorIdentity4} \\
+  \crossprod{\pbrac{\crossprod{\vectr{a}}{\vectr{b}}}}{\pbrac{\crossprod{\vectr{c}}{\vectr{d}}}}&=\pbrac{\tripleprod{\vectr{a}}{\vectr{b}}{\vectr{d}}}\vectr{c}-\pbrac{\tripleprod{\vectr{a}}{\vectr{b}}{\vectr{c}}}\vectr{d}
+  \label{eqn:VectorTensorIdentity5} \\
+  \tensorprod{\vectr{a}}{\vectr{b}}&=\transpose{\pbrac{\tensorprod{\vectr{b}}{\vectr{a}}}}
+  \label{eqn:VectorTensorIdentity6} \\
+  \phi\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}&=\tensorprod{\pbrac{\phi\vectr{a}}}{\vectr{b}}=\tensorprod{\vectr{a}}{\pbrac{\phi\vectr{b}}}
+  \label{eqn:VectorTensorIdentity7} \\
+  \pbrac{\phi+\psi}\tensorprod{\vectr{a}}{\vectr{b}}&=\phi\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}+\psi\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}
+  \label{eqn:VectorTensorIdentity8} \\
+  \tensorprod{\vectr{a}}{\pbrac{\vectr{b}+\vectr{c}}}&=\tensorprod{\vectr{a}}{\vectr{c}}+\tensorprod{\vectr{a}}{\vectr{c}}
+  \label{eqn:VectorTensorIdentity9} \\
+  \tensorprod{\pbrac{\vectr{a}+\vectr{b}}}{\vectr{c}}&=\tensorprod{\vectr{a}}{\vectr{c}}+\tensorprod{\vectr{b}}{\vectr{c}}
+  \label{eqn:VectorTensorIdentity10} \\
+  \crossprod{\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}}{\vectr{c}}&=\vectr{a}\pbrac{\crossprod{\vectr{b}}{\vectr{c}}}
+  \label{eqn:VectorTensorIdentity11} \\
+  \pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}\vectr{c}&=\pbrac{\dotprod{\vectr{b}}{\vectr{c}}}\vectr{a}
+  \label{eqn:VectorTensorIdentity12} \\
+  \pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}\pbrac{\tensorprod{\vectr{c}}{\vectr{d}}}&=\pbrac{\dotprod{\vectr{b}}{\vectr{c}}}\pbrac{\tensorprod{\vectr{a}}{\vectr{d}}}
+  \label{eqn:VectorTensorIdentity13} \\
+  \pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}\pbrac{\tensorprodthree{\vectr{c}}{\vectr{d}}{\vectr{e}}}&=\pbrac{\dotprod{\vectr{b}}{\vectr{c}}}\pbrac{\tensorprodthree{\vectr{a}}{\vectr{d}}{\vectr{e}}}
+  \label{eqn:VectorTensorIdentity14} \\
+  \dotprod{\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}}{\pbrac{\tensorprod{\vectr{c}}{\vectr{d}}}}&=\pbrac{\dotprod{\vectr{a}}{\vectr{c}}}\pbrac{\dotprod{\vectr{b}}{\vectr{d}}}
+  \label{eqn:VectorTensorIdentity15} \\
+  \phi\vectr{a}\pbrac{\dotprod{\vectr{b}}{\vectr{c}}}&=\phi\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}\vectr{c}
+  \label{eqn:VectorTensorIdentity16} \\
+  \dotprod{\phi\vectr{a}}{\pbrac{\tensorprod{\vectr{b}}{\vectr{c}}}}&=\phi\pbrac{\dotprod{\vectr{a}}{\vectr{b}}}\vectr{c}
+  \label{eqn:VectorTensorIdentity17} \\
+  \pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}\tensortwo{A}&=\tensorprod{\vectr{a}}{\transpose{\tensortwo{A}}\vectr{b}}
+  \label{eqn:VectorTensorIdentity18} \\
+  \tensortwo{A}\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}&=\tensorprod{\pbrac{\tensortwo{A}\vectr{a}}}{\vectr{b}}
+  \label{eqn:VectorTensorIdentity19} \\
+  \doubledotprod{\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}}{\tensortwo{A}}&=\vectr{a}\tensortwo{A}\vectr{b}=\vectr{b}\transpose{\tensortwo{A}}\vectr{a}
+  \label{eqn:VectorTensorIdentity20} \\
+  \doubledotprod{\tensortwo{A}}{\tensortwo{B}}&=\doubledotprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}
+  \label{eqn:VectorTensorIdentity21} \\
+  \doubledotprod{\tensortwo{A}}{\pbrac{\tensortwo{B}\tensortwo{C}}}&=\doubledotprod{\pbrac{\transpose{\tensortwo{B}}\tensortwo{A}}}{\tensortwo{C}}=\doubledotprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}}}{\tensortwo{B}}
+  \label{eqn:VectorTensorIdentity22} \\
+  \tensortwo{A}\pbrac{\tensorprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{D}&=\tensorprod{\pbrac{\tensortwo{A}\tensortwo{B}}}{\pbrac{\tensortwo{C}\tensortwo{D}}}
+  \label{eqn:VectorTensorIdentity23}
+\end{align}
+
+\subsection{Gradient identities}
+\label{subsec:GradientIdentities}
+
+\begin{align}
+  \gradient{}{\pbrac{\phi+\psi}}&=\gradient{}{\phi}+\gradient{}{\psi}
+  \label{eqn:GradientIdentity1} \\
+  \gradient{}{\pbrac{\phi\psi}}&=\psi\gradient{}{\phi}+\phi\gradient{}{\psi}
+  \label{eqn:GradientIdentity2} \\
+  \gradient{}{\pbrac{\dfrac{\phi}{\psi}}}&=\dfrac{\psi\gradient{}{\phi}+\phi\gradient{}{\psi}}{\psi^{2}}
+  \label{eqn:GradientIdentity3} \\
+  \gradient{}{\pbrac{\phi\vectr{a}}}&=\tensorprod{\vectr{a}}{\gradient{}{\phi}}+\phi\gradient{}{\vectr{a}}
+  \label{eqn:GradientIdentity4} \\
+  \gradient{}{\pbrac{\vectr{a}+\vectr{b}}}&=\gradient{}{\vectr{a}}+\gradient{}{\vectr{b}}
+  \label{eqn:GradientIdentity5} \\
+  \gradient{}{\pbrac{\dotprod{\vectr{a}}{\vectr{b}}}}&=\dotprod{\pbrac{\gradient{}{\vectr{a}}}}{\vectr{b}}+\dotprod{\pbrac{\gradient{}{\vectr{b}}}}{\vectr{a}}
+  \label{eqn:GradientIdentity6} \\
+  \gradient{}{\pbrac{\divergence{}{\vectr{a}}}}&=\curl{}{\curl{}{\vectr{a}}}+\laplacian{}{\vectr{a}}
+  \label{eqn:GradientIdentity7}
+\end{align}
+
+\subsection{Divergence identities}
+\label{subsec:DivergenceIdentities}
+
+\begin{align}
+  \divergence{}{\pbrac{\gradient{}{\phi}}}&=\laplacian{}{\phi}
+  \label{eqn:DivergenceIdentity1} \\
+  \divergence{}{\pbrac{\phi\gradient{}{\psi}}}&=\phi\laplacian{}{\psi}+\dotprod{\gradient{}{\phi}}{\gradient{}{\psi}}
+  \label{eqn:DivergenceIdentity2} \\
+  \divergence{}{\pbrac{\phi\vectr{a}}}&=\dotprod{\gradient{}{\phi}}{\vectr{a}}+\phi\pbrac{\divergence{}{\vectr{a}}}
+  \label{eqn:DivergenceIdentity3} \\
+  \divergence{}{\pbrac{\dfrac{\vectr{a}}{\phi}}}&=\dfrac{\phi\divergence{}{\vectr{a}}-\dotprod{\pbrac{\gradient{}{\phi}}}{\vectr{a}}}{\phi^{2}}
+  \label{eqn:DivergenceIdentity4} \\
+  \divergence{}{\pbrac{\vectr{a}+\vectr{b}}}&=\divergence{}{\vectr{a}}+\divergence{}{\vectr{b}}
+  \label{eqn:DivergenceIdentity5} \\
+  \divergence{}{\pbrac{\crossprod{\vectr{a}}{\vectr{b}}}}&=\dotprod{\pbrac{\curl{}{\vectr{a}}}}{\vectr{b}}-
+  \dotprod{\vectr{a}}{\pbrac{\curl{}{\vectr{b}}}}
+  \label{eqn:DivergenceIdentity6} \\
+  \divergence{}{\pbrac{\tensorprod{\vectr{a}}{\vectr{b}}}}&=\pbrac{\gradient{}{\vectr{a}}}\vectr{b}+\vectr{u}\pbrac{\divergence{}{\vectr{b}}}
+  \label{eqn:DivergenceIdentity7} \\
+  \divergence{}{\pbrac{\curl{}{\vectr{a}}}}&=0
+  \label{eqn:DivergenceIdentity8} \\
+  \divergence{}{\pbrac{\phi\tensortwo{A}}}&=\dotprod{\gradient{}{\phi}}{\tensortwo{A}}+\phi\divergence{}{\tensortwo{A}}
+  \label{eqn:DivergenceIdentity9} \\
+  \divergence{}{\pbrac{\dotprod{\tensortwo{A}}{\vectr{b}}}}&=\dotprod{\pbrac{\divergence{}{\tensortwo{A}}}}{\vectr{b}}+
+  \doubledotprod{\transpose{\tensortwo{A}}}{\gradient{}{\vectr{b}}}
+  \label{eqn:DivergenceIdentity10} \\
+  \divergence{}{\pbrac{\dotprod{\vectr{b}}{\tensortwo{A}}}}&=\dotprod{\vectr{b}}{\pbrac{\divergence{}{\tensortwo{A}}}}+\doubledotprod{\tensortwo{A}}{\gradient{}{\vectr{b}}}
+  \label{eqn:DivergenceIdentity11} \\
+  \divergence{}{\pbrac{\tensortwo{A}\tensortwo{B}}}&=\tensortwo{A}\divergence{}{\tensortwo{B}}+\doubledotprod{\gradient{}{\tensortwo{A}}}{\tensortwo{B}}
+\end{align}
+
+\subsection{Curl identities}
+\label{subsec:CurlIdentities}
+
+\begin{align}
+  \curl{}{\pbrac{\gradient{}{\phi}}}&=\vectr{0}
+  \label{eqn:CurlIdentity1} \\
+  \curl{}{\pbrac{\phi\gradient{}{\psi}}}&=\crossprod{\gradient{}{\phi}}{\gradient{}{\psi}}
+  \label{eqn:CurlIdentity2} \\
+  \curl{}{\pbrac{\phi\vectr{a}}}&=\crossprod{\gradient{}{\phi}}{\vectr{a}+\phi\curl{}{\vectr{a}}}
+  \label{eqn:CurlIdentity3} \\
+  \curl{}{\pbrac{\dfrac{\vectr{a}}{\phi}}}&=\dfrac{\phi\curl{}{\vectr{a}}-\crossprod{\pbrac{\gradient{}{\phi}}}{\vectr{a}}}{\phi^{2}}
+  \label{eqn:CurlIdentity4} \\
+  \curl{}{\pbrac{\vectr{a}+\vectr{b}}}&=\curl{}{\vectr{a}}+\curl{}{\vectr{b}}
+  \label{eqn:CurlIdentity5} \\
+  \curl{}{\pbrac{\crossprod{\vectr{a}}{\vectr{b}}}}&=\vectr{a}\pbrac{\divergence{}{\vectr{b}}}-
+  \vectr{b}\pbrac{\divergence{}{\vectr{a}}}+\pbrac{\dotprod{\vectr{b}}{\grad}}\vectr{a}-
+  \pbrac{\dotprod{\vectr{a}}{\grad}}\vectr{b}
+  \label{eqn:CurlIdentity6} \\
+  \curl{}{\pbrac{\curl{}{\vectr{a}}}}&=\gradient{}{\pbrac{\divergence{}{\vectr{a}}}}-\laplacian{}{\vectr{a}}
+  \label{eqn:CurlIdentity7}
+\end{align}
+
+\subsection{Laplacian identities}
+\label{subsec:LaplacianIdentities}
+
+\begin{align}
+  \laplacian{}{\pbrac{\phi\psi}}&=\psi\laplacian{}{\phi}+2\dotprod{\pbrac{\gradient{}{\phi}}}{\pbrac{\gradient{}{\psi}}}+\phi\laplacian{}{\psi}
+  \label{eqn:LaplacianIdentity1} \\
+  \laplacian{}{\pbrac{\gradient{}{\phi}}}&=\gradient{}{\pbrac{\divergence{}{\pbrac{\gradient{}{\phi}}}}}=\gradient{}{\pbrac{\laplacian{}{\phi}}}
+  \label{eqn:LaplacianIdentity2} \\
+  \laplacian{}{\pbrac{\phi\vectr{a}}}&=\vectr{a}\laplacian{}{\phi}+2\pbrac{\dotprod{\gradient{}{\phi}}{\nabla}}\vectr{a}+\phi\laplacian{}{\vectr{a}}
+  \label{eqn:LaplacianIdentity3} \\
+  \laplacian{}{\vectr{a}}&=\gradient{}{\pbrac{\divergence{}{\vectr{a}}}}-\curl{}{\pbrac{\curl{}{\vectr{a}}}}
+  \label{eqn:LaplacianIdentity4} \\
+  \laplacian{}{\pbrac{\divergence{}{\vectr{a}}}}&=\divergence{}{\pbrac{\gradient{}{\pbrac{\divergence{}{\vectr{a}}}}}}=\divergence{}{\pbrac{\laplacian{}{\vectr{a}}}}
+  \label{eqn:LaplacianIdentity5} \\
+  \laplacian{}{\pbrac{\curl{}{\vectr{a}}}}&=-\curl{}{\pbrac{\curl{}{\pbrac{\curl{}{\vectr{a}}}}}}=\curl{}{\pbrac{\laplacian{}{\vectr{a}}}}
+  \label{eqn:LaplacianIdentity6}
+\end{align}
+
+\subsection{Vector Integral Theorems}
+\label{subsec:VectorIntegralTheorems}
+
+For a domain $\Omega$ with boundary $\Gamma=\boundary{\Omega}$ that has a normal
+$\vectr{n}$ and a tangent vector $\vectr{\tau}$.
+
+\begin{align}
+  \gint{\Omega}{}{\gradient{}{\phi}}{\Omega}&=\gint{\Gamma}{}{\phi\vectr{n}}{\Gamma}&&\text{Gradient
+  Theorem}
+  \label{eqn:GradientTheorem} \\
+  \gint{\Omega}{}{\divergence{}{\vectr{a}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\vect{a}}{\vectr{n}}}{\Gamma}&\qquad&\text{Divergence
+  Theorem}
+  \label{eqn:DivergenceTheorem} \\
+  \gint{\Omega}{}{\curl{}{\vectr{a}}}{\Omega}&=-\gint{\Gamma}{}{\crossprod{\vectr{a}}{\vectr{n}}}{\Gamma}&&\text{Curl
+  Theorem}
+  \label{eqn:CurlTheorem} \\
+  \gint{\Omega}{}{\pbrac{\phi\laplacian{}{\psi}-\dotprod{\gradient{}{\psi}}{\gradient{}{\phi}}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\phi\gradient{}{\psi}}{\vectr{n}}}{\Gamma}&&\text{Green's
+  First Identity}
+  \label{eqn:GreensFirstIdentity} \\
+  \gint{\Omega}{}{\pbrac{\phi\laplacian{}{\psi}-\psi\laplacian{}{\phi}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\pbrac{\phi\gradient{}{\psi}-\psi\gradient{}{\phi}}}{\vectr{n}}}{\Gamma}&&\text{Green's
+  Second Identity}
+  \label{eqn:GreensSecondIdentity} \\
+  \gint{\Omega}{}{\dotprod{\vectr{a}}{\gradient{}{\phi}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\phi\vectr{a}}{\vectr{n}}}{\Gamma}-\gint{\Omega}{}{\phi\divergence{}{\vectr{a}}}{\Omega}&&\text{Green-Gauss Theorem}
+  \label{eqn:GreenGaussTheorem} \\
+  \gint{\Omega}{}{\phi\divergence{}{\vectr{a}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\phi\vectr{a}}{\vectr{n}}}{\Gamma}-\gint{\Omega}{}{\dotprod{\gradient{}{\phi}}{\vectr{a}}}{\Omega}&&\text{Green-Gauss Theorem}
+  \label{eqn:GreenGaussTheorem2} \\
+  \gint{\Omega}{}{\dotprod{\pbrac{\curl{}{\vectr{a}}}}{\vectr{n}}}{\Omega}&=\gint{\Gamma}{}{\dotprod{\vectr{a}}{\vectr{\tau}}}{\Gamma}&&\text{Stoke's
+  Theorem}
+  \label{eqn:StokesTheorem}
+\end{align}
+

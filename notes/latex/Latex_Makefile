@@ -60,15 +60,15 @@ DVIPS_OPTS      =        -Z -t a4 -K0 -N0
 # latex2html98.1 uses undef as a list operator which is not perl5.6
 LATEX2HTML      =       perl -S latex2html
 LATEX2HTML_OPTS =       -address ' ' -no_navigation -info ' ' -split 0 -tmp /tmp
-FIXL2HTML	=	${OPENCMISS_ROOT}/documentation/notes/html_utils/fixl2html.sh
+FIXL2HTML	=	${OpenCMISS_ROOT}/documentation/notes/html_utils/fixl2html.sh
 MAKEINDEX	=	makeindex
 PRINT           =       lpr
 PSNUP           =       psnup -2 -d0.1
 
 # plot, figure and svg files
-MAKEFIGS	=	make -i -f ${OPENCMISS_ROOT}/documentation/notes/latex/Makefigs
-MAKESVGS	=	make -i -f ${OPENCMISS_ROOT}/documentation/notes/latex/Makesvgs
-MAKEPLOTS	=	make -i -f ${OPENCMISS_ROOT}/documentation/notes/latex/Makeplots
+MAKEFIGS	=	make -i -f ${OpenCMISS_ROOT}/documentation/notes/latex/Makefigs
+MAKESVGS	=	make -i -f ${OpenCMISS_ROOT}/documentation/notes/latex/Makesvgs
+MAKEPLOTS	=	make -i -f ${OpenCMISS_ROOT}/documentation/notes/latex/Makeplots
 
 #
 # Standard TeX makefile follows
@@ -86,11 +86,11 @@ LATEX_PSQ	=	latex --shell-escape \\batchmode \
 			'\def\inputfigure\#1{\psfig{figure=\#1.ps}}' \
 			\\input
 
-OPENCMISS_MACROS  =	${OPENCMISS_ROOT}/documentation/notes/latex/opencmiss_macros.tex
-OPENCMISS_ABBREV  =	${OPENCMISS_ROOT}/documentation/notes/latex/opencmiss_abbreviations.tex
-OPENCMISS_ACRONY  =	${OPENCMISS_ROOT}/documentation/notes/latex/opencmiss_acronyms.tex
-OPENCMISS_DEFNS   =	${OPENCMISS_ROOT}/documentation/notes/latex/opencmiss_defns.tex
-OPENCMISS_SYMBOLS =	${OPENCMISS_ROOT}/documentation/notes/latex/opencmiss_symbols.tex
+OPENCMISS_MACROS  =	${OpenCMISS_ROOT}/documentation/notes/latex/opencmiss_macros.tex
+OPENCMISS_ABBREV  =	${OpenCMISS_ROOT}/documentation/notes/latex/opencmiss_abbreviations.tex
+OPENCMISS_ACRONY  =	${OpenCMISS_ROOT}/documentation/notes/latex/opencmiss_acronyms.tex
+OPENCMISS_DEFNS   =	${OpenCMISS_ROOT}/documentation/notes/latex/opencmiss_defns.tex
+OPENCMISS_SYMBOLS =	${OpenCMISS_ROOT}/documentation/notes/latex/opencmiss_symbols.tex
 
 IS_FIGS = $(findstring .fig,$(FIG_SRC))
 IS_SVGS = $(findstring .svg,$(SVG_SRC))
@@ -100,15 +100,15 @@ $(MAINFILE).dvi	:	$(MAINFILE).tex $(TEX_SRC) $(BIBS) $(EPS_SRC) $(FIG_SRC) $(SVG
 			$(OPENCMISS_MACROS) $(OPENCMISS_ABBREV) $(OPENCMISS_ACRONY) $(OPENCMISS_DEFNS) $(OPENCMISS_SYMBOLS)
 	@if test -z $(IS_FIGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsmake ; \
 	fi
 	@if test -z $(IS_SVGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsmake ; \
 	fi
 	@if test -z $(IS_PLOTS) ; \
 		then  : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsmake ; \
 	fi
 	@if test -r $(MAINFILE).aux ; \
 		 then : ; \
@@ -189,32 +189,33 @@ $(MAINFILE)/index.html :	$(MAINFILE).tex
 quick	:	
 	$(LATEX_DVI) $(MAINFILE)
 
-pics :	$(FIG_SRC) $(SVG_SRC) $(PLOT_SRC)
+pics :	$(FIG_SRC) $(SVG_SRC) $(PLOT_SRC) \
+	$(OPENCMISS_MACROS) $(OPENCMISS_ABBREV) $(OPENCMISS_ACRONY) $(OPENCMISS_SYMBOLS)
 	@if test -z $(IS_FIGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsmake ; \
 	fi
 	@if test -z $(IS_SVGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsmake ; \
 	fi
 	@if test -z $(IS_PLOTS) ; \
 		then  : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsmake ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsmake ; \
 	fi
 
 pics_clean :
 	@if test -z $(IS_FIGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsclean ; \
 	fi
 	@if test -z $(IS_SVGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsclean ; \
 	fi
 	@if test -z $(IS_PLOTS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsclean ; \
 	fi
 
 pdf :	$(MAINFILE).pdf
@@ -266,15 +267,15 @@ qclean :
 clean :	qclean
 	@if test -z $(IS_FIGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile figsclean ; \
 	fi
 	@if test -z $(IS_SVGS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile svgsclean ; \
 	fi
 	@if test -z $(IS_PLOTS) ; \
 		then : ; \
-		else $(MAKE) -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsclean ; \
+		else $(MAKE) -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile plotsclean ; \
 	fi
 
 clobber :	clean

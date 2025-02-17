@@ -120,6 +120,9 @@
 \newcommand{\oscommand}[1]{ %
   \texttt{#1} %
 } %
+\newcommand{\compconst}[1]{ %
+  \texttt{#1} %
+} %
   
 %
 % Software and systmes
@@ -834,15 +837,18 @@
 \newcommand{\complex}[1]{\ensuremath{ %
   \boldsymbol{\textrm{#1}} %
 }} %% complex number format e.g. \complex{i} => i
+\newcommand{\commutation}[2]{\ensuremath{ %
+ \sqbrac{#1,#2} %
+}} %% commutation e.g. \commutation{A,B} => [A,B]
 \newcommand{\conjugate}[1]{\ensuremath{ %
     \overline{#1} %                                _
 }} %% complex conjugate e.g. \conjugate{Z} => Z
 \newcommand{\const}[1]{\ensuremath{\mathrm{#1}}} % constant
-\newcommand{\cont}[1]{\ensuremath{C^{#1}}} % continuity e.g. \cont{1} => C1
-\newcommand{\gcont}[1]{\ensuremath{G^{#1}}} % geometric continuity e.g. \gcont{1} => G1
+\newcommand{\cont}[1]{\ensuremath{C^{#1}}} % continuity e.g. \cont{1} => C^1
+\newcommand{\gcont}[1]{\ensuremath{G^{#1}}} % geometric continuity e.g. \gcont{1} => G^1
 \newcommand{\convolution}[2]{\ensuremath{#1*#2}} % convolution
 % e.g. \convolution{a}{b} => a*b
-\newcommand{\cuberoot}[1]{\ensuremath{ %7
+\newcommand{\cuberoot}[1]{\ensuremath{ %
     \sqrt[3]{#1} %
   }} % cube root e.g. \cuberoot{a} = 3\sqrt{a}
 \newcommand{\degree}{\ensuremath{^{\circ}}\xspace} % degree sign
@@ -899,9 +905,9 @@
 \newcommand{\functionalderiv}[2]{\ensuremath{ %
     \delta #1
 }} % functional deriv e.g., \functionalderiv{f} => \delta f
-\newcommand{\inteval}[3]{\ensuremath{ %
+\newcommand{\intevaluated}[3]{\ensuremath{ %
     \displaystyle\sqbrac{#1}_{#2}^{#3} %
-}} % display evaluated integral with limits e.g. \inteval{xxx}{a}{b} => [xxx]_a^b
+}} % display evaluated integral with limits e.g. \intevaluated{xxx}{a}{b} => [xxx]_a^b
 \newcommand{\inverse}[1]{\ensuremath{ %
     {#1}^{-1} %
 }} % inverse e.g. \inverse{A} => A^-1
@@ -1115,7 +1121,10 @@
 }} % sign function
 \newcommand{\symover}[2]{\ensuremath{
     \stackrel{\scriptscriptstyle #1}{#2} %
-}} % over
+}} % symover
+\newcommand{\tensorrank}[2]{%
+rank(#1,#2)%
+} % tensorrank e.g., \tensorrank(m,n) => rank(m,n)
 \newcommand{\variationsymbol}{\ensuremath{ %
     \delta%
     }} % variation symbol => \delta
@@ -1208,6 +1217,21 @@
 \newcommand{\goneint}[2]{\ensuremath{ %
     \gint{#2}{}{#1}{#2} %
 }} % general integral with one limit. eg. \goneint{xxx}{a} => int_a xxx da
+\newcommand{\jacobian}[2]{\ensuremath{ %
+    \ifthenelse{\equal{#1}{}}{ %
+      \ifthenelse{\equal{#2}{}}{ %
+        \matr{J} %
+      }{
+        \fnof{\matr{J}}{#2} %
+      }
+    }{
+      \ifthenelse{\equal{#2}{}}{ %
+        \matr{J}_{#1} %
+      }{
+        \fnof{\matr{J}_{#1}}{#2} %
+      }
+    }
+}} % Jacobain. e.g. \jacobain{a}{b} => J_a(b)
 
 %
 % Special functions and named polynomials
@@ -1295,16 +1319,16 @@
     \dfrac{ \del^{3} #1}{\del #2 \del #3 \del #4} %
     }} % e.g. \delthreeby{u}{x}{y}{z} => del^3 u / del x del y del z
 \newcommand{\delthreecuby}[2]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2^{3}} %
+    \dfrac{ \del^{3} #1}{\del {#2}^{3}} %
     }} % e.g. \delthreecuby{u}{x} => del^3 u / del x^3
 \newcommand{\deldeltwoby}[3]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2 \del #3^{2}} %
+    \dfrac{ \del^{3} #1}{\del #2 \del {#3}^{2}} %
     }} % e.g. \deldeltwoby{u}{x}{y} => del^3 u / del x del y^2
 \newcommand{\deltwodelby}[3]{\ensuremath{ %
-    \dfrac{ \del^{3} #1}{\del #2^{2} \del #3} %
+    \dfrac{ \del^{3} #1}{\del {#2}^{2} \del #3} %
     }} % e.g. \deltwodelby{u}{x}{y} => del^3 u / del x^2 del y
 \newcommand{\delnby}[4]{\ensuremath{ %
-    \dfrac{\del^{#1} #2}{\del #3^{#4}} %
+    \dfrac{\del^{#1} #2}{\del {#3}^{#4}} %
     }} % e.g. \delnby{3}{u}{v} => del^3 u / del v^3
 \newcommand{\delntwoby}[6]{\ensuremath{ %
     \dfrac{ \del^{#1} #2}{\del {#3}^{#4} \del {#5}^{#6}} %
@@ -1369,51 +1393,54 @@
 \newcommand{\dothamiltonian}[1]{\ensuremath{ %
     \fnof{\dotover{\hamiltoniansym}}{#1} %
 }} % dot Hamiltonian e.g., time derivative of the Hamiltonian
-\newcommand{\lagrangiansym}{\ensuremath{ %
+\newcommand{\lagrangiansymbol}{\ensuremath{ %
     L %
 }} % Lagrangian symbol
 \newcommand{\lagrangian}[1]{\ensuremath{ %
-    \fnof{\lagrangiansym}{#1} %
+    \fnof{\lagrangiansymbol}{#1} %
 }} % Lagrangian e.g., \lagrangian{u,v} => L(u,v)
 
 %
 % Spaces
 %
-\newcommand{\vectorspace}[1]{\ensuremath{ %
+\newcommand{\mathspace}[1]{\ensuremath{ %
     \mathcal{#1} %
-}} % vetor space e.g., \vectirspace{V} => V
+}} % mathmatical space e.g., \mathspace{M} => M
+\newcommand{\vectorspace}[1]{\ensuremath{ %
+    \mathspace{#1} %
+}} % vetor space e.g., \vectorspace{V} => V
 \newcommand{\dualspace}[1]{\ensuremath{ %
     \vectorspace{#1}^{*} %
 }} % dual space e.g., \dualspace{V} => V^*
-\newcommand{\lebesguespacesym}{\ensuremath{ %
+\newcommand{\lebesguespacesymbol}{\ensuremath{ %
     L %
 }} % Lebesque space symbol
 \newcommand{\lebesguepspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\lebesguespacesym^{#1}}
+    \ensuremath{\lebesguespacesymbol^{#1}}
   }{
-    \ensuremath{\lebesguespacesym^{#1}\pbrac{#2}} %  
+    \ensuremath{\lebesguespacesymbol^{#1}\pbrac{#2}} %  
 }} % Lebesgue p space e.g., \lebesguepspace{2}{M} =>L^2(M)
 \newcommand{\lebesguetwospace}[1]{\ensuremath{ %
     \lebesquepspace{2}{#1} %  
 }} % Lebesgue 2 space e.g., \lebesgue2space{M} =>L^2(M)
-\newcommand{\sobolevspacesym}{\ensuremath{ %
+\newcommand{\sobolevspacesymbol}{\ensuremath{ %
     W
 }} % Sobolev space symbol
 \newcommand{\sobolevkpspace}[3]{%
   \ifthenelse{\equal{#3}{}}{ %
-    \ensuremath{\sobolevspacesym^{#1,#2}}
+    \ensuremath{\sobolevspacesymbol^{#1,#2}}
   }{
-    \ensuremath{\sobolevspacesym^{#1,#2}\pbrac{#3}} %  
+    \ensuremath{\sobolevspacesymbol^{#1,#2}\pbrac{#3}} %  
 }} % Sobolev k,p space e.g., \sobolevkpspace{k,p}{M} =>W^k,p(M)
-\newcommand{\hilbertspacesym}{\ensuremath{ %
+\newcommand{\hilbertspacesymbol}{\ensuremath{ %
     H
 }} % Hilbert space symbol
 \newcommand{\hilbertpspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\hilbertspacesym^{#1}}
+    \ensuremath{\hilbertspacesymbol^{#1}}
   }{
-    \ensuremath{\hilbertspacesym^{#1}\pbrac{#2}} %  
+    \ensuremath{\hilbertspacesymbol^{#1}\pbrac{#2}} %  
 }} % Hilbert p space e.g., \hilbertpspace{1}{M} =>H^1(M)
 \newcommand{\hilbertonespace}[1]{\ensuremath{ %
     \hilbertpspace{1}{#1} %  
@@ -1424,26 +1451,32 @@
 \newcommand{\hilbertthreespace}[1]{\ensuremath{ %
     \hilbertpspace{3}{#1} %  
 }} % Hilbert 3 space e.g., \hilbert3space{M} =>H^3(M)
-\newcommand{\diffformspacesym}{\ensuremath{ %
+\newcommand{\vectorfieldspacesymbol}{\ensuremath{ %
+    \mathfrak{X} %
+}} % space of vector fields symbol
+\newcommand{\vectorfieldspace}[1]{\ensuremath{ %
+    \fnof{\vectorfieldspacesymbol}{#1} %  
+}} % vector field space e.g., \vectorfieldspace{M} => X(M)
+\newcommand{\diffformspacesymbol}{\ensuremath{ %
     \bigwedge
 }} % space of differential forms symbol
 \newcommand{\diffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{{\diffformspacesym}^{#1}}
+    \ensuremath{{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % differential form space e.g., \diffformspace{2}{M} =>^2(M)
 \newcommand{\ltwodiffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\lebesguespacesym^{2}{\diffformspacesym}^{#1}}
+    \ensuremath{\lebesguespacesymbol^{2}{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{\lebesguespacesym^{2}{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{\lebesguespacesymbol^{2}{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % L^2 differential form space e.g., \ltwodiffformspace{2}{M} =>L^2 ^2(M)
 \newcommand{\honediffformspace}[2]{%
   \ifthenelse{\equal{#2}{}}{ %
-    \ensuremath{\hilbertspacesym^{1}{\diffformspacesym}^{#1}}
+    \ensuremath{\hilbertspacesymbol^{1}{\diffformspacesymbol}^{#1}}
   }{
-    \ensuremath{\hilbertspacesym^{1}{\diffformspacesym}^{#1}\pbrac{#2}} %  
+    \ensuremath{\hilbertspacesymbol^{1}{\diffformspacesymbol}^{#1}\pbrac{#2}} %  
 }} % H^1 differential form space e.g., \honediffformspace{2}{M} =>H^1 ^2(M)
 \newcommand{\innerform}[3]{ %
   \ifthenelse{\equal{#3}{}}{ %
@@ -1490,21 +1523,24 @@
 %
 \newcommand{\manifold}[1]{\ensuremath{ %
     \mathfrak{#1} %
-}} % manifold symbol
+}} % manifold e.g., \manifold{M} => M
 \newcommand{\boundary}[1]{\ensuremath{ %
     \del{#1} %
-}} % boundary symbol
+}} % boundary symbol e.g., \boundary{\Omega} => \del\Omega
+\newcommand{\configspace}[1]{\ensuremath{ %
+    \mathspace{#1} %
+}} % 
 \newcommand{\embedmanifold}[1]{\ensuremath{ %
-  \mathcal{#1} %
-}} % embedded manifold symbol
+  \configspace{#1} %
+}} % embedded manifold e.g., \embedmanifold{N} => N
 \newcommand{\connection}[2]{\ensuremath{ %
     \grad_{#1}{#2} %
 }} % connection e.g., \connection{X}{Y} => \grad_{X} Y
 \newcommand{\coordspacesymbol}{\ensuremath{ %
-    \mathcal{C} %
+    \configspace{C} %
 }} % Coordinate space symbol => C
 \newcommand{\tangentspacesymbol}{\ensuremath{ %
-    \mathcal{T} %
+    \configspace{T} %
 }} % Tangent space symbol => T
 \newcommand{\cotangentspacesymbol}{\ensuremath{ %
     \tangentspacesymbol^{*} %
@@ -1527,11 +1563,17 @@
 \newcommand{\cotangentbundle}[1]{\ensuremath{ %
     \cotangentspacesymbol \manifold{#1} %
 }} % Cotangent bundle e.g., \cotangentbundle{M} => T^*M
+\newcommand{\pushforwardsymbol}{\ensuremath{ %
+    \triangleright %
+}} % push forward symbol e.g., \pushforwardsymbol => \triangleright
 \newcommand{\pushforward}[2]{\ensuremath{ %
-    #1_{\triangleright}#2 %
+    #1_{\pushforwardsymbol}#2 %
 }} % push forward e.g. \pushforward{M}{v} => M_* v
+\newcommand{\pullbacksymbol}{\ensuremath{ %
+    \triangleleft %
+}} % pull back symbol e.g., \pullbacksymbol => \triangleleft
 \newcommand{\pullback}[2]{\ensuremath{ %
-    #1^{\triangleleft}#2
+    #1^{\pullbacksymbol}#2
 }} % pull back e.g., \pullback{M}{v} => M^* v
 \newcommand{\christoffel}[3]{ %
   \christoffelsecond{#1}{#2}{#3}
@@ -1629,10 +1671,16 @@
   }{
     \ensuremath{\vol_{#1}} % 
 }} % volume form with optional metric e.g. \volumeform{g} => vol_g
+\newcommand{\sharptensorsymbol}{\ensuremath{ %
+    \sharp %
+}} % sharp tensor symbol e.g.,\sharptensorsymbol => #
 \newcommand{\sharptensor}[1]{\ensuremath{ %
-    #1^{\sharp}
+    #1^{\sharptensorsymbol}
 }} % sharp tensor e.g.,\sharptensor{A} => A^#
-\newcommand{\flattensor}[1]{\ensuremath{#1^{\flat}}} % flat tensor e.g.,
+\newcommand{\flattensorsymbol}{\ensuremath{ %
+    \flat %
+}} % flat tensor symbol e.g.,\flattensorsymbol => b
+\newcommand{\flattensor}[1]{\ensuremath{#1^{\flattensorsymbol}}} % flat tensor e.g.,
 % \flattensor{A} => A^b
 % cpb 19/9/96 Changing from \mathbf to \boldsymbol to allow bold greek tensors
 %\newcommand{\tensor}[1]{\ensuremath{\mathbf{#1}}} % tensor
@@ -2278,12 +2326,18 @@
 \newcommand{\Mandel}[1]{\ensuremath{ %
     {#1}^{\Mandelsymbol} %
 }} % Mandel notation e.g., \Mandel{A} => A^M
+\newcommand{\numberMandel}[1]{\ensuremath{ %
+    \fnof{\Mandelsymbol}{#1} %
+}} % number of Mandel e.g., \numberMandel{n} => M(n)
 \newcommand{\Voigtsymbol}{\ensuremath{ %
     V %
 }} % Voigt symbol
 \newcommand{\Voigt}[1]{\ensuremath{ %
     {#1}^{\Voigtsymbol} %
 }} % Voigt notation e.g., \Voigt{A} => A^V
+\newcommand{\numberVoigt}[1]{\ensuremath{ %
+    \fnof{\Voigtsymbol}{#1} %
+}} % number of Voigt e.g., \numberVoigt{n} => V(n)
 
 %
 % Vector Calculus
@@ -2366,7 +2420,8 @@
 \newcommand{\matr}[1]{\ensuremath{\uppercase{\boldsymbol{#1}}}} % matrix
 % cpb 19/9/96 Changing from \mathbf to \boldsymbol to allow bold greek vectors
 \newcommand{\vect}[1]{\ensuremath{\lowercase{\boldsymbol{#1}}}} % vector
-\newcommand{\normal}{\vectr{n}} % normal
+\newcommand{\normalsymbol}{n} % normal symbol
+\newcommand{\normal}{\vectr{\normalsymbol}} % normal
 
 % Matrix and vector operators
 \newcommand{\determinant}[1]{\det #1} % determinant e.g., \determinant{A} =
@@ -2399,7 +2454,7 @@
 \newcommand{\norm}[1]{\lnorm{2}{#1}} % normalise i.e. l-2 norm
 \newcommand{\rank}[1]{\ensuremath{ %
     \rankop #1 %
-}} % rank operation e.g., \rank{A} => rank A7
+}} % rank operation e.g., \rank{A} => rank A
 \newcommand{\skewsym}[1]{\ensuremath{
     \skewop #1 % skew-symmetric operator i.e., \skewsym{A} = skw A
   }}
@@ -2596,6 +2651,12 @@
 \newcommand{\nodept}[2]{\ensuremath{ %
     {#1}^{#2} %
   }} % Nodal point (without derivative) e.g., \nodept{\psi}{n}=> nodal dof of \psi at node n.
+\newcommand{\idxnodept}[3]{\ensuremath{ %
+    {#1}^{#2#3} %
+  }} % Indexed nodal point (without derivative) e.g., \idxnodept{\psi}{i}{n}=> i'th nodal dof of \psi at node n.
+\newcommand{\coidxnodept}[3]{\ensuremath{ %
+    {#1}^{#3}_{#2} %
+  }} % "Covector" Indexed nodal point (without derivative) e.g., \coidxnodept{\psi}{i}{n}=> i'th nodal dof of \psi at node n.
 \newcommand{\nodedof}[3]{\ensuremath{ %
   \nodept{#1}{#2}_{,#3} %
 }} % Nodal DOF e.g., \nodedof{\psi}{n}{u} => nodal dof of \psi at node n
@@ -2611,6 +2672,12 @@
 \newcommand{\elementdof}[2]{\ensuremath{ %
   #1_{#2} %
 }} % Element DOF e.g., \elementdof{\psi}{e} => element dof of \psi at element e
+\newcommand{\barycentricsymb}[0]{\ensuremath{ %
+  \lambda%
+}} % the symbol for a barycentric coordinate e.g., \barycentricsymb => \lambda
+\newcommand{\barycentriccoord}[1]{\ensuremath{ %
+  \barycentricsymb^{#1}%
+}} % a barycentric coordinate e.g., \barycentriccoord{i} => \lambda^{i}
 \newcommand{\chbfnsymb}[2]{\ensuremath{ %
     \Psi_{#1}^{#2} %
     }} % Cubic Hermite basis function symbol
@@ -2619,14 +2686,14 @@
     }} % \chbfn{n}{u}{xi} => cubic Hermite basis function at node n deriv u
        % evaluated at xi
 \newcommand{\hsonebfnsymb}[1]{\ensuremath{ %
-    \zeta_{#1} %
+    \varkappa_{#1} %
     }} % Hermite sector 1 basis function symbol
 \newcommand{\hsonebfn}[2]{\ensuremath{ %
     \fnof{\hsonebfnsymb{#1}}{#2} %
     }} % \hsonebfn{n}{xi} => Hermite sector 1 basis function at node n
        % evaluated at xi
 \newcommand{\hsthreebfnsymb}[1]{\ensuremath{ %
-    \eta_{#1} %
+    \varsigma_{#1} %
     }} % Hermite sector 3 basis function symbol
 \newcommand{\hsthreebfn}[2]{\ensuremath{ %
     \fnof{\hsthreebfnsymb{#1}}{#2} %

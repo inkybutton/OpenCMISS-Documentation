@@ -1,0 +1,781 @@
+\section{Notation}
+\label{subsec:MathsNotation}
+
+\subsection{Voigt Notation}
+\label{subsec:MathsNotationVoigt}
+
+Voigt\footnote{\link{https://en.wikipedia.org/wiki/Woldemar_Voigt}{Woldermar
+  Voigt} (1850-1919), a German physicist.} notation\index{Voigt
+  notation} allows for components of tensors to be
+written as lower dimensional objects (vectors or lower dimension
+tensors). Tensor symmetry \etc can be exploited to reduce the number
+of components that need to be recorded. For further information see
+\citet{helnwein:2001} and \citet{Brannon:2018}.
+
+Consider expanding a vector $\vectr{a}$ in terms of it's contravariant
+components $a^{i}$ and base vectors $\vectr{e}_{i}$ \ie
+\begin{equation}
+  \vectr{a}=\begin{bmatrix} a^{1} \\ a^{2} \\ a^{3} \end{bmatrix}
+  =a^{1}\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}
+  +a^{2}\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} 
+  +a^{3}\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+  =a^{1}\vectr{e}_{1}+a^{2}\vectr{e}_{2}+a^{3}\vectr{e}_{3}
+\end{equation}
+
+An analogous procedure can be used with a tensor. Consider expanding the second order tensor
+\begin{equation}
+  \tensortwo{A}=\begin{bmatrix}
+  A^{11} & A^{12} & A^{13} \\
+  A^{21} & A^{22} & A^{23} \\
+  A^{31} & A^{32} & A^{33}
+  \end{bmatrix}
+  \label{eqn:VoigtNotationSecondOrderTensor}
+\end{equation}
+in terms of it's components and base tensors \ie
+\begin{equation}
+  \begin{aligned}  
+    \tensortwo{A}&=A^{11}\begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{12}\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{13}\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \\
+    &+A^{21}\begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{22}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{23}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{bmatrix} \\
+    &+A^{31}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}
+    +A^{32}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}
+    +A^{33}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix} \\
+    &=A^{11}\tensortwo{E}_{11}+A^{12}\tensortwo{E}_{12}+A^{13}\tensortwo{E}_{13} \\
+    &+A^{21}\tensortwo{E}_{21}+A^{22}\tensortwo{E}_{22}+A^{23}\tensortwo{E}_{23} \\
+    &+A^{31}\tensortwo{E}_{31}+A^{32}\tensortwo{E}_{32}+A^{33}\tensortwo{E}_{33}
+  \end{aligned}
+  \label{eqn:VoigtNotationSecondOrderTensorStdBasis}
+\end{equation}
+where $\tensortwo{E}_{ij}$ are the base tensors for the contravariant
+tensor components $A^{ij}$. The base tensors are formed by taking the
+tensor product of the standard basis vectors \ie
+\begin{equation}
+  \tensortwo{E}_{ij}=\tensorprod{\vectr{e}_{i}}{\vectr{e}_{j}}
+\end{equation}
+
+
+We note that the tensor/vector components are labelled as
+contravariant as they vary \emph{contra} to the base tensors/vectors
+under a change of basis. That is if the ``length'' of the base
+tensors/vectors was to double then the contravariant components would
+need to halve in order that the tensor/vector has the same physical
+``length''. For this reason the base tensors/vectors are often
+\emph{normalised} so that they have unit ``length''.
+
+All second order tensors can be written as the sum of a symmetric
+tensor and a skew-symmetric tensor \ie
+\begin{equation}
+  \tensortwo{A}=\begin{bmatrix}
+  A^{11} & A^{12} & A^{13} \\
+  A^{21} & A^{22} & A^{23} \\
+  A^{31} & A^{32} & A^{33}
+  \end{bmatrix}=\dfrac{1}{2}\pbrac{\symmetric{\tensortwo{A}}+\skewsym{\tensortwo{A}}}
+\end{equation}
+
+We can use a change of basis in \eqnref{eqn:VoigtNotationSecondOrderTensorStdBasis} to write any second order tensor as
+\begin{equation}
+  \begin{aligned}  
+    \tensortwo{A}&=A^{\pbrac{11}}\begin{bmatrix} 1 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{\pbrac{22}}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 0 \end{bmatrix}
+    +A^{\pbrac{33}}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix} \\
+    &+A^{\pbrac{23}}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & 1 \\ 0 & 1 & 0 \end{bmatrix}
+    +A^{\pbrac{13}}\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 1 & 0 & 0 \end{bmatrix}
+    +A^{\pbrac{12}}\begin{bmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \\
+    &+A^{\sqbrac{32}}\begin{bmatrix} 0 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0 \end{bmatrix}
+    +A^{\sqbrac{13}}\begin{bmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ -1 & 0 & 0 \end{bmatrix}
+    +A^{\sqbrac{21}}\begin{bmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 0 \end{bmatrix} \\
+    &=A^{\pbrac{11}}\tensortwo{V}_{11}+A^{\pbrac{22}}\tensortwo{V}_{22}+A^{\pbrac{33}}\tensortwo{V}_{33} \\
+    &+A^{\pbrac{23}}\tensortwo{V}_{23}+A^{\pbrac{13}}\tensortwo{V}_{13}+A^{\pbrac{12}}\tensortwo{V}_{12} \\
+    &+A^{\sqbrac{32}}\tensortwo{V}_{32}+A^{\sqbrac{13}}\tensortwo{V}_{13}+A^{\sqbrac{21}}\tensortwo{V}_{21}
+  \end{aligned}
+  \label{eqn:VoigtNotationSecondOrderTensorVoigtBasis}
+\end{equation}
+where
+\begin{equation}
+  A^{\pbrac{ij}}=\dfrac{1}{2}\pbrac{A^{ij}+A^{ji}}
+\end{equation}
+are the symmetric components of $\tensortwo{A}$ and
+\begin{equation}
+  A^{\sqbrac{ij}}=\dfrac{1}{2}\pbrac{A^{ij}-A^{ji}}
+\end{equation}
+are the skew-symmetric components of $\tensortwo{A}$. The tensors
+$\tensortwo{V}_{ij}$ are the \emph{covariant Voigt basis
+tensors}. Note that the last six Voigt basis tensors are not of unit
+magnitude but have a magnitude of $\sqrt{2}$. They can thus be
+normalised by dividing by $\sqrt{2}$.
+
+Using Voigt notation we can write any second order tensor as
+\begin{equation}
+  \Voigt{\tensortwo{A}}=A^{I}\tensortwo{V}_{I}
+\end{equation}
+where the $\Voigtsymbol$ indicates a Voigt notation tensor. Here
+summation is implied and $I$ ranges from $1$ to $9$, $A^{I}$ are the
+contravariant Voigt components and $\tensortwo{V}_{I}$ are the covariant
+Voigt basis tensors and they are given by
+\begin{equation}
+  A^{1}=A^{\pbrac{11}} \qquad
+  \tensortwo{V}_{1}=\tensorprod{\vectr{e}_{1}}{\vectr{e}_{1}}=\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{2}=A^{\pbrac{22}} \qquad
+  \tensortwo{V}_{2}=\tensorprod{\vectr{e}_{2}}{\vectr{e}_{2}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{3}=A^{\pbrac{33}} \qquad
+  \tensortwo{V}_{3}=\tensorprod{\vectr{e}_{3}}{\vectr{e}_{3}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{4}=A^{\pbrac{23}} \qquad
+  \tensortwo{V}_{4}=\tensorprod{\vectr{e}_{2}}{\vectr{e}_{3}}+\tensorprod{\vectr{e}_{3}}{\vectr{e}_{2}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & 1 \\
+  0 & 1 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{5}=A^{\pbrac{13}} \qquad
+  \tensortwo{V}_{5}=\tensorprod{\vectr{e}_{1}}{\vectr{e}_{3}}+\tensorprod{\vectr{e}_{3}}{\vectr{e}_{1}}=\begin{bmatrix}
+  0 & 0 & 1 \\
+  0 & 0 & 0 \\
+  1 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{6}=A^{\pbrac{12}} \qquad
+  \tensortwo{V}_{6}=\tensorprod{\vectr{e}_{1}}{\vectr{e}_{2}}+\tensorprod{\vectr{e}_{2}}{\vectr{e}_{1}}=\begin{bmatrix}
+  0 & 1 & 0 \\
+  1 & 0 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{7}=A^{\sqbrac{32}} \qquad
+  \tensortwo{V}_{7}=\tensorprod{\vectr{e}_{3}}{\vectr{e}_{2}}-\tensorprod{\vectr{e}_{2}}{\vectr{e}_{3}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & -1 \\
+  0 & 1 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{8}=A^{\sqbrac{13}} \qquad
+  \tensortwo{V}_{8}=\tensorprod{\vectr{e}_{1}}{\vectr{e}_{3}}-\tensorprod{\vectr{e}_{3}}{\vectr{e}_{1}}=\begin{bmatrix}
+  0 & 0 & 1 \\
+  0 & 0 & 0 \\
+  -1 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{9}=A^{\sqbrac{21}} \qquad
+  \tensortwo{V}_{9}=\tensorprod{\vectr{e}_{2}}{\vectr{e}_{1}}-\tensorprod{\vectr{e}_{1}}{\vectr{e}_{2}}=\begin{bmatrix}
+  0 & -1 & 0 \\
+  1 & 0 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+
+In addition if the Voigt array of contravariant components is
+$\transpose{\sqbrac{A^{1},A^{2},A^{3},A^{4},A^{5},A^{6},A^{7},A^{8},A^{9}}}$
+then the equivalent contravariant tensor is
+\begin{equation}
+  \begin{bmatrix}
+    A^{1} & A^{6}-A^{9} & A^{5}+A^{8} \\
+    A^{6}+A^{9} & A^{2} & A^{4}-A^{7} \\
+    A^{5}-A^{8} & A^{4}+A^{7} & A^{3}
+  \end{bmatrix}
+\end{equation}
+
+TODO CHECK UPPER AND LOWER FOR THIS METRIC PART BELOW
+
+The covariant metric tensor for the Voigt basis is 
+\begin{equation}
+  \Voigt{\flattensor{\tensortwo{G}}}=G_{IJ}\tensorprod{\tensortwo{V}^{I}}{\tensortwo{V}^{J}}=
+  \doubledotprod{\tensortwo{V}^{I}}{\tensortwo{V}^{J}}=\begin{bmatrix}
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 2 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 2 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 2
+  \end{bmatrix}
+\end{equation}
+
+We note that that metric tensor with the Voigt basis is not the
+identity tensor. The contravariant metric tensor can thus be found
+from the inverse of the covariant metric tensor \ie
+\begin{equation}
+  \Voigt{\sharptensor{\tensortwo{G}}}=\inverse{\pbrac{\Voigt{\flattensor{\tensortwo{G}}}}}=G^{IJ}\tensorprod{\tensortwo{V}_{I}}{\tensortwo{V}_{J}}=
+  \begin{bmatrix}
+  1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2} & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \frac{1}{2}
+  \end{bmatrix}
+\end{equation}
+
+We can thus calculate the contravariant Voigt basis using the metric tensor
+\begin{equation}
+  \tensortwo{V}^{I}=G^{IJ}\tensortwo{V}_{J}
+\end{equation}
+and thus the contravariant Voigt components are also given by
+\begin{equation}
+  A^{I}=\doubledotprod{\tensortwo{A}}{\tensortwo{V}^{I}}
+\end{equation}
+
+As well as using a covariant Voigt basis we can also expand the tensor in terms of a contravariant Voigt basis \ie
+\begin{equation}
+  \Voigt{\tensortwo{A}}=A_{I}\tensortwo{V}^{I}
+\end{equation}
+where
+\begin{equation}
+  A_{I}=\doubledotprod{\tensortwo{A}}{\tensortwo{V}_{I}}=G_{IJ}A^{J}
+\end{equation}
+are the ``covariant'' Voigt components. Note that we are abusing
+notation here in that all the Voigt components are really
+contravariant and it is just the basis to which they are referred to
+that changes. This will lead to the requirement for correction factors
+(see below).
+
+By substituting the metric tensor we can thus find the relationship between the covariant and contravariant Voigt components \ie
+\begin{equation}
+  \begin{bmatrix}
+    A_{1} \\
+    A_{2} \\
+    A_{3} \\
+    A_{4} \\
+    A_{5} \\
+    A_{6} \\
+    A_{7} \\
+    A_{8} \\
+    A_{9}
+  \end{bmatrix} = \begin{bmatrix}
+    A^{1} \\
+    A^{2} \\
+    A^{3} \\
+    2A^{4} \\
+    2A^{5} \\
+    2A^{6} \\
+    2A^{7} \\
+    2A^{8} \\
+    2A^{9}
+  \end{bmatrix} = \begin{bmatrix}
+    A^{\pbrac{11}} \\
+    A^{\pbrac{22}} \\
+    A^{\pbrac{33}} \\
+    2A^{\pbrac{23}} \\
+    2A^{\pbrac{13}} \\
+    2A^{\pbrac{12}} \\
+    2A^{\sqbrac{32}} \\
+    2A^{\sqbrac{12}} \\
+    2A^{\sqbrac{21}}
+  \end{bmatrix}
+\end{equation}
+
+The factor of $2$ that is applied to covariant Voigt components can
+cause mistakes when using them. For a Voigt representation
+``off-diagonal'' ``covariant'' components require a correction factor of
+$2$. \textbf{Thus care must be taken when using Voigt components in
+  calculations!}
+
+Now, it is often the case that the tensors encountered in physical
+problems are symmetric or skew-symmetric. A symmetric second order
+tensor in three dimensions only has six independent components instead
+of the nine shown in
+\eqnref{eqn:VoigtNotationSecondOrderTensor}. Voigt notation exploits
+this reduction in the number of independent components to store the
+tensor more efficiently by only storing the first six components of
+the Voigt array for three-dimensions \ie
+\begin{equation}
+  \tensortwo{A}=A^{ij}\tensorprod{\vectr{e}_{i}}{\vectr{e}_{j}}=\begin{bmatrix}
+  A^{11} & A^{12} & A^{13} \\
+  A^{21} & A^{22} & A^{23} \\
+  A^{31} & A^{23} & A^{33}
+  \end{bmatrix} = \Voigt{\tensortwo{A}}=A^{I}\tensortwo{V}_{I}=\begin{bmatrix}
+    A^{11} \\
+    A^{22} \\
+    A^{33} \\
+    A^{23} \\
+    A^{13} \\
+    A^{12}
+  \end{bmatrix}    
+\end{equation}
+and the first three components for two-dimensions \ie
+\begin{equation}
+  \tensortwo{A}=A^{ij}\tensorprod{\vectr{e}_{i}}{\vectr{e}_{j}}=\begin{bmatrix}
+  A^{11} & A^{12} \\
+  A^{21} & A^{22}
+  \end{bmatrix} = \Voigt{\tensortwo{A}}=A^{I}\tensortwo{V}_{I} = \begin{bmatrix}
+    A^{11} \\
+    A^{22} \\
+    A^{12}
+  \end{bmatrix} \\
+\end{equation}
+
+Voigt notation can also simplify tensor contraction. For example
+consider two second order tensors, $\tensortwo{A}$ and
+$\tensortwo{B}$,
+\begin{equation}
+  \tensortwo{A}=\begin{bmatrix}
+  A^{11} & A^{12} & A^{13} \\
+  A^{21} & A^{22} & A^{23} \\
+  A^{31} & A^{23} & A^{33}
+  \end{bmatrix} \qquad \tensortwo{B}=\begin{bmatrix}
+  B_{11} & B_{12} & B_{13} \\
+  B_{21} & B_{22} & B_{23} \\
+  B_{31} & B_{23} & B_{33}
+  \end{bmatrix}
+\end{equation}
+
+The tensor contraction of $\tensortwo{A}$ and $\tensortwo{B}$ is given by
+\begin{align}
+  \doubledotprod{\tensortwo{A}}{\tensortwo{B}}&=A^{ij}B_{ij} \\
+  &=A^{11}B_{11}+A^{12}B_{21}+A^{13}B_{31}+A^{21}B_{12}+A^{22}B_{22}+A^{23}B_{32}+A^{31}B_{13}+A^{32}B_{23}+A^{33}B_{33}
+\end{align}
+
+Now if $\tensortwo{A}$ and $\tensortwo{B}$ are symmetric this reduces to
+\begin{align}
+  \doubledotprod{\tensortwo{A}}{\tensortwo{B}}&=A^{ij}B_{ij} \\
+  &=A^{11}B_{11}+2A^{12}B_{21}+2A^{13}B_{31}+A^{22}B_{22}+2A^{23}B_{32}+A^{33}B_{33}
+  \label{eqn:VoigtNotationDoubleContraction}
+\end{align}
+
+Using a Voigt notation for the symmetric tensors $\tensortwo{A}$ and
+$\tensortwo{B}$ simplifies the double contraction to a simple vector
+contraction (or dot product) \ie
+\begin{align}
+  \doubledotprod{\tensortwo{A}}{\tensortwo{B}}&=\dotprod{\Voigt{\tensortwo{A}}}{\Voigt{\tensortwo{B}}}=A^{I}B_{I}\\ &=\begin{bmatrix}
+  A^{1} & A^{2} & A^{3} & A^{4} & A^{5} &
+  A^{6} \end{bmatrix} \begin{bmatrix} B_{1} \\ B_{2} \\ B_{3}
+    \\ 2B_{4} \\ 2B_{5} \\ 2B_{6}
+  \end{bmatrix} \\
+  &=A^{1}B_{1} + A^{2}B_{2} + A^{3}B_{3} + 2A^{4}B_{4} + 2A^{5}B_{5} + 2A^{6}B_{6} \\
+  &=A^{11}B_{11}+2A^{12}B_{21}+2A^{13}B_{31}+A^{22}B_{22}+2A^{23}B_{32}+A^{33}B_{33}
+\end{align}
+which gives the same result as
+\eqnref{eqn:VoigtNotationDoubleContraction}. Note the factors of two
+for the last three ``off-diagonal'' covariant components of the
+$\tensortwo{B}$ tensor.
+
+Voigt notation is often used for ``symmetric'' fourth order tensors as
+well as symmetric second order tensors. Just as Voigt notation will
+reduce a $3 \times 3=9$ component symmetric second order tensor to $6$
+Voigt components, the notation will reduce a $3\times 3\times 3\times
+3=81$ component ``symmetric fourth order tensor to $6\times 6=36$
+Voigt components.
+
+Similar to what was done for a second order tensor, a fourth order tensor can be expanded in terms of a Voigt basis \ie
+\begin{align}
+  \tensorfour{C}&=C^{ijkl}\tensorprodfour{\vectr{e}_{i}}{\vectr{e}_{j}}{\vectr{e}_{k}}{\vectr{e}_{l}}=
+  \Voigt{\tensorfour{C}}=C^{IJ}\tensorprod{\tensortwo{V}_{I}}{\tensortwo{V}_{J}} \\
+  \tensorfour{C}&=C_{ijkl}\tensorprodfour{\vectr{e}^{i}}{\vectr{e}^{j}}{\vectr{e}^{k}}{\vectr{e}^{l}}=
+  \Voigt{\tensorfour{C}}=C_{IJ}\tensorprod{\tensortwo{V}^{I}}{\tensortwo{V}^{J}} \\
+  \tensorfour{C}&=C^{ij..}_{..kl}\tensorprodfour{\vectr{e}_{i}}{\vectr{e}_{j}}{\vectr{e}^{k}}{\vectr{e}^{l}}=
+  \Voigt{\tensorfour{C}}=C^{I.}_{.J}\tensorprod{\tensortwo{V}_{I}}{\tensortwo{V}^{J}} \\
+  \tensorfour{C}&=C^{..kl}_{ij..}\tensorprodfour{\vectr{e}^{i}}{\vectr{e}^{j}}{\vectr{e}_{k}}{\vectr{e}_{l}}=
+  \Voigt{\tensorfour{C}}=C^{.J}_{I.}\tensorprod{\tensortwo{V}^{I}}{\tensortwo{V}_{J}}
+\end{align}
+
+A fourth order tensor with minor and major symmetries in three-dimensions can be written as a
+matrix \ie
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{IJ}\tensorprodtwo{\vectr{V}_{I}}{\vectr{V}_{J}}=\begin{bmatrix}
+    C^{1111} & C^{1122} & C^{1133} & C^{1123} & C^{1113} & C^{1112} \\
+    C^{2211} & C^{2222} & C^{2233} & C^{2223} & C^{2213} & C^{2212} \\
+    C^{3311} & C^{3322} & C^{3333} & C^{3323} & C^{3313} & C^{3312} \\
+    C^{2311} & C^{2322} & C^{2333} & C^{2323} & C^{2313} & C^{2312} \\
+    C^{1311} & C^{1322} & C^{1333} & C^{1323} & C^{1313} & C^{1312} \\
+    C^{1211} & C^{1222} & C^{1233} & C^{1223} & C^{1213} & C^{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C_{IJ}\tensorprodtwo{\vectr{V}^{I}}{\vectr{V}^{J}}=\begin{bmatrix}
+    C_{1111} & C_{1122} & C_{1133} & 2C_{1123} & 2C_{1113} & 2C_{1112} \\
+    C_{2211} & C_{2222} & C_{2233} & 2C_{2223} & 2C_{2213} & 2C_{2212} \\
+    C_{3311} & C_{3322} & C_{3333} & 2C_{3323} & 2C_{3313} & 2C_{3312} \\
+    2C_{2311} & 2C_{2322} & 2C_{2333} & 4C_{2323} & 4C_{2313} & 4C_{2312} \\
+    2C_{1311} & 2C_{1322} & 2C_{1333} & 4C_{1323} & 4C_{1313} & 4C_{1312} \\
+    2C_{1211} & 2C_{1222} & 2C_{1233} & 4C_{1223} & 4C_{1213} & 4C_{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{I.}_{.J}\tensorprodtwo{\vectr{V}_{I}}{\vectr{V}^{J}}=\begin{bmatrix}
+    C^{11..}_{..11} & C^{11..}_{..22} & C^{11..}_{..33} & 2C^{11..}_{..23} & 2C^{11..}_{..13} & 2C^{11..}_{..12} \\
+    C^{22..}_{..11} & C^{22..}_{..22} & C^{22..}_{..33} & 2C^{22..}_{..23} & 2C^{22..}_{..13} & 2C^{22..}_{..12} \\
+    C^{33..}_{..11} & C^{33..}_{..22} & C^{33..}_{..33} & 2C^{33..}_{..23} & 2C^{33..}_{..13} & 2C^{33..}_{..12} \\
+    C^{23..}_{..11} & C^{23..}_{..22} & C^{23..}_{..33} & 2C^{23..}_{..23} & 2C^{23..}_{..13} & 2C^{23..}_{..12} \\
+    C^{13..}_{..11} & C^{13..}_{..22} & C^{13..}_{..33} & 2C^{13..}_{..23} & 2C^{13..}_{..13} & 2C^{13..}_{..12} \\
+    C^{12..}_{..11} & C^{12..}_{..22} & C^{12..}_{..33} & 2C^{12..}_{..23} & 2C^{12..}_{..13} & 2C^{12..}_{..12}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{.J}_{I.}\tensorprodtwo{\vectr{V}^{I}}{\vectr{V}_{J}}=\begin{bmatrix}
+    C^{..11}_{11..} & C^{..22}_{11..} & C^{..33}_{11..} & C^{..23}_{11..} & C^{..13}_{11..} & C^{..12}_{11..} \\
+    C^{..11}_{22..} & C^{..22}_{22..} & C^{..33}_{22..} & C^{..23}_{22..} & C^{..13}_{22..} & C^{..12}_{22..} \\
+    C^{..11}_{33..} & C^{..22}_{33..} & C^{..33}_{33..} & C^{..23}_{33..} & C^{..13}_{33..} & C^{..12}_{33..} \\
+    2C^{..11}_{23..} & 2C^{..22}_{23..} & 2C^{..33}_{23..} & 2C^{..23}_{23..} & 2C^{..13}_{23..} & 2C^{..12}_{23..} \\
+    2C^{..11}_{13..} & 2C^{..22}_{13..} & 2C^{..33}_{13..} & 2C^{..23}_{13..} & 2C^{..13}_{13..} & 2C^{..12}_{13..} \\
+    2C^{..11}_{12..} & 2C^{..22}_{12..} & 2C^{..33}_{12..} & 2C^{..23}_{12..} & 2C^{..13}_{12..} & 2C^{..12}_{12..}     
+  \end{bmatrix}
+\end{equation}
+
+For a fourth order tensor with minor and major symmetries in two-dimensions we have
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{IJ}\tensorprodtwo{\vectr{V}_{I}}{\vectr{V}_{J}}=\begin{bmatrix}
+    C^{1111} & C^{1122} & C^{1112} \\
+    C^{2211} & C^{2222} & C^{2212} \\
+    C^{1211} & C^{1222} & C^{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C_{IJ}\tensorprodtwo{\vectr{V}^{I}}{\vectr{V}^{J}}=\begin{bmatrix}
+    C_{1111} & C_{1122} & 2C_{1112} \\
+    C_{2211} & C_{2222} & 2C_{2212} \\
+    2C_{1211} & 2C_{1222} & 4C_{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{I.}_{.J}\tensorprodtwo{\vectr{V}_{I}}{\vectr{V}^{J}}=\begin{bmatrix}
+    C^{11..}_{..11} & C^{11..}_{..22} & 2C^{11..}_{..12} \\
+    C^{22..}_{..11} & C^{22..}_{..22} & 2C^{22..}_{..12} \\
+    C^{12..}_{..11} & C^{12..}_{..22} & 2C^{12..}_{..12}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Voigt{\tensorfour{C}}=C^{.J}_{I.}\tensorprodtwo{\vectr{V}^{I}}{\vectr{V}_{J}}=\begin{bmatrix}
+    C^{..11}_{11..} & C^{..22}_{11..} & C^{..12}_{11..} \\
+    C^{..11}_{22..} & C^{..22}_{22..} & C^{..12}_{22..} \\
+    2C^{..11}_{12..} & 2C^{..22}_{12..} & 2C^{..12}_{12..}     
+  \end{bmatrix}
+\end{equation}
+
+Note that the covariant and contravariant fourth order Voigt arrays are symmetric but the mixed arrays are not.
+
+Voigt notation is often used in elasticity as it transforms the
+stress-strain relationship from a double tensor contraction to a
+matrix-vector product \ie
+\begin{equation}
+  \tensortwo{\sigma}=\tensorfour{C}\tensortwo{\varepsilon}=\sigma^{ij}\tensorprodtwo{\vectr{e}_{i}}{\vectr{e}_{j}}=
+  \pbrac{C^{ijkl}\tensorprodfour{\vectr{e}_{i}}{\vectr{e}_{j}}{\vectr{e}_{k}}{\vectr{e}_{l}}}
+  \pbrac{\varepsilon_{kl}\tensorprodtwo{\vectr{e}^{k}}{\vectr{e}^{l}}}
+\end{equation}
+transforms into
+\begin{equation}
+  \begin{bmatrix}
+    \sigma^{11} \\
+    \sigma^{22} \\
+    \sigma^{33} \\
+    \sigma^{23} \\
+    \sigma^{13} \\
+    \sigma^{12}
+  \end{bmatrix} = \begin{bmatrix}
+    C^{1111} & C^{1122} & C^{1133} & C^{1123} & C^{1113} & C^{1112} \\
+    C^{2211} & C^{2222} & C^{2233} & C^{2223} & C^{2213} & C^{2212} \\
+    C^{3311} & C^{3322} & C^{3333} & C^{3323} & C^{3313} & C^{3312} \\
+    C^{2311} & C^{2322} & C^{2333} & C^{2323} & C^{2313} & C^{2312} \\
+    C^{1311} & C^{1322} & C^{1333} & C^{1323} & C^{1313} & C^{1312} \\
+    C^{1211} & C^{1222} & C^{1233} & C^{1223} & C^{1213} & C^{1212}     
+  \end{bmatrix} \begin{bmatrix}
+    \varepsilon_{11} \\
+    \varepsilon_{22} \\
+    \varepsilon_{33} \\
+    2\varepsilon_{23} \\
+    2\varepsilon_{13} \\
+    2\varepsilon_{12}
+  \end{bmatrix}
+\end{equation}
+or
+\begin{equation}
+  \begin{bmatrix}
+    \sigma^{11} \\
+    \sigma^{22} \\
+    \sigma^{33} \\
+    \sigma^{23} \\
+    \sigma^{13} \\
+    \sigma^{12}
+  \end{bmatrix} = \begin{bmatrix}
+    C^{11..}_{..11} & C^{11..}_{..22} & C^{11..}_{..33} & 2C^{11..}_{..23} & 2C^{11..}_{..13} & 2C^{11..}_{..12} \\
+    C^{22..}_{..11} & C^{22..}_{..22} & C^{22..}_{..33} & 2C^{22..}_{..23} & 2C^{22..}_{..13} & 2C^{22..}_{..12} \\
+    C^{33..}_{..11} & C^{33..}_{..22} & C^{33..}_{..33} & 2C^{33..}_{..23} & 2C^{33..}_{..13} & 2C^{33..}_{..12} \\
+    C^{23..}_{..11} & C^{23..}_{..22} & C^{23..}_{..33} & 2C^{23..}_{..23} & 2C^{23..}_{..13} & 2C^{23..}_{..12} \\
+    C^{13..}_{..11} & C^{13..}_{..22} & C^{13..}_{..33} & 2C^{13..}_{..23} & 2C^{13..}_{..13} & 2C^{13..}_{..12} \\
+    C^{12..}_{..11} & C^{12..}_{..22} & C^{12..}_{..33} & 2C^{12..}_{..23} & 2C^{12..}_{..13} & 2C^{12..}_{..12}     
+  \end{bmatrix} \begin{bmatrix}
+    \varepsilon^{11} \\
+    \varepsilon^{22} \\
+    \varepsilon^{33} \\
+    \varepsilon^{23} \\
+    \varepsilon^{13} \\
+    \varepsilon^{12}
+  \end{bmatrix}
+\end{equation}
+
+\subsection{Mandel Notation}
+\label{subsec:MathsNotationMandel}
+
+\citet{Mandel:1965}\footnote{named after Jean
+Mandel (1907-1982), a French scientist.} notation\index{Mandel notation} is also known as normalised
+Voigt notation and sometimes as Kelvin notation or Kelvin-Mandel
+notation. Mandel notation solves the problem of the correction factors
+that are required when using Voigt notation.
+
+For a second order tensor, the Mandel basis is the same as the Voigt
+basis but with the last six (non-diagonal) components normalised. A second order tensor may thus be expanded as
+\begin{equation}
+  \Mandel{\tensortwo{A}}=A^{I}\tensortwo{M}_{I}
+\end{equation}
+where
+the $\Mandelsymbol$ indicates a Mandel notation tensor. Here
+summation is implied and $I$ ranges from $1$ to $9$, $A^{I}$ are the
+contravariant Mandel components and $\tensortwo{M}_{I}$ are the covariant
+Mandel basis tensors and they are given by
+\begin{equation}
+  A^{1}=A^{\pbrac{11}} \qquad
+  \tensortwo{M}_{1}=\tensorprod{\vectr{e}_{1}}{\vectr{e}_{1}}=\begin{bmatrix}
+  1 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{2}=A^{\pbrac{22}} \qquad
+  \tensortwo{M}_{2}=\tensorprod{\vectr{e}_{2}}{\vectr{e}_{2}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 1 & 0 \\
+  0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{3}=A^{\pbrac{33}} \qquad
+  \tensortwo{M}_{3}=\tensorprod{\vectr{e}_{3}}{\vectr{e}_{3}}=\begin{bmatrix}
+  0 & 0 & 0 \\
+  0 & 0 & 0 \\
+  0 & 0 & 1
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{4}=\sqrt{2}A^{\pbrac{23}} \qquad
+  \tensortwo{M}_{4}=\dfrac{\tensorprod{\vectr{e}_{2}}{\vectr{e}_{3}}+\tensorprod{\vectr{e}_{3}}{\vectr{e}_{2}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & 1 \\
+    0 & 1 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{5}=\sqrt{2}A^{\pbrac{13}} \qquad
+  \tensortwo{M}_{5}=\dfrac{\tensorprod{\vectr{e}_{1}}{\vectr{e}_{3}}+\tensorprod{\vectr{e}_{3}}{\vectr{e}_{1}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 0 & 1 \\
+    0 & 0 & 0 \\
+    1 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{6}=\sqrt{2}A^{\pbrac{12}} \qquad
+  \tensortwo{M}_{6}=\dfrac{\tensorprod{\vectr{e}_{1}}{\vectr{e}_{2}}+\tensorprod{\vectr{e}_{2}}{\vectr{e}_{1}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{7}=\sqrt{2}A^{\sqbrac{32}} \qquad
+  \tensortwo{M}_{7}=\dfrac{\tensorprod{\vectr{e}_{3}}{\vectr{e}_{2}}-\tensorprod{\vectr{e}_{2}}{\vectr{e}_{3}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 0 & 0 \\
+    0 & 0 & -1 \\
+    0 & 1 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{8}=\sqrt{2}A^{\sqbrac{13}} \qquad
+  \tensortwo{M}_{8}=\dfrac{\tensorprod{\vectr{e}_{1}}{\vectr{e}_{3}}-\tensorprod{\vectr{e}_{3}}{\vectr{e}_{1}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & 0 & 1 \\
+    0 & 0 & 0 \\
+    -1 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  A^{9}=\sqrt{2}A^{\sqbrac{21}} \qquad
+  \tensortwo{M}_{9}=\dfrac{\tensorprod{\vectr{e}_{2}}{\vectr{e}_{1}}-\tensorprod{\vectr{e}_{1}}{\vectr{e}_{2}}}{\sqrt{2}}=
+  \dfrac{1}{\sqrt{2}}\begin{bmatrix}
+    0 & -1 & 0 \\
+    1 & 0 & 0 \\
+    0 & 0 & 0
+  \end{bmatrix}
+\end{equation}
+
+Because the bases are normalised no additional correction factors are
+required and the differences between covariant and contravariant
+components disappear. In this case a double contraction of two second
+order tensors simply becomes the dot product of two Mandel vectors.
+
+A fourth order tensor with minor and major symmetries in
+three-dimensions can be written as a matrix \ie
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{IJ}\tensorprodtwo{\vectr{M}_{I}}{\vectr{M}_{J}}=\begin{bmatrix}
+    C^{1111} & C^{1122} & C^{1133} & \sqrt{2}C^{1123} & \sqrt{2}C^{1113} & \sqrt{2}C^{1112} \\
+    C^{2211} & C^{2222} & C^{2233} & \sqrt{2}C^{2223} & \sqrt{2}C^{2213} & \sqrt{2}C^{2212} \\
+    C^{3311} & C^{3322} & C^{3333} & \sqrt{2}C^{3323} & \sqrt{2}C^{3313} & \sqrt{2}C^{3312} \\
+    \sqrt{2}C^{2311} & \sqrt{2}C^{2322} & \sqrt{2}C^{2333} & 2C^{2323} & 2C^{2313} & 2C^{2312} \\
+    \sqrt{2}C^{1311} & \sqrt{2}C^{1322} & \sqrt{2}C^{1333} & 2C^{1323} & 2C^{1313} & 2C^{1312} \\
+    \sqrt{2}C^{1211} & \sqrt{2}C^{1222} & \sqrt{2}C^{1233} & 2C^{1223} & 2C^{1213} & 2C^{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C_{IJ}\tensorprodtwo{\vectr{M}^{I}}{\vectr{M}^{J}}=\begin{bmatrix}
+    C_{1111} & C_{1122} & C_{1133} & \sqrt{2}C_{1123} & \sqrt{2}C_{1113} & \sqrt{2}C_{1112} \\
+    C_{2211} & C_{2222} & C_{2233} & \sqrt{2}C_{2223} & \sqrt{2}C_{2213} & \sqrt{2}C_{2212} \\
+    C_{3311} & C_{3322} & C_{3333} & \sqrt{2}C_{3323} & \sqrt{2}C_{3313} & \sqrt{2}C_{3312} \\
+    \sqrt{2}C_{2311} & \sqrt{2}C_{2322} & \sqrt{2}C_{2333} & 2C_{2323} & 2C_{2313} & 2C_{2312} \\
+    \sqrt{2}C_{1311} & \sqrt{2}C_{1322} & \sqrt{2}C_{1333} & 2C_{1323} & 2C_{1313} & 2C_{1312} \\
+    \sqrt{2}C_{1211} & \sqrt{2}C_{1222} & \sqrt{2}C_{1233} & 2C_{1223} & 2C_{1213} & 2C_{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{I.}_{.J}\tensorprodtwo{\vectr{M}_{I}}{\vectr{M}^{J}}=\begin{bmatrix}
+    C^{11..}_{..11} & C^{11..}_{..22} & C^{11..}_{..33} & \sqrt{2}C^{11..}_{..23} & \sqrt{2}C^{11..}_{..13} & \sqrt{2}C^{11..}_{..12} \\
+    C^{22..}_{..11} & C^{22..}_{..22} & C^{22..}_{..33} & \sqrt{2}C^{22..}_{..23} & \sqrt{2}C^{22..}_{..13} & \sqrt{2}C^{22..}_{..12} \\
+    C^{33..}_{..11} & C^{33..}_{..22} & C^{33..}_{..33} & \sqrt{2}C^{33..}_{..23} & \sqrt{2}C^{33..}_{..13} & \sqrt{2}C^{33..}_{..12} \\
+    \sqrt{2}C^{23..}_{..11} & \sqrt{2}C^{23..}_{..22} & \sqrt{2}C^{23..}_{..33} & 2C^{23..}_{..23} & 2C^{23..}_{..13} & 2C^{23..}_{..12} \\
+    \sqrt{2}C^{13..}_{..11} & \sqrt{2}C^{13..}_{..22} & \sqrt{2}C^{13..}_{..33} & 2C^{13..}_{..23} & 2C^{13..}_{..13} & 2C^{13..}_{..12} \\
+    \sqrt{2}C^{12..}_{..11} & \sqrt{2}C^{12..}_{..22} & \sqrt{2}C^{12..}_{..33} & 2C^{12..}_{..23} & 2C^{12..}_{..13} & 2C^{12..}_{..12}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{.J}_{I.}\tensorprodtwo{\vectr{M}^{I}}{\vectr{M}_{J}}=\begin{bmatrix}
+    C^{..11}_{11..} & C^{..22}_{11..} & C^{..33}_{11..} & \sqrt{2}C^{..23}_{11..} & \sqrt{2}C^{..13}_{11..} & \sqrt{2}C^{..12}_{11..} \\
+    C^{..11}_{22..} & C^{..22}_{22..} & C^{..33}_{22..} & \sqrt{2}C^{..23}_{22..} & \sqrt{2}C^{..13}_{22..} & \sqrt{2}C^{..12}_{22..} \\
+    C^{..11}_{33..} & C^{..22}_{33..} & C^{..33}_{33..} & \sqrt{2}C^{..23}_{33..} & \sqrt{2}C^{..13}_{33..} & \sqrt{2}C^{..12}_{33..} \\
+    \sqrt{2}C^{..11}_{23..} & \sqrt{2}C^{..22}_{23..} & \sqrt{2}C^{..33}_{23..} & 2C^{..23}_{23..} & 2C^{..13}_{23..} & 2C^{..12}_{23..} \\
+    \sqrt{2}C^{..11}_{13..} & \sqrt{2}C^{..22}_{13..} & \sqrt{2}C^{..33}_{13..} & 2C^{..23}_{13..} & 2C^{..13}_{13..} & 2C^{..12}_{13..} \\
+    \sqrt{2}C^{..11}_{12..} & \sqrt{2}C^{..22}_{12..} & \sqrt{2}C^{..33}_{12..} & 2C^{..23}_{12..} & 2C^{..13}_{12..} & 2C^{..12}_{12..}     
+  \end{bmatrix}
+\end{equation}
+
+For a fourth order tensor with minor and major symmetries in two-dimensions we have
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{IJ}\tensorprodtwo{\vectr{M}_{I}}{\vectr{M}_{J}}=\begin{bmatrix}
+    C^{1111} & C^{1122} & \sqrt{2}C^{1112} \\
+    C^{2211} & C^{2222} & \sqrt{2}C^{2212} \\
+    \sqrt{2}C^{1211} & \sqrt{2}C^{1222} & 2C^{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C_{IJ}\tensorprodtwo{\vectr{M}^{I}}{\vectr{M}^{J}}=\begin{bmatrix}
+    C_{1111} & C_{1122} & \sqrt{2}C_{1112} \\
+    C_{2211} & C_{2222} & \sqrt{2}C_{2212} \\
+    \sqrt{2}C_{1211} & \sqrt{2}C_{1222} & 2C_{1212}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{I.}_{.J}\tensorprodtwo{\vectr{M}_{I}}{\vectr{M}^{J}}=\begin{bmatrix}
+    C^{11..}_{..11} & C^{11..}_{..22} & \sqrt{2}C^{11..}_{..12} \\
+    C^{22..}_{..11} & C^{22..}_{..22} & \sqrt{2}C^{22..}_{..12} \\
+    \sqrt{2}C^{12..}_{..11} & \sqrt{2}C^{12..}_{..22} & 2C^{12..}_{..12}     
+  \end{bmatrix}
+\end{equation}
+\begin{equation}
+  \Mandel{\tensorfour{C}}=C^{.J}_{I.}\tensorprodtwo{\vectr{M}^{I}}{\vectr{M}_{J}}=\begin{bmatrix}
+    C^{..11}_{11..} & C^{..22}_{11..} & \sqrt{2}C^{..12}_{11..} \\
+    C^{..11}_{22..} & C^{..22}_{22..} & \sqrt{2}C^{..12}_{22..} \\
+    \sqrt{2}C^{..11}_{12..} & \sqrt{2}C^{..22}_{12..} & 2C^{..12}_{12..}     
+  \end{bmatrix}
+\end{equation}
+
+A general fourth order tensor with $81$ independent components may be written in Mandel notation as a $9 \times 9$ array \ie
+\begin{equation}
+  \scriptsize\Mandel{\tensorfour{C}}=\left[\begin{array}{ccc|ccc|ccc}
+      C^{\pbrac{11}\pbrac{11}} & C^{\pbrac{11}\pbrac{22}} & C^{\pbrac{11}\pbrac{33}} &
+      \sqrt{2}C^{\pbrac{11}\pbrac{23}} & \sqrt{2}C^{\pbrac{11}\pbrac{13}} & \sqrt{2}C^{\pbrac{11}\pbrac{12}} &
+      \sqrt{2}C^{\pbrac{11}\sqbrac{32}} & \sqrt{2}C^{\pbrac{11}\sqbrac{13}} & \sqrt{2}C^{\pbrac{11}\sqbrac{21}} \\
+      C^{\pbrac{22}\pbrac{11}} & C^{\pbrac{22}\pbrac{22}} & C^{\pbrac{22}\pbrac{33}} &
+      \sqrt{2}C^{\pbrac{22}\pbrac{23}} & \sqrt{2}C^{\pbrac{22}\pbrac{13}} & \sqrt{2}C^{\pbrac{22}\pbrac{12}} &
+      \sqrt{2}C^{\pbrac{22}\sqbrac{32}} & \sqrt{2}C^{\pbrac{22}\sqbrac{13}} & \sqrt{2}C^{\pbrac{22}\sqbrac{21}} \\
+      C^{\pbrac{33}\pbrac{11}} & C^{\pbrac{33}\pbrac{22}} & C^{\pbrac{33}\pbrac{33}} &
+      \sqrt{2}C^{\pbrac{33}\pbrac{23}} & \sqrt{2}C^{\pbrac{33}\pbrac{13}} & \sqrt{2}C^{\pbrac{33}\pbrac{12}} &
+      \sqrt{2}C^{\pbrac{33}\sqbrac{32}} & \sqrt{2}C^{\pbrac{33}\sqbrac{13}} & \sqrt{2}C^{\pbrac{33}\sqbrac{21}} \\ \hline
+      \sqrt{2}C^{\pbrac{23}\pbrac{11}} & \sqrt{2}C^{\pbrac{23}\pbrac{22}} & \sqrt{2}C^{\pbrac{23}\pbrac{33}} &
+      2C^{\pbrac{23}\pbrac{23}} & 2C^{\pbrac{23}\pbrac{13}} & 2C^{\pbrac{23}\pbrac{12}} &
+      2C^{\pbrac{23}\sqbrac{32}} & 2C^{\pbrac{23}\sqbrac{13}} & 2C^{\pbrac{23}\sqbrac{21}} \\
+      \sqrt{2}C^{\pbrac{13}\pbrac{11}} & \sqrt{2}C^{\pbrac{13}\pbrac{22}} & \sqrt{2}C^{\pbrac{13}\pbrac{33}} &
+      2C^{\pbrac{13}\pbrac{23}} & 2C^{\pbrac{13}\pbrac{13}} & 2C^{\pbrac{13}\pbrac{12}} &
+      2C^{\pbrac{13}\sqbrac{32}} & 2C^{\pbrac{13}\sqbrac{13}} & 2C^{\pbrac{13}\sqbrac{21}} \\
+      \sqrt{2}C^{\pbrac{12}\pbrac{11}} & \sqrt{2}C^{\pbrac{12}\pbrac{22}} & \sqrt{2}C^{\pbrac{12}\pbrac{33}} &
+      2C^{\pbrac{12}\pbrac{23}} & 2C^{\pbrac{12}\pbrac{13}} & 2C^{\pbrac{12}\pbrac{12}} &
+      2C^{\pbrac{12}\sqbrac{32}} & 2C^{\pbrac{12}\sqbrac{13}} & 2C^{\pbrac{12}\sqbrac{21}} \\ \hline
+      \sqrt{2}^{\sqbrac{32}\pbrac{11}} & \sqrt{2}C^{\sqbrac{32}\pbrac{22}} & \sqrt{2}C^{\sqbrac{32}\pbrac{33}} &
+      2C^{\sqbrac{32}\pbrac{23}} & 2C^{\sqbrac{32}\pbrac{13}} & 2C^{\sqbrac{32}\pbrac{12}} &
+      2C^{\sqbrac{32}\sqbrac{32}} & 2C^{\sqbrac{32}\sqbrac{13}} & 2C^{\sqbrac{32}\sqbrac{21}} \\
+      \sqrt{2}C^{\sqbrac{13}\pbrac{11}} & \sqrt{2}C^{\sqbrac{13}\pbrac{22}} & \sqrt{2}C^{\sqbrac{13}\pbrac{33}} &
+      2C^{\sqbrac{13}\pbrac{23}} & 2C^{\sqbrac{13}\pbrac{13}} & 2C^{\sqbrac{13}\pbrac{12}} &
+      2C^{\sqbrac{13}\sqbrac{32}} & 2C^{\sqbrac{13}\sqbrac{13}} & 2C^{\sqbrac{13}\sqbrac{21}} \\
+      \sqrt{2}C^{\sqbrac{21}\pbrac{11}} & \sqrt{2}C^{\sqbrac{21}\pbrac{22}} & \sqrt{2}C^{\sqbrac{21}\pbrac{33}} &
+      2C^{\sqbrac{21}\pbrac{23}} & 2C^{\sqbrac{21}\pbrac{13}} & 2C^{\sqbrac{21}\pbrac{12}} &
+      2C^{\sqbrac{21}\sqbrac{32}} & 2C^{\sqbrac{21}\sqbrac{13}} & 2C^{\sqbrac{21}\sqbrac{21}} \\ 
+    \end{array}\right]\normalsize
+\end{equation}
+where
+\begin{align}
+  C^{\pbrac{ij}\pbrac{kl}} &= \dfrac{1}{4}\pbrac{C^{ijkl}+C^{jikl}+C^{ijlk}+C^{jilk}} \\
+  C^{\pbrac{ij}\sqbrac{kl}} &= \dfrac{1}{4}\pbrac{C^{ijkl}+C^{jikl}-C^{ijlk}-C^{jilk}} \\
+  C^{\sqbrac{ij}\pbrac{kl}} &= \dfrac{1}{4}\pbrac{C^{ijkl}-C^{jikl}+C^{ijlk}-C^{jilk}} \\
+  C^{\sqbrac{ij}\sqbrac{kl}} &= \dfrac{1}{4}\pbrac{C^{ijkl}-C^{jikl}-C^{ijlk}-C^{jilk}}
+\end{align}
+
+In Mandel notation the stress-strain relationship from a double tensor
+contraction to a matrix-vector product \ie
+\begin{equation}
+  \tensortwo{\sigma}=\tensorfour{C}\tensortwo{\varepsilon}=\sigma^{ij}\tensorprodtwo{\vectr{e}_{i}}{\vectr{e}_{j}}=
+  \pbrac{C^{ijkl}\tensorprodfour{\vectr{e}_{i}}{\vectr{e}_{j}}{\vectr{e}_{k}}{\vectr{e}_{l}}}
+  \pbrac{\varepsilon_{kl}\tensorprodtwo{\vectr{e}^{k}}{\vectr{e}^{l}}}
+\end{equation}
+transforms into
+\begin{equation}
+  \begin{bmatrix}
+    \sigma^{11} \\
+    \sigma^{22} \\
+    \sigma^{33} \\
+    \sqrt{2}\sigma^{23} \\
+    \sqrt{2}\sigma^{13} \\
+    \sqrt{2}\sigma^{12}
+  \end{bmatrix} = \begin{bmatrix}
+    C^{1111} & C^{1122} & C^{1133} & \sqrt{2}C^{1123} & \sqrt{2}C^{1113} & \sqrt{2}C^{1112} \\
+    C^{2211} & C^{2222} & C^{2233} & \sqrt{2}C^{2223} & \sqrt{2}C^{2213} & \sqrt{2}C^{2212} \\
+    C^{3311} & C^{3322} & C^{3333} & \sqrt{2}C^{3323} & \sqrt{2}C^{3313} & \sqrt{2}C^{3312} \\
+    \sqrt{2}C^{2311} & \sqrt{2}C^{2322} & \sqrt{2}C^{2333} & \sqrt{2}C^{2323} & \sqrt{2}C^{2313} & \sqrt{2}C^{2312} \\
+    \sqrt{2}C^{1311} & \sqrt{2}C^{1322} & \sqrt{2}C^{1333} & \sqrt{2}C^{1323} & \sqrt{2}C^{1313} & \sqrt{2}C^{1312} \\
+    \sqrt{2}C^{1211} & \sqrt{2}C^{1222} & \sqrt{2}C^{1233} & \sqrt{2}C^{1223} & \sqrt{2}C^{1213} & \sqrt{2}C^{1212}     
+  \end{bmatrix} \begin{bmatrix}
+    \varepsilon_{11} \\
+    \varepsilon_{22} \\
+    \varepsilon_{33} \\
+    \sqrt{2}\varepsilon_{23} \\
+    \sqrt{2}\varepsilon_{13} \\
+    \sqrt{2}\varepsilon_{12}
+  \end{bmatrix}
+\end{equation}

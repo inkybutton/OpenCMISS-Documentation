@@ -27,7 +27,7 @@ MY_TEX_SRC="TitlePage/TitlePage.tex "\
 "DifferentialGeometry/DifferentialGeometry.tex "\
 "Theory/Theory.tex "\
 "Theory/SolutionMethods.tex "\
-"Theory/MaterialCoordinateTransformations.tex "\
+"Theory/CoordinateTransformations.tex "\
 "Maths/Maths.tex "\
 "Maths/Space/Space.tex "\
 "Maths/Space/Sets/Sets.tex "\
@@ -44,14 +44,15 @@ MY_TEX_SRC="TitlePage/TitlePage.tex "\
 "Maths/VectorCalculus/VectorCalculus.tex "\
 "Maths/Operations/Operations.tex "\
 "ClassicalField/ClassicalField.tex "\
-"ClassicalField/AdvectionDiffusionEquation.tex "\
 "ClassicalField/GeneralisedLaplaceEquation.tex "\
-"ClassicalField/BiharmonicEquation.tex "\
-"ClassicalField/DiffusionEquation.tex "\
-"ClassicalField/HelmholtzEquation.tex "\
 "ClassicalField/PoissonEquation.tex "\
+"ClassicalField/DiffusionEquation.tex "\
+"ClassicalField/AdvectionDiffusionEquation.tex "\
 "ClassicalField/ReactionDiffusionEquation.tex "\
+"ClassicalField/AdvectionReactionDiffusionEquation.tex "\
 "ClassicalField/WaveEquation.tex "\
+"ClassicalField/BiharmonicEquation.tex "\
+"ClassicalField/HelmholtzEquation.tex "\
 "SolidMechanics/SolidMechanics.tex "\
 "SolidMechanics/LinearElasticity.tex "\
 "SolidMechanics/FiniteElasticity.tex "\
@@ -67,7 +68,8 @@ MY_TEX_SRC="TitlePage/TitlePage.tex "\
 "FluidMechanics/FiniteVolume.tex "\
 "Bioelectrics/Bioelectrics.tex "\
 "Bioelectrics/BidomainEquation.tex "\
-"Bioelectrics/MonodomainEquation2.tex "\
+"Bioelectrics/MonodomainEquation.tex "\
+"Bioelectrics/ImmersedBidomain.tex "\
 "MagnetoElectrics/MagnetoElectrics.tex "\
 "MagnetoElectrics/ElectrostaticEquations.tex "\
 "MagnetoElectrics/MagnetostaticEquations.tex "\
@@ -105,7 +107,8 @@ MY_SVG_SRC="BasisFunctions/svgs/*.svg "\
 "Fitting/svgs/*.svg "\
 "PortHamiltonian/svgs/*.svg "\
 "ComputationAndNumerics/svgs/*.svg "\
-"DevelopersDocument/svgs/*.svg "
+"DevelopersDocument/svgs/*.svg "\
+"Appendices/svgs/*.svg "
 MY_PLOT_SRC="BasisFunctions/plots/*.gnu "\
 "BasisFunctions/plots/*.gnu8 "\
 "ComputationAndNumerics/plots/*.gnu"
@@ -116,7 +119,7 @@ MY_GNUPLOT_SRC="BasisFunctions/gnuplots/*.gnuplot "
 # Note that the actual file will be placed in the directory
 # MY_HTMLUPDATE_DIR/MY_MAINFILE with filename index.html
 
-MY_HTMLUPDATE_DIR=${OPENCMISS_ROOT}/www/help
+MY_HTMLUPDATE_DIR=${OpenCMISS_ROOT}/www/help
 
 #
 # This next option controls the type of backlinks to add to the footer
@@ -129,7 +132,7 @@ MY_HTMLIDXTYPE=user
 #
 # The name of the bibliography database for the document
 
-MY_BIBS=${OPENCMISS_ROOT}/documentation/notes/references/opencmiss_references.bib
+MY_BIBS=${OpenCMISS_ROOT}/documentation/notes/references/opencmiss_references.bib
 
 #
 # The name of the printer to print the document to
@@ -141,7 +144,7 @@ MY_PRINTER=laserjet_postscript
 #
 # Actual make command:
 #
-make -f ${OPENCMISS_ROOT}/documentation/notes/latex/Latex_Makefile $* \
+make -f ${OpenCMISS_ROOT}/documentation/notes/latex/Latex_Makefile $* \
 	MAINFILE=$MY_MAINFILE \
 	TEX_SRC="$MY_TEX_SRC" \
 	EPS_SRC="$MY_EPS_SRC" \

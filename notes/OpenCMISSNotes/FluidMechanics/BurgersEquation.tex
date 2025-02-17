@@ -519,7 +519,7 @@ also we have
 
 The element damping matrix can be written as
 \begin{align}
-  C_{i,i}&=\gint{0}{1}{a\delby{\pbrac{\xi \dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}}{t}\xi\dfrac{L}{E}}{\xi} \\
+  C_{i,i}&=\gint{0}{1}{a\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{t}\xi\dfrac{L}{E}}{\xi} \\
   &=\dfrac{aL}{E}\gint{0}{1}{\pbrac{\xi\dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}\xi}{\xi} \\
   &=\dfrac{aL}{E}\gint{0}{1}{\pbrac{\xi^{2}\dotover{u}_{i}+\pbrac{\xi-\xi^{2}}\dotover{u}_{i+1}}}{\xi} \\
   &=\dfrac{aL}{E}\sqbrac{\dfrac{\xi^{3}}{3}\dotover{u}_{i}+\pbrac{\dfrac{\xi^{2}}{2}-\dfrac{\xi^{3}}{3}}\dotover{u}_{i+1}}_{0}^{1}\\
@@ -529,7 +529,7 @@ The element damping matrix can be written as
 
 Similarily
 \begin{align}
-  C_{i+1,i}&=\gint{0}{1}{a\delby{\pbrac{\xi \dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}}{t}\pbrac{1-\xi}\dfrac{L}{E}}{\xi} \\
+  C_{i+1,i}&=\gint{0}{1}{a\delby{\pbrac{\xi u_{i}+\pbrac{1-\xi}u_{i+1}}}{t}\pbrac{1-\xi}\dfrac{L}{E}}{\xi} \\
   &=\dfrac{aL}{E}\gint{0}{1}{\pbrac{\xi\dotover{u}_{i}+\pbrac{1-\xi}\dotover{u}_{i+1}}\pbrac{1-\xi}}{\xi} \\
   &=\dfrac{aL}{E}\gint{0}{1}{\pbrac{\pbrac{\xi-\xi^{2}}\dotover{u}_{i}+\pbrac{1-2\xi+\xi^{2}}\dotover{u}_{i+1}}}{\xi} \\
   &=\dfrac{aL}{E}\sqbrac{\pbrac{\dfrac{\xi^{2}}{2}-\dfrac{\xi^{3}}{3}}\dotover{u}_{i}+\pbrac{\xi-\xi^{2}+
@@ -571,7 +571,6 @@ Similarily
   &=\dfrac{bE\pbrac{u_{i}-u_{i+1}}}{L}\sqbrac{\xi}_{0}^{1}\\
   &=\dfrac{bE\pbrac{u_{i}-u_{i+1}}}{L}
 \end{align}
-
 
 The element stiffness matrix for element $i$ is thus
 \begin{equation}
@@ -639,12 +638,12 @@ The matrix system for the domain shown in \figref{fig:Burgers1DDomain} with no f
 \begin{multline}
   \begin{bmatrix}
     \frac{aL}{3E} & \frac{aL}{6E} & 0 & 0 & 0 & \cdots & 0 & 0 \\
-    \frac{aL}{6E} & \frac{2aL}{6E} &  \frac{aL}{6E} & 0 & 0 & \cdots & 0 & 0 \\
-    0 & \frac{aL}{6E} & \frac{2aL}{6E} &  \frac{aL}{6E} & 0 & \cdots & 0 & 0 \\
-    0 & 0 & \frac{aL}{6E} & \frac{2aL}{6E} &  \frac{aL}{6E} & \cdots & 0 & 0 \\
-    0 & 0 & 0 & \frac{aL}{6E} & \frac{2aL}{6E} & \cdots & 0 & 0 \\
+    \frac{aL}{6E} & \frac{2aL}{3E} &  \frac{aL}{6E} & 0 & 0 & \cdots & 0 & 0 \\
+    0 & \frac{aL}{6E} & \frac{2aL}{3E} &  \frac{aL}{6E} & 0 & \cdots & 0 & 0 \\
+    0 & 0 & \frac{aL}{6E} & \frac{2aL}{3E} &  \frac{aL}{6E} & \cdots & 0 & 0 \\
+    0 & 0 & 0 & \frac{aL}{6E} & \frac{2aL}{3E} & \cdots & 0 & 0 \\
     \vdots & \vdots & \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
-    0 & 0 & 0 & 0 & 0 & \cdots & \frac{2aL}{6E} & \frac{aL}{6E} \\
+    0 & 0 & 0 & 0 & 0 & \cdots & \frac{2aL}{3E} & \frac{aL}{6E} \\
     0 & 0 & 0 & 0 & 0 & \cdots & \frac{aL}{6E} & \frac{aL}{3E} \\
   \end{bmatrix} \begin{bmatrix}
     \dotover{u}_{1} \\

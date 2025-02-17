@@ -1,10 +1,10 @@
 #set title "Cubic Hermite basis functions"
 set nokey
-set xlabel "$\xi$"
-set label 1 "$\chbfn{1}{0}{\xi}$" at 0.30, 0.648,0 centre
-set label 2 "$\chbfn{1}{1}{\xi}$" at 0.50, 0.200,0 centre
-set label 3 "$\chbfn{2}{0}{\xi}$" at 0.70, 0.648,0 centre
-set label 4 "$\chbfn{2}{1}{\xi}$" at 0.65,-0.080,0 centre
+set xlabel "$\\elementcoordinatesymbol$"
+set label 1 "$\\chbfn{1}{0}{\\elementcoordinatesymbol}$" at 0.30, 0.648,0 centre
+set label 2 "$\\chbfn{1}{1}{\\elementcoordinatesymbol}$" at 0.50, 0.200,0 centre
+set label 3 "$\\chbfn{2}{0}{\\elementcoordinatesymbol}$" at 0.70, 0.648,0 centre
+set label 4 "$\\chbfn{2}{1}{\\elementcoordinatesymbol}$" at 0.65,-0.080,0 centre
 set label 5 "slope=1" at 0.08,0.30 left
 set label 6 "slope=1" at 0.92,0.30 right
 set arrow 1 from 0.15,0.24 to 0.15, 0.15

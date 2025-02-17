@@ -1,0 +1,436 @@
+\section{Coordinate Transformations}
+\label{sec:CoordinateTransformations}
+
+\subsection{Two dimensions}
+\label{subsec:CoordinateTransformationsTwoD}
+
+Consider the two dimensional system shown in
+\figref{fig:CoordinateTransformationTwoD}. There are three coordinate
+systems of interest. The first is the geometric coordinate system,
+$\coordinatevector$, and the second is the $\elementcoordinatevector$
+coordinate system of an element. The final coordinate system is the
+$\fibrecoordinatevector$ coordinate system of the fibre directions.
+
+\epstexfigure{Theory/svgs/TwoDCoordinateTransformation.eps_tex}{Two
+  dimensional coordinate transformations.}{Two dimensional coordinate
+  transformations.}{fig:CoordinateTransformationTwoD}{0.5}
+
+To work out the transformations between these coordinate systems we
+first define the geometric position vector (with respect to the base
+vectors $\generalbasevector_{i}$) of a point inside the element using
+interpolation \ie
+\begin{equation}
+  \fnof{\coordinatevector}{\elementcoordinatevector}=\fnof{\coordinate{i}}{\elementcoordinatevector}\generalbasevector_{i}=
+  \gsf{n}{\beta}\gbfn{n}{\beta}{\elementcoordinatevector}\nodedof{\coordinatevector}{n}{\beta}
+\end{equation}
+
+The transformation matrix between geometric coordinates,
+$\coordinatevector$, and element coordinates,
+$\elementcoordinatevector$, is thus given by
+\begin{equation}
+  \delby{\coordinate{i}}{\elementcoordinate{r}}=\begin{bmatrix}
+  \delby{\coordinate{1}}{\xione} & \delby{\coordinate{2}}{\xione} \\
+  \delby{\coordinate{1}}{\xitwo} & \delby{\coordinate{2}}{\xitwo}
+  \end{bmatrix}
+  \label{eqn:GeometricToElementTransformationTwoD}
+\end{equation}
+and the inverse transformation between element coordinates,
+$\elementcoordinatevector$, and geometric coordinates,
+$\coordinatevector$, is thus given by
+\begin{equation}
+  \delby{\elementcoordinate{r}}{\coordinate{i}}=\inverse{\sqbrac{\delby{\coordinate{i}}{\elementcoordinate{r}}}}=
+  \dfrac{1}{\delby{\coordinate{1}}{\xione}\delby{\coordinate{2}}{\xitwo}-\delby{\coordinate{2}}{\xione}
+    \delby{\coordinate{1}}{\xitwo}}\begin{bmatrix}
+    \delby{\coordinate{2}}{\xitwo} & -\delby{\coordinate{2}}{\xione} \\
+    -\delby{\coordinate{1}}{\xitwo} & \delby{\coordinate{1}}{\xione}    
+  \end{bmatrix}=\begin{bmatrix}
+  \delby{\elementcoordinate{1}}{\coordinate{1}} & \delby{\elementcoordinate{2}}{\coordinate{1}} \\
+  \delby{\elementcoordinate{1}}{\coordinate{2}} & \delby{\elementcoordinate{2}}{\coordinate{2}}
+  \end{bmatrix}
+  \label{eqn:ElementToGeometricTransformationTwoD}
+\end{equation}
+
+The derivative of the geometric interpolation also gives the tangent
+direction with respect to $\xione$. We define the normalisation of
+this direction as the vector, $\vectr{a}$, \ie
+\begin{equation}
+  \fnof{\vectr{a}}{\elementcoordinatevector}=\fnof{a^{i}}{\elementcoordinatevector}\generalbasevector_{i}=
+  \norm{\delby{\fnof{\coordinatevector}{\elementcoordinatevector}}{\xione}}
+\end{equation}
+
+We now define the vector, $\vectr{b}$, to be orthogonal to the vector, $\vectr{a}$, by rotating $\vectr{a}$ counter clockwise
+$90\degree$ \ie
+\begin{equation}
+  \fnof{\vectr{b}}{\elementcoordinatevector}=\fnof{b^{i}}{\elementcoordinatevector}\generalbasevector_{i}=
+  \fnof{a^{2}}{\elementcoordinatevector}\generalbasevector_{1}-\fnof{a^{1}}{\elementcoordinatevector}\generalbasevector_{2}
+\end{equation}
+
+Now the fibre direction is defined by a rotation angle, $\theta$, from
+the $\xione$ direction. This angle is given by interpolation within
+the element \ie
+\begin{equation}
+  \fnof{\theta}{\elementcoordinatevector}=
+  \gsf{o}{\gamma}\gbfn{o}{\gamma}{\elementcoordinatevector}\nodedof{\vectr{\theta}}{o}{\gamma}
+\end{equation}
+
+We can now find the fibre vector, $\vectr{f}$, and sheet vector,
+$\vectr{s}$, by rotating the vectors $\vectr{a}$ and $\vectr{b}$ by
+$\theta$. To do this we make use of the rotation matrix
+\begin{equation}
+  \fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}=\begin{bmatrix}
+  \cosine{\fnof{\theta}{\elementcoordinatevector}} & \sine{\fnof{\theta}{\elementcoordinatevector}} \\
+  -\sine{\fnof{\theta}{\elementcoordinatevector}} & \cosine{\fnof{\theta}{\elementcoordinatevector}}
+  \end{bmatrix}
+\end{equation}
+as
+\begin{equation}
+  \fnof{\vectr{f}}{\elementcoordinatevector}=\fnof{f^{i}}{\elementcoordinatevector}\generalbasevector_{i}=
+  \fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}\fnof{\vectr{a}}{\elementcoordinatevector}
+\end{equation}
+and
+\begin{equation}
+  \fnof{\vectr{s}}{\elementcoordinatevector}=\fnof{s^{i}}{\elementcoordinatevector}\generalbasevector_{i}=
+  \fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}\fnof{\vectr{b}}{\elementcoordinatevector}
+\end{equation}
+  
+The rotation matrix thus gives the transformation between element
+coordinates, $\elementcoordinatevector$, and fibre coordinates,
+$\fibrecoordinatevector$, \ie
+\begin{equation}
+  \delby{\fibrecoordinate{a}}{\elementcoordinate{r}}=\fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}\begin{bmatrix}
+  \cosine{\fnof{\theta}{\elementcoordinatevector}} & \sine{\fnof{\theta}{\elementcoordinatevector}} \\
+  -\sine{\fnof{\theta}{\elementcoordinatevector}} & \cosine{\fnof{\theta}{\elementcoordinatevector}}
+  \end{bmatrix}  
+  \label{eqn:ElementToMaterialTransformationTwoD}
+\end{equation}
+
+The transformation between fibre coordinates,
+$\fibrecoordinatevector$, and element coordinates,
+$\elementcoordinatevector$, can thus be found from
+\begin{equation}
+  \delby{\elementcoordinate{r}}{\fibrecoordinate{a}}=
+  \inverse{\sqbrac{\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}}}=
+  \inverse{\fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}}=
+  \transpose{\fnof{\matr{R}}{\fnof{\theta}{\elementcoordinatevector}}}=\begin{bmatrix}
+  \cosine{\fnof{\theta}{\elementcoordinatevector}} & -\sine{\fnof{\theta}{\elementcoordinatevector}} \\
+  \sine{\fnof{\theta}{\elementcoordinatevector}} & \cosine{\fnof{\theta}{\elementcoordinatevector}}
+  \end{bmatrix}  
+  \label{eqn:FibreToElementTransformationTwoD}
+\end{equation}
+as the rotation matrix is orthogonal.
+
+\subsection{Three dimensions}
+\label{subsec:CoordinateTransformationsThreeD}
+
+Unlike in two-dimensions, rotation of coordinates in three-dimensions
+is not straightforward and there a number of different ways to define
+the coordinate transformations.
+
+\subsubsection{Euler and Tait-Bryan angles}
+\label{subsubsec:CoordinateTransformationsThreeDEulerTaitBryan}
+
+\subsubsection{Quaternions}
+\label{subsubsec:CoordinateTransformationsThreeDQuaternions}
+
+
+\subsection{Tensor transformations}
+\label{subsec:CoordinateTransformationsTensor}
+
+Having defined the relationships between the various fibre, element and
+geometric coordinate systems we can transform fibre tensors.
+
+For example consider transforming a fibre vector, $\vectr{a}$, to a
+geometric vector, $\vectr{b}$. The transformations are
+\begin{equation}
+  b^{i}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}a^{a}
+  \label{eqn:Rank10FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(1,0) vectors, and,
+\begin{equation}
+  b_{i}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}a_{a}
+  \label{eqn:Rank01FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(0,1) vectors.
+
+Now, by defining
+\begin{equation}
+  \delby{\coordinate{i}}{\fibrecoordinate{a}}=\delby{\coordinate{i}}{\elementcoordinate{r}}
+  \delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \label{eqn:CoordinateToFibreTransformationViaElement}
+\end{equation}
+and
+\begin{equation}
+  \delby{\fibrecoordinate{a}}{\coordinate{i}}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}
+  \delby{\elementcoordinate{r}}{\coordinate{i}}
+  \label{eqn:FibreToCoordinateTransformationViaElement}
+\end{equation}
+we can find that transformations without going through element coordinates is given by
+\begin{equation}
+  b^{i}=\delby{\coordinate{i}}{\fibrecoordinate{a}}a^{a}
+  \label{eqn:Rank10FibreToCoordinateTransformation}
+\end{equation}
+for rank(1,0) vectors, and,
+\begin{equation}
+  b_{i}=\delby{\fibrecoordinate{a}}{\coordinate{i}}a_{a}
+  \label{eqn:Rank01FibreToCoordinateTransformation}
+\end{equation}
+for rank(0,1) vectors.
+
+The inverse transformation between a geometric vector, $\vectr{b}$, and a fibre vector, $\vectr{a}$, is given by
+\begin{equation}
+  a^{a}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}b^{i}
+  \label{eqn:Rank10CoordinateToElementToFibreTransformation}
+\end{equation}
+for rank(1,0) vectors, and,
+\begin{equation}
+  a_{a}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}b_{i}
+  \label{eqn:Rank01CoordinateToElementToFibreTransformation}
+\end{equation}
+for rank(0,1) vectors.
+
+Using
+\eqnrefs{eqn:CoordinateToFibreTransformationViaElement}{eqn:FibreToCoordinateTransformationViaElement}
+the inverse transformations are
+\begin{equation}
+  a^{a}=\delby{\fibrecoordinate{a}}{\coordinate{i}}b^{i}
+  \label{eqn:Rank10CoordinateToFibreTransformation}
+\end{equation}
+for rank(1,0) vectors, and,
+\begin{equation}
+  a_{a}=\delby{\coordinate{i}}{\fibrecoordinate{a}}b_{i}
+  \label{eqn:Rank01CoordinateToFibreTransformation}
+\end{equation}
+for rank(0,1) vectors.
+
+For a second order fibre tensors, $\tensortwo{A}$, to geometric
+tensors, $\tensortwo{B}$, the transformations are
+\begin{equation}
+  B^{ij}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}A^{ab}
+  \label{eqn:Rank20FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(2,0) tensors, and,
+\begin{equation}
+  B_{ij}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}A_{ab}
+  \label{eqn:Rank02FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(0,2) tensors, and,
+\begin{equation}
+  B^{i.}_{.j}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}A^{a.}_{.b}
+  \label{eqn:Rank11FibreToElementToCoordinateTransformation1}
+\end{equation}
+and
+\begin{equation}
+  B^{.j}_{i.}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}A^{.b}_{a.}
+  \label{eqn:Rank11FibreToElementToCoordinateTransformation2}
+\end{equation}
+for rank(1,1) tensors.
+
+Using \eqnrefs{eqn:CoordinateToFibreTransformationViaElement}{eqn:FibreToCoordinateTransformationViaElement}
+the transformations are
+\begin{equation}
+  B^{ij}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}A^{ab}
+  \label{eqn:Rank20FibreToCoordinateTransformation}
+\end{equation}
+for rank(2,0) tensors, and,
+\begin{equation}
+  B_{ij}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}A_{ab}
+  \label{eqn:Rank02FibreToCoordinateTransformation}
+\end{equation}
+for rank(0,2) tensors, and,
+\begin{equation}
+  B^{i.}_{.j}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\fibrecoordinate{b}}{\coordinate{j}}A^{a.}_{.b}
+  \label{eqn:Rank11FibreToCoordinateTransformation1}
+\end{equation}
+and
+\begin{equation}
+  B^{.j}_{i.}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\coordinate{j}}{\fibrecoordinate{b}}A^{.b}_{a.}
+  \label{eqn:Rank11FibreToCoordinateTransformation2}
+\end{equation}
+for rank(1,1) tensors.
+
+The inverse transformation for second order geometric tensors, $\tensortwo{B}$, to fibre
+tensors, $\tensortwo{A}$, are given by
+\begin{equation}
+  A^{ab}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}B^{ij}
+  \label{eqn:Rank20CoordinatToElementToFibreTransformation}
+\end{equation}
+for rank(2,0) tensors, and,
+\begin{equation}
+  A_{ab}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}B_{ij}
+  \label{eqn:Rank02CoordinateToElementToFibreTransformation}
+\end{equation}
+for rank(0,2) tensors, and,
+\begin{equation}
+  A^{a.}_{.b}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}B^{i.}_{.j}
+  \label{eqn:Rank11CoordinateToElementToFibreTransformation1}
+\end{equation}
+and
+\begin{equation}
+  A^{.b}_{a.}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}B^{.j}_{i.}
+  \label{eqn:Rank11CoordinateToElementToFibreTransformation2}
+\end{equation}
+for rank(1,1) tensors.
+
+Using \eqnrefs{eqn:CoordinateToFibreTransformationViaElement}{eqn:FibreToCoordinateTransformationViaElement}
+the inverse transformations are
+\begin{equation}
+  A^{ab}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}B^{ij}
+  \label{eqn:Rank20CoordinateToFibreTransformation}
+\end{equation}
+for rank(2,0) tensors, and,
+\begin{equation}
+  A_{ab}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}B_{ij}
+  \label{eqn:Rank02CoordinateToFibreTransformation}
+\end{equation}
+for rank(0,2) tensors, and,
+\begin{equation}
+  A^{a.}_{.b}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\coordinate{j}}{\fibrecoordinate{b}}B^{i.}_{.j}
+  \label{eqn:Rank11CoordinateToFibreTransformation1}
+\end{equation}
+and
+\begin{equation}
+  A^{.b}_{a.}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\fibrecoordinate{b}}{\coordinate{j}}B^{.j}_{i.}
+  \label{eqn:Rank11CoordinateToFibreTransformation2}
+\end{equation}
+for rank(1,1) tensors.
+
+For fourth order fibre tensors, $\tensorfour{A}$, to geometric
+tensors, $\tensorfour{B}$, the transformations are
+\begin{equation}
+  B^{ijkl}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}
+  \delby{\coordinate{k}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\fibrecoordinate{c}}
+  \delby{\coordinate{l}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\fibrecoordinate{d}}A^{abcd}
+  \label{eqn:Rank40FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(4,0) tensors, and,
+\begin{equation}
+  B_{ijkl}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}
+  \delby{\fibrecoordinate{c}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\coordinate{k}}
+  \delby{\fibrecoordinate{d}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\coordinate{l}}A_{abcd}
+  \label{eqn:Rank04FibreToElementToCoordinateTransformation}
+\end{equation}
+for rank(0,4) tensors, and,
+\begin{equation}
+  B^{ij..}_{..kl}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}
+  \delby{\fibrecoordinate{c}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\coordinate{k}}
+  \delby{\fibrecoordinate{d}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\coordinate{l}}A^{ab..}_{..cd}
+  \label{eqn:Rank22FibreToElementToCoordinateTransformation1}
+\end{equation}
+and
+\begin{equation}
+  B^{..kl}_{ij..}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}
+  \delby{\coordinate{k}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\fibrecoordinate{c}}
+  \delby{\coordinate{l}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\fibrecoordinate{d}}A^{..cd}_{ab..}
+  \label{eqn:Rank22FibreToElementToCoordinateTransformation2}
+\end{equation}
+\etc, for rank(2,2) tensors.
+
+Using \eqnrefs{eqn:CoordinateToFibreTransformationViaElement}{eqn:FibreToCoordinateTransformationViaElement}
+the transformations are
+\begin{equation}
+  B^{ijkl}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}
+  \delby{\coordinate{k}}{\fibrecoordinate{c}}\delby{\coordinate{l}}{\fibrecoordinate{d}}A^{abcd}
+  \label{eqn:Rank40FibreToCoordinateTransformation}
+\end{equation}
+for rank(4,0) tensors, and,
+\begin{equation}
+  B_{ijkl}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}
+  \delby{\fibrecoordinate{c}}{\coordinate{k}}\delby{\fibrecoordinate{d}}{\coordinate{l}}A_{abcd}
+  \label{eqn:Rank04FibreToCoordinateTransformation}
+\end{equation}
+for rank(0,4) tensors, and,
+\begin{equation}
+  B^{ij..}_{..kl}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}
+  \delby{\fibrecoordinate{c}}{\coordinate{k}}\delby{\fibrecoordinate{d}}{\coordinate{l}}A^{ab..}_{..cd}
+  \label{eqn:Rank22FibreToCoordianteTransformation1}
+\end{equation}
+and
+\begin{equation}
+  B^{..kl}_{ij..}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}
+  \delby{\coordinate{k}}{\fibrecoordinate{c}}\delby{\coordinate{l}}{\fibrecoordinate{d}}A^{..cd}_{ab..}
+  \label{eqn:Rank22FibreToCoordinateTransformation2}
+\end{equation}
+\etc, for rank(2,2) tensors.
+
+For fourth order geometric tensors, $\tensorfour{B}$, to fibre
+tensors, $\tensorfour{A}$, the transformations are
+\begin{equation}
+  A^{abcd}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}
+  \delby{\fibrecoordinate{c}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\coordinate{k}}
+  \delby{\fibrecoordinate{d}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\coordinate{l}}B^{ijkl}
+  \label{eqn:Rank40CoordinateToElementToFibreTransformation}
+\end{equation}
+for rank(4,0) tensors, and,
+\begin{equation}
+  A_{abcd}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}
+  \delby{\coordinate{k}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\fibrecoordinate{c}}
+  \delby{\coordinate{l}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\fibrecoordinate{d}}B_{ijkl}
+  \label{eqn:Rank04CoordinateToElementToFibreTransformation}
+\end{equation}
+for rank(0,4) tensors, and,
+\begin{equation}
+  A^{ab..}_{..cd}=\delby{\fibrecoordinate{a}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\coordinate{i}}
+  \delby{\fibrecoordinate{b}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\coordinate{j}}
+  \delby{\coordinate{k}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\fibrecoordinate{c}}
+  \delby{\coordinate{l}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\fibrecoordinate{d}}B^{ij..}_{..kl}
+  \label{eqn:Rank22CoordinateToElementToFibreTransformation1}
+\end{equation}
+and
+\begin{equation}
+  A^{..cd}_{ab..}=\delby{\coordinate{i}}{\elementcoordinate{r}}\delby{\elementcoordinate{r}}{\fibrecoordinate{a}}
+  \delby{\coordinate{j}}{\elementcoordinate{s}}\delby{\elementcoordinate{s}}{\fibrecoordinate{b}}
+  \delby{\fibrecoordinate{c}}{\elementcoordinate{t}}\delby{\elementcoordinate{t}}{\coordinate{k}}
+  \delby{\fibrecoordinate{d}}{\elementcoordinate{u}}\delby{\elementcoordinate{u}}{\coordinate{l}}B^{..kl}_{ij..}
+  \label{eqn:Rank22CoordinateToElementToFibreTransformation2}
+\end{equation}
+\etc, for rank(2,2) tensors.
+
+
+Using \eqnrefs{eqn:CoordinateToFibreTransformationViaElement}{eqn:FibreToCoordinateTransformationViaElement}
+the inverse transformations are
+\begin{equation}
+  A^{abcd}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}
+  \delby{\fibrecoordinate{c}}{\coordinate{k}}\delby{\fibrecoordinate{d}}{\coordinate{l}}B^{ijkl}
+  \label{eqn:Rank40CoordinateToFibreTransformation}
+\end{equation}
+for rank(4,0) tensors, and,
+\begin{equation}
+  A_{abcd}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}
+  \delby{\coordinate{k}}{\fibrecoordinate{c}}\delby{\coordinate{l}}{\fibrecoordinate{d}}B_{ijkl}
+  \label{eqn:Rank04CoordinateToFibreTransformation}
+\end{equation}
+for rank(0,4) tensors, and,
+\begin{equation}
+  A^{ab..}_{..cd}=\delby{\fibrecoordinate{a}}{\coordinate{i}}\delby{\fibrecoordinate{b}}{\coordinate{j}}
+  \delby{\coordinate{k}}{\fibrecoordinate{c}}\delby{\coordinate{l}}{\fibrecoordinate{d}}B^{ij..}_{..kl}
+  \label{eqn:Rank22CoordinateToFibreTransformation1}
+\end{equation}
+and
+\begin{equation}
+  A^{..cd}_{ab..}=\delby{\coordinate{i}}{\fibrecoordinate{a}}\delby{\coordinate{j}}{\fibrecoordinate{b}}
+  \delby{\fibrecoordinate{c}}{\coordinate{k}}\delby{\fibrecoordinate{d}}{\coordinate{l}}B^{..kl}_{ij..}
+  \label{eqn:Rank22CoordinateToFibreTransformation2}
+\end{equation}
+\etc, for rank(2,2) tensors.
+
+Here,
+\eqnrefsfour{eqn:GeometricToElementTransformationTwoD}{eqn:ElementToGeometricTransformationTwoD}{eqn:ElementToFibreTransformationTwoD}{eqn:FibreToElementTransformationTwoD}
+define the transformations in two-dimensions, and
+\eqnrefsfour{eqn:GeometricToElementTransformationThreeD}{eqn:ElementToGeometricTransformationThreeD}{eqn:ElementToFibreTransformationThreeD}{eqn:FibreToElementTransformationThreeD}
+define the transformations in three-dimensions. The transformations in
+one-dimension are trivial.
+

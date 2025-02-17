@@ -1,6 +1,8 @@
 \section{Diffusion Equations} 
+\label{sec:DiffusionEquations}
 
 \subsection{Governing equations}
+\label{subsec:DiffusionGoverningEquations}
 
 The \emph{generalised diffusion equation} on a domain $\Omega$ with boundary
 $\Gamma$ in \OpenCMISS can be stated as
@@ -8,13 +10,13 @@ $\Gamma$ in \OpenCMISS can be stated as
   \addtolength{\fboxsep}{5pt}
   \boxed{
     \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+
-    \divergence{}{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}\gradient{}{\fnof{u}{\vectr{x},t}}}}+
+    \divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}\gradient{}{\fnof{u}{\vectr{x},t}}}}+
     \fnof{s}{\vectr{x},t}=0  
   }
-  \label{eqn:diffusionequation}
+  \label{eqn:GeneralisedDiffusionEquation}
 \end{equation}
 where $\vectr{x}\in\Omega$, $t\in[0,\infty)$, $\fnof{u}{\vectr{x},t}$ is the quatity that diffuses,
-$\fnof{a}{\vectr{x}}$ is a material coefficient, $\fnof{\tensor{\sigma}}{\vectr{x}}$ is
+$\fnof{a}{\vectr{x}}$ is a material coefficient, $\fnof{\diffusivitytensor}{\vectr{x}}$ is
 the conductivity/diffusivity tensor throughout the domain and $\fnof{s}{\vectr{x},t}$ is a
 source term in the domain.
 
@@ -24,7 +26,7 @@ Additional forms of the diffusion equation in \OpenCMISS include a \emph{linear
   \addtolength{\fboxsep}{5pt}
   \boxed{
     \begin{gathered}
-      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}
+      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
           \gradient{}{\fnof{u}{\vectr{x},t}}}}
       +\fnof{b}{\vectr{x}}\fnof{u}{\vectr{x},t}+\fnof{s}{\vectr{x},t}=0
     \end{gathered}
@@ -36,7 +38,7 @@ a \emph{quadratic source diffusion equation} given by
   \addtolength{\fboxsep}{5pt}
   \boxed{
     \begin{gathered}
-      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}
+      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
           \gradient{}{\fnof{u}{\vectr{x},t}}}}
       +\fnof{b}{\vectr{x}}\fnof{u}{\vectr{x},t}+\fnof{c}{\vectr{x}}\pbrac{\fnof{u}{\vectr{x},t}}^{2}+
       \fnof{s}{\vectr{x},t}=0
@@ -49,7 +51,7 @@ and an \emph{exponential source diffusion equation} given by
   \addtolength{\fboxsep}{5pt}
   \boxed{
     \begin{gathered}
-      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}
+      \fnof{a}{\vectr{x}}\delby{\fnof{u}{\vectr{x},t}}{t}+\divergence{}{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
           \gradient{}{\fnof{u}{\vectr{x},t}}}}
       +\fnof{b}{\vectr{x}}e^{\fnof{c}{\vectr{x}}\fnof{u}{\vectr{x},t}}+\fnof{s}{\vectr{x},t}=0
     \end{gathered}
@@ -64,15 +66,15 @@ equation are specification of Dirichlet boundary conditions on the solution,
 $\fnof{g}{\vectr{x},t}$, \ie
 \begin{equation}
   \fnof{u}{\vectr{x},t} = \fnof{g}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{D},t\in[0,\infty)
-  \label{eqn:diffusionDirichletBC} 
+  \label{eqn:DiffusionDirichletBC} 
 \end{equation}
 and/or Neumann conditions in terms of the solution flux in the normal
 direction, $\fnof{h}{\vectr{x},t}$ \ie
 \begin{equation}
-  \fnof{q}{\vectr{x},t} = \dotprod{\pbrac{\fnof{\tensor{\sigma}}{\vectr{x}}
+  \fnof{q}{\vectr{x},t} = \dotprod{\pbrac{\fnof{\diffusivitytensor}{\vectr{x}}
       \gradient{}{\fnof{u}{\vectr{x},t}}}}{\fnof{\normal}{\vectr{x}}} =
   \fnof{h}{\vectr{x},t} \quad \vectr{x}\in\Gamma_{N},t\in[0,\infty)
-  \label{eqn:diffusionNeumannBC} 
+  \label{eqn:DiffusionNeumannBC} 
 \end{equation}
 where $\fnof{q}{\vectr{x},t}$, is the flux in the normal direction, $\fnof{\normal}{\vectr{x}}$ is the normal
 vector to the boudary and $\Gamma=\union{\Gamma_{D}}{\Gamma_{N}}$.
@@ -81,64 +83,67 @@ Appropriate initial conditions for the diffusion equation are the
 specification of an initial value of the solution, $\fnof{i}{\vectr{x}}$, \ie
 \begin{equation}
   \fnof{u}{\vectr{x},0} = \fnof{i}{\vectr{x}} \quad \vectr{x}\in\Omega.
-  \label{eqn:diffusionInitialC} 
+  \label{eqn:DiffusionInitialC} 
 \end{equation}
 
 \subsection{Weak formulation}
+\label{subsec:DiffusionWeakForm}
 
-The corresponding weak form of \eqnref{eqn:diffusionequation} can be found by
+The corresponding weak form of \eqnref{eqn:GeneralisedDiffusionEquation} can be found by
 integrating over the spatial domain with a test function \ie
 \begin{equation}
-  \gint{\Omega}{}{a\delby{u}{t}+\pbrac{\divergence{}{\pbrac{\tensor{\sigma}
-          \gradient{}{u}}}+a}w}{\Omega}=0
-  \label{eqn:diffusionweakform1}
+  \gint{\Omega}{}{\pbrac{a\delby{u}{t}+\divergence{}{\pbrac{\diffusivitytensor
+          \gradient{}{u}}}+s}w}{\Omega}=0
+  \label{eqn:DiffusionWeakForm1}
 \end{equation}
 where $w$ is a suitable spatial test function.
 
 Applying the divergence theorem in \eqnref{eqn:DivergenceTheormScalarVector}
-to \eqnref{eqn:diffusionweakform1} gives
+to \eqnref{eqn:DiffusionWeakForm1} gives
 \begin{equation}
   \gint{\Omega}{}{\pbrac{a\delby{u}{t}}w}{\Omega}-
-      \gint{\Omega}{}{\dotprod{\tensor{\sigma}\gradient{}{u}}{\gradient{}{w}}}{\Omega}
-      +\gint{\Gamma}{}{\pbrac{\dotprod{\tensor{\sigma}\gradient{}{u}}{\normal}}w}{\Gamma}+
-      \gint{\Omega}{}{bw}{\Omega}=0
-  \label{eqn:diffusionweakform2}
+      \gint{\Omega}{}{\dotprod{\diffusivitytensor\gradient{}{u}}{\gradient{}{w}}}{\Omega}
+      +\gint{\Gamma}{}{\pbrac{\dotprod{\diffusivitytensor\gradient{}{u}}{\normal}}w}{\Gamma}+
+      \gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:DiffusionWeakForm2}
 \end{equation}
 where $\normal$ is the unit outward normal vector to the boundary $\Gamma$.
 
 \subsection{Tensor notation}
+\label{subsec:DiffusionTensorNotation}
 
-\Eqnref{eqn:diffusionweakform2} can be written in tensor notation as
+\Eqnref{eqn:DiffusionWeakForm2} can be written in tensor notation as
 \begin{equation}
   \gint{\Omega}{}{a\dot{u}w}{\Omega}-
-  \gint{\Omega}{}{G^{jk}\sigma^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
-  \gint{\Gamma}{}{G^{jk}\sigma^{i}_{j}\covarderiv{u}{i}n_{k}w}{\Gamma} +
-  \gint{\Omega}{}{bw}{\Omega}=0
-  \label{eqn:diffusiontensorform1}
+  \gint{\Omega}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
+  \gint{\Gamma}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}n_{k}w}{\Gamma} +
+  \gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:DiffusionTensorForm1}
 \end{equation}
 or
 \begin{equation}
   \gint{\Omega}{}{a\dot{u}w}{\Omega}-
-  \gint{\Omega}{}{G^{jk}\sigma^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
+  \gint{\Omega}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}\covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
   \gint{\Gamma}{}{qw}{\Gamma} +
-  \gint{\Omega}{}{bw}{\Omega}=0
-  \label{eqn:diffusiontensorform2}
+  \gint{\Omega}{}{sw}{\Omega}=0
+  \label{eqn:DiffusionTensorForm2}
 \end{equation}
 where $G^{jk}$ is the contravariant metric tensor for the spatial coordinate system.
 
 \subsection{Finite element formulation}
+\label{subsec:DiffusionFEMFormulation}
 
 We can now discretise the spatial domain into finite elements \ie $\Omega=
 \displaystyle{\bigcup_{e=1}^{E}}\Omega_{e}$ with
 $\Gamma=\displaystyle{\bigcup_{f=1}^{F}}\Gamma_{f}$. 
-\Eqnref{eqn:diffusiontensorform2} becomes
+\Eqnref{eqn:DiffusionTensorForm2} becomes
 \begin{equation}
   \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{a\dot{u}w}{\Omega}-
-  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{G^{jk}\sigma^{i}_{j}
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{G^{jk}\diffusivitytensorsymbol^{i}_{j}
     \covarderiv{u}{i}\covarderiv{w}{k}}{\Omega}+
   \dsum_{f=1}^{F}\gint{\Gamma_{f}}{}{qw}{\Gamma} +
-  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{bw}{\Omega}=0
-  \label{eqn:diffusionfemform}
+  \dsum_{e=1}^{E}\gint{\Omega_{e}}{}{sw}{\Omega}=0
+  \label{eqn:DiffusionFEMForm}
 \end{equation}
 
 If we now assume that the dependent variable $u$ can be interpolated
@@ -163,16 +168,16 @@ We can also interpolate the other variables in a similar manner \ie
     \fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{o}{\gamma} \\
     \fnof{a}{\vectr{\xi}} &=\gbfn{p}{\delta}{\vectr{\xi}}
     \nodedof{a}{p}{\delta}\gsf{p}{\delta} \\
-    \fnof{\tilde{\tensor{\sigma}}}{\vectr{\xi}}
-    &=\gbfn{p}{\delta}{\vectr{\xi}}\nodedof{\tilde{\tensor{\sigma}}}{p}{\delta}
+    \fnof{\tilde{\diffusivitytensor}}{\vectr{\xi}}
+    &=\gbfn{p}{\delta}{\vectr{\xi}}\nodedof{\tilde{\diffusivitytensor}}{p}{\delta}
     \gsf{p}{\delta} \\
-    \fnof{b}{\vectr{\xi},t} &=
-    \gbfn{p}{\delta}{\vectr{\xi}}\fnof{\nodedof{b}{p}{\delta}}{t}\gsf{p}{\delta}
+    \fnof{s}{\vectr{\xi},t} &=
+    \gbfn{p}{\delta}{\vectr{\xi}}\fnof{\nodedof{s}{p}{\delta}}{t}\gsf{p}{\delta}
   \end{split}
 \end{equation}
 where $\fnof{\nodedof{q}{o}{\gamma}}{t}$, $\nodedof{a}{p}{\delta}$,
-$\nodedof{\tilde{\tensor{\sigma}}}{p}{\delta}$ and 
-$\fnof{\nodedof{b}{p}{\delta}}{t}$ are the
+$\nodedof{\tilde{\diffusivitytensor}}{p}{\delta}$ and 
+$\fnof{\nodedof{s}{p}{\delta}}{t}$ are the
 nodal degrees-of-freedom for the variables.
 
 For a Galerkin finite element formulation we also choose the spatial weighting
@@ -182,16 +187,17 @@ function $w$ to be equal to the basis fucntions \ie
 \end{equation}
 
 \subsection{Spatial integration}
+\label{subsec:DiffusionSpatialIntegration}
 
 Adopting the standard integration notation we can write the spatial
-integration term in \eqnref{eqn:diffusionfemform} as
+integration term in \eqnref{eqn:DiffusionFEMForm} as
 \begin{multline}
   \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{a}{\vectr{\xi}}
     \delby{\pbrac{\gbfn{n}{\beta}{\vectr{\xi}}\fnof{\nodedof{u}{\beta}{n}}{t}
         \gsf{n}{\beta}}}{t}\gbfn{m}{\alpha}{\vectr{\xi}}\gsf{m}{\alpha}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} - \\
   \dsum_{e=1}^{E}\dintl{\vectr{0}}{\vectr{1}}G^{jk}\delby{x^{i}}{\xi^{d}}\delby{\xi^{e}}{x^{j}}
-  \delby{\xi^{d}}{\nu^{a}}\delby{\nu^{b}}{\xi^{e}}\fnof{{\tilde{\sigma}}^{a}_{.b}}{\vectr{\xi}}
+  \delby{\xi^{d}}{\nu^{a}}\delby{\nu^{b}}{\xi^{e}}\fnof{{\tilde{\diffusivitytensorsymbol}}^{a}_{.b}}{\vectr{\xi}}
   \delby{\xi^{s}}{x^{i}}
   \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad \\ \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad
   \delby{\pbrac{\gbfn{\beta}{n}{\vectr{\xi}}\fnof{\nodedof{u}{\beta}{n}}{t}
@@ -201,9 +207,9 @@ integration term in \eqnref{eqn:diffusionfemform} as
   \dsum_{f=1}^{F}\gint{\vectr{0}}{\vectr{1}}{\gbfn{o}{\gamma}{\vectr{\xi}}
     \fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{o}{\gamma}\gbfn{m}{\alpha}{\vectr{\xi}}
     \gsf{m}{\alpha}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} + \\
-  \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{b}{\vectr{\xi},t}\gbfn{m}{\alpha}{\vectr{\xi}}
+  \dsum_{e=1}^{E}\gint{\vectr{0}}{\vectr{1}}{\fnof{s}{\vectr{\xi},t}\gbfn{m}{\alpha}{\vectr{\xi}}
     \gsf{m}{\alpha}\abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} = 0
-  \label{eqn:diffusionspatialintegration1}
+  \label{eqn:DiffusionSpatialIntegration1}
 \end{multline}
 where $\fnof{\matr{J}}{\vectr{\xi}}$ is the \emph{Jacobian} of the
 transformation from the integration $\vectr{x}$ to $\vectr{\xi}$ coordinates.
@@ -222,13 +228,13 @@ integration gives
   \dsum_{f=1}^{F}\fnof{\nodedof{q}{o}{\gamma}}{t}\gsf{m}{\alpha}\gsf{o}{\gamma}
   \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{o}{\gamma}{\vectr{\xi}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} + \\
-  \dsum_{e=1}^{E}\fnof{\nodedof{b}{p}{\delta}}{t}\gsf{m}{\alpha}\gsf{p}{\delta}
+  \dsum_{e=1}^{E}\fnof{\nodedof{s}{p}{\delta}}{t}\gsf{m}{\alpha}\gsf{p}{\delta}
   \gint{\vectr{0}}{\vectr{1}}{\gbfn{m}{\alpha}{\vectr{\xi}}\gbfn{p}{\delta}{\vectr{\xi}}
     \abs{\fnof{\matr{J}}{\vectr{\xi}}}}{\vectr{\xi}} = 0
-  \label{eqn:diffusionspatialintegration1}
+  \label{eqn:DiffusionSpatialIntegration2}
 \end{multline}
 where $\fnof{\gamma^{rs}}{\vectr{\xi}}$ is defined in 
-\eqnthrurefs{eqn:diffusiongammadefinition1}{eqn:diffusiongammadefinition3}.
+\eqnthrurefs{eqn:DiffusionOperatorGammaDefinition1}{eqn:DiffusionOperatorGammaDefinition3}.
 
 This is an equation of the form
 \begin{equation}
@@ -236,7 +242,7 @@ This is an equation of the form
 \end{equation}
 where
 \begin{equation}
-  \fnof{\vect{f}}{t}=\matr{N}\fnof{\vect{q}}{t}+\matr{R}\fnof{\vect{b}}{t}
+  \fnof{\vect{f}}{t}=\matr{N}\fnof{\vect{q}}{t}+\matr{R}\fnof{\vect{s}}{t}
 \end{equation}
 
 The elemental damping matrix, $C^{\alpha\beta}_{mn}$, is given by
@@ -268,53 +274,66 @@ and the elemental source matrix, $R^{\alpha\delta}_{mp}$,
 \end{equation}
 
 \subsection{Analytic Solutions}
-
+\label{subsec:DiffusionEquationAnalyticSolutions}
 
 \subsubsection{One Dimensional Analytic Function 1}
 
 From \urllink{http://eqworld.ipmnet.ru/en/solutions/lpde/lpde101.pdf} we have for the \oned diffusion equation
 \begin{equation}
-  \delby{u}{t}=a\deltwosqby{u}{x}
+  \delby{u}{t}=k\deltwosqby{u}{x}
 \end{equation}
 the analytic solution
 \begin{equation}
-  \fnof{u}{x,t}=Ae^{-a\mu^{2}t}\cos(\mu x + B) + C
+  \fnof{u}{x,t}=Ae^{-k\mu^{2}t}\cos(\mu x + B) + C
 \end{equation}
 
 Now, \OpenCMISS solves diffusion equations of the form
 \begin{equation}
-  \delby{u}{t}+k\deltwosqby{u}{x}=0
-  \label{eqn:OpenCMISSDiffusionEquationOneDim}
+  a\delby{u}{t}+\sigma\deltwosqby{u}{x}=0
+  \label{eqn:OpenCMISSDiffusionEquationOneDim1}
 \end{equation}
-and therefore $a=-k$. Choosing $\mu=\dfrac{2\pi}{L}$ gives the
+and therefore $a=1$ and $\sigma=-k$. Choosing $\mu=\dfrac{2\pi}{L}$ gives the
 \OpenCMISS diffusion equation one dimensional analytic function 1, namely
 \begin{equation}
-  \fnof{u}{x,t}=Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L} + B) + C
-  \label{eqn:AnalyticDiffusionEquationOneDim1}
+  \fnof{u}{x,t}=Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) + C
+  \label{eqn:OpenCMISSAnalyticDiffusionEquationOneDim1}
 \end{equation}
 
 To prove the analytic solution we differentiate
-\eqnref{eqn:AnalyticDiffusionEquationOneDim1} to give
+\eqnref{eqn:OpenCMISSAnalyticDiffusionEquationOneDim1}. The temporal derivative is
+\begin{equation}
+  \delby{u}{t} = \dfrac{4\pi^{2}\sigma}{L^{2}}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) 
+  \label{eqn:AnalyticDiffusionEquationOneDim1Velocity}
+\end{equation}
+and the second temporal derivative is
+\begin{equation}
+  \deltwosqby{u}{t} = \dfrac{16\pi^{4}\sigma^{2}}{L^{4}}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) 
+  \label{eqn:AnalyticDiffusionEquationOneDim1Acceleration}
+\end{equation}
+
+For the spatial derivatives we have for the gradient
+\begin{equation}
+  \delby{u}{x}=\dfrac{-2\pi}{L}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\sin(\frac{2\pi x}{L} + B)
+  \label{eqn:AnalyticDiffusionEquationOneDim1Gradient}
+\end{equation}
+and for the Hessian
 \begin{align}
-    \delby{u}{t} &=
-    \dfrac{4\pi^{2}k}{L^{2}}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L} + B) \\
-    \delby{u}{x} &=
-    \dfrac{-2\pi}{L}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\sin(\frac{2\pi x}{L} + B) \\
-    \deltwosqby{u}{x} &=
-    \dfrac{2\pi}{L}\dfrac{-2\pi}{L}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L} + B) \\
-    & = \dfrac{-4\pi^{2}}{L^{2}}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L} + B)
-  \label{eqn:AnalyticDiffusionEquationOneDim1Derivatives}
+  \deltwosqby{u}{x} &=\dfrac{2\pi}{L}\dfrac{-2\pi}{L}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) \\
+  & = \dfrac{-4\pi^{2}}{L^{2}}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B)
+  \label{eqn:AnalyticDiffusionEquationOneDim1Hessian}
 \end{align}
 
-Substiting \eqnref{eqn:AnalyticDiffusionEquationOneDim1Derivatives} into \eqnref{eqn:OpenCMISSDiffusionEquationOneDim} gives
-\begin{align}
-  \delby{u}{t}+k\deltwosqby{u}{x} &=
-  \dfrac{4\pi^{2}k}{L^{2}}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L}
-  + B) +
-  k\dfrac{-4\pi^{2}}{L^{2}}Ae^{\frac{4\pi^{2}kt}{L^{2}}}\cos(\frac{2\pi x}{L}
-  + B) \\
-  &= 0
-\end{align}
+Substiting
+\eqnrefstwo{eqn:AnalyticDiffusionEquationOneDim1Velocity}{eqn:AnalyticDiffusionEquationOneDim1Hessian}
+into \eqnref{eqn:OpenCMISSAnalyticDiffusionEquationOneDim1} gives
+\begin{equation}
+  \begin{aligned}
+    \delby{u}{t}+\sigma\deltwosqby{u}{x} &=
+    \dfrac{4\pi^{2}\sigma}{L^{2}}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) +
+    \sigma\dfrac{-4\pi^{2}}{L^{2}}Ae^{\frac{4\pi^{2}\sigma t}{L^{2}}}\cos(\frac{2\pi x}{L} + B) \\
+    &= 0
+  \end{aligned}
+\end{equation}
 
 The analytic field component definitions in \OpenCMISS are shown in \tabref{tab:OpenCMISSAnalyticFieldDiffusionEquationOneDim1}.
 
@@ -324,7 +343,8 @@ The analytic field component definitions in \OpenCMISS are shown in \tabref{tab:
     $A$ & $1$ \\ 
     $B$ & $2$ \\
     $C$ & $3$ \\
-    $L$ & $4$ \\ \hline
+    $L$ & $4$ \\ 
+    $\sigma$ & $5$ \\ \hline
   \end{tabular}
   \caption{\OpenCMISS analytic field components for the \oned diffusion equation
     analytic function 1.}
@@ -455,6 +475,106 @@ The analytic field component definitions in \OpenCMISS are shown in \tabref{tab:
   \caption{\OpenCMISS analytic field components for the \oned exponential
     source diffusion equation analytic function 1.}
   \label{tab:OpenCMISSAnalyticFieldExponentialSoureDiffusionEquationOneDim1}
+\end{table}
+
+
+\subsubsection{Two Dimensional Analytic Function 1}
+
+Consider a two dimensional domain of length $L$ and height $H$. A solution to
+\begin{equation}
+  \delby{\fnof{u}{\coordinatevector,t}}{t}=k\laplacian{}{\fnof{u}{\coordinatevector,t}}
+\end{equation}
+for $\coordinatevector\in\rntopology{2}$ is
+\begin{equation}
+  \fnof{u}{\coordinatevector,t}=Ae^{\frac{-\pbrac{4\pi^{2}k\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+\end{equation}
+where $A$ is an arbitrary scaling constant, $k$ is the diffusivity and
+$\phi$ is a arbitrary angle constant that changes the orientation of
+the solution to the coordinate axes.
+
+The general form of the \OpenCMISS diffusion equation is given by
+\begin{equation}
+  a\delby{u}{t}+\sigma\laplacian{}{u}=0
+\end{equation}
+
+Choosing $a=1$ and $\sigma=-k$ gives the
+\OpenCMISS diffusion equation two dimensional analytic function 1, namely
+\begin{equation}
+  \fnof{u}{\coordinatevector,t}=Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+  \label{eqn:OpenCMISSAnalyticDiffusionEquationTwoDim1}
+\end{equation}
+
+To prove the analytic solution we differentiate
+\eqnref{eqn:OpenCMISSAnalyticDiffusionEquationOneDim1}. The temporal derivative is
+\begin{equation}
+  \delby{u}{t} = \frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}}{L^{2}H^{2}}
+  Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+  \label{eqn:AnalyticDiffusionEquationTwoDim1Velocity}
+\end{equation}
+and the second temporal derivative is
+\begin{equation}
+  \deltwosqby{u}{t} = \frac{\pbrac{16\pi^{4}\sigma^{2}\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}^{2}}{L^{4}H^{4}}
+  Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+  \label{eqn:AnalyticDiffusionEquationTwoDim1Acceleration}
+\end{equation}
+
+For the spatial derivatives we have for the gradient
+\begin{equation}
+  \begin{aligned}
+    \delby{u}{x}&=\dfrac{2\pi\cosine{\phi}}{L}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+    \cosine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}} \\
+    \delby{u}{y}&=\dfrac{2\pi\sine{\phi}}{H}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+    \cosine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+  \end{aligned}
+  \label{eqn:AnalyticDiffusionEquationTwoDim1Gradient}
+\end{equation}
+and for the Hessian
+\begin{equation}
+  \begin{aligned}
+    \deltwosqby{u}{x} &= \dfrac{-4\pi^{2}\cosinesq{\phi}}{L^{2}}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+    \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}} \\
+    \deltwosqby{u}{y}&=\dfrac{-4\pi\sinesq{\phi}}{H^{2}}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+    \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}} \\
+    \deltwoby{u}{x}{y} &= \dfrac{-4\pi^{2}\sine{\phi}\cosine{\phi}}{LH}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+    \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}
+  \end{aligned}
+  \label{eqn:AnalyticDiffusionEquationTwoDim1Hessian}
+\end{equation}
+
+Substiting
+\eqnrefstwo{eqn:AnalyticDiffusionEquationTwoDim1Velocity}{eqn:AnalyticDiffusionEquationTwoDim1Hessian}
+into \eqnref{eqn:OpenCMISSAnalyticDiffusionEquationTwoDim1} gives
+\begin{multline}
+  \delby{u}{t}+\sigma\pbrac{\deltwosqby{u}{x}+\deltwosqby{u}{y}} =\\
+  \frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}}{L^{2}H^{2}}
+  Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}}\\
+  +\sigma\dfrac{-4\pi^{2}\cosinesq{\phi}}{L^{2}}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}} \\
+  +\sigma\dfrac{-4\pi\sinesq{\phi}}{H^{2}}Ae^{\frac{\pbrac{4\pi^{2}\sigma\pbrac{L^{2}\sinesq{\phi}+H^{2}\cosinesq{\phi}}}t}{L^{2}H^{2}}}
+  \sine{\dfrac{2\pi\cosine{\phi}x}{L}+\dfrac{2\pi\sine{\phi}y}{H}} \\
+  =0
+\end{multline}
+
+
+The analytic field component definitions in \OpenCMISS are shown in \tabref{tab:OpenCMISSAnalyticFieldDiffusionEquationTwoDim1}.
+
+\begin{table}[htb] \centering
+  \begin{tabular}{|c|c|} \hline
+    \emph{Analytic constant} & \emph{Analytic field component} \\ \hline \hline
+    $A$ & $1$ \\ 
+    $\phi$ & $2$ \\
+    $L$ & $3$ \\
+    $H$ & $4$ \\ 
+    $\sigma$ & $5$ \\ \hline
+  \end{tabular}
+  \caption{\OpenCMISS analytic field components for the \twod diffusion equation
+    analytic function 1.}
+  \label{tab:OpenCMISSAnalyticFieldDiffusionEquationTwoDim1}
 \end{table}
 
 \subsubsection{Three Dimensional with linear source Analytic Function 1}

@@ -141,52 +141,97 @@ Similarly, the vector $\vectr{v}$ can also be written as
 where $v_{i}$ are the components of the covariant vector, and
 $\generalbasevector^{i}$ are the contravariant base vectors. 
 
-We now note that
-\begin{equation}
-  \vectr{v}=v^{i}\generalbasevector_{i}=v^{i}\sqrt{g_{ii}}\hat{\generalbasevector_{i}}
-\end{equation}
-where $v^{i}\sqrt{g_{ii}}$ are the physical components of the vector and
-$\hat{\generalbasevector_{i}}$ are the unit vectors given by
-\begin{equation}
-  \hat{\generalbasevector_{i}}=\dfrac{\generalbasevector_{i}}{\sqrt{g_{ii}}}
-\end{equation}
-
 \subsection{Metric Tensors}
 \label{sec:metric tensors}
 
 Metric tensors are the inner product of base vectors. If $\generalbasevector_{i}$ are the
 covariant base vectors then the covariant metric tensor is given by
 \begin{equation}
-  g_{ij}=\dotprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+  \generalmetrictensorsymbol_{ij}=\dotprod{\generalbasevector_{i}}{\generalbasevector_{j}}
 \end{equation}
 
 Similarily if $\generalbasevector^{i}$ are the contravariant base vectors then the
 contravariant metric tensor is given by 
 \begin{equation}
-  g^{ij}=\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}
+  \generalmetrictensorsymbol^{ij}=\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}
 \end{equation}
 
 We can also form a mixed metric tensor from the dot product of a contravariant
 and a covariant base vector \ie
 \begin{equation}
-  g^{i}_{.j}=\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}
+  \generalmetrictensorsymbol^{i}_{.j}=\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}
 \end{equation}
 and 
 \begin{equation}
-  g_{i}^{.j}=\dotprod{\generalbasevector_{i}}{\generalbasevector^{j}}
+  \generalmetrictensorsymbol_{i}^{.j}=\dotprod{\generalbasevector_{i}}{\generalbasevector^{j}}
 \end{equation}
 
 Note that for mixed tensors the ``.'' indicates the order of the index \ie
-$g^{i}_{.j}$ indicates that the first index is contravariant and the second
-index is covariant whereas $g_{i}^{.j}$ indicates that the first index is
+$\generalmetrictensorsymbol^{i}_{.j}$ indicates that the first index is contravariant and the second
+index is covariant whereas $\generalmetrictensorsymbol_{i}^{.j}$ indicates that the first index is
 covariant and the second index is contravariant.
 
 If the base vectors are all mutually orthogonal and constant then
-$\generalbasevector_{i}=\generalbasevector^{i}$ and $g_{ij}=g^{ij}$.
+$\generalbasevector_{i}=\generalbasevector^{i}$ and $\generalmetrictensorsymbol_{ij}=\generalmetrictensorsymbol^{ij}$.
 
 The metric tensors generalise (Euclidean) distance \ie
 \begin{equation}
-  ds^{2}=g_{ij}dx^{i}dx^{j}
+  ds^{2}=\generalmetrictensorsymbol_{ij}dx^{i}dx^{j}
+\end{equation}
+
+\subsubsection{Unit basis vectors and the physical components of vectors}
+
+For a vector in generalised coordinates we have
+\begin{equation}
+  \vectr{v}=v^{i}\generalbasevector_{i}=v_{i}\generalbasevector^{i}
+\end{equation}
+where $v^{i}$ and $v_{i}$ are the contra- and co-variant components of the vector with respect to $\generalbasevector_{i}$ and $\generalbasevector^{i}$ the contra- and co-variant base vectors.
+
+To compute the unit generalised contravariant base vectors we must normalise them by their length \ie
+\begin{equation}
+  \hat{\generalbasevector}_{i}=\dfrac{\generalbasevector_{i}}{\norm{\generalbasevector_{i}}}=\dfrac{\generalbasevector_{i}}{\sqrt{\dotprod{\generalbasevector_{i}}{\generalbasevector_{i}}}}=\dfrac{\generalbasevector_{i}}{\sqrt{\generalmetrictensorsymbol_{\pbrac{ii}}}}
+\end{equation}
+
+Note that the brackets around the indicies of $\generalmetrictensorsymbol_{\pbrac{ii}}$ indicate that there is no sum over the index \ie it is the $\nth{ii}$ index of $\flattensor{\generalmetrictensor}$.
+
+We now note that
+\begin{equation}
+  \vectr{v}=v^{i}\generalbasevector_{i}=v^{i}\sqrt{\generalmetrictensorsymbol_{\pbrac{ii}}}\hat{\generalbasevector}_{i}
+\end{equation}
+where
+$\hat{v}^{i}=v^{i}\sqrt{\generalmetrictensorsymbol_{\pbrac{ii}}}$ are
+the contravariant physical components of the vector and
+$\hat{\generalbasevector}_{i}$ are the unit contravariant base vectors
+given by
+\begin{equation}
+  \hat{\generalbasevector}_{i}=\dfrac{\generalbasevector_{i}}{\sqrt{\generalmetrictensorsymbol_{\pbrac{ii}}}}
+\end{equation}
+so that we have
+\begin{equation}
+  \vectr{v}=\hat{v}^{i}\hat{\generalbasevector}_{i}
+\end{equation}
+
+For unit generalised covariant base vectors we have
+\begin{equation}
+  \hat{\generalbasevector}^{i}=\dfrac{\generalbasevector^{i}}{\norm{\generalbasevector^{i}}}=\dfrac{\generalbasevector^{i}}{\sqrt{\dotprod{\generalbasevector^{i}}{\generalbasevector^{i}}}}=\dfrac{\generalbasevector^{i}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}}
+\end{equation}
+where, again, the brackets around the indicies of $\generalmetrictensorsymbol^{\pbrac{ii}}$ indicate that there is no sum over the index \ie it is the $\nth{ii}$ index of $\sharptensor{\generalmetrictensor}$.
+
+We now note that
+\begin{equation}
+  \vectr{v}=v_{i}\generalbasevector^{i}=v_{i}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\hat{\generalbasevector}^{i}
+\end{equation}
+where
+$\hat{v}_{i}=v_{i}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}$ are
+the covariant physical components of the covariant vector and
+$\hat{\generalbasevector}^{i}$ are the unit covariant base vectors
+given by
+\begin{equation}
+  \hat{\generalbasevector}^{i}=\dfrac{\generalbasevector^{i}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}}
+\end{equation}
+so that we have
+\begin{equation}
+  \vectr{v}=\hat{v}_{i}\hat{\generalbasevector}^{i}
 \end{equation}
 
 \subsubsection{Raising and lowering indices}
@@ -194,22 +239,22 @@ The metric tensors generalise (Euclidean) distance \ie
 Note that multiplying by the covariant metric tensor lowers indices \ie
 \begin{equation}
   \begin{split}
-    \vectr{A}_{i} &= g_{ij}\vectr{A}^{j} \\
-    A_{ij} &= g_{ik}g_{jl}A^{kl} = g_{jk}A_{i}^{.k} = g_{ik}A^{k}_{.j} 
+    \vectr{A}_{i} &= \generalmetrictensorsymbol_{ij}\vectr{A}^{j} \\
+    A_{ij} &= \generalmetrictensorsymbol_{ik}\generalmetrictensorsymbol_{jl}A^{kl} = \generalmetrictensorsymbol_{jk}A_{i}^{.k} = \generalmetrictensorsymbol_{ik}A^{k}_{.j} 
   \end{split}
 \end{equation}
 and that multiplying by the contravariant metric tensor raises indices \ie
 \begin{equation}
   \begin{split}
-  \vectr{A}^{i} &=  g^{ij}\vectr{A}_{j} \\
-   A^{ij} &= g^{ik}g^{jl}A_{kl} = g^{ik}A_{k}^{.j} = g^{jk}A^{i}_{.k}
+  \vectr{A}^{i} &=  \generalmetrictensorsymbol^{ij}\vectr{A}_{j} \\
+   A^{ij} &= \generalmetrictensorsymbol^{ik}\generalmetrictensorsymbol^{jl}A_{kl} = \generalmetrictensorsymbol^{ik}A_{k}^{.j} = \generalmetrictensorsymbol^{jk}A^{i}_{.k}
   \end{split}
 \end{equation}
 and for the mixed tensors
 \begin{equation}
   \begin{split}
-  A_{i}^{.j} &= g^{jk}A_{ik} = g_{ik}A^{kj} \\
-  A^{i}_{.j} &= g^{ik}A_{kj} = g_{jk}A^{ik} \\
+  A_{i}^{.j} &= \generalmetrictensorsymbol^{jk}A_{ik} = \generalmetrictensorsymbol_{ik}A^{kj} \\
+  A^{i}_{.j} &= \generalmetrictensorsymbol^{ik}A_{kj} = \generalmetrictensorsymbol_{jk}A^{ik} \\
   \end{split}
 \end{equation}
 
@@ -233,11 +278,11 @@ coordinates in the submanifold and $\fnof{\vectr{x}}{\vectr{\xi}}$ are the
 functions which embedded the submanifold into a larger manifold then the
 induced metric is given by
 \begin{equation}
-  g_{ab}=\delby{x^{\mu}}{\xi^{a}}\delby{x^{\nu}}{\xi^{b}}g_{\mu\nu}
+  \generalmetrictensorsymbol_{ab}=\delby{x^{\mu}}{\xi^{a}}\delby{x^{\nu}}{\xi^{b}}\generalmetrictensorsymbol_{\mu\nu}
 \end{equation}
 where $a, b$ are the coordinate indices in the submanifold, $\mu, \nu$ are the
-coordinate indices in the larger manifold, $g_{\mu\nu}$ are the components of
-the metric tensor in the larger manifold and $g_{ab}$ are the components of
+coordinate indices in the larger manifold, $\generalmetrictensorsymbol_{\mu\nu}$ are the components of
+the metric tensor in the larger manifold and $\generalmetrictensorsymbol_{ab}$ are the components of
 the induced metric in the submanifold.
 
 \subsubsection{Arc length}
@@ -247,7 +292,7 @@ the induced metric in the submanifold.
 The angle between two vectors $\vectr{u}$ and $\vectr{v}$ is given by
 \begin{equation}
   \cos\theta=\dfrac{\dotprod{\vectr{u}}{\vectr{v}}}{\norm{\vectr{u}}\norm{\vectr{v}}}=
-  \dfrac{g_{ij}u^{i}v^{j}}{\sqrt{g_{pq}u^{p}v^{q}}\sqrt{g_{rs}u^{r}v^{s}}}
+  \dfrac{\generalmetrictensorsymbol_{ij}u^{i}v^{j}}{\sqrt{\generalmetrictensorsymbol_{pq}u^{p}v^{q}}\sqrt{\generalmetrictensorsymbol_{rs}u^{r}v^{s}}}
   \label{eqn:AngleBetweenVectors}
 \end{equation}
 
@@ -265,27 +310,27 @@ The transformation rules for tensors in going from a $\vectr{\nu}$ coordinate
 system to a $\vectr{\xi}$ coordinate system are as follows: 
 
 
-For a covariant vector (a rank (0,1) tensor)
+For a covariant vector (a \tensorrank{0}{1} tensor)
 \begin{equation}
   {\tilde{a}}_{i}=\delby{\nu^{a}}{\xi^{i}}a_{a}
 \end{equation}
 
-For a contravariant vector (a rank (1,0) tensor)
+For a contravariant vector (a \tensorrank{1}{0} tensor)
 \begin{equation}
   {\tilde{a}}^{i}=\delby{\xi^{i}}{\nu^{a}}a^{a}
 \end{equation}
 
-For a covariant tensor (a rank (0,2) tensor)
+For a covariant tensor (a \tensorrank{0}{2} tensor)
 \begin{equation}
   {\tilde{A}}_{ij}=\delby{\nu^{a}}{\xi^{i}}\delby{\nu^{b}}{\xi^{j}}A_{ab} 
 \end{equation}
 
-For a contravariant tensor (a rank (2,0) tensor)
+For a contravariant tensor (a \tensorrank{2}{0} tensor)
 \begin{equation}
   {\tilde{A}}^{ij}=\delby{\xi^{i}}{\nu^{a}}\delby{\xi^{j}}{\nu^{b}}A^{ab}
 \end{equation}
 
-and for Mixed tensors (rank (1,1) tensors)
+and for mixed tensors (\tensorrank{1}{1} tensors)
 \begin{equation}
   {\tilde{A}}^{i}_{.j}=\delby{\xi^{i}}{\nu^{a}}\delby{\nu^{b}}{\xi^{j}}A^{a}_{.b}
 \end{equation}
@@ -294,7 +339,7 @@ and
   {\tilde{A}}_{i}^{.j}=\delby{\nu^{a}}{\xi^{i}}\delby{\xi^{j}}{\nu^{b}}A_{a}^{.b}
 \end{equation}
 
-\subsection{Derivatives}
+\subsection{Covariant Derivatives}
 \label{subsec:function derivatives}
 
 \subsubsection{Scalars}
@@ -341,10 +386,9 @@ or in component notation
 \end{equation}
 
 
+\subsubsection{Derivatives of the base vectors}
 
-\subsubsection{Vectors}
-
-The derivatives of a vector $\vectr{v}$ are given by
+Consider the derivative of a vector $\vectr{v}$ with respect to coordinates \ie
 \begin{equation}
   \begin{split}
     \delby{\vectr{v}}{\xi^{i}} &=
@@ -361,6 +405,17 @@ Now introducing the notation
 where $\christoffelsecond{i}{j}{k}$ are the Christoffel symbols of the second
 kind. 
 
+We have
+\begin{equation}
+  \delby{\generalbasevector_{i}}{\xi^{j}}=\christoffelsecond{k}{i}{j}\generalbasevector_{k}
+  \label{eqn:PartialDerivContraBaseVector}
+\end{equation}
+and
+\begin{equation}
+  \delby{\generalbasevector^{i}}{\xi^{j}}=-\christoffelsecond{i}{j}{k}\generalbasevector^{k}
+  \label{eqn:PartialDerivCoBaseVector}  
+\end{equation}
+
 Note that the Christoffel symbols of the first kind are given by
 \begin{equation}
   \christoffelfirst{i}{j}{k} = \dotprod{\generalbasevector_{i}}{\delby{\generalbasevector_{j}}{x^{k}}}
@@ -371,19 +426,19 @@ Note that
   \begin{split}
     \christoffel{i}{j}{k} &= \dotprod{\generalbasevector^{i}}{\partialderiv{\generalbasevector_{j}}{k}} \\
     &=\dotprod{\generalbasevector^{i}}{\christoffelsecond{l}{j}{k}\generalbasevector_{l}} \\
-    &= \christoffel{i}{j}{l}g^{i}_{.l} 
+    &= \christoffel{i}{j}{l}\generalmetrictensorsymbol^{i}_{.l} 
   \end{split}
 \end{equation}
 
 The Christoffel symbols of the first kind are also given by
 \begin{equation}
-  \christoffelfirst{i}{j}{k}=\frac{1}{2}\pbrac{\delby{g_{ij}}{\xi^{k}}+\delby{g_{ik}}{\xi^{j}}-\delby{g_{jk}}{\xi^{i}}}
+  \christoffelfirst{i}{j}{k}=\frac{1}{2}\pbrac{\delby{\generalmetrictensorsymbol_{ij}}{\xi^{k}}+\delby{\generalmetrictensorsymbol_{ik}}{\xi^{j}}-\delby{\generalmetrictensorsymbol_{jk}}{\xi^{i}}}
 \end{equation}
 and that Christoffel symbols of the second kind are given by
 \begin{equation}
   \begin{split}
-    \christoffelsecond{i}{j}{k} &= g^{il}\christoffelfirst{l}{j}{k} \\
-    &= \frac{1}{2}g^{il}\pbrac{\delby{g_{lj}}{\xi^{k}}+\delby{g_{lk}}{\xi^{j}}-\delby{g_{jk}}{\xi^{l}}} 
+    \christoffelsecond{i}{j}{k} &= \generalmetrictensorsymbol^{il}\christoffelfirst{l}{j}{k} \\
+    &= \frac{1}{2}\generalmetrictensorsymbol^{il}\pbrac{\delby{\generalmetrictensorsymbol_{lj}}{\xi^{k}}+\delby{\generalmetrictensorsymbol_{lk}}{\xi^{j}}-\delby{\generalmetrictensorsymbol_{jk}}{\xi^{l}}} 
   \end{split}
 \end{equation}
 
@@ -392,7 +447,7 @@ transformation laws from $\vectr{\nu}$ to $\vectr{\xi}$ coordinates
 \begin{align}
   \christoffelfirst{i}{j}{k} &=
   \christoffelfirst{a}{b}{c}\delby{\nu^{b}}{\xi^{j}}\delby{\nu^{c}}{\xi^{k}}\delby{\nu^{a}}{\xi^{i}}+
-  g_{ab}\delby{\nu^{c}}{\xi^{i}}\deltwoby{\nu^{c}}{\xi^{j}}{\xi^{k}} \\
+  \generalmetrictensorsymbol_{ab}\delby{\nu^{c}}{\xi^{i}}\deltwoby{\nu^{c}}{\xi^{j}}{\xi^{k}} \\
   \christoffelsecond{i}{j}{k} &= \christoffelsecond{a}{b}{c}\delby{\xi^{i}}{\nu^{a}}\delby{\nu^{b}}{\xi^{k}}\delby{\nu^{c}}{\xi^{j}}+
   \delby{\xi^{i}}{\nu^{a}}\deltwoby{\nu^{a}}{\xi^{j}}{\xi^{k}} \\
 \end{align}
@@ -408,54 +463,279 @@ We can now write (BELOW SEEMS WRONG - CHECK)
 \end{equation}
 where $\covarderiv{v^{k}}{i}$ is the covariant derivative of $v^{k}$ . 
 
-The covariant derivative of a contravariant (rank (0,1)) tensor $v^{k}$ is
+\subsubsection{Covariant derivatives of vectors and covectors}
+
+Using
+\eqnrefs{eqn:PartialDerivContraBaseVector}{eqn:PartialDerivCoBaseVector}
+we can obtain the covariant derivatives of vectors and covectors.
+
+The covariant derivative of a vector, \tensorrank{1}{0} tensor, $\vectr{v}=v^{j}\generalbasevector_{j}$, is
 \begin{equation}
-  \covarderiv{v^{k}}{i} =\partialderiv{v^{k}}{i}+\christoffel{k}{i}{j}v^{j}
-\end{equation}
-and the covariant derivative of a covariant tensor  (rank (1,0)) $v_{k}$ is
-\begin{equation}
-  \covarderiv{v_{k}}{i} =\partialderiv{v_{k}}{i}-\christoffel{j}{k}{i}v_{j}
+  \begin{split}
+    \covarderiv{\vectr{v}}{i}&=\tensorprod{\covarderiv{\pbrac{v^{j}\generalbasevector_{j}}}{i}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{v^{j}}{i}\generalbasevector_{j}+v^{j}\partialderiv{\generalbasevector_{j}}{i}}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{v^{j}}{i}\generalbasevector_{j}+v^{j}\christoffelsecond{k}{j}{i}\generalbasevector_{k}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{v^{j}}{i}+v^{k}\christoffelsecond{j}{k}{i}}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{i}}\\
+    &=\covarderiv{v^{j}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivVector}
 \end{equation}
 
-\subsubsection{Tensors}
+The covariant derivative of a covector, \tensorrank{0}{1} tensor, $\covectr{v}=v_{j}\generalbasevector^{j}$, is
+\begin{equation}
+  \begin{split}
+    \covarderiv{\covectr{v}}{i}&=\tensorprod{\covarderiv{\pbrac{v_{j}\generalbasevector^{j}}}{i}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{v_{j}}{i}\generalbasevector^{j}+v_{j}\partialderiv{\generalbasevector^{j}}{i}}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{v_{j}}{i}\generalbasevector^{j}-v_{j}\christoffelsecond{j}{i}{k}\generalbasevector^{k}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{v_{j}}{i}-v_{k}\christoffelsecond{k}{i}{j}}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{i}}\\
+    &=\covarderiv{v_{j}}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivCovector}
+\end{equation}
 
-The covariant derivative of a contravariant (rank (0,2)) tensor $W^{mn}$ is
+\subsubsection{Covariant derivatives of second order tensors}
+
+Using
+\eqnrefs{eqn:PartialDerivContraBaseVector}{eqn:PartialDerivCoBaseVector}
+we can obtain the covariant derivatives of second order tensors.
+
+The covariant derivative of a \tensorrank{2}{0} tensor $\tensortwo{A}=A^{jk}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}$ is
 \begin{equation}
-  \covarderiv{W^{mn}}{i}=\partialderiv{W^{mn}}{i}+\christoffel{m}{j}{i}W^{jn}+\christoffel{n}{j}{i}W^{mj}
+  \begin{split}
+    \covarderiv{\tensortwo{A}}{i}&=\tensorprod{\covarderiv{\pbrac{A^{jk}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}}}{i}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{A^{jk}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}
+    +A^{jk}\tensorprod{\partialderiv{\generalbasevector_{j}}{i}}{\generalbasevector_{k}}
+    +A^{jk}\tensorprod{\generalbasevector_{j}}{\partialderiv{\generalbasevector_{k}}{i}}}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{A^{jk}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}
+    +A^{jk}\christoffelsecond{l}{j}{i}\tensorprod{\generalbasevector_{l}}{\generalbasevector_{k}}
+    +A^{jk}\christoffelsecond{l}{k}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{l}}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{A^{jk}}{i}+A^{lk}\christoffelsecond{j}{l}{i}+A^{jl}\christoffelsecond{k}{l}{j}}
+    \tensorprodthree{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector^{i}}\\
+    &=\covarderiv{A^{jk}}{i}\tensorprodthree{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivContraContraTensor}
 \end{equation}
-and the covariant derivative of a covariant (rank (2,0)) tensor $W_{mn}$ is
+
+The covariant derivative of a \tensorrank{0}{2} tensor $\tensortwo{A}=A_{jk}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}$ is
 \begin{equation}
-  \covarderiv{W_{mn}}{i}=\partialderiv{W_{mn}}{i}-\christoffel{j}{m}{i}W_{jn}-\christoffel{j}{n}{i}W_{mj}
+  \begin{split}
+    \covarderiv{\tensortwo{A}}{i}&=\tensorprod{\covarderiv{\pbrac{A_{jk}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}}}{i}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{A_{jk}}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}
+    +A_{jk}\tensorprod{\partialderiv{\generalbasevector^{j}}{i}}{\generalbasevector^{k}}
+    +A_{jk}\tensorprod{\generalbasevector^{j}}{\partialderiv{\generalbasevector^{k}}{i}}}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{A^{jk}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}
+    -A_{jk}\christoffelsecond{j}{i}{l}\tensorprod{\generalbasevector^{l}}{\generalbasevector^{k}}
+    -A_{jk}\christoffelsecond{k}{i}{l}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{l}}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{A_{jk}}{i}-A_{lk}\christoffelsecond{l}{i}{j}-A_{jl}\christoffelsecond{l}{i}{k}}
+    \tensorprodthree{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}\\
+    &=\covarderiv{A_{jk}}{i}\tensorprodthree{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivCoCoTensor}
 \end{equation}
-and the covariant derivative of a mixed (rank (1,1)) tensor $W^{m}_{.n}$ is
+
+The covariant derivative of the \tensorrank{1}{1} tensor $\tensortwo{A}=A^{j}_{.k}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}$ is
 \begin{equation}
-  \covarderiv{W^{m}_{.n}}{i}=\partialderiv{W^{m}_{.n}}{i}+\christoffel{m}{j}{i}W^{j}_{.n}-\christoffel{j}{n}{i}W^{m}_{.j}
+  \begin{split}
+    \covarderiv{\tensortwo{A}}{i}&=\tensorprod{\covarderiv{\pbrac{A^{j}_{.k}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}}}{i}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{A^{j}_{.k}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}
+    +A^{j}_{.k}\tensorprod{\partialderiv{\generalbasevector_{j}}{i}}{\generalbasevector^{k}}
+    +A^{j}_{.k}\tensorprod{\generalbasevector_{j}}{\partialderiv{\generalbasevector^{k}}{i}}}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{A^{j}_{.k}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}
+    +A^{j}_{.k}\christoffelsecond{l}{j}{i}\tensorprod{\generalbasevector_{l}}{\generalbasevector^{k}}
+    -A^{j}_{.k}\christoffelsecond{k}{i}{l}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{l}}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{A^{j}_{.k}}{i}+A^{l}_{.k}\christoffelsecond{j}{l}{i}-A^{j}_{.l}\christoffelsecond{l}{i}{k}}
+    \tensorprodthree{\generalbasevector_{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}\\
+    &=\covarderiv{A^{j}_{.k}}{i}\tensorprodthree{\generalbasevector_{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivContraCoTensor}
+\end{equation}
+
+The covariant derivative of the \tensorrank{1}{1} tensor $\tensortwo{A}=A_{j}^{.k}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}$ is
+\begin{equation}
+  \begin{split}
+    \covarderiv{\tensortwo{A}}{i}&=\tensorprod{\covarderiv{\pbrac{A_{j}^{.k}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}}}{i}}{\generalbasevector^{i}}\\
+    &=\tensorprod{\pbrac{\partialderiv{A_{j}^{.k}}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}
+    +A_{j}^{.k}\tensorprod{\partialderiv{\generalbasevector^{j}}{i}}{\generalbasevector_{k}}
+    +A_{j}^{.k}\tensorprod{\generalbasevector^{j}}{\partialderiv{\generalbasevector_{k}}{i}}}}{\generalbasevector^{i}} \\
+    &=\tensorprod{\pbrac{\partialderiv{A_{j}^{.k}}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}
+    -A_{j}^{.k}\christoffelsecond{j}{i}{l}\tensorprod{\generalbasevector^{l}}{\generalbasevector_{k}}
+    +A_{j}^{.k}\christoffelsecond{l}{k}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{l}}}}{\generalbasevector^{i}}\\
+    &=\pbrac{\partialderiv{A_{j}^{.k}}{i}-A_{l}^{.k}\christoffelsecond{l}{j}{i}+A_{j}^{.l}\christoffelsecond{k}{l}{i}}
+    \tensorprodthree{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{i}}\\
+    &=\covarderiv{A^{j}_{.k}}{i}\tensorprodthree{\generalbasevector_{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:CovariantDerivCoContraTensor}
 \end{equation}
 
 \subsection{Common Operators}
-
-For tensor equations to hold in any coordinate system the equations must
-involve tensor quantities \ie covariant derivatives rather than partial derivatives.
 
 \subsubsection{Gradient}
 
 As the covariant derivative of a scalar is just the partial derivative the
 gradient of a scalar function $\phi$ using covariant derivatives is
 \begin{equation}
-  \gradop \phi = \gradient{}{\phi}=\covarderiv{\phi}{i}\generalbasevector^{i}=\partialderiv{\phi}{i}\generalbasevector^{i}
+  \gradop \phi = \gradient{}{\phi}=\covarderiv{\phi}{i}\generalbasevector^{i}=\partialderiv{\phi}{i}\generalbasevector^{i}=\partialderiv{\phi}{i}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\hat{\generalbasevector}^{i}
+\end{equation}
+with respect to covariant base vectors, or, with respect to contravariant base vectors, we have
+\begin{equation}
+  \gradient{}{\phi}=\partialderiv{\phi}{i}\generalbasevector^{i}=\partialderiv{\phi}{i}\generalmetrictensorsymbol^{ij}\generalbasevector_{j}=\partialderiv{\phi}{i}\generalmetrictensorsymbol^{ij}\sqrt{\generalmetrictensorsymbol_{\pbrac{ii}}}\hat{\generalbasevector}_{j}
+\end{equation}
+
+The gradient of a scalar, \tensorrank{0}{0} tensor, is
+\begin{equation}
+  \begin{split}
+    \gradient{\hat{\vectr{x}}}{\phi}&=\delby{\phi}{x^{i}}\hat{\generalbasevector}^{i}\\
+    &=\delby{\phi}{x^{i}}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\generalbasevector^{i}
+  \end{split}
+  \label{eqn:GradientScalar}
+\end{equation}
+
+The gradient of a contravariant vector, \tensorrank{1}{0} tensor, is
+\begin{equation}
+  \begin{split}
+    \gradient{\hat{\vectr{x}}}{\vectr{v}}&=\tensorprod{\covarderiv{\pbrac{v^{j}\generalbasevector_{j}}}{i}}{\hat{\generalbasevector}^{i}}
+    =\tensorprod{\pbrac{\covarderiv{v^{j}}{i}\generalbasevector_{j}+v^{j}\covarderiv{\generalbasevector_{j}}{i}}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\generalbasevector^{i}}\\
+    &=\pbrac{\delby{v^{j}}{x^{i}}+v^{k}\christoffelsecond{j}{k}{i}}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:GradientContraVector}
+\end{equation}
+and the gradient of a covariant vector, \tensorrank{0}{1} tensor, is
+\begin{equation}
+  \begin{split}
+    \gradient{\hat{\vectr{x}}}{\vectr{v}}&=\tensorprod{\covarderiv{\pbrac{v_{j}\generalbasevector^{j}}}{i}}{\hat{\generalbasevector}^{i}}
+    =\tensorprod{\pbrac{\covarderiv{v_{j}}{i}\generalbasevector^{j}+v_{j}\covarderiv{\generalbasevector^{j}}{i}}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\generalbasevector^{i}}\\
+    &=\pbrac{\delby{v_{j}}{x^{i}}-v_{k}\christoffelsecond{k}{j}{i}}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:GradientCoVector}
+\end{equation}
+
+The gradient of a \tensorrank{2}{0} order tensor is
+\begin{equation}
+  \begin{split}
+    \gradient{\hat{\vectr{x}}}{\tensortwo{A}}&=\tensorprod{\covarderiv{\pbrac{A^{jk}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}}}{i}}{\hat{\generalbasevector}^{i}}
+    =\tensorprod{\pbrac{\covarderiv{A^{jk}}{i}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}+A^{jk}\tensorprod{\covarderiv{\generalbasevector_{j}}{i}}{\generalbasevector_{k}}+A^{jk}\tensorprod{\generalbasevector_{j}}{\covarderiv{\generalbasevector_{k}}{i}}}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\generalbasevector^{i}}\\
+    &=\pbrac{\delby{A^{jk}}{x^{i}}+A^{lk}\christoffelsecond{j}{l}{i}+A^{jl}\christoffelsecond{k}{l}{j}}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\tensorprodthree{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:GradientContraContraTensor}
+\end{equation}
+
+The gradient of a \tensorrank{0}{2} order tensor is
+\begin{equation}
+  \begin{split}
+    \gradient{\hat{\vectr{x}}}{\tensortwo{A}}&=\tensorprod{\covarderiv{\pbrac{A_{jk}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}}}{i}}{\hat{\generalbasevector}^{i}}
+    =\tensorprod{\pbrac{\covarderiv{A_{jk}}{i}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}+A_{jk}\tensorprod{\covarderiv{\generalbasevector^{j}}{i}}{\generalbasevector^{k}}+A_{jk}\tensorprod{\generalbasevector^{j}}{\covarderiv{\generalbasevector^{k}}{i}}}}{\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\generalbasevector^{i}}\\
+    &=\pbrac{\delby{A_{jk}}{x^{i}}-A_{lk}\christoffelsecond{l}{i}{j}-A_{jl}\christoffelsecond{l}{i}{k}}\sqrt{\generalmetrictensorsymbol^{\pbrac{ii}}}\tensorprodthree{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}
+  \end{split}
+  \label{eqn:GradientCoCoTensor}
+\end{equation}
+
+The gradient of the \tensorrank{1}{1} order tensors are
+\begin{equation}
+  \gradient{}{\tensortwo{A}}=\tensorprod{\delby{\pbrac{A^{j}_{.k}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}}}{x^{i}}}{\generalbasevector^{i}}=\pbrac{\delby{A^{j}_{.k}}{x^{i}}+A^{l}_{.k}\christoffelsecond{j}{l}{i}-A^{j}_{.l}\christoffelsecond{l}{i}{k}}\tensorprodthree{\generalbasevector_{j}}{\generalbasevector^{k}}{\generalbasevector^{i}}
+  \label{eqn:GradientContraCoTensor}
 \end{equation}
 and
 \begin{equation}
-  \gradient{}{\phi}=\partialderiv{\phi}{i}\generalbasevector^{i}=\partialderiv{\phi}{i}g^{ij}\generalbasevector_{j}
+  \gradient{}{\tensortwo{A}}=\tensorprod{\delby{\pbrac{A_{j}^{.k}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}}}{x^{i}}}{\generalbasevector^{i}}=\pbrac{\delby{A_{j}^{.k}}{x^{i}}-A_{l}^{.k}\christoffelsecond{l}{j}{i}+A_{j}^{.l}\christoffelsecond{k}{l}{i}}\tensorprodthree{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{i}}
+  \label{eqn:GradientCoContraTensor}
 \end{equation}
 
 \subsubsection{Divergence}
 
 The divergence of a vector using covariant derivatives is
 \begin{equation}
-  \divop \vectr{\phi} = \divergence{}{\vectr{\phi}}=\covarderiv{\phi^{i}}{i}=\frac{1}{\sqrt{\abs{g}}}\partialderiv{\pbrac{\sqrt{\abs{g}}\phi^{i}}}{i}
+  \divop \vectr{\phi} = \divergence{}{\vectr{\phi}}=\covarderiv{\phi^{i}}{i}=\frac{1}{\sqrt{\abs{\generalmetrictensorsymbol}}}\partialderiv{\pbrac{\sqrt{\abs{\generalmetrictensorsymbol}}\phi^{i}}}{i}
 \end{equation}
-where $g$ is the determinant of the covariant metric tensor $g_{ij}$.
+where $\generalmetrictensorsymbol$ is the determinant of the covariant metric tensor $\generalmetrictensorsymbol_{ij}$.
+
+Note that 
+\begin{equation}
+  \christoffel{i}{i}{j}=\dfrac{1}{\sqrt{\abs{\generalmetrictensorsymbol}}}\partialderiv{\pbrac{\sqrt{\abs{\generalmetrictensorsymbol}}}}{j}
+\end{equation}
+
+The divergence for a scalar, or \tensorrank{0}{0} tensor, does not exist.
+
+The divergence of a \tensorrank{1}{0} tensor is
+\begin{equation}
+  \begin{split}
+    \divergence{}{\vectr{v}}&=\dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{v^{j}\generalbasevector_{j}}\\
+    &=\dotprod{\generalbasevector^{i}}{\covarderiv{\pbrac{v^{j}\generalbasevector_{j}}}{i}}\\
+    &=\covarderiv{v^{j}}{i}\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}+v^{j}\dotprod{\generalbasevector^{i}}{\covarderiv{\generalbasevector_{j}}{i}} \\
+    &=\covarderiv{v^{j}}{i}\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}+v^{j}\christoffelsecond{k}{j}{i}\dotprod{\generalbasevector^{i}}{\generalbasevector_{k}}\\
+    &=\covarderiv{v^{j}}{i}\mixedkronecker{i}{j}+v^{j}\christoffelsecond{k}{j}{i}\mixedkronecker{i}{k}\\
+    &=\delby{v^{i}}{x^{i}}+v^{j}\christoffelsecond{i}{j}{i}
+  \end{split}
+  \label{eqn:DivergenceContraVector}
+\end{equation}
+
+The divergence of a \tensorrank{0}{1} tensor is
+\begin{equation}
+  \begin{split}
+    \divergence{}{\vectr{v}}&=\dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{v_{j}\generalbasevector^{j}}\\
+    &=\dotprod{\generalbasevector^{i}}{\covarderiv{\pbrac{v_{j}\generalbasevector^{j}}}{i}}\\
+    &=\covarderiv{v_{j}}{i}\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}+v_{j}\dotprod{\generalbasevector^{i}}{\covarderiv{\generalbasevector^{j}}{i}} \\
+    &=\covarderiv{v_{j}}{i}\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}-v_{j}\christoffelsecond{j}{i}{k}\dotprod{\generalbasevector^{i}}{\generalbasevector^{k}}\\
+    &=\covarderiv{v_{j}}{i}\generalmetrictensorsymbol^{ij}-v_{j}\christoffelsecond{j}{i}{k}\generalmetrictensorsymbol^{ik}\\
+    &=\covarderiv{v_{j}}{i}\generalmetrictensorsymbol^{ij}-v_{k}\christoffelsecond{k}{i}{j}\generalmetrictensorsymbol^{ij}\\
+    &=\pbrac{\delby{v_{j}}{x^{i}}-v_{k}\christoffelsecond{k}{i}{j}}\generalmetrictensorsymbol^{ij}
+  \end{split}
+  \label{eqn:DivergenceCoVector}
+\end{equation}
+
+The divergence of a \tensorrank{2}{0} tensor is
+\begin{equation}
+  \begin{split}
+    \divergence{}{\tensortwo{A}}&=\dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{A^{jk}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}}\\
+    &=\dotprod{\generalbasevector^{i}}{\covarderiv{\pbrac{A^{jk}\tensorprod{\generalbasevector_{j}}{\generalbasevector_{k}}}}{i}}\\
+    &=\covarderiv{A^{jk}}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}}\generalbasevector_{k}+A^{jk}\pbrac{\dotprod{\generalbasevector^{i}}{\covarderiv{\generalbasevector_{j}}{i}}}\generalbasevector_{k}+A^{jk}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}}\covarderiv{\generalbasevector_{k}}{i} \\
+    &=\covarderiv{A^{jk}}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}}\generalbasevector_{k}+A^{jk}\christoffelsecond{l}{j}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{l}}}\generalbasevector_{k}+A^{jk}\christoffelsecond{l}{k}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}}\generalbasevector_{l} \\
+    &=\covarderiv{A^{jk}}{i}\mixedkronecker{i}{j}\generalbasevector_{k}+A^{jk}\christoffelsecond{l}{j}{i}\mixedkronecker{i}{l}\generalbasevector_{k}+A^{jk}\christoffelsecond{l}{k}{i}\mixedkronecker{i}{j}\generalbasevector_{l}\\
+    &=\delby{A^{ik}}{i}\generalbasevector_{k}+A^{jk}\christoffelsecond{i}{j}{i}\generalbasevector_{k}+A^{ik}\christoffelsecond{l}{k}{i}\generalbasevector_{l}\\
+    &=\pbrac{\delby{A^{ik}}{x^{i}}+A^{jk}\christoffelsecond{i}{j}{i}+A^{il}\christoffelsecond{k}{l}{i}}\generalbasevector_{k}
+  \end{split}
+  \label{eqn:DivergenceContraContraTensor}
+\end{equation}
+
+The divergence of a \tensorrank{0}{2} tensor is
+\begin{equation}
+  \begin{split}
+    \divergence{}{\tensortwo{A}}&=
+    \dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{A_{jk}\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}}=
+    \covarderiv{A_{jk}}{i}\dotprod{\generalbasevector^{i}}{\tensorprod{\generalbasevector^{j}}{\generalbasevector^{k}}}=
+    \covarderiv{A_{jk}}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}}\generalbasevector^{k} \\
+    &=\covarderiv{A_{jk}}{i}\generalmetrictensorsymbol^{ij}\generalbasevector^{k}=
+    \pbrac{\delby{A_{jk}}{x^{i}}-A_{lk}\christoffelsecond{l}{i}{j}-A_{jl}\christoffelsecond{l}{i}{k}}\generalmetrictensorsymbol^{ij}\generalbasevector^{k}\\
+    &=\pbrac{\delby{A_{jk}}{x^{i}}-A_{lk}\christoffelsecond{l}{i}{j}-A_{jl}\christoffelsecond{l}{i}{k}}\generalmetrictensorsymbol^{ij}\generalbasevector^{k}
+  \end{split}
+  \label{eqn:DivergenceCoCoTensor}
+\end{equation}
+
+The divergence of the \tensorrank{1}{1} tensors are
+\begin{equation}
+  \begin{split}
+    \divergence{}{\tensortwo{A}}&=
+    \dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{A^{j}_{.k}\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}}=
+    \covarderiv{A^{j}_{.k}}{i}\dotprod{\generalbasevector^{i}}{\tensorprod{\generalbasevector_{j}}{\generalbasevector^{k}}}=
+    \covarderiv{A^{j}_{.k}}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}}\generalbasevector^{k} \\
+    &=\covarderiv{A^{j}_{.k}}{i}\mixedkronecker{i}{j}\generalbasevector^{k}=
+    \pbrac{\delby{A^{j}_{.k}}{x^{i}}+A^{l}_{.k}\christoffelsecond{j}{l}{i}-A^{j}_{.l}\christoffelsecond{l}{i}{k}}\mixedkronecker{i}{j}\generalbasevector^{k}\\
+    &=\pbrac{\delby{A^{i}_{.k}}{x^{i}}+A^{l}_{.k}\christoffelsecond{i}{l}{i}-A^{i}_{.l}\christoffelsecond{l}{i}{k}}\generalbasevector^{k}
+  \end{split}
+  \label{eqn:DivergenceContraCoTensor}
+\end{equation}
+and
+\begin{equation}
+  \begin{split}
+    \divergence{}{\tensortwo{A}}&=
+    \dotprod{\covarderiv{\pbrac{\cdot}}{i}\generalbasevector^{i}}{A_{j}^{.k}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}}=
+    \covarderiv{A_{j}^{.k}}{i}\dotprod{\generalbasevector^{i}}{\tensorprod{\generalbasevector^{j}}{\generalbasevector_{k}}}=
+    \covarderiv{A_{j}^{.k}}{i}\pbrac{\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}}\generalbasevector_{k} \\
+    &=\covarderiv{A_{j}^{.k}}{i}\generalmetrictensorsymbol^{ij}\generalbasevector_{k}=
+    \pbrac{\delby{A_{j}^{.k}}{x^{i}}-A_{l}^{.k}\christoffelsecond{l}{j}{i}+A_{j}^{.l}\christoffelsecond{k}{l}{i}}\generalmetrictensorsymbol^{ij}\generalbasevector_{k}\\
+    &=\pbrac{\delby{A_{j}^{.k}}{x^{i}}-A_{l}^{.k}\christoffelsecond{l}{j}{i}+A_{j}^{.l}\christoffelsecond{k}{l}{i}}\generalmetrictensorsymbol^{ij}\generalbasevector_{k}
+  \end{split}
+  \label{eqn:DivergenceCoContraTensor}
+\end{equation}
 
 \subsubsection{Curl}
 
@@ -463,31 +743,31 @@ The curl of a vector using covariant derivatives is
 \begin{equation}
   \curlop \vectr{\phi} = \curl{}{\vectr{\phi}}=\frac{1}{\sqrt{g}}\pbrac{\covarderiv{\phi_{j}}{i}-\covarderiv{\phi_{i}}{j}}\generalbasevector_{k}
 \end{equation}
-where $g$ is the determinant of the covariant metric tensor $g_{ij}$.
+where $g$ is the determinant of the covariant metric tensor $\generalmetrictensorsymbol_{ij}$.
 
 \subsubsection{Laplacian}
 
 The Laplacian of a scalar using covariant derivatives is
 \begin{equation}
   \begin{aligned}
-    \laplacian{}{\phi}&=\divop\pbrac{\gradop\phi}=\divergence{}{\gradient{}{\phi}}=\mixedderiv{\phi}{i}{i}=\frac{1}{\sqrt{g}}\partialderiv{\pbrac{\sqrt{g}g^{ij}\partialderiv{\phi}{j}}}{i}\\
-    &=g^{ij}\pbrac{\deltwoby{\phi}{x^{i}}{x^{j}}-\christoffel{k}{i}{j}\delby{\phi}{x^{k}}}
+    \laplacian{}{\phi}&=\divop\pbrac{\gradop\phi}=\divergence{}{\gradient{}{\phi}}=\mixedderiv{\phi}{i}{i}=\frac{1}{\sqrt{g}}\partialderiv{\pbrac{\sqrt{g}\generalmetrictensorsymbol^{ij}\partialderiv{\phi}{j}}}{i}\\
+    &=\generalmetrictensorsymbol^{ij}\pbrac{\deltwoby{\phi}{x^{i}}{x^{j}}-\christoffel{k}{i}{j}\delby{\phi}{x^{k}}}
   \end{aligned}
 \end{equation}
-where $g$ is the determinant of the covariant metric tensor $g_{ij}$ \ie $g=\determinant{\flattensor{\tensortwo{g}}}$.
+where $g$ is the determinant of the covariant metric tensor $\generalmetrictensorsymbol_{ij}$ \ie $g=\determinant{\flattensor{\tensortwo{g}}}$.
 
 The Laplacian of a vector using covariant derivatives is
 \begin{equation}
   \laplacian{}{\vectr{\phi}}=\gradop\pbrac{\divop\vectr{\phi}}-\curlop \pbrac{\curlop\vectr{\phi}}=\mixedderiv{\vectr{\phi}}{i}{i}
 \end{equation}
 
-The Laplacian of a contravariant (rank (0,1)) tensor $\phi^{k}$ is
+The Laplacian of a contravariant (\tensorrank{0}{1}) tensor $\phi^{k}$ is
 \begin{equation}
-  \laplacian{}{\vectr{\phi}}=\pbrac{\laplacian{}{\phi_{k}}-2g^{ij}\christoffel{K}{j}{H}\delby{\phi^{h}}{x^{i}}+\phi^{h}\delby{g^{ij}\christoffel{K}{i}{j}}{x^{h}}}\vectr{e}^{k}
+  \laplacian{}{\vectr{\phi}}=\pbrac{\laplacian{}{\phi_{k}}-2\generalmetrictensorsymbol^{ij}\christoffel{K}{j}{H}\delby{\phi^{h}}{x^{i}}+\phi^{h}\delby{\generalmetrictensorsymbol^{ij}\christoffel{K}{i}{j}}{x^{h}}}\vectr{e}^{k}
 \end{equation}
-and the covariant derivative of a covariant tensor  (rank (1,0)) $\phi_{k}$ is
+and the covariant derivative of a covariant tensor  (\tensorrank{1}{0}) $\phi_{k}$ is
 \begin{equation}
-  \laplacian{}{\vectr{\phi}}=\pbrac{\laplacian{}{\phi_{k}}-2g^{ij}\christoffel{h}{j}{k}\delby{\phi_{h}}{x^{i}}+\phi_{h}g^{ij}\delby{\christoffel{h}{i}{j}}{x^{i}}}\vectr{e}_{k}
+  \laplacian{}{\vectr{\phi}}=\pbrac{\laplacian{}{\phi_{k}}-2\generalmetrictensorsymbol^{ij}\christoffel{h}{j}{k}\delby{\phi_{h}}{x^{i}}+\phi_{h}\generalmetrictensorsymbol^{ij}\delby{\christoffel{h}{i}{j}}{x^{i}}}\vectr{e}_{k}
 \end{equation}
 
 \section{Lie Derivatives}
@@ -704,8 +984,8 @@ then the components of this tensor are given by
 From \eqnref{eqn:DefinitionIdentitySecondOrder}, the definition of the components of the identity tensor are thus given by
 \begin{equation}
   \begin{aligned}
-    I^{ij}&=\generalbasevector^{i}\tensortwo{I}\generalbasevector^{j}=\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}=g^{ij} \\
-    I_{ij}&=\generalbasevector_{i}\tensortwo{I}\generalbasevector_{j}=\dotprod{\generalbasevector_{i}}{\generalbasevector_{j}}=g_{ij}  \\
+    I^{ij}&=\generalbasevector^{i}\tensortwo{I}\generalbasevector^{j}=\dotprod{\generalbasevector^{i}}{\generalbasevector^{j}}=\generalmetrictensorsymbol^{ij} \\
+    I_{ij}&=\generalbasevector_{i}\tensortwo{I}\generalbasevector_{j}=\dotprod{\generalbasevector_{i}}{\generalbasevector_{j}}=\generalmetrictensorsymbol_{ij}  \\
     I^{i}_{.j}&=\generalbasevector^{i}\tensortwo{I}\generalbasevector_{j}=\dotprod{\generalbasevector^{i}}{\generalbasevector_{j}}=\mixedkronecker{i}{.j} \\
     I^{.i}_{j}&=\generalbasevector_{j}\tensortwo{I}\generalbasevector^{i}=\dotprod{\generalbasevector_{j}}{\generalbasevector^{i}}=\mixedkronecker{.i}{j}    
   \end{aligned}
@@ -723,7 +1003,7 @@ The second order \emph{identity tensor} is thus given by
 We also have
 \begin{equation}
   \begin{aligned}
-    \flattensor{\identitytensortwo}&=g_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}} \\
+    \flattensor{\identitytensortwo}&=\generalmetrictensorsymbol_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}} \\
     &=I_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}} \\
     &=\flattensor{\tensortwo{g}}
   \end{aligned}
@@ -731,7 +1011,7 @@ We also have
 and
 \begin{equation}
   \begin{aligned}
-    \sharptensor{\identitytensortwo}&=g^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}  \\
+    \sharptensor{\identitytensortwo}&=\generalmetrictensorsymbol^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}  \\
     &=I^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
     &=\sharptensor{\tensortwo{g}}
   \end{aligned}
@@ -790,11 +1070,11 @@ have
 
 In component form the defintion of the transpose is
 \begin{equation}
-  \dotprod{\vectr{a}}{\tensortwo{A}\vectr{b}}=\dotprod{a^{i}\generalbasevector_{i}}{A_{ij}\tensorprod{\vectr{g^{i}}}{\vectr{g^{j}}}}b^{j}\generalbasevector_{j}=a^{i}A_{ij}b^{j}=b^{j}\pbrac{\transpose{A}}_{ji}a^{i}=\dotprod{b^{j}\generalbasevector_{j}}{\pbrac{\transpose{A}}_{ji}\tensorprod{\vectr{g^{j}}}{\vectr{g^{i}}}}a^{i}\generalbasevector_{i}=\dotprod{\vectr{b}}{\transpose{\tensortwo{A}}\vectr{a}}
+  \dotprod{\vectr{a}}{\tensortwo{A}\vectr{b}}=\dotprod{a^{i}\generalbasevector_{i}}{A_{ij}\tensorprod{\vectr{\generalmetrictensorsymbol^{i}}}{\vectr{\generalmetrictensorsymbol^{j}}}}b^{j}\generalbasevector_{j}=a^{i}A_{ij}b^{j}=b^{j}\pbrac{\transpose{A}}_{ji}a^{i}=\dotprod{b^{j}\generalbasevector_{j}}{\pbrac{\transpose{A}}_{ji}\tensorprod{\vectr{\generalmetrictensorsymbol^{j}}}{\vectr{\generalmetrictensorsymbol^{i}}}}a^{i}\generalbasevector_{i}=\dotprod{\vectr{b}}{\transpose{\tensortwo{A}}\vectr{a}}
 \end{equation}
 for $\sharptensor{\tensortwo{A}}$ and
 \begin{equation}
-  \dotprod{\vectr{a}}{\tensortwo{A}\vectr{b}}=\dotprod{a_{i}\generalbasevector^{i}}{A^{ij}\tensorprod{\vectr{g_{i}}}{\vectr{g_{j}}}}b_{j}\generalbasevector^{j}=a_{i}A^{ij}b_{j}=b_{j}\pbrac{\transpose{A}}^{ji}a_{i}=\dotprod{b_{j}\generalbasevector^{j}}{\pbrac{\transpose{A}}^{ji}\tensorprod{\vectr{g_{j}}}{\vectr{g_{i}}}}a_{i}\generalbasevector^{i}=\dotprod{\vectr{b}}{\transpose{\tensortwo{A}}\vectr{a}}
+  \dotprod{\vectr{a}}{\tensortwo{A}\vectr{b}}=\dotprod{a_{i}\generalbasevector^{i}}{A^{ij}\tensorprod{\vectr{\generalmetrictensorsymbol_{i}}}{\vectr{\generalmetrictensorsymbol_{j}}}}b_{j}\generalbasevector^{j}=a_{i}A^{ij}b_{j}=b_{j}\pbrac{\transpose{A}}^{ji}a_{i}=\dotprod{b_{j}\generalbasevector^{j}}{\pbrac{\transpose{A}}^{ji}\tensorprod{\vectr{\generalmetrictensorsymbol_{j}}}{\vectr{\generalmetrictensorsymbol_{i}}}}a_{i}\generalbasevector^{i}=\dotprod{\vectr{b}}{\transpose{\tensortwo{A}}\vectr{a}}
 \end{equation}
 for $\flattensor{\tensortwo{A}}$.
 
@@ -816,8 +1096,8 @@ $\trace{}{\tensor{A}}$, is given by
 Or, in component form
 \begin{equation}
   \begin{aligned}
-    \trace{}{\tensortwo{A}}&=\doubledotprod{\flattensor{\tensortwo{I}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{\flattensor{\tensortwo{g}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{g_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}}}{A^{kl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}}=g_{ij}A^{ij}\\
-    &=\doubledotprod{\sharptensor{\tensortwo{I}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{\sharptensor{\tensortwo{g}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{g^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}}{A_{kl}\tensorprod{\generalbasevector^{k}}{\generalbasevector^{l}}}=g^{ij}A_{ij}\\
+    \trace{}{\tensortwo{A}}&=\doubledotprod{\flattensor{\tensortwo{I}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{\flattensor{\tensortwo{g}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{\generalmetrictensorsymbol_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}}}{A^{kl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}}=\generalmetrictensorsymbol_{ij}A^{ij}\\
+    &=\doubledotprod{\sharptensor{\tensortwo{I}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{\sharptensor{\tensortwo{g}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{\generalmetrictensorsymbol^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}}{A_{kl}\tensorprod{\generalbasevector^{k}}{\generalbasevector^{l}}}=\generalmetrictensorsymbol^{ij}A_{ij}\\
     &=\doubledotprod{\tensortwo{I}}{\tensortwo{A}}=\doubledotprod{\mixedkronecker{i}{.j}\tensorprod{\generalbasevector_{i}}{\generalbasevector^{j}}}{A^{k}_{.l}\tensorprod{\generalbasevector_{k}}{\generalbasevector^{l}}}=\mixedkronecker{i}{.j}A^{j}_{.i}=A^{i}_{.i} \\
     &=\doubledotprod{\tensortwo{I}}{\tensortwo{A}}=\doubledotprod{\mixedkronecker{.i}{j}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{i}}}{A^{.k}_{l}\tensorprod{\generalbasevector^{l}}{\generalbasevector_{k}}}=\mixedkronecker{.i}{j}A^{.j}_{i}=A^{.i}_{i}
   \end{aligned}
@@ -827,8 +1107,8 @@ To indicate what metric tensor the trace is repsect to the following notation
 is used
 \begin{equation}
   \begin{aligned}
-    \trace{\tensortwo{g}}{\tensortwo{A}}&=\doubledotprod{\flattensor{\tensortwo{g}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{g_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}}}{A^{kl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}}=g_{ij}A^{ij}\\
-    &=\doubledotprod{\sharptensor{\tensortwo{g}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{g^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}}{A_{kl}\tensorprod{\generalbasevector^{k}}{\generalbasevector^{l}}}=g^{ij}A_{ij}\\
+    \trace{\tensortwo{g}}{\tensortwo{A}}&=\doubledotprod{\flattensor{\tensortwo{g}}}{\sharptensor{\tensortwo{A}}}=\doubledotprod{\generalmetrictensorsymbol_{ij}\tensorprod{\generalbasevector^{i}}{\generalbasevector^{j}}}{A^{kl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}}=\generalmetrictensorsymbol_{ij}A^{ij}\\
+    &=\doubledotprod{\sharptensor{\tensortwo{g}}}{\flattensor{\tensortwo{A}}}=\doubledotprod{\generalmetrictensorsymbol^{ij}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}}{A_{kl}\tensorprod{\generalbasevector^{k}}{\generalbasevector^{l}}}=\generalmetrictensorsymbol^{ij}A_{ij}\\
     &=\doubledotprod{\tensortwo{I}}{\tensortwo{A}}=\doubledotprod{\mixedkronecker{i}{.j}\tensorprod{\generalbasevector_{i}}{\generalbasevector^{j}}}{A^{k}_{.l}\tensorprod{\generalbasevector_{k}}{\generalbasevector^{l}}}=\mixedkronecker{i}{.j}A^{j}_{.i}=A^{i}_{.i} \\
     &=\doubledotprod{\tensortwo{I}}{\tensortwo{A}}=\doubledotprod{\mixedkronecker{.i}{j}\tensorprod{\generalbasevector^{j}}{\generalbasevector_{i}}}{A^{.k}_{l}\tensorprod{\generalbasevector^{l}}{\generalbasevector_{k}}}=\mixedkronecker{.i}{j}A^{.j}_{i}=A^{.i}_{i}
   \end{aligned}
@@ -1176,7 +1456,7 @@ $\tensortwo{C}$. The different double contractions are given by
 \begin{equation}
   \begin{aligned}
     \tensortwo{C}&=\doubledotprod{\tensortwo{B}}{\tensorfour{A}}\\
-    &=\doubledotprod{\pbrac{B_{mn}\tensorprod{\generalbasevector^{m}}{g^{n}}}}{\pbrac{A^{ijkl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}}}\\
+    &=\doubledotprod{\pbrac{B_{mn}\tensorprod{\generalbasevector^{m}}{\generalmetrictensorsymbol^{n}}}}{\pbrac{A^{ijkl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}}}\\
     &=B_{ij}A^{ijkl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}\\
     &=C^{kl}\tensorprod{\generalbasevector_{k}}{\generalbasevector_{l}}              
   \end{aligned}
@@ -1280,6 +1560,7 @@ anti-symmetric tensor products \ie
     &=\dfrac{1}{2}\pbrac{\sharpkronecker{i}{k}\flatkronecker{j}{l}+\mixedkronecker{i}{.l}\mixedkronecker{.k}{j}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}\\
     &=I^{i.k.}_{.j.l}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}
   \end{aligned}
+  \label{eqn:SymmetricIdentityTensorFourDefinition}
 \end{equation}
 \begin{equation}
   \begin{aligned}
@@ -1289,26 +1570,27 @@ anti-symmetric tensor products \ie
     &=\dfrac{1}{2}\pbrac{\sharpkronecker{i}{k}\flatkronecker{j}{l}-\mixedkronecker{i}{.l}\mixedkronecker{.k}{j}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}\\
     &=I^{i.k.}_{.j.l}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector^{j}}{\generalbasevector_{k}}{\generalbasevector^{l}}
   \end{aligned}
+  \label{eqn:AntisymmetricIdentityTensorFourDefinition}
 \end{equation}
 
 We also the sharp fourth order identity tensors
 \begin{equation}
   \begin{aligned}
-    \sharptensor{\identitytensorfour}&=g^{ij}g^{kl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
-    \sharptensor{\upperidentitytensorfour}&=g^{il}g^{jk}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
-    \sharptensor{\loweridentitytensorfour}&=g^{ik}g^{jl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
-    \sharptensor{\symidentitytensorfour}&=\dfrac{1}{2}\pbrac{g^{ik}g^{jl}+g^{il}g^{jk}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
-    \sharptensor{\antisymidentitytensorfour}&=\dfrac{1}{2}\pbrac{g^{ik}g^{jl}-g^{il}g^{jk}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}
+    \sharptensor{\identitytensorfour}&=\generalmetrictensorsymbol^{ij}\generalmetrictensorsymbol^{kl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
+    \sharptensor{\upperidentitytensorfour}&=\generalmetrictensorsymbol^{il}\generalmetrictensorsymbol^{jk}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
+    \sharptensor{\loweridentitytensorfour}&=\generalmetrictensorsymbol^{ik}\generalmetrictensorsymbol^{jl}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
+    \sharptensor{\symidentitytensorfour}&=\dfrac{1}{2}\pbrac{\generalmetrictensorsymbol^{ik}\generalmetrictensorsymbol^{jl}+\generalmetrictensorsymbol^{il}\generalmetrictensorsymbol^{jk}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}\\
+    \sharptensor{\antisymidentitytensorfour}&=\dfrac{1}{2}\pbrac{\generalmetrictensorsymbol^{ik}\generalmetrictensorsymbol^{jl}-\generalmetrictensorsymbol^{il}\generalmetrictensorsymbol^{jk}}\tensorprodfour{\generalbasevector_{i}}{\generalbasevector_{j}}{\generalbasevector_{k}}{\generalbasevector_{l}}
   \end{aligned}
 \end{equation}
 and the flat fourth order identity tensors
 \begin{equation}
   \begin{aligned}
-    \flattensor{\identitytensorfour}&=g_{ij}g_{kl}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
-    \flattensor{\upperidentitytensorfour}&=g_{il}g_{jk}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
-    \flattensor{\upperidentitytensorfour}&=g_{ik}g_{jl}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
-    \flattensor{\symidentitytensorfour}&=\dfrac{1}{2}\pbrac{g_{ik}g_{jl}+g_{il}g_{jk}}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
-    \flattensor{\antisymidentitytensorfour}&=\dfrac{1}{2}\pbrac{g_{ik}g_{jl}-g_{il}g_{jk}}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}
+    \flattensor{\identitytensorfour}&=\generalmetrictensorsymbol_{ij}\generalmetrictensorsymbol_{kl}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
+    \flattensor{\upperidentitytensorfour}&=\generalmetrictensorsymbol_{il}\generalmetrictensorsymbol_{jk}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
+    \flattensor{\upperidentitytensorfour}&=\generalmetrictensorsymbol_{ik}\generalmetrictensorsymbol_{jl}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
+    \flattensor{\symidentitytensorfour}&=\dfrac{1}{2}\pbrac{\generalmetrictensorsymbol_{ik}\generalmetrictensorsymbol_{jl}+\generalmetrictensorsymbol_{il}\generalmetrictensorsymbol_{jk}}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}\\
+    \flattensor{\antisymidentitytensorfour}&=\dfrac{1}{2}\pbrac{\generalmetrictensorsymbol_{ik}\generalmetrictensorsymbol_{jl}-\generalmetrictensorsymbol_{il}\generalmetrictensorsymbol_{jk}}\tensorprodfour{\generalbasevector^{i}}{\generalbasevector^{j}}{\generalbasevector^{k}}{\generalbasevector^{l}}
   \end{aligned}
 \end{equation}
 
@@ -1319,20 +1601,20 @@ The differences between the identity tensors can
 be observed when they are contracted with a second order tensor,
 $\tensortwo{A}$, \ie
 \begin{align}
-  \doubledotprod{\identitytensorfour}{\tensortwo{A}}&=\doubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \doubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}} \\
-  \doubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}\\
-  \doubledotprod{\symidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\symtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\symmetric{\tensortwo{A}}\\
-  \doubledotprod{\antisymidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\antisymtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\skewsym{\tensortwo{A}}
+  \doubledotprod{\identitytensorfour}{\tensortwo{A}}&=\doubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo   \label{eqn:DoubleDotIdentityFourTwoTensor} \\
+  \doubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}   \label{eqn:DoubleDotUpperIdentityFourTwoTensor} \\
+  \doubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}   \label{eqn:DoubleDotLowerIdentityFourTwoTensor} \\
+  \doubledotprod{\symidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\symtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\symmetric{\tensortwo{A}}   \label{eqn:DoubleDotSymIdentityFourTwoTensor} \\
+  \doubledotprod{\antisymidentitytensorfour}{\tensortwo{A}}&=\doubledotprod{\antisymtensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\skewsym{\tensortwo{A}} \label{eqn:DoubleDotAntisymIdentityFourTwoTensor} 
 \end{align}
 and
 \begin{align}
-  \upperdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A} \\
-  \upperdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \upperdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}\\
-  \lowerdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A} \\
-  \lowerdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo \\
-  \lowerdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}\\
+  \upperdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}  \label{eqn:UpperDoubleDotIdentityFourTwoTensor} \\
+  \upperdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo   \label{eqn:UpperDoubleDotUpperIdentityFourTwoTensor} \\
+  \upperdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\upperdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}}   \label{eqn:UpperDoubleDotLowerIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\identitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\tensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\tensortwo{A}   \label{eqn:LowerDoubleDotIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\upperidentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\uppertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\pbrac{\trace{}{\tensortwo{A}}}\identitytensortwo  \label{eqn:LowerDoubleDotUpperIdentityFourTwoTensor} \\
+  \lowerdoubledotprod{\loweridentitytensorfour}{\tensortwo{A}}&=\lowerdoubledotprod{\lowertensorprod{\identitytensortwo}{\identitytensortwo}}{\tensortwo{A}}=\transpose{\tensortwo{A}} \label{eqn:LowerDoubleDotLowerIdentityFourTwoTensor} 
 \end{align}
 
 In \citep{kintzel_fourth-order_2006,kintzel_fourth-order2_2006}
@@ -1410,110 +1692,110 @@ property relationships.
 
 Single contraction of a fourth order tensor with a second order tensor
 \begin{align}
-  \dotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}}\\
-  \dotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{A}}{\tensortwo{C}}}}{\tensortwo{B}}\\
-  \dotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\lowertensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}\\
-  \dotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}}
+  \dotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}} \label{eqn:DotProdFourTwoProperty1} \\
+  \dotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{A}}{\tensortwo{C}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty2}  \\
+  \dotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\lowertensorprod{\tensortwo{A}}{\pbrac{\dotprod{\tensortwo{B}}{\tensortwo{C}}}} \label{eqn:DotProdFourTwoProperty3} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty4} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty5} \\
+  \dotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\pbrac{\dotprod{\tensortwo{C}}{\tensortwo{A}}}}{\tensortwo{B}} \label{eqn:DotProdFourTwoProperty6} 
 \end{align}
 
 Double contraction of a fourth order tensor with a second order tensor for a
 double dot product
 \begin{align}
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{A}}}\tensortwo{B}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{B}}\transpose{\tensortwo{C}}\tensortwo{A}\\
-  \doubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\tensortwo{B}
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A} \label{eqn:DoubleDotProdFourTwoProperty1} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}} \label{eqn:DoubleDotProdFourTwoProperty2} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:DoubleDotProdFourTwoProperty3} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{A}}}\tensortwo{B} \label{eqn:DoubleDotProdFourTwoProperty4} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{B}}\transpose{\tensortwo{C}}\tensortwo{A} \label{eqn:DoubleDotProdFourTwoProperty5} \\
+  \doubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\tensortwo{B} \label{eqn:DoubleDotProdFourTwoProperty6}
 \end{align}
 and for an upper double dot product
 \begin{align}
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{B}}}\tensortwo{A}\\
-  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourTwoProperty1} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}  \label{eqn:UpperDoubleDotProdFourTwoProperty2} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}  \label{eqn:UpperDoubleDotProdFourTwoProperty3} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}  \label{eqn:UpperDoubleDotProdFourTwoProperty4} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{C}}{\tensortwo{B}}}\tensortwo{A}  \label{eqn:UpperDoubleDotProdFourTwoProperty5} \\
+  \upperdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B} \label{eqn:UpperDoubleDotProdFourTwoProperty6} 
 \end{align}
 and for an lower double dot product
 \begin{align}
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B}\\
-  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A}
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\tensortwo{C}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty1} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A} \label{eqn:LowerDoubleDotProdFourTwoProperty2} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\tensortwo{C}}&=\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty3} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\transpose{\tensortwo{A}}\tensortwo{C}\transpose{\tensortwo{B}} \label{eqn:LowerDoubleDotProdFourTwoProperty4} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{C}}}\tensortwo{B} \label{eqn:LowerDoubleDotProdFourTwoProperty5} \\
+  \lowerdoubledotprod{\tensortwo{C}}{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensortwo{B}\transpose{\tensortwo{C}}\tensortwo{A} \label{eqn:LowerDoubleDotProdFourTwoProperty6} 
 \end{align}
 
 Double contraction of two fourth order tensors for a double dot product
 \begin{align}
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{D}}\transpose{\tensortwo{B}}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\tensortwo{D}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}}}{\tensortwo{D}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}\\
-  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}} \label{eqn:DoubleDotProdFourFourProperty1} \\
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{D}}\transpose{\tensortwo{B}}\tensortwo{C}}}  \label{eqn:DoubleDotProdFourFourProperty2} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\transpose{\tensortwo{B}}}}{\tensortwo{D}}  \label{eqn:DoubleDotProdFourFourProperty3} \\
+  \doubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty4} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\transpose{\tensortwo{B}}}}{\tensortwo{D}}  \label{eqn:DoubleDotProdFourFourProperty5} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}} \label{eqn:DoubleDotProdFourFourProperty6} \\
+  \doubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{D}}}{\pbrac{\tensortwo{B}\tensortwo{C}}}  \label{eqn:DoubleDotProdFourFourProperty7} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty8} \\
+  \doubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}  \label{eqn:DoubleDotProdFourFourProperty9}
 \end{align}
 and for an upper double dot product
 \begin{align}
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}{\tensortwo{A}}}}{\pbrac{\tensortwo{B}{\tensortwo{D}}}}\\
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}\transpose{\tensortwo{B}}}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}\tensortwo{D}}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}}}{\pbrac{\tensortwo{B}\tensortwo{D}}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{D}}}\tensortwo{C}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{A}}\tensortwo{D}}}{\tensortwo{B}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\tensortwo{B}\transpose{\tensortwo{D}}\tensortwo{A}}}\\
-  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}{\tensortwo{A}}}}{\pbrac{\tensortwo{B}{\tensortwo{D}}}} \label{eqn:UpperDoubleDotProdFourFourProperty1} \\
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}\transpose{\tensortwo{B}}}} \label{eqn:UpperDoubleDotProdFourFourProperty2} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}\tensortwo{D}}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty3} \\
+  \upperdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}} \label{eqn:UpperDoubleDotProdFourFourProperty4} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{C}\tensortwo{A}}}{\pbrac{\tensortwo{B}\tensortwo{D}}} \label{eqn:UpperDoubleDotProdFourFourProperty5} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{A}}{\tensortwo{D}}}\tensortwo{C}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty6} \\
+  \upperdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{A}}\tensortwo{D}}}{\tensortwo{B}} \label{eqn:UpperDoubleDotProdFourFourProperty7} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{C}}{\pbrac{\tensortwo{B}\transpose{\tensortwo{D}}\tensortwo{A}}} \label{eqn:UpperDoubleDotProdFourFourProperty8} \\
+  \upperdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{C}\transpose{\tensortwo{B}}}}{\pbrac{\transpose{\tensortwo{A}}\tensortwo{D}}}  \label{eqn:UpperDoubleDotProdFourFourProperty9} 
 \end{align}
 and for an lower double dot product
 \begin{align}
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}{\tensortwo{C}}}}{\pbrac{\tensortwo{D}{\tensortwo{B}}}}\\
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\tensortwo{B}}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\transpose{\tensortwo{D}}}}\\
-  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{D}\tensortwo{B}}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\tensortwo{D}\transpose{\tensortwo{B}}\tensortwo{C}}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}}}{\tensortwo{D}}\\
-  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}{\tensortwo{C}}}}{\pbrac{\tensortwo{D}{\tensortwo{B}}}} \label{eqn:LowerDoubleDotProdFourFourProperty1} \\
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}\tensortwo{B}}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty2} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}\transpose{\tensortwo{D}}}} \label{eqn:LowerDoubleDotProdFourFourProperty3} \\
+  \lowerdoubledotprod{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\tensortwo{C}}}{\pbrac{\tensortwo{D}\tensortwo{B}}} \label{eqn:LowerDoubleDotProdFourFourProperty4} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\tensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\lowertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}} \label{eqn:LowerDoubleDotProdFourFourProperty5} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\doubledotprod{\tensortwo{B}}{\tensortwo{C}}}\tensortwo{A}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty6} \\
+  \lowerdoubledotprod{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\tensortwo{A}}{\pbrac{\tensortwo{D}\transpose{\tensortwo{B}}\tensortwo{C}}} \label{eqn:LowerDoubleDotProdFourFourProperty7} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\uppertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\uppertensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{C}}\tensortwo{B}}}{\tensortwo{D}} \label{eqn:LowerDoubleDotProdFourFourProperty8} \\
+  \lowerdoubledotprod{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}{\pbrac{\lowertensorprod{\tensortwo{C}}{\tensortwo{D}}}}&=\tensorprod{\pbrac{\tensortwo{A}\transpose{\tensortwo{D}}}}{\pbrac{\transpose{\tensortwo{C}}\tensortwo{B}}}  \label{eqn:LowerDoubleDotProdFourFourProperty9} 
 \end{align}
 
 Transposition of a fourth order tensor obtained from the standard tensor
 product of two second order tensors gives
 \begin{align}
-  \fulltranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \leftrighttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \swaptranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \innertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}\\
-  \outertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \lefttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}\\
-  \righttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}
+  \fulltranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}} \label{eqn:FullTransposeProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}} \label{eqn:LeftRightTransposeProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{B}}{\tensortwo{A}} \label{eqn:SwapTransposeProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}  \label{eqn:InnerTransposeProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}  \label{eqn:OuterTransposeProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}  \label{eqn:LeftTransposeProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\tensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}  \label{eqn:RightTransposeProductTwoTwoTensor} 
 \end{align}
 and for an upper tensor product
 \begin{align}
-  \fulltranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \leftrighttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \swaptranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \innertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}\\
-  \outertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}\\
-  \lefttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \righttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}
+  \fulltranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}  \label{eqn:FullTransposeUpperProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftRightTransposeUpperProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}} \label{eqn:SwapTransposeUpperProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\transpose{\tensortwo{B}}}  \label{eqn:InnerTransposeUpperProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\transpose{\tensortwo{A}}}{\tensortwo{B}}  \label{eqn:OuterTransposeUpperProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftTransposeUpperProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}  \label{eqn:RightTransposeUpperProductTwoTwoTensor} 
 \end{align}
 and for an lower tensor product
 \begin{align}
-  \fulltranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \leftrighttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \swaptranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}\\
-  \innertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\tensortwo{B}}\\
-  \outertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}\\
-  \lefttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}\\
-  \righttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}
+  \fulltranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}  \label{eqn:FullTransposeLowerProductTwoTwoTensor} \\
+  \leftrighttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\tensortwo{B}}{\tensortwo{A}}  \label{eqn:LeftRightTransposeLowerProductTwoTwoTensor} \\
+  \swaptranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\lowertensorprod{\transpose{\tensortwo{A}}}{\transpose{\tensortwo{B}}}   \label{eqn:SwapTransposeLowerProductTwoTwoTensor} \\
+  \innertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\tensortwo{A}}{\tensortwo{B}}   \label{eqn:InnerTransposeLowerProductTwoTwoTensor} \\
+  \outertranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\tensorprod{\transpose{\tensortwo{B}}}{\transpose{\tensortwo{A}}}   \label{eqn:OuterTransposeLowerProductTwoTwoTensor} \\
+  \lefttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{B}}{\tensortwo{A}}   \label{eqn:LeftTransposeLowerProductTwoTwoTensor} \\
+  \righttranspose{\pbrac{\lowertensorprod{\tensortwo{A}}{\tensortwo{B}}}}&=\uppertensorprod{\tensortwo{A}}{\tensortwo{B}}   \label{eqn:RightTransposeLowerProductTwoTwoTensor} 
 \end{align}
 
 Transposition of the contraction of two fourth order tensors for the double
@@ -1805,25 +2087,25 @@ $\trace{}{\tensortwo{A}}$ with respect to the tensor $\tensortwo{A}$ \ie
 \begin{equation}
   \begin{split}
     \delby{\pbrac{\trace{\tensortwo{g}}{\tensortwo{A}}}}{\tensortwo{A}}
-    &=\delby{\pbrac{g_{ij}A^{ij}}}{\tensortwo{A}}\\
-    &=\delby{\pbrac{g_{11}A^{11}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{12}A^{12}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{13}A^{13}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
-    &\quad\delby{\pbrac{g_{21}A^{21}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{22}A^{22}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{23}A^{23}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
-    &\quad\delby{\pbrac{g_{31}A^{31}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{32}A^{32}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
-    +\delby{\pbrac{g_{33}A^{33}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
-    &=g_{11}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{1}}
-    +g_{12}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{2}}
-    +g_{13}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{3}}\\
-    &\quad g_{21}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{1}}
-    +g_{22}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{2}}
-    +g_{23}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{3}}\\
-    &\quad g_{31}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{1}}
-    +g_{32}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{2}}
-    +g_{33}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{3}}\\
+    &=\delby{\pbrac{\generalmetrictensorsymbol_{ij}A^{ij}}}{\tensortwo{A}}\\
+    &=\delby{\pbrac{\generalmetrictensorsymbol_{11}A^{11}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{12}A^{12}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{13}A^{13}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
+    &\quad\delby{\pbrac{\generalmetrictensorsymbol_{21}A^{21}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{22}A^{22}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{23}A^{23}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
+    &\quad\delby{\pbrac{\generalmetrictensorsymbol_{31}A^{31}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{32}A^{32}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}}
+    +\delby{\pbrac{\generalmetrictensorsymbol_{33}A^{33}}}{A_{ij}}\tensorprod{\generalbasevector_{i}}{\generalbasevector_{j}} \\
+    &=\generalmetrictensorsymbol_{11}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{1}}
+    +\generalmetrictensorsymbol_{12}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{2}}
+    +\generalmetrictensorsymbol_{13}\tensorprod{\generalbasevector_{1}}{\generalbasevector_{3}}\\
+    &\quad \generalmetrictensorsymbol_{21}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{1}}
+    +\generalmetrictensorsymbol_{22}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{2}}
+    +\generalmetrictensorsymbol_{23}\tensorprod{\generalbasevector_{2}}{\generalbasevector_{3}}\\
+    &\quad \generalmetrictensorsymbol_{31}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{1}}
+    +\generalmetrictensorsymbol_{32}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{2}}
+    +\generalmetrictensorsymbol_{33}\tensorprod{\generalbasevector_{3}}{\generalbasevector_{3}}\\
     &=\sharptensor{\tensortwo{g}}\\
     &=\sharptensor{\identitytensortwo}
   \end{split}

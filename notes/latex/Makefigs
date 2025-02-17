@@ -35,10 +35,10 @@ all	:	all_pstex
 
 .fig.pstex:	
 	( cd ${@D} ; ${FIG2DEV} -Lpstex ${*F}.fig > ${*F}.eps )
-	( cd ${@D} ; ${FIG2DEV} -Lpstex_t -F -p${*F}.eps ${*F}.fig | sed -f ${OPENCMISS_ROOT}/documentation/notes/latex/Strip_pstex_figs | sed s%CUR_DIR%${@D}% | sed s%=figs/./%=figs/% | sed s%=figs//%=figs/% | sed s%{figs/./%{figs/% | sed s%{figs//%{figs/% > ${@F} )
+	( cd ${@D} ; ${FIG2DEV} -Lpstex_t -F -p${*F}.eps ${*F}.fig | sed -f ${OpenCMISS_ROOT}/documentation/notes/latex/Strip_pstex_figs | sed s%CUR_DIR%${@D}% | sed s%=figs/./%=figs/% | sed s%=figs//%=figs/% | sed s%{figs/./%{figs/% | sed s%{figs//%{figs/% > ${@F} )
 
 all_pstex:
-	@${OPENCMISS_ROOT}/documentation/notes/latex/call_makefile.sh ${OPENCMISS_ROOT}/documentation/notes/latex/Makefigs pstex `find . -name "*.fig" -print`
+	@${OpenCMISS_ROOT}/documentation/notes/latex/call_makefile.sh ${OpenCMISS_ROOT}/documentation/notes/latex/Makefigs pstex `find . -name "*.fig" -print`
 
 clean:
 	find . -name "*.eps" -not -path "*/epsfiles/*" -exec rm -f {} \;

@@ -9,4 +9,4 @@
 #   Chris Bradley
 # Updates:
 #
-make -f ${OPENCMISS_ROOT}/documentation/notes/latex/Makeplots $1:r.fig
+make -f ${OpenCMISS_ROOT}/documentation/notes/latex/Makeplots $1:r.fig
